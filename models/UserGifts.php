@@ -5,19 +5,19 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "user_to_gifts".
+ * This is the model class for table "user_gifts".
  *
  * @property int|null $user_id
  * @property int|null $gifts_id
  */
-class UserToGifts extends \yii\db\ActiveRecord
+class UserGifts extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'user_to_gifts';
+        return 'user_gifts';
     }
 
     /**
@@ -36,8 +36,8 @@ class UserToGifts extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'user_id' => Yii::t('admin', 'User ID'),
-            'gifts_id' => Yii::t('admin', 'Gifts ID'),
+            'user_id' => Yii::t('app', 'User ID'),
+            'gifts_id' => Yii::t('app', 'Gifts ID'),
         ];
     }
 }

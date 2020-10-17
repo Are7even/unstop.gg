@@ -5,19 +5,19 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "user_to_stage".
+ * This is the model class for table "user_stage".
  *
  * @property int|null $user_id
  * @property int|null $stage_id
  */
-class UserToStage extends \yii\db\ActiveRecord
+class UserStage extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'user_to_stage';
+        return 'user_stage';
     }
 
     /**
@@ -36,8 +36,8 @@ class UserToStage extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'user_id' => Yii::t('admin', 'User ID'),
-            'stage_id' => Yii::t('admin', 'Stage ID'),
+            'user_id' => Yii::t('app', 'User ID'),
+            'stage_id' => Yii::t('app', 'Stage ID'),
         ];
     }
 }

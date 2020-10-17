@@ -113,6 +113,13 @@ CREATE TABLE `stage` (
 PRIMARY KEY(`id`)
 );
 
+
+DROP TABLE IF EXISTS `user_stage`;
+CREATE TABLE `user_stage`(
+`user_id` int(11) DEFAULT 0,
+`stage_id` int(11) DEFAULT 0
+);
+
 DROP TABLE IF EXISTS `gifts`;
 CREATE TABLE `gifts` (
 `id` int(11) AUTO_INCREMENT,
@@ -131,16 +138,10 @@ PRIMARY KEY(`id`)
 );
 
 
-DROP TABLE IF EXISTS `user_to_gifts`;
-CREATE TABLE `user_to_gifts`(
+DROP TABLE IF EXISTS `user_gifts`;
+CREATE TABLE `user_gifts`(
 `user_id` int(11) DEFAULT 0,
 `gifts_id` int(11) DEFAULT 0
-);
-
-DROP TABLE IF EXISTS `user_to_stage`;
-CREATE TABLE `user_to_stage`(
-`user_id` int(11) DEFAULT 0,
-`stage_id` int(11) DEFAULT 0
 );
 
 -- DELIMITER //
