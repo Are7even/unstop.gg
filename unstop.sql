@@ -123,11 +123,20 @@ CREATE TABLE `user_stage`(
 DROP TABLE IF EXISTS `gifts`;
 CREATE TABLE `gifts` (
 `id` int(11) AUTO_INCREMENT,
-`title` varchar(255) DEFAULT NULL,
 `icon` varchar(255) DEFAULT NULL,
+PRIMARY KEY(`id`)
+);
+
+
+DROP TABLE IF EXISTS `gifts_translate`;
+CREATE TABLE `gifts_translate` (
+`id` int(11) AUTO_INCREMENT,
+`gifts_id` int(11) DEFAULT 0,
+`title` varchar(255) DEFAULT NULL,
 `description` varchar (255) DEFAULT NULL,
 PRIMARY KEY(`id`)
 );
+
 
 DROP TABLE IF EXISTS `user_gifts`;
 CREATE TABLE `user_gifts`(
