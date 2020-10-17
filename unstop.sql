@@ -13,16 +13,18 @@ PRIMARY KEY(`id`)
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) AUTO_INCREMENT,
-  `token` int(11) DEFAULT 0,
+  `token` varchar(255) DEFAULT NULL,
   `login` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `role` varchar(255) DEFAULT NULL,
   `rating` int(11) DEFAULT 1,
   `photo` varchar(255) DEFAULT NULL,
-  `created_at` int(11) DEFAULT 0,
+  `created_at` date DEFAULT NULL,
   PRIMARY KEY(`id`)
 );
+
+ALTER TABLE `user` ADD UNIQUE(`token`);
 
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message` (
@@ -145,6 +147,43 @@ DROP TABLE IF EXISTS `user_to_stage`;
 CREATE TABLE `user_to_stage`(
 `user_id` int(11) DEFAULT 0,
 `stage_id` int(11) DEFAULT 0
+);
+
+DROP TABLE IF EXISTS `games`;
+CREATE TABLE `games`(
+`id` int(11) AUTO_INCREMENT,
+`image` varchar (255) DEFAULT NULL,
+`name` varchar (255) DEFAULT NULL,
+`genre_id` varchar (255) DEFAULT NULL,
+PRIMARY KEY(`id`)
+);
+
+DROP TABLE IF EXISTS `games_translate`;
+CREATE TABLE `games_translate`(
+`id` int(11) AUTO_INCREMENT,
+`games_id` int(11) DEFAULT 0,
+`header` varchar (255) DEFAULT NULL,
+`description` varchar(255) DEFAULT NULL,
+`keywords` varchar(255) DEFAULT NULL,
+
+PRIMARY KEY(`id`)
+);
+
+DROP TABLE IF EXISTS `genre`;
+CREATE TABLE `genre`(
+`id` int(11) AUTO_INCREMENT,
+`status` varchar (255) DEFAULT NULL,
+
+PRIMARY KEY(`id`)
+);
+
+DROP TABLE IF EXISTS `genre_translate`;
+CREATE TABLE `genre_translate`(
+`id` int(11) AUTO_INCREMENT,
+`genre_id` int(11) DEFAULT 0,
+`title` varchar (255) DEFAULT NULL,
+
+PRIMARY KEY(`id`)
 );
 
 -- DELIMITER //

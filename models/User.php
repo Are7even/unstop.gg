@@ -33,8 +33,10 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['token', 'rating'], 'integer'],
-            [['login', 'email', 'password', 'role', 'photo'], 'string', 'max' => 255],
+            [['rating'], 'integer'],
+            [['rating'], 'default','value'=>'1'],
+            [['login', 'email', 'password', 'role', 'photo','token'], 'string', 'max' => 255],
+            [['photo'], 'default','value'=>'no-image.png'],
             [['created_at'], 'safe'],
             [['created_at'], 'default', 'value' => date('Y-m-j')],
         ];

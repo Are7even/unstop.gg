@@ -43,8 +43,10 @@ class Tournament extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'hidden', 'handheld', 'rating_on', 'players_count', 'start', 'end', 'checkin', 'checkin_start', 'checkin_end', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place'], 'integer'],
+            [['hidden', 'handheld', 'rating_on', 'players_count', 'start', 'end', 'checkin', 'checkin_start', 'checkin_end', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place'], 'integer'],
             [['icon', 'game', 'type'], 'string', 'max' => 255],
+            [['created_at'], 'safe'],
+            [['created_at'], 'default', 'value' => date('Y-m-j')],
         ];
     }
 
