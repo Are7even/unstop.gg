@@ -26,11 +26,13 @@ CREATE TABLE `user` (
 
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message` (
+`id` int(11) AUTO_INCREMENT,
 `theme` varchar(255) DEFAULT NULL,
 `text` TEXT,
 `created_at` int(11) DEFAULT 0,
 `sender_id` int(11) DEFAULT 0,
-`receiver_id` int(11) DEFAULT 0
+`receiver_id` int(11) DEFAULT 0,
+PRIMARY KEY(`id`)
 );
 
 DROP TABLE IF EXISTS `tournament`;
