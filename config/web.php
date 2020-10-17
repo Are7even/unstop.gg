@@ -11,6 +11,8 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'language'=>'ru',
+    'sourceLanguage'=>'ru',
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -25,6 +27,27 @@ $config = [
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
+        ],
+        'i18n' => [
+            'translations' => [
+                'admin' =>[
+                    'class'=>'yii\i18n\PhpMessageSource',
+                    'basePath'=>'@app/messages',
+                    'sourceLanguage' => 'en',
+//                    'fileMap'=>[
+//                        'admin'=>'admin.php'
+//                    ]
+                ],
+                '*' => [
+                    'class' => 'yii \ i18n \ PhpMessageSource',
+                    'basePath' => '@app / messages',
+                    'sourceLanguage' => 'ru',
+//                    'fileMap'=>[
+//                        'app'=>'app.php',
+//                        'app/error'=>'error.php'
+//                    ]
+                ],
+            ],
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -53,6 +76,9 @@ $config = [
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
+        ],
+        'mm'=>[
+            'class' => 'iutbay\yii2\mm\Module',
         ],
     ],
     'params' => $params,
