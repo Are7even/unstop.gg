@@ -33,8 +33,10 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['token', 'rating', 'created_at'], 'integer'],
+            [['token', 'rating'], 'integer'],
             [['login', 'email', 'password', 'role', 'photo'], 'string', 'max' => 255],
+            [['created_at'], 'safe'],
+            [['created_at'], 'default', 'value' => date('Y-m-j')],
         ];
     }
 
@@ -44,15 +46,15 @@ class User extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'token' => Yii::t('app', 'Token'),
-            'login' => Yii::t('app', 'Login'),
-            'email' => Yii::t('app', 'Email'),
-            'password' => Yii::t('app', 'Password'),
-            'role' => Yii::t('app', 'Role'),
-            'rating' => Yii::t('app', 'Rating'),
-            'photo' => Yii::t('app', 'Photo'),
-            'created_at' => Yii::t('app', 'Created At'),
+            'id' => Yii::t('admin', 'ID'),
+            'token' => Yii::t('admin', 'Token'),
+            'login' => Yii::t('admin', 'Login'),
+            'email' => Yii::t('admin', 'Email'),
+            'password' => Yii::t('admin', 'Password'),
+            'role' => Yii::t('admin', 'Role'),
+            'rating' => Yii::t('admin', 'Rating'),
+            'photo' => Yii::t('admin', 'Photo'),
+            'created_at' => Yii::t('admin', 'Created At'),
         ];
     }
 }

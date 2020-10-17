@@ -46,15 +46,15 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'checkin_end') ?>
 
-    <?php // echo $form->field($model, '1_place') ?>
+    <?php // echo $form->field($model, 'first_place') ?>
 
-    <?php // echo $form->field($model, '2_place') ?>
+    <?php // echo $form->field($model, 'second_place') ?>
 
-    <?php // echo $form->field($model, '3_place') ?>
+    <?php // echo $form->field($model, 'third_place') ?>
 
-    <?php // echo $form->field($model, '4_place') ?>
+    <?php // echo $form->field($model, 'fourth_place') ?>
 
-    <?php // echo $form->field($model, '5_place') ?>
+    <?php // echo $form->field($model, 'fifth_place') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('admin', 'Search'), ['class' => 'btn btn-primary']) ?>

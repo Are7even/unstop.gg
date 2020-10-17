@@ -39,10 +39,10 @@ class GiftsTranslate extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'gifts_id' => Yii::t('app', 'Gifts ID'),
-            'title' => Yii::t('app', 'Title'),
-            'description' => Yii::t('app', 'Description'),
+            'id' => Yii::t('admin', 'ID'),
+            'gifts_id' => Yii::t('admin', 'Gifts ID'),
+            'title' => Yii::t('admin', 'Title'),
+            'description' => Yii::t('admin', 'Description'),
         ];
     }
 }

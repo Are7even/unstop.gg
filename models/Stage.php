@@ -42,13 +42,13 @@ class Stage extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'tournament_id' => Yii::t('app', 'Tournament ID'),
-            'type' => Yii::t('app', 'Type'),
-            'rule' => Yii::t('app', 'Rule'),
-            'start' => Yii::t('app', 'Start'),
-            'end' => Yii::t('app', 'End'),
-            'players_count' => Yii::t('app', 'Players Count'),
+            'id' => Yii::t('admin', 'ID'),
+            'tournament_id' => Yii::t('admin', 'Tournament ID'),
+            'type' => Yii::t('admin', 'Type'),
+            'rule' => Yii::t('admin', 'Rule'),
+            'start' => Yii::t('admin', 'Start'),
+            'end' => Yii::t('admin', 'End'),
+            'players_count' => Yii::t('admin', 'Players Count'),
         ];
     }
 }

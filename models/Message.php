@@ -41,11 +41,11 @@ class Message extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'theme' => Yii::t('app', 'Theme'),
-            'text' => Yii::t('app', 'Text'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'sender_id' => Yii::t('app', 'Sender ID'),
-            'receiver_id' => Yii::t('app', 'Receiver ID'),
+            'theme' => Yii::t('admin', 'Theme'),
+            'text' => Yii::t('admin', 'Text'),
+            'created_at' => Yii::t('admin', 'Created At'),
+            'sender_id' => Yii::t('admin', 'Sender ID'),
+            'receiver_id' => Yii::t('admin', 'Receiver ID'),
         ];
     }
 }

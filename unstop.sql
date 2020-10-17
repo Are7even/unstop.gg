@@ -51,11 +51,11 @@ CREATE TABLE `tournament` (
 `checkin` int(1) DEFAULT 0,
 `checkin_start` int(11) DEFAULT 0,
 `checkin_end` int(11) DEFAULT 0,
-`1_place` int(11) DEFAULT 0,
-`2_place` int(11) DEFAULT 0,
-`3_place` int(11) DEFAULT 0,
-`4_place` int(11) DEFAULT 0,
-`5_place` int(11) DEFAULT 0,
+`first_place` int(11) DEFAULT 0,
+`second_place` int(11) DEFAULT 0,
+`third_place` int(11) DEFAULT 0,
+`fourth_place` int(11) DEFAULT 0,
+`fifth_place` int(11) DEFAULT 0,
 PRIMARY KEY(`id`)
 );
 

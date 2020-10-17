@@ -36,8 +36,8 @@ class Gifts extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'icon' => Yii::t('app', 'Icon'),
+            'id' => Yii::t('admin', 'ID'),
+            'icon' => Yii::t('admin', 'Icon'),
         ];
     }
 }

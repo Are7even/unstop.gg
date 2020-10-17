@@ -38,15 +38,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'checkin_end')->textInput() ?>
 
-    <?= $form->field($model, '1_place')->textInput() ?>
+    <?= $form->field($model, 'first_place')->textInput() ?>
 
-    <?= $form->field($model, '2_place')->textInput() ?>
+    <?= $form->field($model, 'second_place')->textInput() ?>
 
-    <?= $form->field($model, '3_place')->textInput() ?>
+    <?= $form->field($model, 'third_place')->textInput() ?>
 
-    <?= $form->field($model, '4_place')->textInput() ?>
+    <?= $form->field($model, 'fourth_place')->textInput() ?>
 
-    <?= $form->field($model, '5_place')->textInput() ?>
+    <?= $form->field($model, 'fifth_place')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('admin', 'Save'), ['class' => 'btn btn-success']) ?>

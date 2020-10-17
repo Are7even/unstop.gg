@@ -41,11 +41,11 @@ class TournamentTranslate extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'tournament_id' => Yii::t('app', 'Tournament ID'),
-            'header' => Yii::t('app', 'Header'),
-            'short_text' => Yii::t('app', 'Short Text'),
-            'text' => Yii::t('app', 'Text'),
+            'id' => Yii::t('admin', 'ID'),
+            'tournament_id' => Yii::t('admin', 'Tournament ID'),
+            'header' => Yii::t('admin', 'Header'),
+            'short_text' => Yii::t('admin', 'Short Text'),
+            'text' => Yii::t('admin', 'Text'),
         ];
     }
 }
