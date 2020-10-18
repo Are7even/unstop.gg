@@ -68,6 +68,7 @@ CREATE TABLE `tournament_translate` (
 `header` varchar (255) DEFAULT NULL,
 `short_text` varchar (255) DEFAULT NULL,
 `text` TEXT,
+`language` varchar (255) DEFAULT NULL,
 PRIMARY KEY(`id`)
 );
 
@@ -101,6 +102,7 @@ CREATE TABLE `gifts_translate` (
 `gifts_id` int(11) DEFAULT 0,
 `title` varchar(255) DEFAULT NULL,
 `description` varchar (255) DEFAULT NULL,
+`language` varchar (255) DEFAULT NULL,
 PRIMARY KEY(`id`)
 );
 
@@ -133,6 +135,7 @@ CREATE TABLE `games_translate`(
 `header` varchar (255) DEFAULT NULL,
 `description` varchar(255) DEFAULT NULL,
 `keywords` varchar(255) DEFAULT NULL,
+`language` varchar (255) DEFAULT NULL,
 
 PRIMARY KEY(`id`)
 );
@@ -150,6 +153,7 @@ CREATE TABLE `genre_translate`(
 `id` int(11) AUTO_INCREMENT,
 `genre_id` int(11) DEFAULT 0,
 `title` varchar (255) DEFAULT NULL,
+`language` varchar (255) DEFAULT NULL,
 
 PRIMARY KEY(`id`)
 );

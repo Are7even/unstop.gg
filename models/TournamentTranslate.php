@@ -12,6 +12,7 @@ use Yii;
  * @property string|null $header
  * @property string|null $short_text
  * @property string|null $text
+ * @property string|null $language
  */
 class TournamentTranslate extends \yii\db\ActiveRecord
 {
@@ -31,7 +32,7 @@ class TournamentTranslate extends \yii\db\ActiveRecord
         return [
             [['tournament_id'], 'integer'],
             [['text'], 'string'],
-            [['header', 'short_text'], 'string', 'max' => 255],
+            [['header', 'short_text', 'language'], 'string', 'max' => 255],
         ];
     }
 
@@ -46,6 +47,7 @@ class TournamentTranslate extends \yii\db\ActiveRecord
             'header' => Yii::t('admin', 'Header'),
             'short_text' => Yii::t('admin', 'Short Text'),
             'text' => Yii::t('admin', 'Text'),
+            'language' => Yii::t('admin', 'Language'),
         ];
     }
 }

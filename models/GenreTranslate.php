@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property int|null $genre_id
  * @property string|null $title
+ * @property string|null $language
  */
 class GenreTranslate extends \yii\db\ActiveRecord
 {
@@ -28,7 +29,7 @@ class GenreTranslate extends \yii\db\ActiveRecord
     {
         return [
             [['genre_id'], 'integer'],
-            [['title'], 'string', 'max' => 255],
+            [['title', 'language'], 'string', 'max' => 255],
         ];
     }
 
@@ -41,6 +42,12 @@ class GenreTranslate extends \yii\db\ActiveRecord
             'id' => Yii::t('admin', 'ID'),
             'genre_id' => Yii::t('admin', 'Genre ID'),
             'title' => Yii::t('admin', 'Title'),
+            'language' => Yii::t('admin', 'Language'),
         ];
     }
+
+    public function getGenre () {
+        return $this -> hasOne(Genre::className(), ['id'=>'genre_id']);
+    }
+
 }

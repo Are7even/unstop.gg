@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\helpers\StatusHelper;
 use Yii;
 
 /**
@@ -51,5 +52,9 @@ class Language extends \yii\db\ActiveRecord
             'status' => Yii::t('admin', 'Status'),
             'pos' => Yii::t('admin', 'Pos'),
         ];
+    }
+
+    static function findActive(){
+        return self::find()->where(['status'=>StatusHelper::$active])->all();
     }
 }

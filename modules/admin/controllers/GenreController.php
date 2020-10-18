@@ -66,8 +66,14 @@ class GenreController extends Controller
     {
         $model = new Genre();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            foreach (Yii::$app->request->post('GenreTranslate', []) as $language => $data) {
+                foreach ($data as $attribute => $translation) {
+                    $model->translate($language)->$attribute = $translation;
+                }
+            }
+            $model->save();
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -86,10 +92,15 @@ class GenreController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            foreach (Yii::$app->request->post('GenreTranslate', []) as $language => $data) {
+                foreach ($data as $attribute => $translation) {
+                    $model->translate($language)->$attribute = $translation;
+                }
+            }
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
         return $this->render('update', [
             'model' => $model,
         ]);

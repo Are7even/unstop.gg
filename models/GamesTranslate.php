@@ -12,6 +12,7 @@ use Yii;
  * @property string|null $header
  * @property string|null $description
  * @property string|null $keywords
+ * @property string|null $language
  */
 class GamesTranslate extends \yii\db\ActiveRecord
 {
@@ -30,7 +31,7 @@ class GamesTranslate extends \yii\db\ActiveRecord
     {
         return [
             [['games_id'], 'integer'],
-            [['header', 'description', 'keywords'], 'string', 'max' => 255],
+            [['header', 'description', 'keywords', 'language'], 'string', 'max' => 255],
         ];
     }
 
@@ -45,6 +46,7 @@ class GamesTranslate extends \yii\db\ActiveRecord
             'header' => Yii::t('admin', 'Header'),
             'description' => Yii::t('admin', 'Description'),
             'keywords' => Yii::t('admin', 'Keywords'),
+            'language' => Yii::t('admin', 'Language'),
         ];
     }
 }

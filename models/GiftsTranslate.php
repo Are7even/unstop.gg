@@ -11,6 +11,7 @@ use Yii;
  * @property int|null $gifts_id
  * @property string|null $title
  * @property string|null $description
+ * @property string|null $language
  */
 class GiftsTranslate extends \yii\db\ActiveRecord
 {
@@ -29,7 +30,7 @@ class GiftsTranslate extends \yii\db\ActiveRecord
     {
         return [
             [['gifts_id'], 'integer'],
-            [['title', 'description'], 'string', 'max' => 255],
+            [['title', 'description', 'language'], 'string', 'max' => 255],
         ];
     }
 
@@ -43,6 +44,7 @@ class GiftsTranslate extends \yii\db\ActiveRecord
             'gifts_id' => Yii::t('admin', 'Gifts ID'),
             'title' => Yii::t('admin', 'Title'),
             'description' => Yii::t('admin', 'Description'),
+            'language' => Yii::t('admin', 'Language'),
         ];
     }
 }
