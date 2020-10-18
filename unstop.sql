@@ -42,7 +42,7 @@ CREATE TABLE `tournament` (
 `id` int(11) AUTO_INCREMENT,
 `icon` varchar (255) DEFAULT NULL,
 `game` varchar(255) DEFAULT NULL,
-`created_at` int(11) DEFAULT 0,
+`created_at` date DEFAULT NULL,
 `hidden` int(11) DEFAULT 0,
 `handheld` int(11) DEFAULT 0,
 `type` varchar(255) DEFAULT NULL,
@@ -71,38 +71,6 @@ CREATE TABLE `tournament_translate` (
 PRIMARY KEY(`id`)
 );
 
--- DROP TABLE IF EXISTS `group_tournament`;
--- CREATE TABLE `group_tournament` (
--- `id` int(11) AUTO_INCREMENT,
--- `icon` varchar (255) DEFAULT NULL,
--- `game` varchar(255) DEFAULT NULL,
--- `created_at` int(11) DEFAULT 0,
--- `hidden` int(11) DEFAULT 0,
--- `type` varchar(255) DEFAULT NULL,
--- `rating_on` int(11) DEFAULT 0,
--- `players_count` int(11) DEFAULT 0,
--- `start` int(11) DEFAULT 0,
--- `end`  int(11) DEFAULT 0,
--- `checkin` int(1) DEFAULT 0,
--- `checkin_start` int(11) DEFAULT 0,
--- `checkin_end` int(11) DEFAULT 0,
--- `1_place` int(11) DEFAULT 0,
--- `2_place` int(11) DEFAULT 0,
--- `3_place` int(11) DEFAULT 0,
--- `4_place` int(11) DEFAULT 0,
--- `5_place` int(11) DEFAULT 0,
--- PRIMARY KEY(`id`)
--- );
---
--- DROP TABLE IF EXISTS `group_tournament_translate`;
--- CREATE TABLE `group_tournament_translate` (
--- `id` int(11) AUTO_INCREMENT,
--- `tournament_id`  int(11) DEFAULT 0,
--- `header` varchar (255) DEFAULT NULL,
--- `short_text` varchar (255) DEFAULT NULL,
--- `text` TEXT,
--- PRIMARY KEY(`id`)
--- );
 
 DROP TABLE IF EXISTS `stage`;
 CREATE TABLE `stage` (
@@ -190,4 +158,28 @@ PRIMARY KEY(`id`)
 -- CREATE TRIGGER `delete_stage` BEFORE DELETE ON `stage`
 -- FOR EACH ROW BEGIN
 --   DELETE FROM `stage` WHERE `tournament_id`=OLD.`id`;
+-- END
+
+-- DELIMITER //
+-- CREATE TRIGGER `delete_games_translate` BEFORE DELETE ON `games`
+-- FOR EACH ROW BEGIN
+--   DELETE FROM `games_translate` WHERE `games_id`=OLD.`id`;
+-- END
+--
+-- DELIMITER //
+-- CREATE TRIGGER `delete_genre_translate` BEFORE DELETE ON `genre`
+-- FOR EACH ROW BEGIN
+--   DELETE FROM `genre_translate` WHERE `genre_id`=OLD.`id`;
+-- END
+--
+-- DELIMITER //
+-- CREATE TRIGGER `delete_gifts_translate` BEFORE DELETE ON `gifts`
+-- FOR EACH ROW BEGIN
+--   DELETE FROM `gifts_translate` WHERE `gifts_id`=OLD.`id`;
+-- END
+--
+-- DELIMITER //
+-- CREATE TRIGGER `delete_tournament_translate` BEFORE DELETE ON `tournament`
+-- FOR EACH ROW BEGIN
+--   DELETE FROM `tournament_translate` WHERE `tournament_id`=OLD.`id`;
 -- END

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\helpers\RoleHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
@@ -20,7 +21,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'role')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'role')->dropDownList(RoleHelper::roleList()) ?>
 
     <?= $form->field($model, 'rating')->textInput() ?>
 

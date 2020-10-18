@@ -33,7 +33,7 @@ $config = [
                 'admin' =>[
                     'class'=>'yii\i18n\PhpMessageSource',
                     'basePath'=>'@app/messages',
-                    'sourceLanguage' => 'en',
+                    'sourceLanguage' => 'ru',
 //                    'fileMap'=>[
 //                        'admin'=>'admin.php'
 //                    ]
