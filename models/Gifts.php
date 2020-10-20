@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use creocoder\translateable\TranslateableBehavior;
 use Yii;
 
 /**
@@ -18,6 +19,23 @@ class Gifts extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'gifts';
+    }
+
+    public function behaviors()
+    {
+        return [
+            'translateable' => [
+                'class' => TranslateableBehavior::className(),
+                'translationAttributes' => ['title','description'],
+            ],
+        ];
+    }
+
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_INSERT | self::OP_UPDATE,
+        ];
     }
 
     /**
@@ -40,4 +58,9 @@ class Gifts extends \yii\db\ActiveRecord
             'icon' => Yii::t('admin', 'Icon'),
         ];
     }
+
+    public function getTranslations () {
+        return $this -> hasMany(GiftsTranslate::className(), ['gifts_id'=>'id']);
+    }
+
 }

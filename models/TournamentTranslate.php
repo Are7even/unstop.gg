@@ -50,4 +50,9 @@ class TournamentTranslate extends \yii\db\ActiveRecord
             'language' => Yii::t('admin', 'Language'),
         ];
     }
+
+    public function getTournament(){
+        return $this->hasOne(Tournament::className(),['id'=>'tournament_id']);
+    }
+
 }

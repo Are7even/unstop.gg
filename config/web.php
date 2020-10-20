@@ -70,7 +70,12 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'thumbs/<path:.*>' => 'mm/thumb/thumb',
             ],
+        ],
+        'fs' => [
+            'class' => 'creocoder\flysystem\LocalFilesystem',
+            'path' => '@webroot/upload',
         ],
     ],
     'modules' => [

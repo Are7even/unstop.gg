@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use creocoder\translateable\TranslateableBehavior;
 use Yii;
 
 /**
@@ -37,15 +38,32 @@ class Tournament extends \yii\db\ActiveRecord
         return 'tournament';
     }
 
+    public function behaviors()
+    {
+        return [
+            'translateable' => [
+                'class' => TranslateableBehavior::className(),
+                'translationAttributes' => ['header','short_text','text'],
+            ],
+        ];
+    }
+
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_INSERT | self::OP_UPDATE,
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['hidden', 'handheld', 'rating_on', 'players_count', 'start', 'end', 'checkin', 'checkin_start', 'checkin_end', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place'], 'integer'],
+            [['hidden', 'handheld', 'rating_on', 'players_count', 'checkin', 'checkin_start', 'checkin_end', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place'], 'integer'],
             [['icon', 'game', 'type'], 'string', 'max' => 255],
-            [['created_at'], 'safe'],
+            [['created_at', 'start', 'end'], 'safe'],
             [['created_at'], 'default', 'value' => date('Y-m-j')],
         ];
     }
@@ -77,4 +95,9 @@ class Tournament extends \yii\db\ActiveRecord
             'fifth_place' => Yii::t('admin', 'Fifth Place'),
         ];
     }
+
+    public function getTranslations () {
+        return $this -> hasMany(TournamentTranslate::className(), ['tournament_id'=>'id']);
+    }
+
 }

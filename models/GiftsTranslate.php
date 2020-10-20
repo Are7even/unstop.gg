@@ -47,4 +47,9 @@ class GiftsTranslate extends \yii\db\ActiveRecord
             'language' => Yii::t('admin', 'Language'),
         ];
     }
+
+    public function getGifts(){
+        return $this->hasOne(Gifts::className(),['id'=>'gifts_id']);
+    }
+
 }

@@ -49,4 +49,9 @@ class GamesTranslate extends \yii\db\ActiveRecord
             'language' => Yii::t('admin', 'Language'),
         ];
     }
+
+    public function getGames(){
+        return $this->hasOne(Games::className(),['id'=>'games_id']);
+    }
+
 }

@@ -14,7 +14,7 @@ $languages = \app\models\Language::findActive();
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'status')->dropDownList(\app\helpers\StatusHelper::statusList()) ?>
 
     <div class="tabs">
         <?php $count = 0; ?>

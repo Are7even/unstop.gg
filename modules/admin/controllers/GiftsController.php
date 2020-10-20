@@ -66,8 +66,14 @@ class GiftsController extends Controller
     {
         $model = new Gifts();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            foreach (Yii::$app->request->post('GiftsTranslate', []) as $language => $data) {
+                foreach ($data as $attribute => $translation) {
+                    $model->translate($language)->$attribute = $translation;
+                }
+            }
+            $model->save();
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -86,7 +92,13 @@ class GiftsController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            foreach (Yii::$app->request->post('GiftsTranslate', []) as $language => $data) {
+                foreach ($data as $attribute => $translation) {
+                    $model->translate($language)->$attribute = $translation;
+                }
+            }
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
