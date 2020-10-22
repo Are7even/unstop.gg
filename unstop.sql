@@ -31,7 +31,7 @@ CREATE TABLE `message` (
 `id` int(11) AUTO_INCREMENT,
 `theme` varchar(255) DEFAULT NULL,
 `text` TEXT,
-`created_at` int(11) DEFAULT 0,
+`created_at` DATETIME DEFAULT NULL,
 `sender_id` int(11) DEFAULT 0,
 `receiver_id` int(11) DEFAULT 0,
 PRIMARY KEY(`id`)
@@ -48,11 +48,11 @@ CREATE TABLE `tournament` (
 `type` varchar(255) DEFAULT NULL,
 `rating_on` int(11) DEFAULT 0,
 `players_count` int(11) DEFAULT 0,
-`start` date DEFAULT NULL,
-`end`  date DEFAULT NULL,
+`start` DATETIME DEFAULT NULL,
+`end`  DATETIME DEFAULT NULL,
 `checkin` int(1) DEFAULT 0,
-`checkin_start` int(11) DEFAULT 0,
-`checkin_end` int(11) DEFAULT 0,
+`checkin_start` DATETIME DEFAULT NULL,
+`checkin_end` DATETIME DEFAULT NULL,
 `first_place` int(11) DEFAULT 0,
 `second_place` int(11) DEFAULT 0,
 `third_place` int(11) DEFAULT 0,
@@ -79,8 +79,8 @@ CREATE TABLE `stage` (
 `tournament_id` int(11) DEFAULT 0,
 `type` varchar(255) DEFAULT NULL,
 `rule` varchar(255) DEFAULT NULL,
-`start` int(11) DEFAULT 0,
-`end`  int(11) DEFAULT 0,
+`start` DATETIME DEFAULT NULL,
+`end`  DATETIME DEFAULT NULL,
 `players_count` int(11) DEFAULT 0,
 
 PRIMARY KEY(`id`)
@@ -113,8 +113,8 @@ CREATE TABLE `user_to_gifts`(
 `gifts_id` int(11) DEFAULT 0
 );
 
-DROP TABLE IF EXISTS `user_to_stage`;
-CREATE TABLE `user_to_stage`(
+DROP TABLE IF EXISTS `stage_to_user`;
+CREATE TABLE `stage_to_user`(
 `user_id` int(11) DEFAULT 0,
 `stage_id` int(11) DEFAULT 0
 );

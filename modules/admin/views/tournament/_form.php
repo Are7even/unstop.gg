@@ -3,11 +3,11 @@
 use app\helpers\StatusHelper;
 use app\models\Games;
 use iutbay\yii2\mm\widgets\MediaManagerInput;
+use kartik\datetime\DateTimePicker;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
-use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Tournament */
@@ -47,35 +47,54 @@ $languages = \app\models\Language::findActive();
 
     <?= $form->field($model, 'players_count')->textInput() ?>
 
-    <?php echo $form->field($model, 'start')->widget(DatePicker::classname(), [
-        'options' => ['placeholder' => ''],
+    <?php echo $form->field($model, 'start')->widget(DateTimePicker::classname(), [
+        'removeButton' => false,
+        'pickerButton' => ['icon' => 'time'],
         'pluginOptions' => [
-            'autoclose' => true
+            'autoclose' => true,
+            'format'=>'dd-mm-yyyy hh:ii',
         ]
     ]); ?>
 
-    <?= $form->field($model, 'end')->widget(DatePicker::classname(), [
-        'options' => ['placeholder' => ''],
+    <?= $form->field($model, 'end')->widget(DateTimePicker::classname(), [
+        'removeButton' => false,
+        'pickerButton' => ['icon' => 'time'],
         'pluginOptions' => [
-            'autoclose' => true
+            'autoclose' => true,
+            'format'=>'dd-mm-yyyy hh:ii',
         ]
     ]); ?>
 
-    <?= $form->field($model, 'checkin')->dropDownList(StatusHelper::statusList()) ?>
+<!--    --><?//= $form->field($model, 'checkin')->dropDownList(StatusHelper::statusList()) ?>
+    <?php echo $form->field($model, 'checkin')->radioList(StatusHelper::statusList()) ?>
 
-    <?= $form->field($model, 'checkin_start')->textInput() ?>
+    <?php echo $form->field($model, 'checkin_start')->widget(DateTimePicker::classname(), [
+        'removeButton' => false,
+        'pickerButton' => ['icon' => 'time'],
+        'pluginOptions' => [
+            'autoclose' => true,
+            'format'=>'dd-mm-yyyy hh:ii',
+        ]
+    ]); ?>
 
-    <?= $form->field($model, 'checkin_end')->textInput() ?>
+    <?php echo $form->field($model, 'checkin_end')->widget(DateTimePicker::classname(), [
+        'removeButton' => false,
+        'pickerButton' => ['icon' => 'time'],
+        'pluginOptions' => [
+            'autoclose' => true,
+            'format'=>'dd-mm-yyyy hh:ii',
+        ]
+    ]); ?>
 
-    <?= $form->field($model, 'first_place')->textInput() ?>
+    <?= $form->field($model, 'first_place')->hiddenInput()->label(false) ?>
 
-    <?= $form->field($model, 'second_place')->textInput() ?>
+    <?= $form->field($model, 'second_place')->hiddenInput()->label(false) ?>
 
-    <?= $form->field($model, 'third_place')->textInput() ?>
+    <?= $form->field($model, 'third_place')->hiddenInput()->label(false) ?>
 
-    <?= $form->field($model, 'fourth_place')->textInput() ?>
+    <?= $form->field($model, 'fourth_place')->hiddenInput()->label(false) ?>
 
-    <?= $form->field($model, 'fifth_place')->textInput() ?>
+    <?= $form->field($model, 'fifth_place')->hiddenInput()->label(false) ?>
 
     <div class="tabs">
         <?php $count = 0; ?>

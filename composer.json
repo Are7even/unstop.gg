@@ -20,7 +20,7 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "creocoder/yii2-translateable": "^1.0",
         "iutbay/yii2-mm": "*",
-        "kartik-v/yii2-widget-datepicker": "@dev",
+        "kartik-v/yii2-widget-datetimepicker": "dev-master",
         "codemix/yii2-localeurls": "dev-master"
     },
     "require-dev": {

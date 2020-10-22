@@ -61,9 +61,9 @@ class Tournament extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['hidden', 'handheld', 'rating_on', 'players_count', 'checkin', 'checkin_start', 'checkin_end', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place'], 'integer'],
+            [['hidden', 'handheld', 'rating_on', 'players_count', 'checkin', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place'], 'integer'],
             [['icon', 'game', 'type'], 'string', 'max' => 255],
-            [['created_at', 'start', 'end'], 'safe'],
+            [['created_at', 'start', 'end','checkin_start', 'checkin_end'], 'safe'],
             [['created_at'], 'default', 'value' => date('Y-m-j')],
         ];
     }
@@ -98,6 +98,22 @@ class Tournament extends \yii\db\ActiveRecord
 
     public function getTranslations () {
         return $this -> hasMany(TournamentTranslate::className(), ['tournament_id'=>'id']);
+    }
+
+    static function getCurrentStartTime($id){
+        return true;
+    }
+
+    static function getCurrentEndTime($id){
+        return true;
+    }
+
+    static function getCurrentCheckinStartTime($id){
+        return true;
+    }
+
+    static function getCurrentCheckinEndTime($id){
+        return true;
     }
 
 }

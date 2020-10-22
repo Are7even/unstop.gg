@@ -40,4 +40,21 @@ class UserToGifts extends \yii\db\ActiveRecord
             'gifts_id' => Yii::t('admin', 'Gifts ID'),
         ];
     }
+
+    public function add($userId,$giftsId){
+        $model = new self();
+        $model->user_id = $userId;
+        $model->gifts_id = $giftsId;
+        $model->save();
+        return true;
+    }
+
+    public function getGiftsList(){
+        return self::find()->where(['user_id'=>Yii::$app->user->id])->all();
+    }
+
+    public function getGifts(){
+        return $this->hasMany(Gifts::className(),['id'=>'gifts_id']);
+    }
+
 }
