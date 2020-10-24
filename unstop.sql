@@ -14,10 +14,10 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) AUTO_INCREMENT,
   `token` varchar(255) DEFAULT NULL,
-  `login` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `role` varchar(255) DEFAULT NULL,
+  `role` int(11) DEFAULT 0,
   `rating` int(11) DEFAULT 1,
   `photo` varchar(255) DEFAULT NULL,
   `created_at` date DEFAULT NULL,

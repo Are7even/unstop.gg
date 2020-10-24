@@ -15,7 +15,7 @@ use app\helpers\RoleHelper;
 
     <?= $form->field($model, 'token')->textInput() ?>
 
-    <?= $form->field($model, 'login')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 

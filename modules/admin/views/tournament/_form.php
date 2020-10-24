@@ -48,7 +48,6 @@ $languages = \app\models\Language::findActive();
     <?= $form->field($model, 'players_count')->textInput() ?>
 
     <?php echo $form->field($model, 'start')->widget(DateTimePicker::classname(), [
-        'removeButton' => false,
         'pickerButton' => ['icon' => 'time'],
         'pluginOptions' => [
             'autoclose' => true,
@@ -57,7 +56,6 @@ $languages = \app\models\Language::findActive();
     ]); ?>
 
     <?= $form->field($model, 'end')->widget(DateTimePicker::classname(), [
-        'removeButton' => false,
         'pickerButton' => ['icon' => 'time'],
         'pluginOptions' => [
             'autoclose' => true,
@@ -66,10 +64,13 @@ $languages = \app\models\Language::findActive();
     ]); ?>
 
 <!--    --><?//= $form->field($model, 'checkin')->dropDownList(StatusHelper::statusList()) ?>
+    <?php \yii\widgets\Pjax::begin([
+        'timeout' => '1000',
+        'enablePushState' => false,
+    ]); ?>
     <?php echo $form->field($model, 'checkin')->radioList(StatusHelper::statusList()) ?>
 
     <?php echo $form->field($model, 'checkin_start')->widget(DateTimePicker::classname(), [
-        'removeButton' => false,
         'pickerButton' => ['icon' => 'time'],
         'pluginOptions' => [
             'autoclose' => true,
@@ -78,14 +79,13 @@ $languages = \app\models\Language::findActive();
     ]); ?>
 
     <?php echo $form->field($model, 'checkin_end')->widget(DateTimePicker::classname(), [
-        'removeButton' => false,
         'pickerButton' => ['icon' => 'time'],
         'pluginOptions' => [
             'autoclose' => true,
             'format'=>'dd-mm-yyyy hh:ii',
         ]
     ]); ?>
-
+    <?php \yii\widgets\Pjax::end()?>
     <?= $form->field($model, 'first_place')->hiddenInput()->label(false) ?>
 
     <?= $form->field($model, 'second_place')->hiddenInput()->label(false) ?>

@@ -5,16 +5,16 @@ use yii;
 class RoleHelper
 {
 
-    public static $creator = 'creator';
-    public static $admin = 'admin';
-    public static $moder = 'moder';
-    public static $redactor = 'redactor';
-    public static $steward = 'steward';
-    public static $premium = 'premium';
-    public static $true_user = 'true_user';
-    public static $user = 'user';
-    public static $guest = 'guest';
-    public static $banned = 'banned';
+    public static $creator = 10;
+    public static $admin = 7;
+    public static $moder = 6;
+    public static $redactor = 5;
+    public static $steward = 4;
+    public static $premium = 3;
+    public static $true_user = 2;
+    public static $user = 1;
+    public static $guest = 0;
+    public static $banned = 9;
 
     static function roleList(){
         return [
