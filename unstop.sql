@@ -13,18 +13,21 @@ PRIMARY KEY(`id`)
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) AUTO_INCREMENT,
-  `token` varchar(255) DEFAULT NULL,
+  `auth_key` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `password_reset_token` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `role` int(11) DEFAULT 0,
+  `role` int(11) DEFAULT 1,
   `rating` int(11) DEFAULT 1,
   `photo` varchar(255) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY(`id`)
 );
 
-ALTER TABLE `user` ADD UNIQUE(`token`);
+ALTER TABLE `user` ADD UNIQUE(`password_reset_token`);
+ALTER TABLE `user` ADD UNIQUE(`username`);
+ALTER TABLE `user` ADD UNIQUE(`email`);
 
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message` (

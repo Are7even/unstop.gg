@@ -13,13 +13,15 @@ use app\helpers\RoleHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'token')->textInput() ?>
+    <?= $form->field($model, 'auth_key')->textInput() ?>
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'password_reset_token')->passwordInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'role')->dropDownList(RoleHelper::roleList()) ?>
 

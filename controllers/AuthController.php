@@ -5,8 +5,10 @@ namespace app\controllers;
 
 
 use app\models\LoginForm;
+use app\models\RegistrationForm;
 use app\models\User;
 use Yii;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -29,16 +31,28 @@ class AuthController extends Controller
         ]);
     }
 
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
+
     public function actionLogout()
     {
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+
+    public function actionRegistration()
+    {
+
+        $model = new RegistrationForm();
+
+        if ($model->load(Yii::$app->request->post())&&$model->save()) {
+            Yii::$app->session->setFlash('success', Yii::t('admin', 'User registered!'));
+            return $this->redirect(Url::to(['auth/login']));
+        }
+        return $this->render('registration', [
+            'model' => $model,
+        ]);
+
     }
 
 }
