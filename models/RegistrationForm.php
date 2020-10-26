@@ -47,6 +47,7 @@ class RegistrationForm extends Model
         $user->email = $this->email;
         $user->auth_key = Yii::$app->security->generateRandomString();
         $user->setPassword($this->password);
+        $user->generateEmailVerificationToken();
         $user->role = RoleHelper::$user;
         $user->photo = 'no-image.png';
         $user->created_at = date('Y-m-j');

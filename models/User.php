@@ -86,6 +86,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $this->password = Yii::$app->security->generatePasswordHash($password);
     }
 
+    public function generateEmailVerificationToken(){
+        $this->password_reset_token = Yii::$app->security->generateRandomString().'_'.time();
+    }
+
     public function generatePasswordResetToken(){
         $this->password_reset_token = Yii::$app->security->generateRandomString().'_'.time();
     }
