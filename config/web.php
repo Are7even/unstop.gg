@@ -24,10 +24,7 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
-<<<<<<< HEAD
             'loginUrl'=>['auth/login'],
-=======
->>>>>>> origin/Oleg
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -74,7 +71,6 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-<<<<<<< HEAD
                 'thumbs/<path:.*>' => 'mm/thumb/thumb',
             ],
         ],
@@ -82,18 +78,11 @@ $config = [
             'class' => 'creocoder\flysystem\LocalFilesystem',
             'path' => '@webroot/upload',
         ],
-=======
-            ],
-        ],
->>>>>>> origin/Oleg
     ],
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
-<<<<<<< HEAD
             'layout' => 'main'
-=======
->>>>>>> origin/Oleg
         ],
         'mm'=>[
             'class' => 'iutbay\yii2\mm\Module',

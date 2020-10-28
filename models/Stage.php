@@ -31,14 +31,9 @@ class Stage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-<<<<<<< HEAD
             [['tournament_id','players_count'], 'integer'],
             [['type', 'rule'], 'string', 'max' => 255],
             [['start', 'end'], 'safe'],
-=======
-            [['tournament_id', 'start', 'end', 'players_count'], 'integer'],
-            [['type', 'rule'], 'string', 'max' => 255],
->>>>>>> origin/Oleg
         ];
     }
 

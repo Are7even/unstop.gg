@@ -30,14 +30,9 @@ class Message extends \yii\db\ActiveRecord
     {
         return [
             [['text'], 'string'],
-<<<<<<< HEAD
             [['sender_id', 'receiver_id'], 'integer'],
             [['theme'], 'string', 'max' => 255],
             [['created_at'], 'safe'],
-=======
-            [['created_at', 'sender_id', 'receiver_id'], 'integer'],
-            [['theme'], 'string', 'max' => 255],
->>>>>>> origin/Oleg
         ];
     }
 

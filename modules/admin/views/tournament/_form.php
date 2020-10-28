@@ -1,6 +1,5 @@
 <?php
 
-<<<<<<< HEAD
 use app\helpers\StatusHelper;
 use app\models\Games;
 use iutbay\yii2\mm\widgets\MediaManagerInput;
@@ -8,26 +7,19 @@ use kartik\datetime\DateTimePicker;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
-=======
-use yii\helpers\Html;
->>>>>>> origin/Oleg
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Tournament */
 /* @var $form yii\widgets\ActiveForm */
-<<<<<<< HEAD
 
 $languages = \app\models\Language::findActive();
-=======
->>>>>>> origin/Oleg
 ?>
 
 <div class="tournament-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-<<<<<<< HEAD
     <?php echo $form->field($model, 'icon')->widget(MediaManagerInput::className(), [
         'multiple' => true,
 
@@ -132,43 +124,6 @@ $languages = \app\models\Language::findActive();
 
 
 
-=======
-    <?= $form->field($model, 'icon')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'game')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'hidden')->textInput() ?>
-
-    <?= $form->field($model, 'handheld')->textInput() ?>
-
-    <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'rating_on')->textInput() ?>
-
-    <?= $form->field($model, 'players_count')->textInput() ?>
-
-    <?= $form->field($model, 'start')->textInput() ?>
-
-    <?= $form->field($model, 'end')->textInput() ?>
-
-    <?= $form->field($model, 'checkin')->textInput() ?>
-
-    <?= $form->field($model, 'checkin_start')->textInput() ?>
-
-    <?= $form->field($model, 'checkin_end')->textInput() ?>
-
-    <?= $form->field($model, 'first_place')->textInput() ?>
-
-    <?= $form->field($model, 'second_place')->textInput() ?>
-
-    <?= $form->field($model, 'third_place')->textInput() ?>
-
-    <?= $form->field($model, 'fourth_place')->textInput() ?>
-
-    <?= $form->field($model, 'fifth_place')->textInput() ?>
->>>>>>> origin/Oleg
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('admin', 'Save'), ['class' => 'btn btn-success']) ?>

@@ -5,7 +5,6 @@ use yii;
 class RoleHelper
 {
 
-<<<<<<< HEAD
     public static $creator = 10;
     public static $admin = 7;
     public static $moder = 6;
@@ -16,18 +15,6 @@ class RoleHelper
     public static $user = 1;
     public static $guest = 0;
     public static $banned = 9;
-=======
-    public static $creator = 'creator';
-    public static $admin = 'admin';
-    public static $moder = 'moder';
-    public static $redactor = 'redactor';
-    public static $steward = 'steward';
-    public static $premium = 'premium';
-    public static $true_user = 'true_user';
-    public static $user = 'user';
-    public static $guest = 'guest';
-    public static $banned = 'banned';
->>>>>>> origin/Oleg
 
     static function roleList(){
         return [

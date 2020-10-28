@@ -13,44 +13,28 @@ PRIMARY KEY(`id`)
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) AUTO_INCREMENT,
-<<<<<<< HEAD
   `auth_key` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `password_reset_token` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `role` int(11) DEFAULT 1,
-=======
-  `token` varchar(255) DEFAULT NULL,
-  `login` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `role` varchar(255) DEFAULT NULL,
->>>>>>> origin/Oleg
   `rating` int(11) DEFAULT 1,
   `photo` varchar(255) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY(`id`)
 );
 
-<<<<<<< HEAD
 ALTER TABLE `user` ADD UNIQUE(`password_reset_token`);
 ALTER TABLE `user` ADD UNIQUE(`username`);
 ALTER TABLE `user` ADD UNIQUE(`email`);
-=======
-ALTER TABLE `user` ADD UNIQUE(`token`);
->>>>>>> origin/Oleg
 
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message` (
 `id` int(11) AUTO_INCREMENT,
 `theme` varchar(255) DEFAULT NULL,
 `text` TEXT,
-<<<<<<< HEAD
 `created_at` DATETIME DEFAULT NULL,
-=======
-`created_at` int(11) DEFAULT 0,
->>>>>>> origin/Oleg
 `sender_id` int(11) DEFAULT 0,
 `receiver_id` int(11) DEFAULT 0,
 PRIMARY KEY(`id`)
@@ -67,19 +51,11 @@ CREATE TABLE `tournament` (
 `type` varchar(255) DEFAULT NULL,
 `rating_on` int(11) DEFAULT 0,
 `players_count` int(11) DEFAULT 0,
-<<<<<<< HEAD
 `start` DATETIME DEFAULT NULL,
 `end`  DATETIME DEFAULT NULL,
 `checkin` int(1) DEFAULT 0,
 `checkin_start` DATETIME DEFAULT NULL,
 `checkin_end` DATETIME DEFAULT NULL,
-=======
-`start` int(11) DEFAULT 0,
-`end`  int(11) DEFAULT 0,
-`checkin` int(1) DEFAULT 0,
-`checkin_start` int(11) DEFAULT 0,
-`checkin_end` int(11) DEFAULT 0,
->>>>>>> origin/Oleg
 `first_place` int(11) DEFAULT 0,
 `second_place` int(11) DEFAULT 0,
 `third_place` int(11) DEFAULT 0,
@@ -106,13 +82,8 @@ CREATE TABLE `stage` (
 `tournament_id` int(11) DEFAULT 0,
 `type` varchar(255) DEFAULT NULL,
 `rule` varchar(255) DEFAULT NULL,
-<<<<<<< HEAD
 `start` DATETIME DEFAULT NULL,
 `end`  DATETIME DEFAULT NULL,
-=======
-`start` int(11) DEFAULT 0,
-`end`  int(11) DEFAULT 0,
->>>>>>> origin/Oleg
 `players_count` int(11) DEFAULT 0,
 
 PRIMARY KEY(`id`)
@@ -145,13 +116,8 @@ CREATE TABLE `user_to_gifts`(
 `gifts_id` int(11) DEFAULT 0
 );
 
-<<<<<<< HEAD
 DROP TABLE IF EXISTS `stage_to_user`;
 CREATE TABLE `stage_to_user`(
-=======
-DROP TABLE IF EXISTS `user_to_stage`;
-CREATE TABLE `user_to_stage`(
->>>>>>> origin/Oleg
 `user_id` int(11) DEFAULT 0,
 `stage_id` int(11) DEFAULT 0
 );
@@ -195,7 +161,6 @@ CREATE TABLE `genre_translate`(
 PRIMARY KEY(`id`)
 );
 
-<<<<<<< HEAD
 DELIMITER //
 CREATE TRIGGER `delete_stage` BEFORE DELETE ON `stage`
 FOR EACH ROW BEGIN
@@ -225,34 +190,3 @@ CREATE TRIGGER `delete_tournament_translate` BEFORE DELETE ON `tournament`
 FOR EACH ROW BEGIN
   DELETE FROM `tournament_translate` WHERE `tournament_id`=OLD.`id`;
 END
-=======
--- DELIMITER //
--- CREATE TRIGGER `delete_stage` BEFORE DELETE ON `stage`
--- FOR EACH ROW BEGIN
---   DELETE FROM `stage` WHERE `tournament_id`=OLD.`id`;
--- END
-
--- DELIMITER //
--- CREATE TRIGGER `delete_games_translate` BEFORE DELETE ON `games`
--- FOR EACH ROW BEGIN
---   DELETE FROM `games_translate` WHERE `games_id`=OLD.`id`;
--- END
---
--- DELIMITER //
--- CREATE TRIGGER `delete_genre_translate` BEFORE DELETE ON `genre`
--- FOR EACH ROW BEGIN
---   DELETE FROM `genre_translate` WHERE `genre_id`=OLD.`id`;
--- END
---
--- DELIMITER //
--- CREATE TRIGGER `delete_gifts_translate` BEFORE DELETE ON `gifts`
--- FOR EACH ROW BEGIN
---   DELETE FROM `gifts_translate` WHERE `gifts_id`=OLD.`id`;
--- END
---
--- DELIMITER //
--- CREATE TRIGGER `delete_tournament_translate` BEFORE DELETE ON `tournament`
--- FOR EACH ROW BEGIN
---   DELETE FROM `tournament_translate` WHERE `tournament_id`=OLD.`id`;
--- END
->>>>>>> origin/Oleg

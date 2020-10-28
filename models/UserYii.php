@@ -2,11 +2,7 @@
 
 namespace app\models;
 
-<<<<<<< HEAD
 class UserYii extends \yii\base\BaseObject implements \yii\web\IdentityInterface
-=======
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
->>>>>>> origin/Oleg
 {
     public $id;
     public $username;
