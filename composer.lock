@@ -53,7 +53,7 @@
             "version": "3.5.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "4c0e4becb8263bb5b3e6dadc448d8e7305ef8215"
             },
             "dist": {
@@ -854,17 +854,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "25c8bd0b66ce53b187a1e0c25bfb1a8c476b9b9d"
+                "reference": "f7d2961c858520dc83a594c66cde9d550f6d2226"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/25c8bd0b66ce53b187a1e0c25bfb1a8c476b9b9d",
-                "reference": "25c8bd0b66ce53b187a1e0c25bfb1a8c476b9b9d",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/f7d2961c858520dc83a594c66cde9d550f6d2226",
+                "reference": "f7d2961c858520dc83a594c66cde9d550f6d2226",
                 "shasum": ""
             },
             "require": {
                 "egulias/email-validator": "^2.0",
-                "php": "^7.2.5",
+                "php": ">=7.2.5",
                 "symfony/polyfill-iconv": "^1.0",
                 "symfony/polyfill-intl-idn": "^1.10",
                 "symfony/polyfill-mbstring": "^1.0"
@@ -917,7 +917,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-06T06:01:18+00:00"
+            "time": "2020-10-28T07:50:18+00:00"
         },
         {
             "name": "symfony/polyfill-iconv",
@@ -2359,16 +2359,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "26c3c624bbfd3924e5a36a8c5a077a1fd7f167d3"
+                "reference": "ac73e5287024f5e98dd6d0bf10e6a6f7877b7513"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/26c3c624bbfd3924e5a36a8c5a077a1fd7f167d3",
-                "reference": "26c3c624bbfd3924e5a36a8c5a077a1fd7f167d3",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/ac73e5287024f5e98dd6d0bf10e6a6f7877b7513",
+                "reference": "ac73e5287024f5e98dd6d0bf10e6a6f7877b7513",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3.3 || ^7.0"
+                "php": "^5.3.3 || ^7.0 || ^8.0"
             },
             "require-dev": {
                 "ext-intl": "*",
@@ -2401,7 +2401,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2020-10-23T12:58:11+00:00"
+            "time": "2020-10-27T14:15:58+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -4147,12 +4147,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "4f00061f0fe49fb7c836fc31d66f365d8bff32fa"
+                "reference": "b8474c7497390d0ae2807c25944af1314db9846b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/4f00061f0fe49fb7c836fc31d66f365d8bff32fa",
-                "reference": "4f00061f0fe49fb7c836fc31d66f365d8bff32fa",
+                "url": "https://api.github.com/repos/symfony/console/zipball/b8474c7497390d0ae2807c25944af1314db9846b",
+                "reference": "b8474c7497390d0ae2807c25944af1314db9846b",
                 "shasum": ""
             },
             "require": {
@@ -4233,7 +4233,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-24T12:08:07+00:00"
+            "time": "2020-10-27T15:37:34+00:00"
         },
         {
             "name": "symfony/css-selector",
