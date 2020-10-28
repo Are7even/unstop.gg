@@ -16,22 +16,30 @@ $languages = \app\models\Language::findActive();
 
     <?= $form->field($model, 'status')->dropDownList(\app\helpers\StatusHelper::statusList()) ?>
 
+
     <div class="tabs">
         <?php $count = 0; ?>
-        <ul class="tabs__caption">
+        <ul class="nav nav-pills nav-justified" data-role="st-tabnav" role="tablist">
             <?php foreach ($languages as $language): ?>
-                <li class="<?php if ($count === 0) echo "active"; ?>"><?php echo $language->title ?></li>
+                <li class="nav-item waves-effect waves-light <?php if ($count === 0) echo "active"; ?>">
+                    <a class="nav-link" data-st-tab="city-form"
+                       href="<?php echo '#tab-' . $count ?>"><?php echo $language->title ?></a>
+                </li>
                 <?php $count++; ?>
             <?php endforeach; ?>
         </ul>
         <?php $count = 0; ?>
 
-        <?php foreach ($languages as $language): ?>
-            <div class="tabs__content <?php if ($count === 0) echo "active"; ?>">
-                <?php echo $form->field($model->translate($language->code), "[$language->code]title")->textInput(); ?>
-            </div>
-            <?php $count++; ?>
-        <?php endforeach; ?>
+        <div class="tab-content" data-role="city-form">
+            <?php foreach ($languages as $language): ?>
+                <div id="<?php echo 'tab-' . $count ?>" class="tab-pane <?php if ($count === 0) echo "active"; ?>">
+                    <div class="p-3 " role="tabpanel">
+                        <?php echo $form->field($model->translate($language->code), "[$language->code]title")->textInput(); ?>
+                    </div>
+                </div>
+                <?php $count++; ?>
+            <?php endforeach; ?>
+        </div>
     </div>
 
     <div class="form-group">

@@ -161,32 +161,32 @@ CREATE TABLE `genre_translate`(
 PRIMARY KEY(`id`)
 );
 
--- DELIMITER //
--- CREATE TRIGGER `delete_stage` BEFORE DELETE ON `stage`
--- FOR EACH ROW BEGIN
---   DELETE FROM `stage` WHERE `tournament_id`=OLD.`id`;
--- END
+DELIMITER //
+CREATE TRIGGER `delete_stage` BEFORE DELETE ON `stage`
+FOR EACH ROW BEGIN
+  DELETE FROM `stage` WHERE `tournament_id`=OLD.`id`;
+END
 
--- DELIMITER //
--- CREATE TRIGGER `delete_games_translate` BEFORE DELETE ON `games`
--- FOR EACH ROW BEGIN
---   DELETE FROM `games_translate` WHERE `games_id`=OLD.`id`;
--- END
---
--- DELIMITER //
--- CREATE TRIGGER `delete_genre_translate` BEFORE DELETE ON `genre`
--- FOR EACH ROW BEGIN
---   DELETE FROM `genre_translate` WHERE `genre_id`=OLD.`id`;
--- END
---
--- DELIMITER //
--- CREATE TRIGGER `delete_gifts_translate` BEFORE DELETE ON `gifts`
--- FOR EACH ROW BEGIN
---   DELETE FROM `gifts_translate` WHERE `gifts_id`=OLD.`id`;
--- END
---
--- DELIMITER //
--- CREATE TRIGGER `delete_tournament_translate` BEFORE DELETE ON `tournament`
--- FOR EACH ROW BEGIN
---   DELETE FROM `tournament_translate` WHERE `tournament_id`=OLD.`id`;
--- END
+DELIMITER //
+CREATE TRIGGER `delete_games_translate` BEFORE DELETE ON `games`
+FOR EACH ROW BEGIN
+  DELETE FROM `games_translate` WHERE `games_id`=OLD.`id`;
+END
+
+DELIMITER //
+CREATE TRIGGER `delete_genre_translate` BEFORE DELETE ON `genre`
+FOR EACH ROW BEGIN
+  DELETE FROM `genre_translate` WHERE `genre_id`=OLD.`id`;
+END
+
+DELIMITER //
+CREATE TRIGGER `delete_gifts_translate` BEFORE DELETE ON `gifts`
+FOR EACH ROW BEGIN
+  DELETE FROM `gifts_translate` WHERE `gifts_id`=OLD.`id`;
+END
+
+DELIMITER //
+CREATE TRIGGER `delete_tournament_translate` BEFORE DELETE ON `tournament`
+FOR EACH ROW BEGIN
+  DELETE FROM `tournament_translate` WHERE `tournament_id`=OLD.`id`;
+END

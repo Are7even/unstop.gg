@@ -82,6 +82,7 @@ $config = [
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
+            'layout' => 'main'
         ],
         'mm'=>[
             'class' => 'iutbay\yii2\mm\Module',

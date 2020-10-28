@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace app\admin;
+namespace app\assets;
 
 use yii\web\AssetBundle;
 
@@ -24,13 +24,15 @@ class AdminAsset extends AssetBundle
         'admin/css/bootstrap.min.css' ,
         'admin/css/icons.css' ,
         'admin/css/style.css' ,
+        'admin/css/custom.css' ,
     ];
     public $js = [
-        'admin/js/jquery.min.js',
+//        'admin/js/jquery.min.js',
         'admin/js/popper.min.js',
         'admin/js/bootstrap.min.js',
         'admin/js/modernizr.min.js',
         'admin/js/detect.js',
+        'admin/js/tabs.js',
         'admin/js/fastclick.js',
         'admin/js/jquery.slimscroll.js',
         'admin/js/jquery.blockUI.js',
@@ -46,9 +48,11 @@ class AdminAsset extends AssetBundle
         'admin/plugins/jquery-sparkline/jquery.sparkline.min.js',
         'admin/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js',
         'admin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js',
-        'admin/pages/crypto-dash.init.js',
         'admin/js/app.js',
     ];
     public $depends = [
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
+        'yiiui\yii2materialdesignicons\MaterialDesignIconsAsset',
     ];
 }
