@@ -2,7 +2,10 @@
 
 namespace app\models;
 
+<<<<<<< HEAD
 use creocoder\translateable\TranslateableBehavior;
+=======
+>>>>>>> origin/Oleg
 use Yii;
 
 /**
@@ -21,6 +24,7 @@ class Gifts extends \yii\db\ActiveRecord
         return 'gifts';
     }
 
+<<<<<<< HEAD
     public function behaviors()
     {
         return [
@@ -38,6 +42,8 @@ class Gifts extends \yii\db\ActiveRecord
         ];
     }
 
+=======
+>>>>>>> origin/Oleg
     /**
      * {@inheritdoc}
      */
@@ -58,9 +64,12 @@ class Gifts extends \yii\db\ActiveRecord
             'icon' => Yii::t('admin', 'Icon'),
         ];
     }
+<<<<<<< HEAD
 
     public function getTranslations () {
         return $this -> hasMany(GiftsTranslate::className(), ['gifts_id'=>'id']);
     }
 
+=======
+>>>>>>> origin/Oleg
 }

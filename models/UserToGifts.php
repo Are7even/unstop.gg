@@ -40,6 +40,7 @@ class UserToGifts extends \yii\db\ActiveRecord
             'gifts_id' => Yii::t('admin', 'Gifts ID'),
         ];
     }
+<<<<<<< HEAD
 
     public function add($userId,$giftsId){
         $model = new self();
@@ -57,4 +58,6 @@ class UserToGifts extends \yii\db\ActiveRecord
         return $this->hasMany(Gifts::className(),['id'=>'gifts_id']);
     }
 
+=======
+>>>>>>> origin/Oleg
 }

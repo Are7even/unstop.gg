@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 use iutbay\yii2\mm\widgets\MediaManagerInput;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -7,6 +8,11 @@ use yii\widgets\ActiveForm;
 
 $languages = \app\models\Language::findActive();
 
+=======
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+>>>>>>> origin/Oleg
 /* @var $this yii\web\View */
 /* @var $model app\models\Gifts */
 /* @var $form yii\widgets\ActiveForm */
@@ -16,6 +22,7 @@ $languages = \app\models\Language::findActive();
 
     <?php $form = ActiveForm::begin(); ?>
 
+<<<<<<< HEAD
     <?php echo $form->field($model, 'icon')->widget(MediaManagerInput::className(), [
         'multiple' => true,
 
@@ -55,6 +62,9 @@ $languages = \app\models\Language::findActive();
             <?php endforeach; ?>
         </div>
     </div>
+=======
+    <?= $form->field($model, 'icon')->textInput(['maxlength' => true]) ?>
+>>>>>>> origin/Oleg
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('admin', 'Save'), ['class' => 'btn btn-success']) ?>

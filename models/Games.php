@@ -2,7 +2,10 @@
 
 namespace app\models;
 
+<<<<<<< HEAD
 use creocoder\translateable\TranslateableBehavior;
+=======
+>>>>>>> origin/Oleg
 use Yii;
 
 /**
@@ -23,6 +26,7 @@ class Games extends \yii\db\ActiveRecord
         return 'games';
     }
 
+<<<<<<< HEAD
     public function behaviors()
     {
         return [
@@ -40,6 +44,8 @@ class Games extends \yii\db\ActiveRecord
         ];
     }
 
+=======
+>>>>>>> origin/Oleg
     /**
      * {@inheritdoc}
      */
@@ -47,7 +53,10 @@ class Games extends \yii\db\ActiveRecord
     {
         return [
             [['image', 'name', 'genre_id'], 'string', 'max' => 255],
+<<<<<<< HEAD
             [['image'], 'default', 'value' => 'no-image.png'],
+=======
+>>>>>>> origin/Oleg
         ];
     }
 
@@ -63,6 +72,7 @@ class Games extends \yii\db\ActiveRecord
             'genre_id' => Yii::t('admin', 'Genre ID'),
         ];
     }
+<<<<<<< HEAD
 
     public function getTranslations () {
         return $this -> hasMany(GamesTranslate::className(), ['games_id'=>'id']);
@@ -72,4 +82,6 @@ class Games extends \yii\db\ActiveRecord
         return $this->hasOne(Genre::className(),['id'=>'genre_id']);
     }
 
+=======
+>>>>>>> origin/Oleg
 }

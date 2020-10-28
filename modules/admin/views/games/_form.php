@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 use app\models\Genre;
 use iutbay\yii2\mm\widgets\MediaManagerInput;
 use yii\helpers\ArrayHelper;
@@ -9,6 +10,11 @@ use yii\widgets\ActiveForm;
 
 $languages = \app\models\Language::findActive();
 
+=======
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+>>>>>>> origin/Oleg
 /* @var $this yii\web\View */
 /* @var $model app\models\Games */
 /* @var $form yii\widgets\ActiveForm */
@@ -18,6 +24,7 @@ $languages = \app\models\Language::findActive();
 
     <?php $form = ActiveForm::begin(); ?>
 
+<<<<<<< HEAD
     <?php echo $form->field($model, 'image')->widget(MediaManagerInput::className(), [
         'multiple' => true,
 
@@ -66,6 +73,13 @@ $languages = \app\models\Language::findActive();
         </div>
     </div>
 
+=======
+    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'genre_id')->textInput(['maxlength' => true]) ?>
+>>>>>>> origin/Oleg
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('admin', 'Save'), ['class' => 'btn btn-success']) ?>

@@ -66,6 +66,7 @@ class GamesController extends Controller
     {
         $model = new Games();
 
+<<<<<<< HEAD
         if ($model->load(Yii::$app->request->post())) {
             foreach (Yii::$app->request->post('GamesTranslate', []) as $language => $data) {
                 foreach ($data as $attribute => $translation) {
@@ -74,6 +75,10 @@ class GamesController extends Controller
             }
             $model->save();
             return $this->redirect(['index']);
+=======
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+>>>>>>> origin/Oleg
         }
 
         return $this->render('create', [
@@ -92,6 +97,7 @@ class GamesController extends Controller
     {
         $model = $this->findModel($id);
 
+<<<<<<< HEAD
         if ($model->load(Yii::$app->request->post())) {
             foreach (Yii::$app->request->post('GamesTranslate', []) as $language => $data) {
                 foreach ($data as $attribute => $translation) {
@@ -99,6 +105,9 @@ class GamesController extends Controller
                 }
             }
             $model->save();
+=======
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+>>>>>>> origin/Oleg
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
