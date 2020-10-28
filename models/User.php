@@ -2,63 +2,69 @@
 
 namespace app\models;
 
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
+use Yii;
+use yii\base\NotSupportedException;
+use yii\web\IdentityInterface;
+
+/**
+ * This is the model class for table "user".
+ *
+ * @property int $id
+ * @property int|null $auth_key
+ * @property string|null $username
+ * @property string|null $email
+ * @property string|null $password
+ * @property string|null $password_reset_token
+ * @property string|null $role
+ * @property int|null $rating
+ * @property string|null $photo
+ * @property int|null $created_at
+ */
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
-
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
 
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function findIdentity($id)
+
+    public static function tableName()
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return 'user';
+    }
+
+
+    public function rules()
+    {
+        return [
+            [['rating'], 'integer'],
+            [['rating'], 'default','value'=>'1'],
+            [['username', 'email', 'password_reset_token','auth_key','password', 'role', 'photo'], 'string', 'max' => 255],
+            [['photo'], 'default','value'=>'no-image.png'],
+            [['created_at'], 'safe'],
+            [['created_at'], 'default', 'value' => date('Y-m-j')],
+        ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function findIdentityByAccessToken($token, $type = null)
+    public function attributeLabels()
     {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return [
+            'id' => Yii::t('admin', 'ID'),
+            'auth_key' => Yii::t('admin', 'Auth key'),
+            'username' => Yii::t('admin', 'Username'),
+            'email' => Yii::t('admin', 'Email'),
+            'password' => Yii::t('admin', 'Password'),
+            'password_reset_token' => Yii::t('admin', 'Password reset token'),
+            'role' => Yii::t('admin', 'Role'),
+            'rating' => Yii::t('admin', 'Rating'),
+            'photo' => Yii::t('admin', 'Photo'),
+            'created_at' => Yii::t('admin', 'Created At'),
+        ];
     }
 
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
     public static function findByUsername($username)
     {
-        foreach (self::$users as $user) {
+        foreach (self::getAllUsers() as $user) {
             if (strcasecmp($user['username'], $username) === 0) {
                 return new static($user);
             }
@@ -67,38 +73,55 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
         return null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    static function getAllUsers(){
+        return self::find()->all();
+    }
+
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password,$this->password);
+    }
+
+    public function setPassword($password){
+        $this->password = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    public function generateEmailVerificationToken(){
+        $this->password_reset_token = Yii::$app->security->generateRandomString().'_'.time();
+    }
+
+    public function generatePasswordResetToken(){
+        $this->password_reset_token = Yii::$app->security->generateRandomString().'_'.time();
+    }
+
+    public function removePasswordResetToken(){
+        $this->password_reset_token = null;
+    }
+
+
+
+    public static function findIdentity($id)
+    {
+        return User::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        throw new NotSupportedException('"findIdentifyByAccessToken" is not implemented');
+    }
+
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return $this->auth_key;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateAuthKey($authKey)
     {
-        return $this->authKey === $authKey;
-    }
-
-    /**
-     * Validates password
-     *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
-     */
-    public function validatePassword($password)
-    {
-        return $this->password === $password;
+        return $this->auth_key===$authKey;
     }
 }

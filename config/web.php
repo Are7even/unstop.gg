@@ -11,6 +11,8 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'language'=>'ru',
+    'sourceLanguage'=>'ru',
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -22,9 +24,31 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            'loginUrl'=>['auth/login'],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
+        ],
+        'i18n' => [
+            'translations' => [
+                'admin' =>[
+                    'class'=>'yii\i18n\PhpMessageSource',
+                    'basePath'=>'@app/messages',
+                    'sourceLanguage' => 'ru',
+//                    'fileMap'=>[
+//                        'admin'=>'admin.php'
+//                    ]
+                ],
+                '*' => [
+                    'class' => 'yii \ i18n \ PhpMessageSource',
+                    'basePath' => '@app / messages',
+                    'sourceLanguage' => 'ru',
+//                    'fileMap'=>[
+//                        'app'=>'app.php',
+//                        'app/error'=>'error.php'
+//                    ]
+                ],
+            ],
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -47,12 +71,21 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'thumbs/<path:.*>' => 'mm/thumb/thumb',
             ],
+        ],
+        'fs' => [
+            'class' => 'creocoder\flysystem\LocalFilesystem',
+            'path' => '@webroot/upload',
         ],
     ],
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
+            'layout' => 'main'
+        ],
+        'mm'=>[
+            'class' => 'iutbay\yii2\mm\Module',
         ],
     ],
     'params' => $params,

@@ -31,3 +31,11 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
+
+web/upload
+
+web/list
+
+web/thumbs
+
+web/download
