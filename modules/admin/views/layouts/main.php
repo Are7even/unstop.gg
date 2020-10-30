@@ -105,7 +105,7 @@ AdminAsset::register($this);
                                 <a class="nav-link dropdown-toggle arrow-none waves-effect text-white" data-toggle="dropdown" href="#" role="button"
                                    aria-haspopup="false" aria-expanded="false">
 
-                                    <?php echo Yii::$app->language; ?>
+                                    <?php echo \app\widgets\CurrentLanguage::widget(['language_code'=>Yii::$app->language]); ?>
 
 <!--                                    --><?php //$languages = Language::find()->where(['status' => true])->all() ?>
 <!--                                    --><?php

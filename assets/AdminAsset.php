@@ -25,6 +25,7 @@ class AdminAsset extends AssetBundle
         'admin/css/icons.css' ,
         'admin/css/style.css' ,
         'admin/css/custom.css' ,
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css',
     ];
     public $js = [
 //        'admin/js/jquery.min.js',

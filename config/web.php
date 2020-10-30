@@ -1,5 +1,7 @@
 <?php
 
+use codemix\localeurls\UrlManager;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -11,12 +13,14 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
-    'language'=>'ru',
     'sourceLanguage'=>'ru',
+    'language'=>'ru',
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'LKjmAuGCr3XVEWZmUEiqdFrBpUoV5dkH',
+//            'baseUrl' => '',
+            'csrfParam' => '_csrf-app',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -34,19 +38,19 @@ $config = [
                 'admin' =>[
                     'class'=>'yii\i18n\PhpMessageSource',
                     'basePath'=>'@app/messages',
-                    'sourceLanguage' => 'ru',
-//                    'fileMap'=>[
-//                        'admin'=>'admin.php'
-//                    ]
+                    'sourceLanguage' => 'en',
+                    'fileMap'=>[
+                        'admin'=>'admin.php'
+                    ]
                 ],
-                '*' => [
+                'app*' => [
                     'class' => 'yii \ i18n \ PhpMessageSource',
                     'basePath' => '@app / messages',
                     'sourceLanguage' => 'ru',
-//                    'fileMap'=>[
-//                        'app'=>'app.php',
-//                        'app/error'=>'error.php'
-//                    ]
+                    'fileMap'=>[
+                        'app'=>'app.php',
+                        'app/error'=>'error.php'
+                    ]
                 ],
             ],
         ],
@@ -68,11 +72,15 @@ $config = [
         ],
         'db' => $db,
         'urlManager' => [
+            'class' => 'codemix\localeurls\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableLanguageDetection' => false,
             'rules' => [
                 'thumbs/<path:.*>' => 'mm/thumb/thumb',
+                '<controller>/<action>' => '<controller>/<action>',
             ],
+            'languages' => ['ru', 'en'],
         ],
         'fs' => [
             'class' => 'creocoder\flysystem\LocalFilesystem',
