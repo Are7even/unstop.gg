@@ -36,6 +36,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             [['rating'], 'integer'],
             [['rating'], 'default','value'=>'1'],
+            [['status'], 'integer'],
+            [['status'], 'default','value'=>'1'],
             [['username', 'email', 'password_reset_token','auth_key','password', 'role', 'photo'], 'string', 'max' => 255],
             [['photo'], 'default','value'=>'no-image.png'],
             [['created_at'], 'safe'],
@@ -51,6 +53,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             'id' => Yii::t('admin', 'ID'),
             'auth_key' => Yii::t('admin', 'Auth key'),
+            'status' => Yii::t('admin', 'Status'),
             'username' => Yii::t('admin', 'Username'),
             'email' => Yii::t('admin', 'Email'),
             'password' => Yii::t('admin', 'Password'),

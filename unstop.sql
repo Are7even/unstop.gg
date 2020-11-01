@@ -20,6 +20,7 @@ CREATE TABLE `user` (
   `email` varchar(255) DEFAULT NULL,
   `role` int(11) DEFAULT 1,
   `rating` int(11) DEFAULT 1,
+  `status` int(11) DEFAULT 1,
   `photo` varchar(255) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY(`id`)
@@ -44,6 +45,7 @@ DROP TABLE IF EXISTS `tournament`;
 CREATE TABLE `tournament` (
 `id` int(11) AUTO_INCREMENT,
 `icon` varchar (255) DEFAULT NULL,
+`author` varchar (255) DEFAULT NULL,
 `game` varchar(255) DEFAULT NULL,
 `created_at` date DEFAULT NULL,
 `hidden` int(11) DEFAULT 0,
@@ -190,3 +192,7 @@ CREATE TRIGGER `delete_tournament_translate` BEFORE DELETE ON `tournament`
 FOR EACH ROW BEGIN
   DELETE FROM `tournament_translate` WHERE `tournament_id`=OLD.`id`;
 END
+
+php yii migrate --migrationPath=@mdm/admin/migrations To use the menu manager (optional)
+
+php yii migrate --migrationPath=@yii/rbac/migrations If you use database (class 'yii\rbac\DbManager') to save rbac data

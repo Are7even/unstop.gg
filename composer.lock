@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "27356e2414dfa23e4b8719ffe6660697",
+    "content-hash": "bec023b37261dc344ecf1a54ee3a473c",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.4.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/twbs/bootstrap.git",
+                "url": "git@github.com:twbs/bootstrap.git",
                 "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
             },
             "dist": {
@@ -401,12 +401,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "68e418ec08fbfc6f58f6fd2eea70ca8efc8cc7d5"
+                "reference": "5fa792ad1853ae2bc60528dd3e5cbf4542d3c1df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/68e418ec08fbfc6f58f6fd2eea70ca8efc8cc7d5",
-                "reference": "68e418ec08fbfc6f58f6fd2eea70ca8efc8cc7d5",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/5fa792ad1853ae2bc60528dd3e5cbf4542d3c1df",
+                "reference": "5fa792ad1853ae2bc60528dd3e5cbf4542d3c1df",
                 "shasum": ""
             },
             "require": {
@@ -451,7 +451,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2020-09-26T15:48:38+00:00"
+            "time": "2020-10-31T20:37:35+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -566,7 +566,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:iutbay/yii2-mm.git",
+                "url": "https://github.com/iutbay/yii2-mm.git",
                 "reference": "33097b46883ac48bcd7a039597f20af20b3e427a"
             },
             "dist": {
@@ -847,6 +847,64 @@
                 }
             ],
             "time": "2020-10-18T11:50:25+00:00"
+        },
+        {
+            "name": "mdmsoft/yii2-admin",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mdmsoft/yii2-admin.git",
+                "reference": "5b0966e6d6d4fedfcd12031fc7d5d20f73f60fb8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mdmsoft/yii2-admin/zipball/5b0966e6d6d4fedfcd12031fc7d5d20f73f60fb8",
+                "reference": "5b0966e6d6d4fedfcd12031fc7d5d20f73f60fb8",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0.7"
+            },
+            "require-dev": {
+                "yiisoft/yii2-codeception": "~2.0"
+            },
+            "suggest": {
+                "yiisoft/yii2-bootstrap": "Used when using layout 'left-menu', 'right-menu' or 'top-menu'"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.0.master": "1.0.x-dev",
+                    "dev-master": "2.x-dev"
+                },
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "mdm\\admin\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Misbahul Munir",
+                    "email": "misbahuldmunir@gmail.com"
+                }
+            ],
+            "description": "RBAC Auth manager for Yii2 ",
+            "keywords": [
+                "admin",
+                "auth",
+                "rbac",
+                "yii"
+            ],
+            "time": "2020-09-07T10:26:07+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1317,12 +1375,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "305cda5282b6ee5568b46a3b485242afd92fc83a"
+                "reference": "09c0422cc8260646ab24b6ad4f88e7cfb61dacaf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/305cda5282b6ee5568b46a3b485242afd92fc83a",
-                "reference": "305cda5282b6ee5568b46a3b485242afd92fc83a",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/09c0422cc8260646ab24b6ad4f88e7cfb61dacaf",
+                "reference": "09c0422cc8260646ab24b6ad4f88e7cfb61dacaf",
                 "shasum": ""
             },
             "require": {
@@ -1423,7 +1481,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-24T10:13:19+00:00"
+            "time": "2020-11-01T14:38:32+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -1431,12 +1489,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-bootstrap.git",
-                "reference": "66c41917b90f5d8b4c14c93fbc63b7363d9d235a"
+                "reference": "c45bf125671f3f6237a605241486a6dd35b142a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/66c41917b90f5d8b4c14c93fbc63b7363d9d235a",
-                "reference": "66c41917b90f5d8b4c14c93fbc63b7363d9d235a",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/c45bf125671f3f6237a605241486a6dd35b142a7",
+                "reference": "c45bf125671f3f6237a605241486a6dd35b142a7",
                 "shasum": ""
             },
             "require": {
@@ -1444,12 +1502,22 @@
                 "yiisoft/yii2": "~2.0.6"
             },
             "require-dev": {
-                "phpunit/phpunit": "<7"
+                "cweagans/composer-patches": "^1.7",
+                "phpunit/phpunit": "4.8.34"
             },
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.0.x-dev"
+                },
+                "patches": {
+                    "phpunit/phpunit-mock-objects": {
+                        "Fix PHP 7 and 8 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_mock_objects.patch"
+                    },
+                    "phpunit/phpunit": {
+                        "Fix PHP 7 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_php7.patch",
+                        "Fix PHP 8 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_php8.patch"
+                    }
                 }
             },
             "autoload": {
@@ -1500,7 +1568,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-19T11:33:47+00:00"
+            "time": "2020-10-30T19:50:24+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -1577,12 +1645,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-imagine.git",
-                "reference": "e32e4cb593b2cf31404ff7ff3d93e24203625a9d"
+                "reference": "e537d55a2d2f832e36feedb415beb2a62eb06e33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-imagine/zipball/e32e4cb593b2cf31404ff7ff3d93e24203625a9d",
-                "reference": "e32e4cb593b2cf31404ff7ff3d93e24203625a9d",
+                "url": "https://api.github.com/repos/yiisoft/yii2-imagine/zipball/e537d55a2d2f832e36feedb415beb2a62eb06e33",
+                "reference": "e537d55a2d2f832e36feedb415beb2a62eb06e33",
                 "shasum": ""
             },
             "require": {
@@ -1590,12 +1658,23 @@
                 "yiisoft/yii2": "~2.0.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "<7"
+                "cweagans/composer-patches": "^1.7",
+                "phpunit/phpunit": "4.8.34"
             },
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.0.x-dev"
+                },
+                "composer-exit-on-patch-failure": true,
+                "patches": {
+                    "phpunit/phpunit-mock-objects": {
+                        "Fix PHP 7 and 8 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_mock_objects.patch"
+                    },
+                    "phpunit/phpunit": {
+                        "Fix PHP 7 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_php7.patch",
+                        "Fix PHP 8 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_php8.patch"
+                    }
                 }
             },
             "autoload": {
@@ -1634,7 +1713,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-10T22:47:21+00:00"
+            "time": "2020-10-31T13:33:28+00:00"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -1642,12 +1721,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-swiftmailer.git",
-                "reference": "8958f992d3b155d6162d7bf2bdcd8711ff8204f9"
+                "reference": "ea7a13455c8381b4690ba1cea6c8cf41c9388f98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/8958f992d3b155d6162d7bf2bdcd8711ff8204f9",
-                "reference": "8958f992d3b155d6162d7bf2bdcd8711ff8204f9",
+                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/ea7a13455c8381b4690ba1cea6c8cf41c9388f98",
+                "reference": "ea7a13455c8381b4690ba1cea6c8cf41c9388f98",
                 "shasum": ""
             },
             "require": {
@@ -1655,12 +1734,23 @@
                 "yiisoft/yii2": ">=2.0.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "<7"
+                "cweagans/composer-patches": "^1.7",
+                "phpunit/phpunit": "4.8.34"
             },
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.1.x-dev"
+                },
+                "composer-exit-on-patch-failure": true,
+                "patches": {
+                    "phpunit/phpunit-mock-objects": {
+                        "Fix PHP 7 and 8 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_mock_objects.patch"
+                    },
+                    "phpunit/phpunit": {
+                        "Fix PHP 7 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_php7.patch",
+                        "Fix PHP 8 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_php8.patch"
+                    }
                 }
             },
             "autoload": {
@@ -1701,7 +1791,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2019-12-06T16:14:23+00:00"
+            "time": "2020-10-31T12:18:29+00:00"
         }
     ],
     "packages-dev": [
@@ -1785,12 +1875,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "5782e342b978a3efd0b7a776b7808902840b8213"
+                "reference": "9501a23aae63cbb8cceaa1539ed48b0dfb81d21c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/5782e342b978a3efd0b7a776b7808902840b8213",
-                "reference": "5782e342b978a3efd0b7a776b7808902840b8213",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/9501a23aae63cbb8cceaa1539ed48b0dfb81d21c",
+                "reference": "9501a23aae63cbb8cceaa1539ed48b0dfb81d21c",
                 "shasum": ""
             },
             "require": {
@@ -1868,7 +1958,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2020-10-23T17:59:47+00:00"
+            "time": "2020-10-29T12:26:32+00:00"
         },
         {
             "name": "codeception/lib-asserts",
@@ -2354,21 +2444,29 @@
             "time": "2020-06-15T18:51:04+00:00"
         },
         {
-            "name": "fzaninotto/faker",
-            "version": "dev-master",
+            "name": "fakerphp/faker",
+            "version": "1.9.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "ac73e5287024f5e98dd6d0bf10e6a6f7877b7513"
+                "url": "https://github.com/FakerPHP/Faker.git",
+                "reference": "b07d15b7f196f2eba51e70ac1bd7352918c8bf2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/ac73e5287024f5e98dd6d0bf10e6a6f7877b7513",
-                "reference": "ac73e5287024f5e98dd6d0bf10e6a6f7877b7513",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/b07d15b7f196f2eba51e70ac1bd7352918c8bf2f",
+                "reference": "b07d15b7f196f2eba51e70ac1bd7352918c8bf2f",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3.3 || ^7.0 || ^8.0"
+                "php": "^5.3.3 || ^7.0"
+            },
+            "conflict": {
+                "ergebnis/faker": "!=1.9.1",
+                "fzaninotto/faker": "!=1.9.1"
+            },
+            "replace": {
+                "ergebnis/faker": "1.9.1",
+                "fzaninotto/faker": "1.9.1"
             },
             "require-dev": {
                 "ext-intl": "*",
@@ -2376,11 +2474,6 @@
                 "squizlabs/php_codesniffer": "^2.9.2"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Faker\\": "src/Faker/"
@@ -2401,7 +2494,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2020-10-27T14:15:58+00:00"
+            "time": "2020-10-27T12:08:29+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -3197,12 +3290,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "1c1371c1da8fef55bec2b4cd99932a95bd4f71aa"
+                "reference": "45e0286a006ac8f4660c9f00f22369763ca51810"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1c1371c1da8fef55bec2b4cd99932a95bd4f71aa",
-                "reference": "1c1371c1da8fef55bec2b4cd99932a95bd4f71aa",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/45e0286a006ac8f4660c9f00f22369763ca51810",
+                "reference": "45e0286a006ac8f4660c9f00f22369763ca51810",
                 "shasum": ""
             },
             "require": {
@@ -3282,7 +3375,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-26T04:52:55+00:00"
+            "time": "2020-10-30T14:18:50+00:00"
         },
         {
             "name": "psr/container",
@@ -4147,12 +4240,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "b8474c7497390d0ae2807c25944af1314db9846b"
+                "reference": "f372360d0dfa520b23b91fc70e2bba6a232ac62d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/b8474c7497390d0ae2807c25944af1314db9846b",
-                "reference": "b8474c7497390d0ae2807c25944af1314db9846b",
+                "url": "https://api.github.com/repos/symfony/console/zipball/f372360d0dfa520b23b91fc70e2bba6a232ac62d",
+                "reference": "f372360d0dfa520b23b91fc70e2bba6a232ac62d",
                 "shasum": ""
             },
             "require": {
@@ -4233,7 +4326,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-27T15:37:34+00:00"
+            "time": "2020-10-29T07:35:47+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -4438,12 +4531,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "4493f163b24f5bfbd783e7bafde43f828ad6e4d2"
+                "reference": "aa13a09811e6d2ad43f8fb336bebdb7691d85d3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/4493f163b24f5bfbd783e7bafde43f828ad6e4d2",
-                "reference": "4493f163b24f5bfbd783e7bafde43f828ad6e4d2",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/aa13a09811e6d2ad43f8fb336bebdb7691d85d3c",
+                "reference": "aa13a09811e6d2ad43f8fb336bebdb7691d85d3c",
                 "shasum": ""
             },
             "require": {
@@ -4512,7 +4605,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-24T12:08:07+00:00"
+            "time": "2020-11-01T16:14:45+00:00"
         },
         {
             "name": "symfony/event-dispatcher-contracts",
@@ -5395,25 +5488,36 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-faker.git",
-                "reference": "1f9a6bc08ef48bafc8ae440ac4c00fbe67af317d"
+                "reference": "5cdc38eb544b764a47f4ba930bc41b1b7615ba68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/1f9a6bc08ef48bafc8ae440ac4c00fbe67af317d",
-                "reference": "1f9a6bc08ef48bafc8ae440ac4c00fbe67af317d",
+                "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/5cdc38eb544b764a47f4ba930bc41b1b7615ba68",
+                "reference": "5cdc38eb544b764a47f4ba930bc41b1b7615ba68",
                 "shasum": ""
             },
             "require": {
-                "fzaninotto/faker": "~1.4",
+                "fakerphp/faker": "~1.9|~1.10",
                 "yiisoft/yii2": "~2.0.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "<7"
+                "cweagans/composer-patches": "^1.7",
+                "phpunit/phpunit": "4.8.34"
             },
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.0.x-dev"
+                },
+                "composer-exit-on-patch-failure": true,
+                "patches": {
+                    "phpunit/phpunit-mock-objects": {
+                        "Fix PHP 7 and 8 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_mock_objects.patch"
+                    },
+                    "phpunit/phpunit": {
+                        "Fix PHP 7 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_php7.patch",
+                        "Fix PHP 8 compatibility": "https://yiisoft.github.io/phpunit-patches/phpunit_php8.patch"
+                    }
                 }
             },
             "autoload": {
@@ -5451,7 +5555,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-01-24T23:10:57+00:00"
+            "time": "2020-10-30T20:51:06+00:00"
         },
         {
             "name": "yiisoft/yii2-gii",

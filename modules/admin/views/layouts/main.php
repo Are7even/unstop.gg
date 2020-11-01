@@ -53,26 +53,29 @@ AdminAsset::register($this);
                 <div id="sidebar-menu">
                     <ul>
                         <li>
-                            <a href="<?php echo Url::to(['/admin/user'])?>" class="waves-effect"><i class="mdi mdi-account"></i><span>User</span></a>
+                            <a href="<?php echo Url::to(['/admin/user'])?>" class="waves-effect"><i class="mdi mdi-account"></i><span><?php echo Yii::t('admin','User')?></span></a>
                         </li>
 
                         <li>
-                            <a href="<?php echo Url::to(['/admin/games'])?>" class="waves-effect"><i class="mdi mdi-gamepad-down"></i><span>Games</span></a>
+                            <a href="<?php echo Url::to(['/admin/games'])?>" class="waves-effect"><i class="mdi mdi-gamepad-down"></i><span><?php echo Yii::t('admin','Games')?></span></a>
                         </li>
                         <li>
-                            <a href="<?php echo Url::to(['/admin/genre'])?>" class="waves-effect"><i class="mdi mdi-gamepad-variant"></i><span>Genre</span></a>
+                            <a href="<?php echo Url::to(['/admin/genre'])?>" class="waves-effect"><i class="mdi mdi-gamepad-variant"></i><span><?php echo Yii::t('admin','Genre')?></span></a>
                         </li>
                         <li>
-                            <a href="<?php echo Url::to(['/admin/gifts'])?>" class="waves-effect"><i class="mdi mdi-trophy-award"></i><span>Gifts</span></a>
+                            <a href="<?php echo Url::to(['/admin/gifts'])?>" class="waves-effect"><i class="mdi mdi-trophy-award"></i><span><?php echo Yii::t('admin','Gifts')?></span></a>
                         </li>
                         <li>
-                            <a href="<?php echo Url::to(['/admin/stage'])?>" class="waves-effect"><i class="mdi mdi-truck-fast"></i><span>Stage</span></a>
+                            <a href="<?php echo Url::to(['/admin/stage'])?>" class="waves-effect"><i class="mdi mdi-truck-fast"></i><span><?php echo Yii::t('admin','Stage')?></span></a>
                         </li>
                         <li>
-                            <a href="<?php echo Url::to(['/admin/tournament'])?>" class="waves-effect"><i class="mdi mdi-tournament"></i><span>Tournament</span></a>
+                            <a href="<?php echo Url::to(['/admin/tournament'])?>" class="waves-effect"><i class="mdi mdi-tournament"></i><span><?php echo Yii::t('admin','Tournament')?></span></a>
                         </li>
                         <li>
-                            <a href="<?php echo Url::to(['/admin/language'])?>" class="waves-effect"><i class="mdi mdi-flag-variant"></i><span>Language</span></a>
+                            <a href="<?php echo Url::to(['/admin/language'])?>" class="waves-effect"><i class="mdi mdi-flag-variant"></i><span><?php echo Yii::t('admin','Language')?></span></a>
+                        </li>
+                        <li>
+                            <a href="<?php echo Url::to(['/rbac'])?>" class="waves-effect"><i class="mdi mdi-flag-variant"></i><span><?php echo Yii::t('admin','Roles')?></span></a>
                         </li>
                         <li>
                             <a href="<?= Url::to(['site/index'])?>" class="waves-effect">

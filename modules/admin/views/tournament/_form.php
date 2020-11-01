@@ -35,6 +35,8 @@ $languages = \app\models\Language::findActive();
 
     <?= $form->field($model, 'game')->dropDownList(ArrayHelper::map(Games::find()->all(),'id','name')) ?>
 
+    <?= $form->field($model, 'author')->textInput(['maxlength' => true])  ?>
+
     <?= $form->field($model, 'created_at')->hiddenInput()->label(false) ?>
 
     <?= $form->field($model, 'hidden')->dropDownList(StatusHelper::statusList()) ?>

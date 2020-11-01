@@ -17,7 +17,7 @@ class TournamentSearch extends Tournament
     public function rules()
     {
         return [
-            [['id', 'created_at', 'hidden', 'handheld', 'rating_on', 'players_count', 'start', 'end', 'checkin', 'checkin_start', 'checkin_end', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place'], 'integer'],
+            [['id', 'created_at', 'author','hidden', 'handheld', 'rating_on', 'players_count', 'start', 'end', 'checkin', 'checkin_start', 'checkin_end', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place'], 'integer'],
             [['icon', 'game', 'type'], 'safe'],
         ];
     }
@@ -78,6 +78,7 @@ class TournamentSearch extends Tournament
 
         $query->andFilterWhere(['like', 'icon', $this->icon])
             ->andFilterWhere(['like', 'game', $this->game])
+            ->andFilterWhere(['like', 'author', $this->game])
             ->andFilterWhere(['like', 'type', $this->type]);
 
         return $dataProvider;

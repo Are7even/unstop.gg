@@ -62,7 +62,7 @@ class Tournament extends \yii\db\ActiveRecord
     {
         return [
             [['hidden', 'handheld', 'rating_on', 'players_count', 'checkin', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place'], 'integer'],
-            [['icon', 'game', 'type'], 'string', 'max' => 255],
+            [['icon', 'game','author', 'type'], 'string', 'max' => 255],
             [['created_at', 'start', 'end','checkin_start', 'checkin_end'], 'safe'],
             [['created_at'], 'default', 'value' => date('Y-m-j')],
         ];
@@ -76,6 +76,7 @@ class Tournament extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('admin', 'ID'),
             'icon' => Yii::t('admin', 'Icon'),
+            'author' => Yii::t('admin', 'Author'),
             'game' => Yii::t('admin', 'Game'),
             'created_at' => Yii::t('admin', 'Created At'),
             'hidden' => Yii::t('admin', 'Hidden'),

@@ -25,10 +25,14 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+//        'user' => [
+//            'identityClass' => 'app\models\User',
+//            'enableAutoLogin' => true,
+//            'loginUrl'=>['auth/login'],
+//        ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
-            'loginUrl'=>['auth/login'],
+            'loginUrl' => ['auth/login'],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -86,15 +90,38 @@ $config = [
             'class' => 'creocoder\flysystem\LocalFilesystem',
             'path' => '@webroot/upload',
         ],
+        'authManager'=>[
+            'class'=>'yii\rbac\DbManager',
+        ],
     ],
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
             'layout' => 'main'
         ],
+        'rbac' => [
+            'class' => 'mdm\admin\Module',
+            'controllerMap' => [
+                'assignment' => [
+                    'class' => 'mdm\admin\controllers\AssignmentController',
+                    'userClassName' => 'app\models\User',
+                    'idField' => 'id',
+                    'usernameField' => 'username',
+                ],
+            ],
+            'layout'=>'left-menu',
+            'mainLayout'=>'@app/modules/admin/views/layouts/main.php',
+        ],
         'mm'=>[
             'class' => 'iutbay\yii2\mm\Module',
         ],
+    ],
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            'site/*',
+            'auth/*',
+        ]
     ],
     'params' => $params,
 ];

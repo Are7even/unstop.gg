@@ -4,6 +4,7 @@
 namespace app\models;
 
 
+use app\helpers\StatusHelper;
 use yii\base\Model;
 use Yii;
 use app\models\User;
@@ -45,6 +46,7 @@ class RegistrationForm extends Model
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
+        $user->status = StatusHelper::$active;
         $user->auth_key = Yii::$app->security->generateRandomString();
         $user->setPassword($this->password);
         $user->generateEmailVerificationToken();

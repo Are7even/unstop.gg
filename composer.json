@@ -21,7 +21,8 @@
         "creocoder/yii2-translateable": "^1.0",
         "iutbay/yii2-mm": "*",
         "kartik-v/yii2-widget-datetimepicker": "dev-master",
-        "codemix/yii2-localeurls": "dev-master"
+        "codemix/yii2-localeurls": "dev-master",
+        "mdmsoft/yii2-admin": "~2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
