@@ -76,6 +76,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return null;
     }
 
+    public static function findByEmail($email)
+    {
+        return User::find()->where(['email'=>$email])->one();
+    }
+
     static function getAllUsers(){
         return self::find()->all();
     }
