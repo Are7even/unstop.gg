@@ -65,6 +65,7 @@ class Tournament extends \yii\db\ActiveRecord
             [['icon', 'game','author', 'type'], 'string', 'max' => 255],
             [['created_at', 'start', 'end','checkin_start', 'checkin_end'], 'safe'],
             [['created_at'], 'default', 'value' => date('Y-m-j')],
+            [['author'], 'default', 'value' => Yii::$app->user->id],
         ];
     }
 
