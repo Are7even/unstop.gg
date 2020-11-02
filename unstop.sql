@@ -91,7 +91,17 @@ CREATE TABLE `stage` (
 PRIMARY KEY(`id`)
 );
 
+DROP TABLE IF EXISTS `fight`;
+CREATE TABLE `fight` (
+`id` int(11) AUTO_INCREMENT,
+`stage_id` int(11) DEFAULT 0,
+`first_user_id` varchar(255) DEFAULT NULL,
+`second_user_id` varchar(255) DEFAULT NULL,
+`first_user_id_score` int(11) DEFAULT 0,
+`second_user_id_score` int(11) DEFAULT 0,
 
+PRIMARY KEY(`id`)
+);
 
 DROP TABLE IF EXISTS `gifts`;
 CREATE TABLE `gifts` (

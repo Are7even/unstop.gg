@@ -102,6 +102,10 @@ class Tournament extends \yii\db\ActiveRecord
         return $this -> hasMany(TournamentTranslate::className(), ['tournament_id'=>'id']);
     }
 
+    public function getStage () {
+        return $this -> hasMany(Stage::className(), ['tournament_id'=>'id']);
+    }
+
     static function getCurrentStartTime($id){
         return true;
     }
