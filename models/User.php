@@ -11,6 +11,8 @@ use yii\web\IdentityInterface;
  *
  * @property int $id
  * @property int|null $auth_key
+ * @property string|null $last_name
+ * @property string|null $first_name
  * @property string|null $username
  * @property string|null $email
  * @property string|null $password
@@ -24,7 +26,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
 
-
     public static function tableName()
     {
         return 'user';
@@ -35,11 +36,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             [['rating'], 'integer'],
-            [['rating'], 'default','value'=>'1'],
+            [['rating'], 'default', 'value' => '1'],
             [['status'], 'integer'],
-            [['status'], 'default','value'=>'1'],
-            [['username', 'email', 'password_reset_token','auth_key','password', 'role', 'photo'], 'string', 'max' => 255],
-            [['photo'], 'default','value'=>'no-image.png'],
+            [['status'], 'default', 'value' => '1'],
+            [['first_name', 'last_name','username', 'email', 'password_reset_token', 'auth_key', 'password', 'role', 'photo'], 'string', 'max' => 255],
+            [['photo'], 'default', 'value' => 'no-image.png'],
             [['created_at'], 'safe'],
             [['created_at'], 'default', 'value' => date('Y-m-j')],
         ];
@@ -55,6 +56,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'auth_key' => Yii::t('admin', 'Auth key'),
             'status' => Yii::t('admin', 'Status'),
             'username' => Yii::t('admin', 'Username'),
+            'first_name' => Yii::t('admin', 'First name'),
+            'last_name' => Yii::t('admin', 'Last name'),
             'email' => Yii::t('admin', 'Email'),
             'password' => Yii::t('admin', 'Password'),
             'password_reset_token' => Yii::t('admin', 'Password reset token'),
@@ -78,34 +81,55 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public static function findByEmail($email)
     {
-        return User::find()->where(['email'=>$email])->one();
+        return User::find()->where(['email' => $email])->one();
     }
 
-    static function getAllUsers(){
+    static function getAllUsers()
+    {
         return self::find()->all();
     }
 
     public function validatePassword($password)
     {
-        return Yii::$app->security->validatePassword($password,$this->password);
+        return Yii::$app->security->validatePassword($password, $this->password);
     }
 
-    public function setPassword($password){
+    public function setPassword($password)
+    {
         $this->password = Yii::$app->security->generatePasswordHash($password);
     }
 
-    public function generateEmailVerificationToken(){
-        $this->password_reset_token = Yii::$app->security->generateRandomString().'_'.time();
+    public function generateEmailVerificationToken()
+    {
+        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
 
-    public function generatePasswordResetToken(){
-        $this->password_reset_token = Yii::$app->security->generateRandomString().'_'.time();
+    public function generatePasswordResetToken()
+    {
+        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
 
-    public function removePasswordResetToken(){
+    public function removePasswordResetToken()
+    {
         $this->password_reset_token = null;
     }
 
+    public function saveFromVk($uid, $first_name, $last_name, $photo)
+    {
+
+        $user = User::findOne($uid);
+        if ($user) {
+            return Yii::$app->user->login($user);
+        }
+        $this->id = $uid;
+        $this->first_name = $first_name;
+        $this->last_name = $last_name;
+        $this->photo = $photo;
+        $this->save(false);
+
+        return Yii::$app->user->login($this);
+
+    }
 
 
     public static function findIdentity($id)
@@ -130,6 +154,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public function validateAuthKey($authKey)
     {
-        return $this->auth_key===$authKey;
+        return $this->auth_key === $authKey;
     }
 }
