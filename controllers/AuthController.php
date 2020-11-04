@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 
+use app\models\FurtherInformationForm;
 use app\models\LoginForm;
 use app\models\RegistrationForm;
 use app\models\User;
@@ -45,7 +46,7 @@ class AuthController extends Controller
 
         $model = new RegistrationForm();
 
-        if ($model->load(Yii::$app->request->post())&&$model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Yii::t('admin', 'User registered!'));
             return $this->redirect(Url::to(['auth/login']));
         }
@@ -55,12 +56,33 @@ class AuthController extends Controller
 
     }
 
-    public function actionLoginVk($uid,$first_name,$last_name,$photo){
+    public function actionLoginVk($uid, $first_name, $last_name, $photo)
+    {
         $user = new User();
-        if ($user->saveFromVk($uid,$first_name,$last_name,$photo)){
-            return $this->redirect(['site/index']);
+        if ($user->saveFromVk($uid, $first_name, $last_name, $photo)) {
+            if (empty($user->getUsername(Yii::$app->user->id))) {
+                return $this->redirect(['auth/further-information']);
+            }
         }
         return $this->redirect(Url::to(['auth/login']));
+    }
+
+    public function actionFurtherInformation()
+    {
+        $model = new FurtherInformationForm();
+        $user = new User();
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        if ($model->load(Yii::$app->request->post())) {
+            $user->updateFurtherInformation(Yii::$app->user->id, $model->username, $model->email);
+            Yii::$app->session->setFlash('success', Yii::t('admin', 'User registered!'));
+            return $this->redirect(Url::to(['auth/login']));
+        }
+        return $this->render('further-information', [
+            'model' => $model,
+        ]);
+
     }
 
 }

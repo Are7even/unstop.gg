@@ -131,6 +131,18 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     }
 
+    public function updateFurtherInformation($id,$username,$email){
+       $user = User::findOne($id);
+       $user->username = $username;
+       $user->email = $email;
+       $user->save(false);
+        return Yii::$app->session->setFlash('anger', Yii::t('admin', 'Sorry for site problem? let`s try register another way...'));
+    }
+
+    public function getUsername($id){
+        $user = self::findIdentity($id);
+        return $user->username;
+    }
 
     public static function findIdentity($id)
     {

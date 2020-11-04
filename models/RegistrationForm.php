@@ -57,7 +57,6 @@ class RegistrationForm extends Model
         $user->created_at = date('Y-m-j');
         return $user->save(false);
 
-
     }
 
 
