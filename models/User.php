@@ -21,6 +21,7 @@ use yii\web\IdentityInterface;
  * @property int|null $rating
  * @property string|null $photo
  * @property int|null $created_at
+ * @property int|null $updated_at
  */
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
@@ -41,8 +42,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['status'], 'default', 'value' => '1'],
             [['first_name', 'last_name','username', 'email', 'password_reset_token', 'auth_key', 'password', 'role', 'photo'], 'string', 'max' => 255],
             [['photo'], 'default', 'value' => 'no-image.png'],
-            [['created_at'], 'safe'],
+            [['created_at','updated_at'], 'safe'],
             [['created_at'], 'default', 'value' => date('Y-m-j')],
+            [['updated_at'], 'default', 'value' => date('Y-m-j')],
         ];
     }
 
@@ -65,6 +67,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'rating' => Yii::t('admin', 'Rating'),
             'photo' => Yii::t('admin', 'Photo'),
             'created_at' => Yii::t('admin', 'Created At'),
+            'updated_at' => Yii::t('admin', 'Created At'),
         ];
     }
 
@@ -168,4 +171,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return $this->auth_key === $authKey;
     }
+
+    public function getAuth(){
+        return $this->hasMany(Auth::className(),['user_id'=>'id']);
+    }
+
+    public function generateAuthKey()
+    {
+        return $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
 }

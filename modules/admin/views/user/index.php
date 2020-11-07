@@ -38,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'rating',
             //'photo',
             //'created_at',
+            //'updated_at',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

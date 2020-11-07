@@ -33,7 +33,9 @@ use app\helpers\RoleHelper;
 
     <?= $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+    <?= $form->field($model, 'created_at')->hiddenInput()->label(false); ?>
+
+    <?= $form->field($model, 'updated_at')->hiddenInput()->label(false); ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('admin', 'Save'), ['class' => 'btn btn-success']) ?>

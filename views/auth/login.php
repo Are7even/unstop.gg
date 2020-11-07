@@ -36,6 +36,16 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-lg-offset-1 col-lg-11">
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
+
+            <div class="col-lg-offset-1 col-lg-11">
+                <?= yii\authclient\widgets\AuthChoice::widget([
+                    'baseAuthUrl' => ['auth/auth'],
+                    'popupMode' => false,
+                    'options'=>[
+                            'class'=>'inline-block',
+                    ], // for div holder
+                ]) ?>
+            </div>
         </div>
 
     <?php ActiveForm::end(); ?>
@@ -52,5 +62,6 @@ $this->params['breadcrumbs'][] = $this->title;
             VK.Widgets.Auth("vk_auth", {"authUrl":"/auth/login-vk"});
         </script>
     </div>
+
 
 </div>

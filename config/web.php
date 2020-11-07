@@ -11,10 +11,10 @@ $config = [
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
-    'sourceLanguage'=>'ru',
-    'language'=>'ru',
+    'sourceLanguage' => 'ru',
+    'language' => 'ru',
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -37,23 +37,38 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'authClientCollection' => [
+            'class' => 'yii\authclient\Collection',
+            'clients' => [
+                'google' => [
+                    'class' => 'yii\authclient\clients\Google',
+                    'clientId' => '413438028153-7j7ogp33k4u93p29bjqkln3j9d5k2g1e.apps.googleusercontent.com',
+                    'clientSecret' => 'VTaM2X1dIeNcegBlFiQsxvXl',
+                ],
+                'facebook' => [
+                    'class' => 'yii\authclient\clients\Facebook',
+                    'clientId' => '671984006835673',
+                    'clientSecret' => 'a3f0a52345a72fea95fa1cec86c676ff',
+                ],
+            ],
+        ],
         'i18n' => [
             'translations' => [
-                'admin' =>[
-                    'class'=>'yii\i18n\PhpMessageSource',
-                    'basePath'=>'@app/messages',
+                'admin' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages',
                     'sourceLanguage' => 'en',
-                    'fileMap'=>[
-                        'admin'=>'admin.php'
+                    'fileMap' => [
+                        'admin' => 'admin.php'
                     ]
                 ],
                 'app*' => [
                     'class' => 'yii \ i18n \ PhpMessageSource',
                     'basePath' => '@app / messages',
                     'sourceLanguage' => 'ru',
-                    'fileMap'=>[
-                        'app'=>'app.php',
-                        'app/error'=>'error.php'
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        'app/error' => 'error.php'
                     ]
                 ],
             ],
@@ -90,8 +105,8 @@ $config = [
             'class' => 'creocoder\flysystem\LocalFilesystem',
             'path' => '@webroot/upload',
         ],
-        'authManager'=>[
-            'class'=>'yii\rbac\DbManager',
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
         ],
     ],
     'modules' => [
@@ -109,10 +124,10 @@ $config = [
                     'usernameField' => 'username',
                 ],
             ],
-            'layout'=>'left-menu',
-            'mainLayout'=>'@app/modules/admin/views/layouts/main.php',
+            'layout' => 'left-menu',
+            'mainLayout' => '@app/modules/admin/views/layouts/main.php',
         ],
-        'mm'=>[
+        'mm' => [
             'class' => 'iutbay\yii2\mm\Module',
         ],
     ],

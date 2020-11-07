@@ -25,6 +25,7 @@ CREATE TABLE `user` (
   `status` int(11) DEFAULT 1,
   `photo` varchar(255) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL,
   PRIMARY KEY(`id`)
 );
 
