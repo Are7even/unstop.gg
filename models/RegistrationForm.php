@@ -8,10 +8,10 @@ use app\helpers\StatusHelper;
 use yii\base\Model;
 use Yii;
 use app\models\User;
-use app\helpers\RoleHelper;
 
 class RegistrationForm extends Model
 {
+    public $username;
     public $first_name;
     public $last_name;
     public $email;
@@ -22,10 +22,12 @@ class RegistrationForm extends Model
     public function rules()
     {
         return [
-            [['first_name','last_name'], 'required'],
-            [['first_name','last_name'], 'trim'],
+            [['first_name','last_name','username'], 'required'],
+            [['first_name','last_name','username'], 'trim'],
             ['first_name', 'string', 'min' => 1, 'max' => 255],
             ['last_name', 'string', 'min' => 1, 'max' => 255],
+            ['username', 'string', 'min' => 1, 'max' => 255],
+            [['username'], 'unique', 'targetClass' => User::className()],
             ['email', 'email'],
             [['email'], 'required'],
             ['email', 'string', 'max' => 255],
@@ -45,6 +47,7 @@ class RegistrationForm extends Model
             return null;
         }
         $user = new User();
+        $user->username = $this->first_name;
         $user->first_name = $this->first_name;
         $user->last_name = $this->last_name;
         $user->email = $this->email;
@@ -52,7 +55,6 @@ class RegistrationForm extends Model
         $user->auth_key = Yii::$app->security->generateRandomString();
         $user->setPassword($this->password);
         $user->generateEmailVerificationToken();
-        $user->role = RoleHelper::$user;
         $user->photo = 'no-image.png';
         $user->created_at = date('Y-m-j');
         return $user->save(false);

@@ -61,7 +61,7 @@ class Tournament extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['hidden', 'handheld', 'rating_on', 'players_count', 'checkin', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place'], 'integer'],
+            [['hidden','status', 'handheld', 'rating_on', 'players_count', 'checkin', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place'], 'integer'],
             [['icon', 'game','author', 'type'], 'string', 'max' => 255],
             [['created_at', 'start', 'end','checkin_start', 'checkin_end'], 'safe'],
             [['created_at'], 'default', 'value' => date('Y-m-j')],
@@ -76,6 +76,7 @@ class Tournament extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('admin', 'ID'),
+            'status' => Yii::t('admin', 'Status'),
             'icon' => Yii::t('admin', 'Icon'),
             'author' => Yii::t('admin', 'Author'),
             'game' => Yii::t('admin', 'Game'),
@@ -104,6 +105,15 @@ class Tournament extends \yii\db\ActiveRecord
 
     public function getStage () {
         return $this -> hasMany(Stage::className(), ['tournament_id'=>'id']);
+    }
+
+    public function getUser(){
+        return $this->hasOne(User::className(),['id'=>'author']);
+    }
+
+    public function getIcon()
+    {
+        return ($this->icon) ? '/upload/' . $this->icon : '/no-image.png';
     }
 
     static function getCurrentStartTime($id){

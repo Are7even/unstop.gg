@@ -53,14 +53,12 @@ class AuthController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 
 
     public function actionRegistration()
     {
-
         $model = new RegistrationForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

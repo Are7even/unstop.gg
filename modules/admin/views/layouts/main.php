@@ -78,9 +78,12 @@ AdminAsset::register($this);
                             <a href="<?php echo Url::to(['/rbac'])?>" class="waves-effect"><i class="mdi mdi-flag-variant"></i><span><?php echo Yii::t('admin','Roles')?></span></a>
                         </li>
                         <li>
+                            <a href="<?php echo Url::to(['/admin/advertisement'])?>" class="waves-effect"><i class="mdi mdi-flag-variant"></i><span><?php echo Yii::t('admin','Advertisement')?></span></a>
+                        </li>
+                        <li>
                             <a href="<?= Url::to(['site/index'])?>" class="waves-effect">
                                 <i class="mdi mdi-power"></i>
-                                <span>logout</span>
+                                <span><?php echo Yii::t('admin','Exit')?></span>
                             </a>
 
 <!--                            <a href="logout.html" class="waves-effect"><i class="mdi mdi-power"></i><span> Logout </span></a>-->

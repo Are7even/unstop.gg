@@ -20,7 +20,6 @@ CREATE TABLE `user` (
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `role` int(11) DEFAULT 1,
   `rating` int(11) DEFAULT 1,
   `status` int(11) DEFAULT 1,
   `photo` varchar(255) DEFAULT NULL,
@@ -47,6 +46,7 @@ PRIMARY KEY(`id`)
 DROP TABLE IF EXISTS `tournament`;
 CREATE TABLE `tournament` (
 `id` int(11) AUTO_INCREMENT,
+`status` int (11) DEFAULT 0,
 `icon` varchar (255) DEFAULT NULL,
 `author` varchar (255) DEFAULT NULL,
 `game` varchar(255) DEFAULT NULL,
@@ -146,6 +146,16 @@ CREATE TABLE `games`(
 PRIMARY KEY(`id`)
 );
 
+
+DROP TABLE IF EXISTS `advertisement`;
+CREATE TABLE `advertisement`(
+`id` int(11) AUTO_INCREMENT,
+`image` varchar (255) DEFAULT NULL,
+`title` varchar (255) DEFAULT NULL,
+`description` TEXT,
+PRIMARY KEY(`id`)
+);
+
 DROP TABLE IF EXISTS `games_translate`;
 CREATE TABLE `games_translate`(
 `id` int(11) AUTO_INCREMENT,
@@ -180,6 +190,12 @@ DELIMITER //
 CREATE TRIGGER `delete_stage` BEFORE DELETE ON `stage`
 FOR EACH ROW BEGIN
   DELETE FROM `stage` WHERE `tournament_id`=OLD.`id`;
+END
+
+DELIMITER //
+CREATE TRIGGER `delete_fight` BEFORE DELETE ON `fight`
+FOR EACH ROW BEGIN
+  DELETE FROM `stage` WHERE `stage_id`=OLD.`id`;
 END
 
 DELIMITER //

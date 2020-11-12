@@ -107,6 +107,9 @@ $config = [
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => function(){
+                return \Yii::$app->user->isGuest ? ['guest'] : ['user'];
+            },
         ],
     ],
     'modules' => [

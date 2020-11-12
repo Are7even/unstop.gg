@@ -17,7 +17,6 @@ use yii\web\IdentityInterface;
  * @property string|null $email
  * @property string|null $password
  * @property string|null $password_reset_token
- * @property string|null $role
  * @property int|null $rating
  * @property string|null $photo
  * @property int|null $created_at
@@ -40,7 +39,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['rating'], 'default', 'value' => '1'],
             [['status'], 'integer'],
             [['status'], 'default', 'value' => '1'],
-            [['first_name', 'last_name','username', 'email', 'password_reset_token', 'auth_key', 'password', 'role', 'photo'], 'string', 'max' => 255],
+            [['first_name', 'last_name','username', 'email', 'password_reset_token', 'auth_key', 'password', 'photo'], 'string', 'max' => 255],
             [['photo'], 'default', 'value' => 'no-image.png'],
             [['created_at','updated_at'], 'safe'],
             [['created_at'], 'default', 'value' => date('Y-m-j')],
@@ -63,7 +62,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'email' => Yii::t('admin', 'Email'),
             'password' => Yii::t('admin', 'Password'),
             'password_reset_token' => Yii::t('admin', 'Password reset token'),
-            'role' => Yii::t('admin', 'Role'),
             'rating' => Yii::t('admin', 'Rating'),
             'photo' => Yii::t('admin', 'Photo'),
             'created_at' => Yii::t('admin', 'Created At'),
@@ -179,6 +177,19 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function generateAuthKey()
     {
         return $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
+    public function getAuthAssignment(){
+        return $this->hasOne(AuthAssignment::className(),['user_id'=>'id']);
+    }
+
+    public function getTournament(){
+        return $this->hasOne(Tournament::className(),['author'=>'id']);
+    }
+
+    public function getPhoto()
+    {
+        return ($this->photo) ? '/upload/' . $this->photo : '/no-image.png';
     }
 
 }
