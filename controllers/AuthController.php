@@ -97,7 +97,6 @@ class AuthController extends Controller
         return $this->render('further-information', [
             'model' => $model,
         ]);
-
     }
 
 }

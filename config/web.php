@@ -139,6 +139,7 @@ $config = [
         'allowActions' => [
             'site/*',
             'auth/*',
+            'mm/*',
         ]
     ],
     'params' => $params,

@@ -6,6 +6,7 @@ use Yii;
 use app\models\Tournament;
 use app\models\TournamentSearch;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -92,6 +93,10 @@ class TournamentController extends Controller
     {
         $model = $this->findModel($id);
 
+        if (!Yii::$app->user->can('updateOwnTournament',['post'=>$model])){
+            throw new ForbiddenHttpException(Yii::t('admin','You are not the author!'));
+        }
+
         if ($model->load(Yii::$app->request->post())) {
             foreach (Yii::$app->request->post('TournamentTranslate', []) as $language => $data) {
                 foreach ($data as $attribute => $translation) {
@@ -116,8 +121,11 @@ class TournamentController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        if (!Yii::$app->user->can('updateOwnTournament',['post'=>$model])){
+            throw new ForbiddenHttpException(Yii::t('admin','You are not the author!'));
+        }
+        $model->delete();
         return $this->redirect(['index']);
     }
 
