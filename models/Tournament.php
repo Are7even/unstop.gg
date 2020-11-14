@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\helpers\StatusHelper;
 use app\helpers\TournamentStatusHelper;
 use creocoder\translateable\TranslateableBehavior;
 use Yii;
@@ -10,6 +11,7 @@ use Yii;
  * This is the model class for table "tournament".
  *
  * @property int $id
+ * @property int $status
  * @property string|null $icon
  * @property string|null $game
  * @property int|null $created_at
@@ -113,6 +115,16 @@ class Tournament extends \yii\db\ActiveRecord
     public function getIcon()
     {
         return ($this->icon) ? '/upload/' . $this->icon : '/no-image.png';
+    }
+
+    public function allow(){
+        $this->status = TournamentStatusHelper::$waiting;
+        return $this->save(false);
+    }
+
+    public function disallow(){
+        $this->status = TournamentStatusHelper::$created;
+        return $this->save(false);
     }
 
     static function getCurrentStartTime($id){

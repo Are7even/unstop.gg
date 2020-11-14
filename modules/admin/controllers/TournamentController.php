@@ -112,13 +112,21 @@ class TournamentController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing Tournament model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+
+    public function actionAllow($id){
+        $tournament = Tournament::findOne($id);
+        if ($tournament->allow()){
+            return $this->redirect(['view', 'id' => $tournament->id]);
+        }
+    }
+
+    public function actionDisallow($id){
+        $tournament = Tournament::findOne($id);
+        if ($tournament->disallow()){
+            return $this->redirect(['view', 'id' => $tournament->id]);
+        }
+    }
+
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
@@ -129,13 +137,6 @@ class TournamentController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Tournament model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Tournament the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = Tournament::findOne($id)) !== null) {

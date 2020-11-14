@@ -140,6 +140,7 @@ $config = [
             'site/*',
             'auth/*',
             'mm/*',
+//            'rbac/*',
         ]
     ],
     'params' => $params,
