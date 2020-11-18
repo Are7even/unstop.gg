@@ -24,6 +24,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title') ?>
 
+    <?= $form->field($model, 'href') ?>
+
     <?= $form->field($model, 'description') ?>
 
     <div class="form-group">

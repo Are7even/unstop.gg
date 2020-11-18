@@ -18,7 +18,7 @@ class AdvertisementSearch extends Advertisement
     {
         return [
             [['id'], 'integer'],
-            [['image', 'title', 'description'], 'safe'],
+            [['image', 'title', 'description','href'], 'safe'],
         ];
     }
 
@@ -63,7 +63,8 @@ class AdvertisementSearch extends Advertisement
 
         $query->andFilterWhere(['like', 'image', $this->image])
             ->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description]);
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'href', $this->href]);
 
         return $dataProvider;
     }

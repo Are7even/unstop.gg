@@ -160,6 +160,7 @@ CREATE TABLE `advertisement`(
 `id` int(11) AUTO_INCREMENT,
 `image` varchar (255) DEFAULT NULL,
 `title` varchar (255) DEFAULT NULL,
+`href` varchar (255) DEFAULT NULL,
 `description` TEXT,
 PRIMARY KEY(`id`)
 );

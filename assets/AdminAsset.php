@@ -28,7 +28,7 @@ class AdminAsset extends AssetBundle
         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css',
     ];
     public $js = [
-//        'admin/assets/js/jquery.min.js',
+     //   'admin/assets/js/jquery.min.js',
         'admin/assets/js/popper.min.js',
         'admin/assets/js/bootstrap.min.js',
         'admin/assets/js/modernizr.min.js',
@@ -50,6 +50,8 @@ class AdminAsset extends AssetBundle
         'admin/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js',
         'admin/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js',
         'admin/assets/js/app.js',
+        'admin/assets/js/form.js',
+        'admin/assets/plugins/tinymce/tinymce.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

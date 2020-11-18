@@ -11,6 +11,7 @@ use Yii;
  * @property string|null $image
  * @property string|null $title
  * @property string|null $description
+ * @property string|null $href
  */
 class Advertisement extends \yii\db\ActiveRecord
 {
@@ -28,7 +29,7 @@ class Advertisement extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['description'], 'string'],
+            [['description','href'], 'string'],
             [['image', 'title'], 'string', 'max' => 255],
         ];
     }
@@ -43,6 +44,7 @@ class Advertisement extends \yii\db\ActiveRecord
             'image' => Yii::t('admin', 'Image'),
             'title' => Yii::t('admin', 'Title'),
             'description' => Yii::t('admin', 'Description'),
+            'href' => Yii::t('admin', 'Href'),
         ];
     }
 

@@ -28,7 +28,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'href')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'description')->textarea(['rows' => 6,'id' => 'textarea']) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('admin', 'Save'), ['class' => 'btn btn-success']) ?>
