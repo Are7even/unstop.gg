@@ -29,7 +29,7 @@ use app\helpers\RoleHelper;
 
     <?= $form->field($model, 'role')->dropDownList(RoleHelper::roleList()) ?>
 
-    <?= $form->field($model, 'rating')->textInput() ?>
+    <?= $form->field($model, 'reputation')->textInput() ?>
 
     <?= $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
 

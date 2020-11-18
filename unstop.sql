@@ -20,7 +20,7 @@ CREATE TABLE `user` (
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `rating` int(11) DEFAULT 1,
+  `reputation` int(11) DEFAULT 1,
   `status` int(11) DEFAULT 1,
   `photo` varchar(255) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
@@ -129,6 +129,14 @@ DROP TABLE IF EXISTS `user_to_gifts`;
 CREATE TABLE `user_to_gifts`(
 `user_id` int(11) DEFAULT 0,
 `gifts_id` int(11) DEFAULT 0
+);
+
+DROP TABLE IF EXISTS `user_game_rating`;
+CREATE TABLE `user_to_gifts`(
+`id` int(11) AUTO_INCREMENT,
+`user_id` int(11) DEFAULT 0,
+`games_id` int(11) DEFAULT 0,
+`rating` int(11) DEFAULT 0
 );
 
 DROP TABLE IF EXISTS `stage_to_user`;

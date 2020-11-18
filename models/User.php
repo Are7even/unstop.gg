@@ -17,7 +17,7 @@ use yii\web\IdentityInterface;
  * @property string|null $email
  * @property string|null $password
  * @property string|null $password_reset_token
- * @property int|null $rating
+ * @property int|null $reputation
  * @property string|null $photo
  * @property int|null $created_at
  * @property int|null $updated_at
@@ -35,8 +35,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['rating'], 'integer'],
-            [['rating'], 'default', 'value' => '1'],
+            [['reputation'], 'integer'],
+            [['reputation'], 'default', 'value' => '0'],
             [['status'], 'integer'],
             [['status'], 'default', 'value' => '1'],
             [['first_name', 'last_name','username', 'email', 'password_reset_token', 'auth_key', 'password', 'photo'], 'string', 'max' => 255],
@@ -62,7 +62,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'email' => Yii::t('admin', 'Email'),
             'password' => Yii::t('admin', 'Password'),
             'password_reset_token' => Yii::t('admin', 'Password reset token'),
-            'rating' => Yii::t('admin', 'Rating'),
+            'reputation' => Yii::t('admin', 'reputation'),
             'photo' => Yii::t('admin', 'Photo'),
             'created_at' => Yii::t('admin', 'Created At'),
             'updated_at' => Yii::t('admin', 'Created At'),
