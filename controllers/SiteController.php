@@ -92,7 +92,6 @@ class SiteController extends Controller
             'login' => $loginForm,
             'registration' => $registrationForm,
             'furtherInformation' => $furtherInformationForm,
-            'user'=>$user,
         ]);
     }
 
