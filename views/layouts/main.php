@@ -5,6 +5,7 @@
 
 use app\assets\SiteAsset;
 use app\widgets\Alert;
+use app\widgets\UserLayoutWidget;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -73,20 +74,7 @@ SiteAsset::register($this);
                         <!--                       <a href="#">Изменение статуса</a>-->
                     </div>
                 </div>
-                <div class="dropdown dropdown-avatar">
-                    <img class="avatar dropbtn" src="/web/site/img/avatar-1.jpg" alt="avatar">
-                    <div class="dropdown-content">
-                        <div class="avatar-title">
-                            <p>JasonStathem</p>
-                            <p>admin</p>
-                        </div>
-                        <a href="#">Карма: 22222</a>
-                        <a href="#">Валюта: 100500</a>
-                        <a href="lk.html">Личный кабинет</a>
-                        <a href="#">Админ панель</a>
-                        <?php echo Html::a(Yii::t('admin','Exit'),Url::toRoute(['auth/logout']))?>
-                    </div>
-                </div>
+                <?php echo UserLayoutWidget::widget(['userId'=>Yii::$app->user->id])?>
             </div>
             <?php endif;?>
         </div>
