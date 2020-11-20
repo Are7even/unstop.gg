@@ -45,7 +45,7 @@ class AuthController extends Controller
 
         $model->password = '';
         return $this->render('login', [
-            'model' => $model,
+            'login' => $model,
         ]);
     }
 
@@ -57,19 +57,19 @@ class AuthController extends Controller
     }
 
 
-    public function actionRegistration()
-    {
-        $model = new RegistrationForm();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Yii::t('admin', 'User registered!'));
-            return $this->redirect(Url::to(['auth/login']));
-        }
-        return $this->render('registration', [
-            'model' => $model,
-        ]);
-
-    }
+//    public function actionRegistration()
+//    {
+//        $model = new RegistrationForm();
+//
+//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//            Yii::$app->session->setFlash('success', Yii::t('admin', 'User registered!'));
+//            return $this->redirect(Url::to(['auth/login']));
+//        }
+//        return $this->render('registration', [
+//            'registration' => $model,
+//        ]);
+//
+//    }
 
     public function actionLoginVk($uid, $first_name, $last_name, $photo)
     {
@@ -95,7 +95,7 @@ class AuthController extends Controller
             return $this->redirect(Url::to(['auth/login']));
         }
         return $this->render('further-information', [
-            'model' => $model,
+            'furtherInformation' => $model,
         ]);
     }
 

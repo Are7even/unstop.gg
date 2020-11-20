@@ -8,6 +8,7 @@ use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 
 SiteAsset::register($this);
@@ -41,6 +42,7 @@ SiteAsset::register($this);
         </div>
         <a href="#"><img class="logo" src="/web/site/img/logo.png" alt="logo"></a>
         <div class="control">
+            <?php if (Yii::$app->user->isGuest):?>
             <div class="control_logout">
                 <div class="dropdown">
                     <img onclick="myFunction()" class="flag dropbtn" src="/web/site/img/us_flag.jpg" alt="flag">
@@ -50,6 +52,7 @@ SiteAsset::register($this);
                     </div>
                 </div>
             </div>
+            <?php else:?>
             <div class="control_login">
                 <div class="dropdown">
                     <img onclick="myFunction()" class="flag dropbtn" src="/web/site/img/us_flag.jpg" alt="flag">
@@ -81,10 +84,11 @@ SiteAsset::register($this);
                         <a href="#">Валюта: 100500</a>
                         <a href="lk.html">Личный кабинет</a>
                         <a href="#">Админ панель</a>
-                        <a href="index.html">Выйти</a>
+                        <?php echo Html::a(Yii::t('admin','Exit'),Url::toRoute(['auth/logout']))?>
                     </div>
                 </div>
             </div>
+            <?php endif;?>
         </div>
     </div>
     <nav class="nav" id="nav">

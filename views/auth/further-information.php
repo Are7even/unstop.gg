@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model app\models\LoginForm */
+/* @var $furtherInformation app\models\FurtherInformationForm */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -18,15 +18,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php $form = ActiveForm::begin([
         'id' => 'further-information-form',
         'layout' => 'horizontal',
+        'action' => 'auth/further-information',
         'fieldConfig' => [
             'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
             'labelOptions' => ['class' => 'col-lg-1 control-label'],
         ],
     ]); ?>
 
-    <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+    <?= $form->field($furtherInformation, 'username')->textInput(['autofocus' => true]) ?>
 
-    <?= $form->field($model, 'email')->textInput() ?>
+    <?= $form->field($furtherInformation, 'email')->textInput() ?>
 
 
     <div class="form-group">

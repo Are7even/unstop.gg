@@ -1,5 +1,6 @@
 <?php
-
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
 ?>
 <div class="container">
     <div class="content">
@@ -223,63 +224,74 @@
 
 
             </div>
-            <div>
-                <iframe width="100%" height="400" src="https://www.youtube.com/embed/bBB_9M49ZeE" frameborder="0"
-                        allowfullscreen></iframe>
-            </div>
+<!--            <div>-->
+<!--                <iframe width="100%" height="400" src="https://www.youtube.com/embed/bBB_9M49ZeE" frameborder="0"-->
+<!--                        allowfullscreen></iframe>-->
+<!--            </div>-->
         </div>
         <div class="aside">
+            <?php if (Yii::$app->user->isGuest):?>
             <div class="limiter forms">
-                <form class="login-form validate-form">
-                    <span class="form-title">Авторизация</span>
-                    <input class="input100" placeholder="email" type="text" name="email">
-                    <input class="input100" placeholder="password" type="password" name="pass">
-                    <button class="login100-form-btn">Вход</button>
-                    <div class="text-center">
-                        <a href="#" class="txt1">Забыли пароль?</a>
-                        <a href="#" class="txt1">Нет учетной записи? Зарегестрируйтесь</a>
-                    </div>
-                    <div class="social">
-                        <a href="#" target="_blank">
-                            <i class="fab fa-facebook-square"></i>
-                        </a>
-                        <a href="#" target="_blank">
-                            <i class="fab fa-google"></i>
-                        </a>
-                        <a href="#" target="_blank">
-                            <i class="fab fa-vk"></i>
-                        </a>
-                    </div>
-                </form>
-                <form class="login-form register-form validate-form">
-                    <span class="form-title">Регистрация</span>
-                    <input class="input100" placeholder="username" type="text" name="username">
-                    <input class="input100" placeholder="first name" type="text" name="first name">
-                    <input class="input100" placeholder="last name" type="text" name="last name">
-                    <input class="input100" placeholder="email" type="text" name="email">
-                    <input class="input100" placeholder="password" type="password" name="pass">
-                    <input class="input100" placeholder="password repeat" type="password" name="pass">
-                    <div class="text-center">
-                        Нажав на кнопку Регистрация, Вы принимаете наши <a href="#">
-                            <span>правила пользования</span></a> проектом.
-                    </div>
-                    <button class="login100-form-btn">Вход</button>
-                    <div class="text-center">
-                        <a href="#" class="txt1">Забыли пароль?</a>
-                        <a href="#" class="txt1">Нет учетной записи? Зарегестрируйтесь</a>
-                    </div>
-                    <div class="social">
-                        <a href="#" target="_blank">
-                            <i class="fab fa-facebook-square"></i>
-                        </a>
-                        <a href="#" target="_blank">
-                            <i class="fab fa-google"></i>
-                        </a>
-                        <a href="#" target="_blank">
-                            <i class="fab fa-vk"></i>
-                        </a>
-                    </div>
-                </form>
+
+                <?php include(Yii::getAlias('@app/views/auth/login.php')); ?>
+
+                <?php $form = ActiveForm::begin([
+                    'id' => 'registration-form',
+                    'layout' => 'horizontal',
+                    'action' => '/',
+                    'class' => 'login-form register-form validate-form',
+                ]); ?>
+                <?= $form->field($registration, 'formId')->hiddenInput([
+                        'value'=>'registration-form',
+                    'name'=>'formId'
+                ])->label(false)?>
+
+                <span class="form-title"><?php echo Yii::t('admin', 'Registration') ?></span>
+                <?= $form->field($registration, 'username')->textInput([
+                    'class' => 'input100',
+                    'placeholder' => 'username',
+                    'type' => 'text',
+                    'name' => 'username',
+                ])->label(false) ?>
+
+                <?= $form->field($registration, 'first_name')->textInput([
+                    'class' => 'input100',
+                    'placeholder' => 'first name',
+                    'type' => 'text',
+                    'name' => 'first name',
+                ])->label(false) ?>
+
+                <?= $form->field($registration, 'last_name')->textInput([
+                    'class' => 'input100',
+                    'placeholder' => 'last name',
+                    'type' => 'text',
+                    'name' => 'last name',
+                ])->label(false) ?>
+
+                <?= $form->field($registration, 'email')->textInput([
+                    'class' => 'input100',
+                    'placeholder' => 'email',
+                    'type' => 'text',
+                    'name' => 'email',
+                ])->label(false) ?>
+
+                <?= $form->field($registration, 'password')->passwordInput([
+                    'class' => 'input100',
+                    'placeholder' => 'password',
+                    'type' => 'password',
+                    'name' => 'password',
+                ])->label(false) ?>
+
+                <div class="text-center">
+                    <?php echo Yii::t('admin', 'By clicking on the Register button, you accept our ') ?> <a class="register-href"
+                                                                                                            href="#">
+                        <span><?php echo Yii::t('admin', 'terms of use ') ?></span></a> <?php echo Yii::t('admin', 'project') ?>.
+                </div>
+
+                <?= Html::submitButton('Register now', ['class' => 'login100-form-btn', 'name' => 'registration-button']) ?>
+
+                <?php ActiveForm::end(); ?>
+
                 <form class="login-form password-recovery validate-form">
                     <span class="form-title">Восстановление пароля</span>
                     <input class="input100" placeholder="email" type="text" name="email">
@@ -301,6 +313,12 @@
                     </div>
                 </form>
             </div>
+            <?php endif;?>
+            <?php if (Yii::$app->session->getFlash('registration')): ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo Yii::$app->session->getFlash('registration');?>
+                </div>
+            <?php endif; ?>
             <div class="limiter rating" id="game-rating">
                 <img src="/web/site/img/corona.png" alt="" class="rating-logo">
                 <div class="rating-title">Top players</div>

@@ -2,8 +2,13 @@
 
 namespace app\controllers;
 
+use app\models\FurtherInformationForm;
+use app\models\RegistrationForm;
+use app\models\User;
 use Yii;
+use yii\base\DynamicModel;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -38,9 +43,6 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function actions()
     {
         return [
@@ -54,28 +56,72 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
     public function actionIndex()
     {
-        return $this->render('index');
+        $loginForm = new LoginForm();
+        $registrationForm = new RegistrationForm();
+        $furtherInformationForm = new FurtherInformationForm();
+
+        if (Yii::$app->request->isPost) {
+
+            $data = Yii::$app->request->post();
+            if (isset($data['formId'])) {
+                if ($data['formId'] === 'registration-form') {
+                    if ($registrationForm->load($data, '')) {
+                        if ($registrationForm->validate()) {
+                            $registrationForm->save();
+                            Yii::$app->session->setFlash('registration', Yii::t('admin', 'User registered!'));
+                            return $this->redirect('/');
+                        }
+                    }
+                } elseif ($data['formId'] === 'login-form') {
+                    if ($loginForm->load($data, '')) {
+                        if ($loginForm->validate() && $loginForm->login()) {
+                            $loginForm->password = '';
+                            return $this->redirect('/');
+                        }
+                    }
+
+                } elseif ($data['formId'] === 'registration-form') {
+
+                }
+            }
+        }
+
+        return $this->render('index', [
+            'login' => $loginForm,
+            'registration' => $registrationForm,
+            'furtherInformation' => $furtherInformationForm,
+        ]);
     }
 
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
+    public function actionRegistration()
+    {
+        $model = new RegistrationForm();
+        if (!$model->validate()) {
+            return $this->actionIndex();
+        }
+        if ($model->load(Yii::$app->request->post(), '') && $model->save()) {
+            Yii::$app->session->setFlash('registration', Yii::t('admin', 'User registered!'));
+            return $this->goHome();
+        }
+    }
 
+//    public function actionRegistration()
+//    {
+//        $model = new RegistrationForm();
+//        $isSuccessfullySaved = (
+//            Yii::$app->request->isPost &&
+//            $model->load(Yii::$app->request->post(), '') &&
+//            $model->save()
+//        );
+//
+//        if ($isSuccessfullySaved) {
+//            Yii::$app->session->setFlash('registration', Yii::t('admin', 'User registered!'));
+//            return $this->goHome();
+//        }
+//    }
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
     public function actionContact()
     {
         $model = new ContactForm();
@@ -89,11 +135,6 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
     public function actionAbout()
     {
         return $this->render('about');

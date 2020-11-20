@@ -25,14 +25,9 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-//        'user' => [
-//            'identityClass' => 'app\models\User',
-//            'enableAutoLogin' => true,
-//            'loginUrl'=>['auth/login'],
-//        ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'loginUrl' => ['auth/login'],
+            'loginUrl' => ['/'],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -140,7 +135,7 @@ $config = [
             'site/*',
             'auth/*',
             'mm/*',
-//            'rbac/*',
+            'rbac/*',
         ]
     ],
     'params' => $params,
@@ -152,7 +147,7 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
 
     $config['bootstrap'][] = 'gii';

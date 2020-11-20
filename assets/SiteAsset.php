@@ -16,7 +16,7 @@ class SiteAsset extends AssetBundle
         'https://unpkg.com/swiper/swiper-bundle.min.css',
     ];
     public $js = [
-        'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',
+//        'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',
         'https://unpkg.com/swiper/swiper-bundle.min.js',
         'site/assets/swiper.min.js',
         'site/js/script.min.js',
