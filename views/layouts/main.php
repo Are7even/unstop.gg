@@ -5,6 +5,7 @@
 
 use app\assets\SiteAsset;
 use app\widgets\Alert;
+use app\widgets\LanguageSwitch;
 use app\widgets\UserLayoutWidget;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -48,7 +49,7 @@ SiteAsset::register($this);
                 <div class="dropdown">
                     <img onclick="myFunction()" class="flag dropbtn" src="/web/site/img/us_flag.jpg" alt="flag">
                     <div id="myDropdown2" class="dropdown-content">
-                        <a href="#">Russian <img class="flag" src="/web/site/img/russia_flag.jpg" alt="flag"></a>
+                        <a href="#"><?php echo LanguageSwitch::widget()?><img class="flag" src="/web/site/img/russia_flag.jpg" alt="flag"></a>
                         <a href="#">English<img class="flag" src="/web/site/img/us_flag.jpg" alt="flag"></a>
                     </div>
                 </div>
@@ -56,10 +57,9 @@ SiteAsset::register($this);
             <?php else:?>
             <div class="control_login">
                 <div class="dropdown">
-                    <img onclick="myFunction()" class="flag dropbtn" src="/web/site/img/us_flag.jpg" alt="flag">
+                    <img onclick="myFunction()" class="flag dropbtn" src="/web/upload/<?php echo \app\widgets\LanguageIconWidget::widget(['currentLanguage'=>Yii::$app->language])?>" alt="flag">
                     <div id="myDropdown" class="dropdown-content">
-                        <a href="#">Russian <img class="flag" src="/web/site/img/russia_flag.jpg" alt="flag"></a>
-                        <a href="#">English<img class="flag" src="/web/site/img/us_flag.jpg" alt="flag"></a>
+                      <?php echo LanguageSwitch::widget()?>
                     </div>
                 </div>
                 <img class="swords" src="/web/site/img/swords.png" alt="swords">

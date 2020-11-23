@@ -135,7 +135,7 @@ $config = [
             'site/*',
             'auth/*',
             'mm/*',
-            'rbac/*',
+           // 'rbac/*',
         ]
     ],
     'params' => $params,

@@ -119,15 +119,11 @@ AdminAsset::register($this);
 //                                        echo Yii::$app->language;
 //                                    endforeach;
 //                                    ?>
-                                    <img src="/web/admin/assets/images/flags/us_flag.jpg" class="ml-2" height="16" alt=""/>
+                                    <img src="/web/upload/<?php echo \app\widgets\LanguageIconWidget::widget(['currentLanguage'=>Yii::$app->language])?>" class="ml-2" height="16" alt=""/>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right language-switch">
-                                    <?php echo LanguageSwitch::widget()?>
-                                    <a class="dropdown-item" href="#"><img src="/web/admin/assets/images/flags/italy_flag.jpg" alt="" height="16"/><span> Italian </span></a>
-                                    <a class="dropdown-item" href="#"><img src="/web/admin/assets/images/flags/french_flag.jpg" alt="" height="16"/><span> French </span></a>
-                                    <a class="dropdown-item" href="#"><img src="/web/admin/assets/images/flags/spain_flag.jpg" alt="" height="16"/><span> Spanish </span></a>
-                                    <a class="dropdown-item" href="#"><img src="/web/admin/assets/images/flags/russia_flag.jpg" alt="" height="16"/><span> Russian </span></a>
+                                    <?php echo LanguageSwitch::widget(['admin'=>\app\helpers\StatusHelper::$active])?>
                                 </div>
                             </li>
 <!--                            <li class="list-inline-item dropdown notification-list">-->
