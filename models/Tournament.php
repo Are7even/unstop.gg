@@ -114,7 +114,7 @@ class Tournament extends \yii\db\ActiveRecord
 
     public function getIcon()
     {
-        return ($this->icon) ? '/upload/' . $this->icon : '/no-image.png';
+        return ($this->icon) ? '/upload/tournament/' . $this->icon : '/web/upload/user/no-image.png';
     }
 
     public function allow(){
@@ -141,6 +141,11 @@ class Tournament extends \yii\db\ActiveRecord
 
     static function getCurrentCheckinEndTime($id){
         return true;
+    }
+
+    public function getCutDate($modelDate){
+        $date = date('d.m.Y', strtotime($modelDate));
+        return $date;
     }
 
 }

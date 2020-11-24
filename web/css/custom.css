@@ -1,0 +1,8 @@
+.content .content-body .match .match-container{
+    width: 100%;
+}
+
+.header .container .control .control_logout, .header .container .control_login .control_logout, .header .container .control_logout .control_logout {
+    display: flex;
+    justify-content: flex-end;
+}

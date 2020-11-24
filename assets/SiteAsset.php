@@ -10,6 +10,7 @@ class SiteAsset extends AssetBundle
     public $baseUrl = '';
     public $css = [
         'site/css/style.min.css',
+        'css/custom.css',
         'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap',
         'https://pro.fontawesome.com/releases/v5.10.0/css/all.css',
         'https://unpkg.com/swiper/swiper-bundle.css',
