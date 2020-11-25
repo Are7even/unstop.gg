@@ -46,11 +46,11 @@ class UserGameRating extends \yii\db\ActiveRecord
     }
 
     public function getUser(){
-        $this->hasOne(User::className(),['id'=>'user_id']);
+        return $this->hasOne(User::className(),['id'=>'user_id']);
     }
 
     public function getGames(){
-        $this->hasOne(Games::className(),['id'=>'games_id']);
+        return $this->hasOne(Games::className(),['id'=>'games_id']);
     }
 
 }

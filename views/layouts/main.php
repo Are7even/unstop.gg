@@ -44,8 +44,8 @@ SiteAsset::register($this);
         </div>
         <a href="#"><img class="logo" src="/web/site/img/logo.png" alt="logo"></a>
         <div class="control">
-            <?php if (Yii::$app->user->isGuest):?>
-            <div class="control_logout">
+
+            <div class="control_logout" style="<?= Yii::$app->user->isGuest ? '' : 'display:none'?>">
                 <div class="dropdown">
                     <img onclick="myFunction()" class="flag dropbtn" src="/web/upload/<?php echo \app\widgets\LanguageIconWidget::widget(['currentLanguage'=>Yii::$app->language])?>" alt="flag">
                     <div id="myDropdown2" class="dropdown-content">
@@ -53,8 +53,8 @@ SiteAsset::register($this);
                     </div>
                 </div>
             </div>
-            <?php else:?>
-            <div class="control_login">
+
+            <div class="control_login" style="<?= !Yii::$app->user->isGuest ? '' : 'display:none'?>">
                 <div class="dropdown">
                     <img onclick="myFunction()" class="flag dropbtn" src="/web/upload/<?php echo \app\widgets\LanguageIconWidget::widget(['currentLanguage'=>Yii::$app->language])?>" alt="flag">
                     <div id="myDropdown" class="dropdown-content">
@@ -75,7 +75,7 @@ SiteAsset::register($this);
                 </div>
                 <?php echo UserLayoutWidget::widget(['userId'=>Yii::$app->user->id])?>
             </div>
-            <?php endif;?>
+
         </div>
     </div>
     <nav class="nav" id="nav">

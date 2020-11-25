@@ -4,8 +4,10 @@ namespace app\controllers;
 
 use app\models\ForgotPasswordForm;
 use app\models\FurtherInformationForm;
+use app\models\Games;
 use app\models\RegistrationForm;
 use app\models\User;
+use app\models\UserGameRating;
 use Yii;
 use yii\base\DynamicModel;
 use yii\filters\AccessControl;
@@ -62,6 +64,7 @@ class SiteController extends Controller
         $loginForm = new LoginForm();
         $registrationForm = new RegistrationForm();
         $forgotPasswordForm = new ForgotPasswordForm();
+        $games = Games::find()->all();
 
         if (Yii::$app->request->isPost) {
 
@@ -103,6 +106,7 @@ class SiteController extends Controller
             'login' => $loginForm,
             'registration' => $registrationForm,
             'forgotPasswordForm' => $forgotPasswordForm,
+            'games' => $games,
         ]);
     }
 

@@ -209,4 +209,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return ($this->photo) ? '/upload/' . $this->photo : '/no-image.png';
     }
 
+    public function getUserGameRating(){
+        return $this->hasMany(UserGameRating::className(),['user_id'=>'id']);
+    }
+
 }

@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-
+use yii\web\View;
+ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',['position'=>View::POS_HEAD]);
 ?>
 <?php if (Yii::$app->session->getFlash('registration')): ?>
     <div class="alert alert-success" role="alert">
@@ -231,246 +232,75 @@ use yii\bootstrap\ActiveForm;
                 <div class="rating-title">Top players</div>
                 <select>
                     <option disabled hidden>Выберите игру</option>
-                    <option selected value="CS_GO">CS GO</option>
-                    <option value="FIFA_2020">FIFA 2020</option>
-                    <option value="DOTA_2">DOTA 2</option>
+                    <?php foreach ($games as $key => $game):?>
+                    <option <?= $key == 0 ? 'selected' : '' ?> value="<?php echo $game->name?>"><?php echo $game->name?></option>
+                    <?php endforeach;?>
                 </select>
-                <div class="dropdownlist" id="CS_GO">
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">CS GO</div>
-                        <div class="rang rang-1">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">Открыт</div>
-                        <div class="rang rang-2">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">Gambit</div>
-                        <div class="rang rang-3">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">Petrovich</div>
-                        <div class="rang">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">JasonStathem</div>
-                        <div class="rang">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">Открыт</div>
-                        <div class="rang">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">Gambit</div>
-                        <div class="rang">22341</div>
-                    </div>
-                    <!--                    <div class="rating-list">-->
-                    <!--                        <div class="icon-background">-->
-                    <!--                            <i class="fal fa-user-friends"></i>-->
-                    <!--                        </div>-->
-                    <!--                        <div class="name">JasonStathem</div>-->
-                    <!--                        <div class="rang ">22341</div>-->
-                    <!--                    </div>-->
-                    <!--                    <div class="rating-list">-->
-                    <!--                        <div class="icon-background">-->
-                    <!--                            <i class="fal fa-user-friends"></i>-->
-                    <!--                        </div>-->
-                    <!--                        <div class="name">JasonStathem</div>-->
-                    <!--                        <div class="rang ">22341</div>-->
-                    <!--                    </div>-->
+                <?php foreach ($games as $key => $game):?>
+                <div class="dropdownlist <?= $key !== 0 ? 'shadow' : '' ?>" id="<?php echo $game->name?>">
+                    <?php echo \app\widgets\TopPlayersWidget::widget(['gamesId' => $game->id]) ?>
                 </div>
-                <div class="dropdownlist shadow" id="FIFA_2020">
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">FIFA_2020</div>
-                        <div class="rang rang-1">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">Открыт</div>
-                        <div class="rang rang-2">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">Gambit</div>
-                        <div class="rang rang-3">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">Petrovich</div>
-                        <div class="rang">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">JasonStathem</div>
-                        <div class="rang">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">Открыт</div>
-                        <div class="rang">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">Gambit</div>
-                        <div class="rang">22341</div>
-                    </div>
-                    <!--                    <div class="rating-list">-->
-                    <!--                        <div class="icon-background">-->
-                    <!--                            <i class="fal fa-user-friends"></i>-->
-                    <!--                        </div>-->
-                    <!--                        <div class="name">JasonStathem</div>-->
-                    <!--                        <div class="rang ">22341</div>-->
-                    <!--                    </div>-->
-                    <!--                    <div class="rating-list">-->
-                    <!--                        <div class="icon-background">-->
-                    <!--                            <i class="fal fa-user-friends"></i>-->
-                    <!--                        </div>-->
-                    <!--                        <div class="name">JasonStathem</div>-->
-                    <!--                        <div class="rang ">22341</div>-->
-                    <!--                    </div>-->
-                </div>
-                <div class="dropdownlist shadow" id="DOTA_2">
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">DOTA_2</div>
-                        <div class="rang rang-1">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">Открыт</div>
-                        <div class="rang rang-2">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">Gambit</div>
-                        <div class="rang rang-3">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">Petrovich</div>
-                        <div class="rang">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">JasonStathem</div>
-                        <div class="rang">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">Открыт</div>
-                        <div class="rang">22341</div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="icon-background">
-                            <i class="fal fa-user-friends"></i>
-                        </div>
-                        <div class="name">Gambit</div>
-                        <div class="rang">22341</div>
-                    </div>
-                </div>
+                <?php endforeach;?>
 
-            </div>
-            <div class="limiter advertising">
-                <div class="advertising-title">
-                    Advertising
+
+                <div class="limiter advertising">
+                    <div class="advertising-title">
+                        Advertising
+                    </div>
+                    <?php echo \app\widgets\AdvertisementWidget::widget() ?>
                 </div>
-                <?php echo \app\widgets\AdvertisementWidget::widget() ?>
             </div>
         </div>
     </div>
-</div>
 
-
-<div class="wrapper">
-    <div class="popup" id="popup">
-        <div class="popup__body">
-            <div class="popup__content">
-                <a href="#" class="popup__close close-popup">
-                    <i class="fas fa-times"></i>
-                </a>
-                <div class="info-block">
-                    <img src="/web/site/img/cs.jpg" alt="">
-                    <div class="info">
-                        <div class="button">на форум</div>
-                        <div class="icons">
-                            <div><i class="fas fa-heart"></i><br>22</div>
-                            <div><i class="fas fa-share-alt"></i><br>22</div>
+    <div class="wrapper">
+        <div class="popup" id="popup">
+            <div class="popup__body">
+                <div class="popup__content">
+                    <a href="#" class="popup__close close-popup">
+                        <i class="fas fa-times"></i>
+                    </a>
+                    <div class="info-block">
+                        <img src="/web/site/img/cs.jpg" alt="">
+                        <div class="info">
+                            <div class="button">на форум</div>
+                            <div class="icons">
+                                <div><i class="fas fa-heart"></i><br>22</div>
+                                <div><i class="fas fa-share-alt"></i><br>22</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="text">
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                    labore et
-                    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-                    rebum. Stet
-                    clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-                    amet,
-                    consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                    aliquyam erat,
-                    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-                    gubergren, no
-                    sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-                    sadipscing
-                    elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-                    voluptua. At
-                    vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-                    sanctus est
-                    Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                    eirmod
-                    tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-                    et justo
-                    duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-                    sit amet
-                    <div class="autor">
-                        Author
+                    <div class="text">
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                        ut
+                        labore et
+                        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+                        rebum. Stet
+                        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
+                        sit
+                        amet,
+                        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                        aliquyam erat,
+                        sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+                        gubergren, no
+                        sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+                        sadipscing
+                        elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+                        voluptua. At
+                        vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+                        sanctus est
+                        Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+                        nonumy
+                        eirmod
+                        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+                        accusam
+                        et justo
+                        duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+                        dolor
+                        sit amet
+                        <div class="autor">
+                            Author
+                        </div>
                     </div>
                 </div>
             </div>
