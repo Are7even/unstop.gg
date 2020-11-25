@@ -1,7 +1,14 @@
 <?php
+
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+
 ?>
+<?php if (Yii::$app->session->getFlash('registration')): ?>
+    <div class="alert alert-success" role="alert">
+        <?php echo Yii::$app->session->getFlash('registration'); ?>
+    </div>
+<?php endif; ?>
 <div class="container">
     <div class="content">
         <div class="content-body">
@@ -97,111 +104,128 @@ use yii\bootstrap\ActiveForm;
                     Active matches
                 </div>
 
-               <?php echo \app\widgets\TournamentIndexWidget::widget(['status'=>\app\helpers\TournamentStatusHelper::$fighting])?>
+                <?php echo \app\widgets\TournamentIndexWidget::widget(['status' => \app\helpers\TournamentStatusHelper::$fighting]) ?>
 
                 <div class="match-title ongoing">
                     Ongoing matches
                 </div>
 
-                <?php echo \app\widgets\TournamentIndexWidget::widget(['status'=>\app\helpers\TournamentStatusHelper::$waiting])?>
+                <?php echo \app\widgets\TournamentIndexWidget::widget(['status' => \app\helpers\TournamentStatusHelper::$waiting]) ?>
 
 
             </div>
-<!--            <div>-->
-<!--                <iframe width="100%" height="400" src="https://www.youtube.com/embed/bBB_9M49ZeE" frameborder="0"-->
-<!--                        allowfullscreen></iframe>-->
-<!--            </div>-->
+            <!--            <div>-->
+            <!--                <iframe width="100%" height="400" src="https://www.youtube.com/embed/bBB_9M49ZeE" frameborder="0"-->
+            <!--                        allowfullscreen></iframe>-->
+            <!--            </div>-->
         </div>
         <div class="aside">
-            <?php if (Yii::$app->user->isGuest):?>
-            <div class="limiter forms">
+            <?php if (Yii::$app->user->isGuest): ?>
+                <div class="limiter forms">
 
-                <?php include(Yii::getAlias('@app/views/auth/login.php')); ?>
+                    <?php include(Yii::getAlias('@app/views/auth/login.php')); ?>
 
-                <?php $form = ActiveForm::begin([
-                    'id' => 'registration-form',
-                    'layout' => 'horizontal',
-                    'action' => '/',
-                    'class' => 'login-form register-form validate-form',
-                ]); ?>
-                <?= $form->field($registration, 'formId')->hiddenInput([
-                        'value'=>'registration-form',
-                    'name'=>'formId'
-                ])->label(false)?>
+                    <?php $form = ActiveForm::begin([
+                        'id' => 'registration-form',
+                        'layout' => 'horizontal',
+                        'action' => '/',
+                        'class' => 'login-form register-form validate-form',
+                    ]); ?>
+                    <?= $form->field($registration, 'formId')->hiddenInput([
+                        'value' => 'registration-form',
+                        'name' => 'formId'
+                    ])->label(false) ?>
 
-                <span class="form-title"><?php echo Yii::t('admin', 'Registration') ?></span>
-                <?= $form->field($registration, 'username')->textInput([
-                    'class' => 'input100',
-                    'placeholder' => 'username',
-                    'type' => 'text',
-                    'name' => 'username',
-                ])->label(false) ?>
+                    <span class="form-title"><?php echo Yii::t('admin', 'Registration') ?></span>
+                    <?= $form->field($registration, 'username')->textInput([
+                        'class' => 'input100',
+                        'placeholder' => 'username',
+                        'type' => 'text',
+                        'name' => 'username',
+                    ])->label(false) ?>
 
-                <?= $form->field($registration, 'first_name')->textInput([
-                    'class' => 'input100',
-                    'placeholder' => 'first name',
-                    'type' => 'text',
-                    'name' => 'first name',
-                ])->label(false) ?>
+                    <?= $form->field($registration, 'first_name')->textInput([
+                        'class' => 'input100',
+                        'placeholder' => 'first name',
+                        'type' => 'text',
+                        'name' => 'first name',
+                    ])->label(false) ?>
 
-                <?= $form->field($registration, 'last_name')->textInput([
-                    'class' => 'input100',
-                    'placeholder' => 'last name',
-                    'type' => 'text',
-                    'name' => 'last name',
-                ])->label(false) ?>
+                    <?= $form->field($registration, 'last_name')->textInput([
+                        'class' => 'input100',
+                        'placeholder' => 'last name',
+                        'type' => 'text',
+                        'name' => 'last name',
+                    ])->label(false) ?>
 
-                <?= $form->field($registration, 'email')->textInput([
-                    'class' => 'input100',
-                    'placeholder' => 'email',
-                    'type' => 'text',
-                    'name' => 'email',
-                ])->label(false) ?>
+                    <?= $form->field($registration, 'email')->textInput([
+                        'class' => 'input100',
+                        'placeholder' => 'email',
+                        'type' => 'text',
+                        'name' => 'email',
+                    ])->label(false) ?>
 
-                <?= $form->field($registration, 'password')->passwordInput([
-                    'class' => 'input100',
-                    'placeholder' => 'password',
-                    'type' => 'password',
-                    'name' => 'password',
-                ])->label(false) ?>
+                    <?= $form->field($registration, 'password')->passwordInput([
+                        'class' => 'input100',
+                        'placeholder' => 'password',
+                        'type' => 'password',
+                        'name' => 'password',
+                    ])->label(false) ?>
 
-                <div class="text-center">
-                    <?php echo Yii::t('admin', 'By clicking on the Register button, you accept our ') ?> <a class="register-href"
-                                                                                                            href="#">
-                        <span><?php echo Yii::t('admin', 'terms of use ') ?></span></a> <?php echo Yii::t('admin', 'project') ?>.
-                </div>
-
-                <?= Html::submitButton('Register now', ['class' => 'login100-form-btn', 'name' => 'registration-button']) ?>
-
-                <?php ActiveForm::end(); ?>
-
-                <form class="login-form password-recovery validate-form">
-                    <span class="form-title">Восстановление пароля</span>
-                    <input class="input100" placeholder="email" type="text" name="email">
-                    <button class="login100-form-btn">Восстановить</button>
                     <div class="text-center">
+                        <?php echo Yii::t('admin', 'By clicking on the Register button, you accept our ') ?> <a
+                                class="register-href"
+                                href="#">
+                            <span><?php echo Yii::t('admin', 'terms of use ') ?></span></a> <?php echo Yii::t('admin', 'project') ?>
+                        .
+                    </div>
+
+                    <?= Html::submitButton('Register now', ['class' => 'login100-form-btn', 'name' => 'registration-button']) ?>
+
+                    <?php ActiveForm::end(); ?>
+
+
+                    <?php $form = ActiveForm::begin([
+                        'id' => 'forgot-password-form',
+                        'layout' => 'horizontal',
+                        'action' => '/',
+                        'class' => 'login-form password-recovery validate-form',
+                    ]); ?>
+
+                    <?= $form->field($forgotPasswordForm, 'formId')->hiddenInput([
+                        'value' => 'forgot-password-form',
+                        'name' => 'formId'
+                    ])->label(false) ?>
+
+                    <span class="form-title"><?php echo Yii::t('admin', 'Password recovery') ?></span>
+                    <?= $form->field($forgotPasswordForm, 'email')->textInput([
+                        'class' => 'input100',
+                        'placeholder' => 'email',
+                        'type' => 'text',
+                        'name' => 'email',
+                    ])->label(false) ?>
+
+                    <?= Html::submitButton(Yii::t('admin', 'Recovery'), ['class' => 'login100-form-btn', 'name' => 'forgot-password-button']) ?>
+
+                    <div class="text-center">
+                        <?php if (Yii::$app->session->getFlash('reset-password')): ?>
+                            <div class="alert alert-success" role="alert">
+                                <?php echo Yii::$app->session->getFlash('reset-password'); ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (Yii::$app->session->getFlash('reset-password-sanded')): ?>
+                            <div class="alert alert-success" role="alert">
+                                <?php echo Yii::$app->session->getFlash('reset-password-sanded'); ?>
+                            </div>
+                        <?php endif; ?>
+
                         <a href="#" class="txt1">Авторизироваться</a>
                         <a href="#" class="txt1">Нет учетной записи? Зарегестрируйтесь</a>
                     </div>
-                    <div class="social">
-                        <a href="#" target="_blank">
-                            <i class="fab fa-facebook-square"></i>
-                        </a>
-                        <a href="#" target="_blank">
-                            <i class="fab fa-google"></i>
-                        </a>
-                        <a href="#" target="_blank">
-                            <i class="fab fa-vk"></i>
-                        </a>
-                    </div>
-                </form>
-            </div>
-            <?php endif;?>
-            <?php if (Yii::$app->session->getFlash('registration')): ?>
-                <div class="alert alert-success" role="alert">
-                    <?php echo Yii::$app->session->getFlash('registration');?>
+                    <?php ActiveForm::end() ?>
                 </div>
             <?php endif; ?>
+
             <div class="limiter rating" id="game-rating">
                 <img src="/web/site/img/corona.png" alt="" class="rating-logo">
                 <div class="rating-title">Top players</div>
@@ -398,12 +422,11 @@ use yii\bootstrap\ActiveForm;
                 <div class="advertising-title">
                     Advertising
                 </div>
-                    <?php echo \app\widgets\AdvertisementWidget::widget()?>
+                <?php echo \app\widgets\AdvertisementWidget::widget() ?>
             </div>
         </div>
     </div>
 </div>
-
 
 
 <div class="wrapper">

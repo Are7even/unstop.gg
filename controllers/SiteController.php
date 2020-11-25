@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\ForgotPasswordForm;
 use app\models\FurtherInformationForm;
 use app\models\RegistrationForm;
 use app\models\User;
@@ -60,7 +61,7 @@ class SiteController extends Controller
     {
         $loginForm = new LoginForm();
         $registrationForm = new RegistrationForm();
-        $furtherInformationForm = new FurtherInformationForm();
+        $forgotPasswordForm = new ForgotPasswordForm();
 
         if (Yii::$app->request->isPost) {
 
@@ -70,6 +71,7 @@ class SiteController extends Controller
                     if ($registrationForm->load($data, '')) {
                         if ($registrationForm->validate()) {
                             $registrationForm->save();
+                            $loginForm->login();
                             Yii::$app->session->setFlash('registration', Yii::t('admin', 'User registered!'));
                             return $this->redirect('/');
                         }
@@ -82,8 +84,17 @@ class SiteController extends Controller
                         }
                     }
 
-                } elseif ($data['formId'] === 'registration-form') {
-
+                } elseif ($data['formId'] === 'forgot-password-form') {
+                    if ($forgotPasswordForm->load($data,'')){
+                        if ($forgotPasswordForm->validate()){
+                            if ($forgotPasswordForm->sendEmail()){
+                                Yii::$app->session->setFlash('reset-password-sanded', Yii::t('admin', 'Message sent!'));
+                                return $this->redirect('/');
+                            }
+                        }
+                    }
+                    Yii::$app->session->setFlash('reset-password', Yii::t('admin', 'Email not founded!'));
+                    return $this->redirect('/');
                 }
             }
         }
@@ -91,7 +102,7 @@ class SiteController extends Controller
         return $this->render('index', [
             'login' => $loginForm,
             'registration' => $registrationForm,
-            'furtherInformation' => $furtherInformationForm,
+            'forgotPasswordForm' => $forgotPasswordForm,
         ]);
     }
 
@@ -107,20 +118,6 @@ class SiteController extends Controller
         }
     }
 
-//    public function actionRegistration()
-//    {
-//        $model = new RegistrationForm();
-//        $isSuccessfullySaved = (
-//            Yii::$app->request->isPost &&
-//            $model->load(Yii::$app->request->post(), '') &&
-//            $model->save()
-//        );
-//
-//        if ($isSuccessfullySaved) {
-//            Yii::$app->session->setFlash('registration', Yii::t('admin', 'User registered!'));
-//            return $this->goHome();
-//        }
-//    }
 
     public function actionContact()
     {

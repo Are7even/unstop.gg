@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'adminEmail' => 'admin@example.com',
-    'senderEmail' => 'noreply@example.com',
-    'senderName' => 'Example.com mailer',
+    'adminEmail' => 'jeka.klumenko@gmail.com',
+    'senderEmail' => 'jeka.klumenko@gmail.com',
+    'senderName' => 'jeka.klumenko@gmail.com',
     'user.rememberMeDuration'=>30*24*60,
 ];

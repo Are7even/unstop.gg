@@ -25,6 +25,7 @@ use yii\web\IdentityInterface;
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
+    private $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
 
     public static function tableName()
     {
@@ -93,6 +94,22 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
         return Yii::$app->security->validatePassword($password, $this->password);
+    }
+
+    public function generateNewPassword(){
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($this->alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $this->alphabet[$n];
+        }
+       return implode($pass);
+    }
+
+    public function updatePassword($email,$password){
+        $user = User::findByEmail($email);
+        $user->password = $this->setPassword($password);
+        $user->save(false);
     }
 
     public function setPassword($password)

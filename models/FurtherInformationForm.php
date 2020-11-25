@@ -23,7 +23,6 @@ class FurtherInformationForm extends Model
 
     public function save()
     {
-
         if (!$this->validate()) {
             return null;
         }
