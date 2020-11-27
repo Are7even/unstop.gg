@@ -15,6 +15,7 @@ use yii\web\IdentityInterface;
  * @property string|null $first_name
  * @property string|null $username
  * @property string|null $email
+ * @property string|null $about
  * @property string|null $password
  * @property string|null $password_reset_token
  * @property int|null $reputation
@@ -40,7 +41,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['reputation'], 'default', 'value' => '0'],
             [['status'], 'integer'],
             [['status'], 'default', 'value' => '1'],
-            [['first_name', 'last_name','username', 'email', 'password_reset_token', 'auth_key', 'password', 'photo'], 'string', 'max' => 255],
+            [['first_name', 'last_name','username', 'email', 'about','password_reset_token', 'auth_key', 'password', 'photo'], 'string', 'max' => 255],
             [['photo'], 'default', 'value' => 'no-image.png'],
             [['created_at','updated_at'], 'safe'],
             [['created_at'], 'default', 'value' => date('Y-m-j')],
@@ -61,6 +62,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'first_name' => Yii::t('admin', 'First name'),
             'last_name' => Yii::t('admin', 'Last name'),
             'email' => Yii::t('admin', 'Email'),
+            'about' => Yii::t('admin', 'About'),
             'password' => Yii::t('admin', 'Password'),
             'password_reset_token' => Yii::t('admin', 'Password reset token'),
             'reputation' => Yii::t('admin', 'reputation'),
@@ -157,6 +159,15 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return Yii::$app->session->setFlash('anger', Yii::t('admin', 'Sorry for site problem? let`s try register another way...'));
     }
 
+    public function editCabinet($first_name,$last_name,$photo,$about){
+        $user = User::findOne(Yii::$app->user->id);
+        $user->first_name = $first_name;
+        $user->last_name = $last_name;
+        $user->photo = $photo;
+        $user->about = $about;
+        return $user->save();
+    }
+
     public function getUsername($id){
         $user = self::findIdentity($id);
         return $user->username;
@@ -211,6 +222,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public function getUserGameRating(){
         return $this->hasMany(UserGameRating::className(),['user_id'=>'id']);
+    }
+
+    public function getUserLinks(){
+        return $this->hasOne(UserLinks::className(),['user_id'=>'id']);
+    }
+
+    public function getUserToGifts(){
+        return $this->hasOne(UserToGifts::className(),['user_id'=>'id']);
     }
 
 }

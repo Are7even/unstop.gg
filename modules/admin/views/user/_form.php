@@ -25,6 +25,8 @@ use app\helpers\RoleHelper;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'about')->textArea(['rows' => 6]) ?>
+
     <?= $form->field($model, 'password_reset_token')->passwordInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'reputation')->textInput() ?>

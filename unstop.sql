@@ -20,6 +20,7 @@ CREATE TABLE `user` (
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
+  `about` TEXT,
   `reputation` int(11) DEFAULT 1,
   `status` int(11) DEFAULT 1,
   `photo` varchar(255) DEFAULT NULL,
@@ -31,6 +32,22 @@ CREATE TABLE `user` (
 ALTER TABLE `user` ADD UNIQUE(`password_reset_token`);
 ALTER TABLE `user` ADD UNIQUE(`username`);
 ALTER TABLE `user` ADD UNIQUE(`email`);
+
+DROP TABLE IF EXISTS `user_links`;
+CREATE TABLE `user_links` (
+`id` int(11) not null AUTO_INCREMENT,
+`user_id` int (11) DEFAULT 0,
+`vk` VARCHAR (10) DEFAULT '',
+`fb` VARCHAR (10) DEFAULT '',
+`twitch` VARCHAR (10) DEFAULT '',
+`steam` VARCHAR (10) DEFAULT '',
+`battle_net` VARCHAR (10) DEFAULT '',
+`youtube` VARCHAR (10) DEFAULT '',
+`xbox` VARCHAR (10) DEFAULT '',
+`ps` VARCHAR (10) DEFAULT '',
+
+PRIMARY KEY(`id`)
+);
 
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message` (

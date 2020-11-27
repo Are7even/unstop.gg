@@ -9,13 +9,12 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 ?>
-<div class="site-login">
 
     <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
+        'id' => 'login',
         'layout' => 'horizontal',
         'action' => '/',
-        'class' => 'login-form validate-form',
+        'options'=>['class' => 'login-form validate-form'],
     ]); ?>
     <span class="form-title"><?php echo Yii::t('admin', 'Login') ?></span>
 
@@ -72,9 +71,8 @@ use yii\bootstrap\ActiveForm;
     </div>
 
     <div class="text-center">
-        <a href="#" class="txt1"><?php echo Yii::t('admin','Forgot your password?')?></a>
-        <a href="#" class="txt1"><?php echo Yii::t('admin',"Don't have an account? Register")?></a>
+        <a href="#" class="txt1" id="recovery_login_href"><?php echo Yii::t('admin','Forgot your password?')?></a>
+        <a href="#" class="txt1" id="register_login_href"><?php echo Yii::t('admin',"Don't have an account? Register")?></a>
     </div>
-
     <?php ActiveForm::end(); ?>
 

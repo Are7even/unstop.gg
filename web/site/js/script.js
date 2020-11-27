@@ -171,39 +171,101 @@ var galleryTop = new Swiper('.gallery-top', {
     });
 
 })();
-// var acc = document.getElementsByClassName("news-container");
-// var i;
+// const login_form = document.getElementById('login');
+// const register_form = document.getElementById('register');
+// const recovery_form = document.getElementById('recovery');
 //
-// for (i = 0; i < acc.length; i++) {
-//     acc[i].addEventListener("click", function() {
-//         /* Toggle between adding and removing the "active" class,
-//         to highlight the button that controls the panel */
-//         this.classList.toggle("active");
-//
-//         /* Toggle between hiding and showing the active panel */
-//         var panel = this.nextElementSibling;
-//         if (panel.style.display === "block") {
-//             panel.style.display = "none";
-//         } else {
-//             panel.style.display = "block";
-//         }
-//     });
+// function showLogin(event){
+//     event.preventDefault()
+//     register_form.classList.add('shadow')
+//     recovery_form.classList.add('shadow')
+//     login_form.classList.remove('shadow')
 // }
+//
+// function showRegister(event){
+//     event.preventDefault()
+//     register_form.classList.remove('shadow')
+//     recovery_form.classList.add('shadow')
+//     login_form.classList.add('shadow')
+// }
+//
+// function showRecovery(event){
+//     event.preventDefault()
+//     register_form.classList.add('shadow')
+//     recovery_form.classList.remove('shadow')
+//     login_form.classList.add('shadow')
+// }
+//
+// document.getElementById('recovery_login_href').addEventListener('click', showRecovery)
+// document.getElementById('register_login_href').addEventListener('click', showRegister)
+// document.getElementById('recovery_href').addEventListener('click', showRecovery)
+// document.getElementById('register_href').addEventListener('click', showRegister)
+// document.getElementById('login_href').addEventListener('click', showLogin)
+// document.getElementById('register_recovery_href').addEventListener('click', showRegister)
+var tabContainers = [
+    '#page__tabs',
+];
 
-// var acc = document.getElementsByClassName("game-container");
-// var i;
-//
-// for (i = 0; i < acc.length; i++) {
-//     acc[i].addEventListener("click", function() {
-//         this.classList.toggle("active");
-//         var panel = this.nextElementSibling;
-//         if (panel.style.maxHeight) {
-//             panel.style.maxHeight = null;
-//         } else {
-//             panel.style.maxHeight = panel.scrollHeight + "px";
-//         }
-//     });
-// }
+tabContainers.forEach(function (classContainer) {
+    var jsTriggers = document.querySelectorAll(classContainer + ' .js-tab-trigger');
+    jsTriggers.forEach(function(item, i) {
+        item.addEventListener('click', function() {
+            var tabName = this.dataset.tab,
+                tabContent = document.querySelector(classContainer + ' .js-tab-content[data-tab="'+tabName+'"]');
+
+            document.querySelectorAll(classContainer + ' .js-tab-content.active').forEach(function(item, i){
+                item.classList.remove('active');
+            });
+
+            document.querySelectorAll(classContainer + ' .js-tab-trigger.active').forEach(function(item, i){
+                item.classList.remove('active');
+            });
+
+            tabContent.classList.add('active');
+            this.classList.add('active');
+        });
+    })
+})
+
+var hoverContainers = [
+    '#menu__tabs'
+];
+
+
+hoverContainers.forEach(function (classContainer) {
+    var jsTriggers = document.querySelectorAll(classContainer + ' .js-tab-trigger');
+    jsTriggers.forEach(function(item, i) {
+        item.addEventListener('mouseenter', function() {
+            var tabName = this.dataset.tab,
+                tabContent = document.querySelector(classContainer + ' .js-tab-content[data-tab="'+tabName+'"]');
+
+            document.querySelectorAll(classContainer + ' .js-tab-content.active').forEach(function(item, i){
+                item.classList.remove('active');
+            });
+
+            document.querySelectorAll(classContainer + ' .js-tab-trigger.active').forEach(function(item, i){
+                item.classList.remove('active');
+            });
+
+            tabContent.classList.add('active');
+            this.classList.add('active');
+        });
+    })
+})
+var acc = document.getElementsByClassName("game-container");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+        } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+    });
+}
 const gameRating = document.getElementById('game-rating');
 const selection = gameRating.querySelector('select');
 const lists = gameRating.querySelectorAll('.dropdownlist');
@@ -239,6 +301,39 @@ window.onclick = function(event) {
         }
     }
 }
+
+
+const login_form = document.getElementById('login');
+const register_form = document.getElementById('register');
+const recovery_form = document.getElementById('recovery');
+
+function showLogin(event){
+    event.preventDefault()
+    register_form.classList.add('shadow')
+    recovery_form.classList.add('shadow')
+    login_form.classList.remove('shadow')
+}
+
+function showRegister(event){
+    event.preventDefault()
+    register_form.classList.remove('shadow')
+    recovery_form.classList.add('shadow')
+    login_form.classList.add('shadow')
+}
+
+function showRecovery(event){
+    event.preventDefault()
+    register_form.classList.add('shadow')
+    recovery_form.classList.remove('shadow')
+    login_form.classList.add('shadow')
+}
+
+document.getElementById('recovery_login_href').addEventListener('click', showRecovery)
+document.getElementById('register_login_href').addEventListener('click', showRegister)
+document.getElementById('recovery_href').addEventListener('click', showRecovery)
+document.getElementById('register_href').addEventListener('click', showRegister)
+document.getElementById('login_href').addEventListener('click', showLogin)
+document.getElementById('register_recovery_href').addEventListener('click', showRegister)
 
 function testWebP(callback) {
 

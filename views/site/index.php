@@ -3,7 +3,8 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\web\View;
- $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',['position'=>View::POS_HEAD]);
+
+$this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', ['position' => View::POS_HEAD]);
 ?>
 <?php if (Yii::$app->session->getFlash('registration')): ?>
     <div class="alert alert-success" role="alert">
@@ -123,14 +124,13 @@ use yii\web\View;
         <div class="aside">
             <?php if (Yii::$app->user->isGuest): ?>
                 <div class="limiter forms">
-
                     <?php include(Yii::getAlias('@app/views/auth/login.php')); ?>
 
                     <?php $form = ActiveForm::begin([
-                        'id' => 'registration-form',
+                        'id' => 'register',
                         'layout' => 'horizontal',
                         'action' => '/',
-                        'class' => 'login-form register-form validate-form',
+                        'options'=>['class' => 'login-form register-form shadow validate-form'],
                     ]); ?>
                     <?= $form->field($registration, 'formId')->hiddenInput([
                         'value' => 'registration-form',
@@ -183,14 +183,21 @@ use yii\web\View;
 
                     <?= Html::submitButton('Register now', ['class' => 'login100-form-btn', 'name' => 'registration-button']) ?>
 
+                    <div class="text-center">
+                        <a href="#" class="txt1"
+                           id="recovery_href"><?php echo Yii::t('admin', 'Forgot your password?') ?></a>
+                        <a href="#" class="txt1"
+                           id="register_href"><?php echo Yii::t('admin', "Don't have an account? Register") ?></a>
+                    </div>
+
                     <?php ActiveForm::end(); ?>
 
 
                     <?php $form = ActiveForm::begin([
-                        'id' => 'forgot-password-form',
+                        'id' => 'recovery',
                         'layout' => 'horizontal',
                         'action' => '/',
-                        'class' => 'login-form password-recovery validate-form',
+                       'options'=>[ 'class' => 'login-form password-recovery shadow validate-form'],
                     ]); ?>
 
                     <?= $form->field($forgotPasswordForm, 'formId')->hiddenInput([
@@ -220,8 +227,8 @@ use yii\web\View;
                             </div>
                         <?php endif; ?>
 
-                        <a href="#" class="txt1">Авторизироваться</a>
-                        <a href="#" class="txt1">Нет учетной записи? Зарегестрируйтесь</a>
+                        <a href="#" class="txt1" id="login_href">Авторизироваться</a>
+                        <a href="#" class="txt1" id="register_recovery_href">Нет учетной записи? Зарегестрируйтесь</a>
                     </div>
                     <?php ActiveForm::end() ?>
                 </div>
@@ -232,78 +239,79 @@ use yii\web\View;
                 <div class="rating-title">Top players</div>
                 <select>
                     <option disabled hidden>Выберите игру</option>
-                    <?php foreach ($games as $key => $game):?>
-                    <option <?= $key == 0 ? 'selected' : '' ?> value="<?php echo $game->name?>"><?php echo $game->name?></option>
-                    <?php endforeach;?>
+                    <?php foreach ($games as $key => $game): ?>
+                        <option <?= $key == 0 ? 'selected' : '' ?>
+                                value="<?php echo $game->name ?>"><?php echo $game->name ?></option>
+                    <?php endforeach; ?>
                 </select>
-                <?php foreach ($games as $key => $game):?>
-                <div class="dropdownlist <?= $key !== 0 ? 'shadow' : '' ?>" id="<?php echo $game->name?>">
-                    <?php echo \app\widgets\TopPlayersWidget::widget(['gamesId' => $game->id]) ?>
-                </div>
-                <?php endforeach;?>
-
-
-                <div class="limiter advertising">
-                    <div class="advertising-title">
-                        Advertising
+                <?php foreach ($games as $key => $game): ?>
+                    <div class="dropdownlist <?= $key !== 0 ? 'shadow' : '' ?>" id="<?php echo $game->name ?>">
+                        <?php echo \app\widgets\TopPlayersWidget::widget(['gamesId' => $game->id]) ?>
                     </div>
-                    <?php echo \app\widgets\AdvertisementWidget::widget() ?>
+                <?php endforeach; ?>
+
+            </div>
+            <div class="limiter advertising">
+                <div class="advertising-title">
+                    Advertising
+                </div>
+                <?php echo \app\widgets\AdvertisementWidget::widget() ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="popup" id="popup">
+        <div class="popup__body">
+            <div class="popup__content">
+                <a href="#" class="popup__close close-popup">
+                    <i class="fas fa-times"></i>
+                </a>
+                <div class="info-block">
+                    <img src="/web/site/img/cs.jpg" alt="">
+                    <div class="info">
+                        <div class="button">на форум</div>
+                        <div class="icons">
+                            <div><i class="fas fa-heart"></i><br>22</div>
+                            <div><i class="fas fa-share-alt"></i><br>22</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text">
+                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+                    ut
+                    labore et
+                    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+                    rebum. Stet
+                    clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
+                    sit
+                    amet,
+                    consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                    aliquyam erat,
+                    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+                    gubergren, no
+                    sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+                    sadipscing
+                    elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+                    voluptua. At
+                    vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+                    sanctus est
+                    Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+                    nonumy
+                    eirmod
+                    tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+                    accusam
+                    et justo
+                    duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+                    dolor
+                    sit amet
+                    <div class="autor">
+                        Author
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="wrapper">
-        <div class="popup" id="popup">
-            <div class="popup__body">
-                <div class="popup__content">
-                    <a href="#" class="popup__close close-popup">
-                        <i class="fas fa-times"></i>
-                    </a>
-                    <div class="info-block">
-                        <img src="/web/site/img/cs.jpg" alt="">
-                        <div class="info">
-                            <div class="button">на форум</div>
-                            <div class="icons">
-                                <div><i class="fas fa-heart"></i><br>22</div>
-                                <div><i class="fas fa-share-alt"></i><br>22</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text">
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-                        ut
-                        labore et
-                        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-                        rebum. Stet
-                        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
-                        sit
-                        amet,
-                        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                        aliquyam erat,
-                        sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-                        gubergren, no
-                        sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-                        sadipscing
-                        elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-                        voluptua. At
-                        vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-                        sanctus est
-                        Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                        nonumy
-                        eirmod
-                        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                        accusam
-                        et justo
-                        duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
-                        dolor
-                        sit amet
-                        <div class="autor">
-                            Author
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
 </div>

@@ -63,4 +63,8 @@ class Gifts extends \yii\db\ActiveRecord
         return $this -> hasMany(GiftsTranslate::className(), ['gifts_id'=>'id']);
     }
 
+    public function getUserToGifts(){
+        return $this->hasMany(UserToGifts::className(),['gifts_id'=>'id']);
+    }
+
 }

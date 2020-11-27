@@ -145,6 +145,7 @@ $config = [
             'mm/*',
            // 'rbac/*',
             'debug/*',
+            'cabinet/*',
         ]
     ],
     'params' => $params,
