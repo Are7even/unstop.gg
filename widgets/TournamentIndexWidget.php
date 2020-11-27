@@ -11,6 +11,7 @@ use yii\data\ActiveDataProvider;
 class TournamentIndexWidget extends Widget
 {
     public $status;
+    public $author;
 
     public function init()
     {
@@ -19,16 +20,30 @@ class TournamentIndexWidget extends Widget
 
     public function run()
     {
-        $tournament = new ActiveDataProvider([
+        if ($this->author){
+            $tournament = new ActiveDataProvider([
+                'query' => Tournament::find()->where(['author'=>$this->author]),
+                'pagination' => false,
+            ]);
+
+            return $this->render('list-view-tournament-cabinet-index',[
+                'tournament'=>$tournament,
+            ]);
+
+        }elseif ($this->status){
+            $tournament = new ActiveDataProvider([
             'query' => Tournament::find()->where(['status'=>$this->status]),
             'pagination' => false,
-        ]);
+            ]);
+
+            return $this->render('list-view-tournament-index',[
+                'tournament'=>$tournament,
+            ]);
+        }
         if (empty($tournament)){
             return false;
         }
-        return $this->render('list-view-tournament-index',[
-            'tournament'=>$tournament,
-        ]);
+
     }
 
 }
