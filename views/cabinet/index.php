@@ -2,6 +2,7 @@
 use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\ActiveForm;
+use yii\widgets\Pjax;
 
 $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', ['position' => View::POS_HEAD]);
 $userId = Yii::$app->user->id;
@@ -14,10 +15,10 @@ $userId = Yii::$app->user->id;
                 <div class="lk-menu">
                     <div class="lk-nav">
                         <ul>
-                            <li class="menu-link"><?= Html::a(Yii::t('admin','Profile'),Url::to(['cabinet/index','id'=>$userId]))?></li>
-                            <li class="menu-link"><?= Html::a(Yii::t('admin','Tournament history'),Url::to(['cabinet/history','id'=>$userId]))?></li>
-                            <li class="menu-link"><?= Html::a(Yii::t('admin','Matches history'),Url::to(['cabinet/matches','id'=>$userId]))?></li>
-                            <li class="menu-link"><?= Html::a(Yii::t('admin','Archive'),Url::to(['cabinet/rating','id'=>$userId]))?></li>
+                            <li class="menu-link"><?= Html::a(Yii::t('admin', 'Profile'), Url::to(['cabinet/index', 'id' => $userId])) ?></li>
+                            <li class="menu-link"><?= Html::a(Yii::t('admin', 'Tournament history'), Url::to(['cabinet/history', 'id' => $userId])) ?></li>
+                            <li class="menu-link"><?= Html::a(Yii::t('admin', 'Matches history'), Url::to(['cabinet/matches', 'id' => $userId])) ?></li>
+                            <li class="menu-link"><?= Html::a(Yii::t('admin', 'Archive'), Url::to(['cabinet/rating', 'id' => $userId])) ?></li>
                         </ul>
                     </div>
                 </div>
@@ -133,25 +134,25 @@ $userId = Yii::$app->user->id;
                                                     ])->label(false); ?>
                                                 </div>
                                             </div>
-                                            <?= \yii\helpers\Html::submitButton(Yii::t('admin','Save'),['class'=>'login100-form-btn'])?>
+                                            <?= \yii\helpers\Html::submitButton(Yii::t('admin', 'Save'), ['class' => 'login100-form-btn']) ?>
 
                                             <?php $form = ActiveForm::end() ?>
                                             <a href="#">
                                                 <div class="lk-button">Подтвердить почту</div>
                                             </a>
-                                            <?= Html::a("<div class='lk-button'>".Yii::t('admin','Set photo')."</div>", \yii\helpers\Url::to(['cabinet/photo','id'=>$userId]), ['class' => 'btn btn-default']) ?>
+                                            <?= Html::a("<div class='lk-button'>" . Yii::t('admin', 'Set photo') . "</div>", \yii\helpers\Url::to(['cabinet/photo', 'id' => $userId]), ['class' => 'btn btn-default','id'=>'photo-button']) ?>
                                         </div>
                                     </div>
                                     <div class="page__tabs-content__item js-tab-content" data-tab="7">
 
-                                        <?= \app\widgets\TournamentIndexWidget::widget(['author'=>Yii::$app->user->id])?>
+                                        <?= \app\widgets\TournamentIndexWidget::widget(['author' => Yii::$app->user->id]) ?>
 
                                     </div>
                                     <div class="page__tabs-content__item js-tab-content" data-tab="8">
                                         <div class="page__item">
                                             <div class="page__item-content">
                                                 <div style="width: 1000px;">
-                                                    <?= $user->about?>
+                                                    <?= $user->about ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -159,17 +160,18 @@ $userId = Yii::$app->user->id;
                                     <div class="page__tabs-content__item js-tab-content" data-tab="9">
                                         <div class="page__item">
                                             <div class="page__item-content reward">
-                                                <?php foreach ($gifts as $gift):?>
-                                                <div class="reward-container" style="width: 985px">
-                                                    <div class="icons">
-                                                        <img src="/web/upload/gifts/<?= $gift->gifts->icon?>" alt="">
+                                                <?php foreach ($gifts as $gift): ?>
+                                                    <div class="reward-container" style="width: 985px">
+                                                        <div class="icons">
+                                                            <img src="/web/upload/gifts/<?= $gift->gifts->icon ?>"
+                                                                 alt="">
+                                                        </div>
+                                                        <div class="name"><?= $gift->gifts->title ?></div>
+                                                        <div class="text">
+                                                            <?= $gift->gifts->description ?>
+                                                        </div>
                                                     </div>
-                                                    <div class="name"><?= $gift->gifts->title?></div>
-                                                    <div class="text">
-                                                        <?= $gift->gifts->description?>
-                                                    </div>
-                                                </div>
-                                                <?php endforeach;?>
+                                                <?php endforeach; ?>
                                             </div>
                                         </div>
                                     </div>

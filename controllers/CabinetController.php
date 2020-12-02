@@ -63,9 +63,14 @@ class CabinetController extends Controller
             {
                 return $this->redirect(Url::toRoute(['/cabinet','id'=>$user->id]));
             }
+        } else {
+            if (Yii::$app->request->isAjax){
+                return $this->render('photo', ['model' => $model]);
+            } else {
+                return $this->render('photo', ['model' => $model]);
+            }
         }
-
-        return $this->render('photo', ['model' => $model]);
+       // return $this->render('photo', ['model' => $model]);
     }
 
 }
