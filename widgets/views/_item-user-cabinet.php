@@ -22,17 +22,14 @@ use yii\helpers\Html;
     </div>
 
     <div class="lk-social">
-        <a href=""><img src="/web/site/img/lk_items/vk.png" alt=""></a>
-        <a href=""><img src="/web/site/img/lk_items/fb.png" alt=""></a>
-        <a href=""><img src="/web/site/img/lk_items/twich.png" alt=""></a>
-        <a href=""><img src="/web/site/img/lk_items/steam.png" alt=""></a>
-        <a href=""><img src="/web/site/img/lk_items/battl.png" alt=""></a>
-        <a href=""><img src="/web/site/img/lk_items/youtube.png" alt=""></a>
-        <a href=""><img src="/web/site/img/lk_items/xbox.png" alt=""></a>
-        <a href=""><img src="/web/site/img/lk_items/ps.png" alt=""></a>
+        <a href="<?= $model->userLinks->vk?>" target="_blank"><img src="/web/site/img/lk_items/vk.png" alt=""></a>
+        <a href="<?= $model->userLinks->fb?>" target="_blank"><img src="/web/site/img/lk_items/fb.png" alt=""></a>
+        <a href="<?= $model->userLinks->twitch?>" target="_blank"><img src="/web/site/img/lk_items/twich.png" alt=""></a>
+        <a href="<?= $model->userLinks->steam?>" target="_blank"><img src="/web/site/img/lk_items/steam.png" alt=""></a>
+        <a href="<?= $model->userLinks->battle_net?>" target="_blank"><img src="/web/site/img/lk_items/battl.png" alt=""></a>
+        <a href="<?= $model->userLinks->youtube?>" target="_blank"><img src="/web/site/img/lk_items/youtube.png" alt=""></a>
+        <a href="<?= $model->userLinks->xbox?>" target="_blank"><img src="/web/site/img/lk_items/xbox.png" alt=""></a>
+        <a href="<?= $model->userLinks->ps?>" target="_blank"><img src="/web/site/img/lk_items/ps.png" alt=""></a>
     </div>
 
-    <div>
-        <?= Html::a(Yii::t('admin','Set photo'), \yii\helpers\Url::to(['cabinet/photo','id'=>$model->id]), ['class' => 'btn btn-default']) ?>
-    </div>
 

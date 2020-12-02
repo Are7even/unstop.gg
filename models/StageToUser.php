@@ -53,8 +53,12 @@ class StageToUser extends \yii\db\ActiveRecord
         return self::find()->where(['user_id'=>Yii::$app->user->id])->all();
     }
 
-    public function getUsers(){
+    public function getUser(){
         return $this->hasMany(User::className(),['id'=>'user_id']);
+    }
+
+    public function getStage(){
+        return $this->hasOne(Stage::className(),['id'=>'stage_id']);
     }
 
 }

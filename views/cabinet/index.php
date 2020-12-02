@@ -1,8 +1,10 @@
-<?php use yii\web\View;
+<?php use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\web\View;
 use yii\widgets\ActiveForm;
 
 $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', ['position' => View::POS_HEAD]);
-
+$userId = Yii::$app->user->id;
 ?>
 
 <div class="container">
@@ -12,11 +14,10 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                 <div class="lk-menu">
                     <div class="lk-nav">
                         <ul>
-                            <li class="menu-link">Архив</li>
-                            <li class="menu-link">История</li>
-                            <li class="menu-link">Матчи</li>
-                            <li class="menu-link">Инфрмация</li>
-                            <li class="menu-link">Результати</li>
+                            <li class="menu-link"><?= Html::a(Yii::t('admin','Profile'),Url::to(['cabinet/index','id'=>$userId]))?></li>
+                            <li class="menu-link"><?= Html::a(Yii::t('admin','Tournament history'),Url::to(['cabinet/history','id'=>$userId]))?></li>
+                            <li class="menu-link"><?= Html::a(Yii::t('admin','Matches history'),Url::to(['cabinet/matches','id'=>$userId]))?></li>
+                            <li class="menu-link"><?= Html::a(Yii::t('admin','Archive'),Url::to(['cabinet/rating','id'=>$userId]))?></li>
                         </ul>
                     </div>
                 </div>
@@ -37,7 +38,6 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                                     <div class="page__tabs-content__item active js-tab-content" data-tab="6">
                                         <div class="page__item-content">
 
-
                                             <?php $form = ActiveForm::begin(['options' => ['class' => 'lk-form']]) ?>
                                             <span class="form-title"><?= Yii::t('admin', 'Personal information') ?></span>
                                             <?= $form->field($updateForm, 'first_name', ['options' => ['tag' => false]])->textInput([
@@ -56,22 +56,6 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                                                 'class' => 'input100',
                                             ])->label(false); ?>
 
-                                            <!--                                            --><? //= $form->field($updateForm, 'email',['options'=>['tag'=>false]])->textInput([
-                                            //                                                'value' => $user->email,
-                                            //                                                'placeholder'=>'email',
-                                            //                                                'type'=>'text',
-                                            //                                                'name'=>'email',
-                                            //                                                'class'=>'input100',
-                                            //                                            ])->label(false); ?>
-
-<!--                                            --><?//= $form->field($updateForm, 'photo', ['options' => ['tag' => false]])->fileInput([
-//                                                'value' => $user->photo,
-//                                                'placeholder' => 'photo',
-//                                                'type' => 'text',
-//                                                'name' => 'photo',
-//                                                'class' => 'input100',
-//                                            ])->label(false); ?>
-
                                             <?= $form->field($updateForm, 'about', ['options' => ['tag' => false]])->textInput([
                                                 'value' => $user->about,
                                                 'placeholder' => 'about',
@@ -79,6 +63,7 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                                                 'name' => 'about',
                                                 'class' => 'input100',
                                             ])->label(false); ?>
+
                                             <div class="text-center">
                                                 <span class="form-title">my social networks</span>
                                                 <div>
@@ -154,6 +139,7 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                                             <a href="#">
                                                 <div class="lk-button">Подтвердить почту</div>
                                             </a>
+                                            <?= Html::a("<div class='lk-button'>".Yii::t('admin','Set photo')."</div>", \yii\helpers\Url::to(['cabinet/photo','id'=>$userId]), ['class' => 'btn btn-default']) ?>
                                         </div>
                                     </div>
                                     <div class="page__tabs-content__item js-tab-content" data-tab="7">

@@ -11,5 +11,4 @@ use yii\helpers\Html;
 
 <?= \yii\helpers\Html::submitButton(Yii::t('admin','Submit'),['class'=>'login100-form-btn'])?>
 
-
 <?php ActiveForm::end() ?>

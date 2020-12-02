@@ -32,6 +32,18 @@ class CabinetController extends Controller
         return $this->render('index',['user'=>$user,'updateForm'=>$updateForm,'gifts'=>$gifts,'photoForm'=>$setPhotoForm]);
     }
 
+    public function actionHistory($id){
+        return $this->render('lk-history');
+    }
+
+    public function actionMatches($id){
+        return $this->render('lk-matches');
+    }
+
+    public function actionRating($id){
+        return $this->render('lk-rating');
+    }
+
     public function findModel($id)
     {
         if (($model = User::findOne($id)) !== null) {
