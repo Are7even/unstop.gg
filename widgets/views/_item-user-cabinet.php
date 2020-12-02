@@ -1,5 +1,10 @@
+<?php
 
-    <div class="lk-info">
+use yii\helpers\Html;
+
+?>
+
+<div class="lk-info">
         <div class="image-container">
             <img class="lk-image" src="/web/upload/user/<?= $model->photo ?>" alt="">
             <?= (Yii::$app->user->can('premium_user')) ? '<img class="diamond" src="/web/site/img/diamond.png" alt="">' : ''?>
@@ -25,5 +30,9 @@
         <a href=""><img src="/web/site/img/lk_items/youtube.png" alt=""></a>
         <a href=""><img src="/web/site/img/lk_items/xbox.png" alt=""></a>
         <a href=""><img src="/web/site/img/lk_items/ps.png" alt=""></a>
+    </div>
+
+    <div>
+        <?= Html::a(Yii::t('admin','Set photo'), \yii\helpers\Url::to(['cabinet/photo','id'=>$model->id]), ['class' => 'btn btn-default']) ?>
     </div>
 

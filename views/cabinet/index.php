@@ -64,13 +64,13 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                                             //                                                'class'=>'input100',
                                             //                                            ])->label(false); ?>
 
-                                            <?= $form->field($updateForm, 'photo', ['options' => ['tag' => false]])->textInput([
-                                                'value' => $user->photo,
-                                                'placeholder' => 'photo',
-                                                'type' => 'text',
-                                                'name' => 'photo',
-                                                'class' => 'input100',
-                                            ])->label(false); ?>
+<!--                                            --><?//= $form->field($updateForm, 'photo', ['options' => ['tag' => false]])->fileInput([
+//                                                'value' => $user->photo,
+//                                                'placeholder' => 'photo',
+//                                                'type' => 'text',
+//                                                'name' => 'photo',
+//                                                'class' => 'input100',
+//                                            ])->label(false); ?>
 
                                             <?= $form->field($updateForm, 'about', ['options' => ['tag' => false]])->textInput([
                                                 'value' => $user->about,

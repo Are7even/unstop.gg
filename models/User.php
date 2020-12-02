@@ -159,13 +159,29 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return Yii::$app->session->setFlash('anger', Yii::t('admin', 'Sorry for site problem? let`s try register another way...'));
     }
 
-    public function editCabinet($first_name,$last_name,$photo,$about){
+    public function editCabinet($first_name,$last_name,$about){
         $user = User::findOne(Yii::$app->user->id);
         $user->first_name = $first_name;
         $user->last_name = $last_name;
-        $user->photo = $photo;
         $user->about = $about;
         return $user->save();
+    }
+
+    public function savePhoto($filename)
+    {
+        $this->photo = $filename;
+        return $this->save(false);
+    }
+
+    public function getImage()
+    {
+        return ($this->photo) ? '/upload/user/' . $this->photo : '/no-image.png';
+    }
+
+    public function deletePhoto()
+    {
+        $imageUploadModel =  new CabinetSetPhotoForm();
+        $imageUploadModel->deleteCurrentPhoto($this->photo);
     }
 
     public function getUsername($id){
