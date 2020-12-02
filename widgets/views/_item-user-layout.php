@@ -5,7 +5,7 @@ use yii\helpers\Url; ?>
     <div class="dropdown-content">
         <div class="avatar-title">
             <p><?php echo $model->username?></p>
-            <p><?php echo $model->authAssignment->item_name?></p>
+<!--            <p>--><?php //echo $model->authAssignment->item_name?><!--</p>-->
         </div>
         <a href="#"><?php echo Yii::t('admin','Reputation')?>: <?php echo $model->reputation?></a>
         <a href="#"><?php echo Yii::t('admin','Kudo')?>: 100500</a>

@@ -129,7 +129,7 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                     <?php $form = ActiveForm::begin([
                         'id' => 'register',
                         'layout' => 'horizontal',
-                        'action' => '/',
+                        'action' => \yii\helpers\Url::to(['site/index']),
                         'options'=>['class' => 'login-form register-form shadow validate-form'],
                     ]); ?>
                     <?= $form->field($registration, 'formId')->hiddenInput([
@@ -196,7 +196,7 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                     <?php $form = ActiveForm::begin([
                         'id' => 'recovery',
                         'layout' => 'horizontal',
-                        'action' => '/',
+                        'action' => \yii\helpers\Url::to(['site/index']),
                        'options'=>[ 'class' => 'login-form password-recovery shadow validate-form'],
                     ]); ?>
 

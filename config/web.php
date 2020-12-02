@@ -146,6 +146,7 @@ $config = [
            // 'rbac/*',
             'debug/*',
             'cabinet/*',
+            'tournament/*',
         ]
     ],
     'params' => $params,

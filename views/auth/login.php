@@ -13,7 +13,7 @@ use yii\bootstrap\ActiveForm;
     <?php $form = ActiveForm::begin([
         'id' => 'login',
         'layout' => 'horizontal',
-        'action' => '/',
+        'action' => \yii\helpers\Url::to(['site/index']),
         'options'=>['class' => 'login-form validate-form'],
     ]); ?>
     <span class="form-title"><?php echo Yii::t('admin', 'Login') ?></span>

@@ -43,7 +43,8 @@ use yii\helpers\Url;
         </div>
     </div>
     <div class="table-button">
-        К турниру
+        <?= Html::a(Yii::t('admin','View tournament'),Url::toRoute(['tournament/index']),['style'=>'color:white;text-align:center'])?>
+
     </div>
 </div>
 
