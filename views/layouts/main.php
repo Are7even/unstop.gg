@@ -79,8 +79,8 @@ SiteAsset::register($this);
         </div>
     </div>
     <nav class="nav" id="nav">
-        <a class="nav_link" href="index.html"><p>Главная</p></a>
-        <a class="nav_link" href="tournaments.html"><p>Турниры</p></a>
+        <a class="nav_link" href="<?= Url::to(['site/index'])?>"><p><?=Yii::t('admin','Main')?></p></a>
+        <a class="nav_link" href="<?= Url::to(['tournament/index'])?>"><p><?=Yii::t('admin','Tournaments')?></p></a>
         <a class="nav_link" href="leagues.html"><p>Лиги</p></a>
         <a class="nav_link" href="news.html"><p>Новости</p></a>
         <a class="nav_link" href="top100.html"><p>Топ 100</p></a>
@@ -108,8 +108,8 @@ SiteAsset::register($this);
 <nav class="nav">
     <div class="container">
         <ul>
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="tournaments.html">Турниры</a></li>
+            <li><a href="<?= Url::to(['site/index'])?>"><?=Yii::t('admin','Main')?></a></li>
+            <li><a href="<?= Url::to(['tournament/index'])?>"><?=Yii::t('admin','Tournaments')?></a></li>
             <li><a href="leagues.html">Лиги</a></li>
             <li><a href="news.html">Новости</a></li>
             <li><a class="gold_text" href="top100.html">Топ 100</a></li>

@@ -70,7 +70,6 @@ class CabinetController extends Controller
                 return $this->render('photo', ['model' => $model]);
             }
         }
-       // return $this->render('photo', ['model' => $model]);
     }
 
 }

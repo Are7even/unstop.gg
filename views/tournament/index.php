@@ -4,160 +4,174 @@ use yii\widgets\ActiveForm;
 $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', ['position' => View::POS_HEAD]);
 
 ?>
+
 <div class="container">
     <div class="content">
-        <div class="content-body tr">
-            <div class="tournament-container">
-                <div class="tournament-image">
-                    <img src="/web/site/img/cs.jpg" alt="">
-                    <div class="tournament-text">
-                        Cs Go
-                    </div>
+        <div class="content-body">
+            <div onclick="myFunction2()" class="dropbtn dropdown gameslist dropdown-tournaments">
+                Выберите игру<i class="fas fa-angle-down"></i>
+                <div id="myDropdown3" class="dropdown-content">
+                    <a href="#">Турниры по CS GO</a>
+                    <a href="#">Турниры по FIFA 2020</a>
+                    <a href="#">Турниры по DOTA 2</a>
                 </div>
-                <div class="tournament-table">
-                    <div class="">
-                        <p>Индивидуальный турнир</p>
-                        <p>Начало регистрации: <br> 10.11.2020</p>
-                        <p>Рейтинг: <br> Есть</p>
-                        <p class="last">8 участников</p>
+            </div>
+            <div class="games">
+                <div class="game">
+                    <div class="game-container">
+                        <img src="/web/site/img/cs.jpg" alt="">
+                        <div class="game-title">
+                            Cs go
+                        </div>
                     </div>
-                    <div class="">
-                        <p>Чекин за 30 мин</p>
-                        <p>Начало турнира: <br> 12.11.2020</p>
-                        <p>Окончания турнира: <br> 15.11.2020</p>
-                        <p class="last">Конец регистрации: <br> 12.11.2020</p>
+                    <div class="game-buttons">
+                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
+                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
                     </div>
-                </div>
-                <div class="tournament-buttons">
-                    <div class="button">Участники <i class="fal fa-plus"></i></div>
-                    <div class="button">О турнире <i class="fal fa-plus"></i></div>
-                </div>
-                <div class="reg-container">
-                    <div class="button-registration">
-                        Регистация
-                    </div>
-                </div>
 
-                <div class="tournament-grid">
-                    <div class="dropdownlist">
-                        <div class="rating-list win">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">JasonStathem</div>
-                            <div class="rang">1</div>
-                        </div>
-                        <div class="rating-list loose">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">Открыт</div>
-                            <div class="rang">0</div>
-                        </div>
-                        <div class="rating-list">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">Gambit</div>
-                            <div class="rang ">1</div>
-                        </div>
-                        <div class="rating-list">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">Petrovich</div>
-                            <div class="rang">0</div>
-                        </div>
-                        <div class="rating-list">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">JasonStathem</div>
-                            <div class="rang">1</div>
-                        </div>
-                        <div class="rating-list">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">Открыт</div>
-                            <div class="rang">0</div>
-                        </div>
-                        <div class="rating-list">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">Gambit</div>
-                            <div class="rang">1</div>
-                        </div>
-                        <div class="rating-list">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">Gambit</div>
-                            <div class="rang">0</div>
+                </div>
+                <div class="game">
+                    <div class="game-container">
+                        <img src="/web/site/img/cs.jpg" alt="">
+                        <div class="game-title">
+                            Cs go
                         </div>
                     </div>
-                    <div class="dropdownlist">
-                        <div class="list-first">
-                            <div class="rating-list win">
-                                <div class="icon-background">
-                                    <i class="fal fa-user-friends"></i>
-                                </div>
-                                <div class="name">JasonStathem</div>
-                                <div class="rang">1</div>
-                            </div>
-                            <div class="rating-list loose">
-                                <div class="icon-background">
-                                    <i class="fal fa-user-friends"></i>
-                                </div>
-                                <div class="name">Открыт</div>
-                                <div class="rang">0</div>
-                            </div>
-                        </div>
-                        <div class="list-second">
-                            <div class="rating-list">
-                                <div class="icon-background">
-                                    <i class="fal fa-user-friends"></i>
-                                </div>
-                                <div class="name">Gambit</div>
-                                <div class="rang ">1</div>
-                            </div>
-                            <div class="rating-list">
-                                <div class="icon-background">
-                                    <i class="fal fa-user-friends"></i>
-                                </div>
-                                <div class="name">Petrovich</div>
-                                <div class="rang">0</div>
-                            </div>
-                        </div>
+                    <div class="game-buttons">
+                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
+                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
+                    </div>
 
-                    </div>
-                    <div class="dropdownlist">
-                        <div class="rating-list win">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">JasonStathem</div>
-                            <div class="rang">1</div>
-                        </div>
-                        <div class="rating-list loose">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">Открыт</div>
-                            <div class="rang">0</div>
+                </div>
+                <div class="game">
+                    <div class="game-container">
+                        <img src="/web/site/img/cs.jpg" alt="">
+                        <div class="game-title">
+                            Cs go
                         </div>
                     </div>
-                    <div class="dropdownlist">
-                        <div class="rating-list win">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">JasonStathem</div>
-                            <div class="rang">1</div>
+                    <div class="game-buttons">
+                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
+                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
+                    </div>
+
+                </div>
+                <div class="game">
+                    <div class="game-container">
+                        <img src="/web/site/img/cs.jpg" alt="">
+                        <div class="game-title">
+                            Cs go
                         </div>
+                    </div>
+                    <div class="game-buttons">
+                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
+                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
+                    </div>
+
+                </div>
+                <div class="game">
+                    <div class="game-container">
+                        <img src="/web/site/img/cs.jpg" alt="">
+                        <div class="game-title">
+                            Cs go
+                        </div>
+                    </div>
+                    <div class="game-buttons">
+                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
+                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
+                    </div>
+
+                </div>
+                <div class="game">
+                    <div class="game-container">
+                        <img src="/web/site/img/cs.jpg" alt="">
+                        <div class="game-title">
+                            Cs go
+                        </div>
+                    </div>
+                    <div class="game-buttons">
+                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
+                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
+                    </div>
+
+                </div>
+                <div class="game">
+                    <div class="game-container">
+                        <img src="/web/site/img/cs.jpg" alt="">
+                        <div class="game-title">
+                            Cs go
+                        </div>
+                    </div>
+                    <div class="game-buttons">
+                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
+                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
+                    </div>
+
+                </div>
+                <div class="game">
+                    <div class="game-container">
+                        <img src="/web/site/img/cs.jpg" alt="">
+                        <div class="game-title">
+                            Cs go
+                        </div>
+                    </div>
+                    <div class="game-buttons">
+                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
+                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
+                    </div>
+
+                </div>
+                <div class="game">
+                    <div class="game-container">
+                        <img src="/web/site/img/cs.jpg" alt="">
+                        <div class="game-title">
+                            Cs go
+                        </div>
+                    </div>
+                    <div class="game-buttons">
+                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
+                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
+                    </div>
+
+                </div>
+                <div class="game">
+                    <div class="game-container">
+                        <img src="/web/site/img/cs.jpg" alt="">
+                        <div class="game-title">
+                            Cs go
+                        </div>
+                    </div>
+                    <div class="game-buttons">
+                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
+                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="aside">
+
+            <div class="limiter rating" id="game-rating">
+                <img src="/web/site/img/corona.png" alt="" class="rating-logo">
+                <div class="rating-title">Top players</div>
+                <select>
+                    <option disabled hidden>Выберите игру</option>
+                    <?php foreach ($games as $key => $game): ?>
+                        <option <?= $key == 0 ? 'selected' : '' ?>
+                                value="<?php echo $game->name ?>"><?php echo $game->name ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <?php foreach ($games as $key => $game): ?>
+                    <div class="dropdownlist <?= $key !== 0 ? 'shadow' : '' ?>" id="<?php echo $game->name ?>">
+                        <?php echo \app\widgets\TopPlayersWidget::widget(['gamesId' => $game->id]) ?>
+                    </div>
+                <?php endforeach; ?>
+
+            </div>
+            <div class="limiter advertising">
+                <div class="advertising-title">
+                    Advertising
+                </div>
+                <?php echo \app\widgets\AdvertisementWidget::widget() ?>
             </div>
         </div>
     </div>
