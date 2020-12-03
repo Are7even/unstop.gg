@@ -3,6 +3,7 @@ use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
+use yii\bootstrap\Modal;
 
 $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', ['position' => View::POS_HEAD]);
 $userId = Yii::$app->user->id;
@@ -140,7 +141,18 @@ $userId = Yii::$app->user->id;
                                             <a href="#">
                                                 <div class="lk-button">Подтвердить почту</div>
                                             </a>
-                                            <?= Html::a("<div class='lk-button'>" . Yii::t('admin', 'Set photo') . "</div>", \yii\helpers\Url::to(['cabinet/photo', 'id' => $userId]), ['class' => 'btn btn-default','id'=>'photo-button']) ?>
+                                            <?= Html::button("<div class='lk-button'>" . Yii::t('admin', 'Set photo') . "</div>", ['value'=>\yii\helpers\Url::to(['cabinet/photo', 'id' => $userId]),'class' => 'photo-button','id'=>'photo-button']) ?>
+                                            <?php
+                                            Modal::begin([
+                                                'header'=>'<h4>'.Yii::t('admin','Set Photo').'</h4>',
+                                                'id'=>'modal',
+                                                'size'=>'modal-lg'
+                                            ]);
+
+                                            echo "<div id='modalContent'></div>";
+
+                                            Modal::end();
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="page__tabs-content__item js-tab-content" data-tab="7">

@@ -22,6 +22,7 @@ class SiteAsset extends AssetBundle
         'https://unpkg.com/swiper/swiper-bundle.min.js',
         'site/assets/swiper.min.js',
         'site/js/script.js',
+        'js/custom.js',
     ];
     public $depends = [
         //'yii\web\YiiAsset',

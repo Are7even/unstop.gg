@@ -29,8 +29,8 @@ $userId = Yii::$app->user->id;
                         <div class="page__item" id="page__tabs">
                             <div class="page__tabs__inner">
                                 <div class="page__tabs">
-                                    <div class="page__tabs__item active js-tab-trigger" data-tab="6">Рейтинг</div>
-                                    <div class="page__tabs__item js-tab-trigger" data-tab="7">Кудо</div>
+                                    <div class="page__tabs__item active js-tab-trigger" data-tab="6"><?= Yii::t('admin','Reputation')?></div>
+                                    <div class="page__tabs__item js-tab-trigger" data-tab="7"><?= Yii::t('admin','Kudo')?></div>
                                 </div>
                                 <div class="page__tabs-content">
                                     <div class="page__tabs-content__item active js-tab-content" data-tab="6">
