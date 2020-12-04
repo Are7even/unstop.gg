@@ -145,6 +145,17 @@ var galleryTop = new Swiper('.gallery-top', {
     //     }
     // }
 });
+
+var swiper = new Swiper('.sliderMobile', {
+    cssMode: true,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    mousewheel: true,
+    keyboard: true,
+});
+
 (function () {
 
     $("#nav_toggle").on("click", function (event) {
@@ -267,6 +278,7 @@ for (i = 0; i < acc.length; i++) {
     });
 }
 const gameRating = document.getElementById('game-rating');
+const game = document.getElementById('game');
 const selection = gameRating.querySelector('select');
 const lists = gameRating.querySelectorAll('.dropdownlist');
 

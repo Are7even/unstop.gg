@@ -1,4 +1,7 @@
-<?php use yii\web\View;
+<?php use app\helpers\StatusHelper;
+use app\helpers\TournamentTypeHelper;
+use yii\helpers\Url;
+use yii\web\View;
 use yii\widgets\ActiveForm;
 
 $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', ['position' => View::POS_HEAD]);
@@ -9,23 +12,23 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
         <div class="content-body tr">
             <div class="tournament-container">
                 <div class="tournament-image">
-                    <img src="/web/site/img/cs.jpg" alt="">
+                    <img src="/web/upload/<?= $tournament->icon?>" alt="">
                     <div class="tournament-text">
-                        Cs Go
+                        <?= $tournament->header?>
                     </div>
                 </div>
                 <div class="tournament-table">
                     <div class="">
-                        <p>Индивидуальный турнир</p>
-                        <p>Начало регистрации: <br> 10.11.2020</p>
-                        <p>Рейтинг: <br> Есть</p>
-                        <p class="last">8 участников</p>
+                        <p><?= ($tournament->type == TournamentTypeHelper::$group) ? Yii::t('admin','Group') : Yii::t('admin','Individual')?> <?= Yii::t('admin','tournament')?></p>
+                        <p><?= Yii::t('admin','Registration start')?>: <br> <?= $tournament->getCutDate($tournament->checkin_start)?></p>
+                        <p><?= Yii::t('admin','Rating')?>: <br> <?= ($tournament->rating_on == StatusHelper::$active) ? Yii::t('admin','Active') : Yii::t('admin','Draft')?></p>
+                        <p class="last"><?= Yii::t('admin','Max players')?> <?= $tournament->players_count?></p>
                     </div>
                     <div class="">
-                        <p>Чекин за 30 мин</p>
-                        <p>Начало турнира: <br> 12.11.2020</p>
-                        <p>Окончания турнира: <br> 15.11.2020</p>
-                        <p class="last">Конец регистрации: <br> 12.11.2020</p>
+                        <p><?= Yii::t('admin','Checkin')?>: <br> <?= ($tournament->checkin == StatusHelper::$active) ? Yii::t('admin','Active') : Yii::t('admin','Draft')?></p>
+                        <p><?= Yii::t('admin','Tournament start')?>: <br> <?= $tournament->getCutDate($tournament->start)?></p>
+                        <p><?= Yii::t('admin','Tournament end')?>: <br> <?= $tournament->getCutDate($tournament->end)?></p>
+                        <p class="last"><?= Yii::t('admin','Registration end')?>: <br> <?= $tournament->getCutDate($tournament->checkin_end)?></p>
                     </div>
                 </div>
                 <div class="tournament-buttons">
@@ -34,130 +37,10 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                 </div>
                 <div class="reg-container">
                     <div class="button-registration">
-                        Регистация
+                        <?= \yii\helpers\Html::a(Yii::t('admin','Registration'),Url::to(['tournament/registration','userId'=>Yii::$app->user->id]))?>
                     </div>
                 </div>
 
-                <div class="tournament-grid">
-                    <div class="dropdownlist">
-                        <div class="rating-list win">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">JasonStathem</div>
-                            <div class="rang">1</div>
-                        </div>
-                        <div class="rating-list loose">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">Открыт</div>
-                            <div class="rang">0</div>
-                        </div>
-                        <div class="rating-list">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">Gambit</div>
-                            <div class="rang ">1</div>
-                        </div>
-                        <div class="rating-list">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">Petrovich</div>
-                            <div class="rang">0</div>
-                        </div>
-                        <div class="rating-list">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">JasonStathem</div>
-                            <div class="rang">1</div>
-                        </div>
-                        <div class="rating-list">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">Открыт</div>
-                            <div class="rang">0</div>
-                        </div>
-                        <div class="rating-list">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">Gambit</div>
-                            <div class="rang">1</div>
-                        </div>
-                        <div class="rating-list">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">Gambit</div>
-                            <div class="rang">0</div>
-                        </div>
-                    </div>
-                    <div class="dropdownlist">
-                        <div class="list-first">
-                            <div class="rating-list win">
-                                <div class="icon-background">
-                                    <i class="fal fa-user-friends"></i>
-                                </div>
-                                <div class="name">JasonStathem</div>
-                                <div class="rang">1</div>
-                            </div>
-                            <div class="rating-list loose">
-                                <div class="icon-background">
-                                    <i class="fal fa-user-friends"></i>
-                                </div>
-                                <div class="name">Открыт</div>
-                                <div class="rang">0</div>
-                            </div>
-                        </div>
-                        <div class="list-second">
-                            <div class="rating-list">
-                                <div class="icon-background">
-                                    <i class="fal fa-user-friends"></i>
-                                </div>
-                                <div class="name">Gambit</div>
-                                <div class="rang ">1</div>
-                            </div>
-                            <div class="rating-list">
-                                <div class="icon-background">
-                                    <i class="fal fa-user-friends"></i>
-                                </div>
-                                <div class="name">Petrovich</div>
-                                <div class="rang">0</div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="dropdownlist">
-                        <div class="rating-list win">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">JasonStathem</div>
-                            <div class="rang">1</div>
-                        </div>
-                        <div class="rating-list loose">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">Открыт</div>
-                            <div class="rang">0</div>
-                        </div>
-                    </div>
-                    <div class="dropdownlist">
-                        <div class="rating-list win">
-                            <div class="icon-background">
-                                <i class="fal fa-user-friends"></i>
-                            </div>
-                            <div class="name">JasonStathem</div>
-                            <div class="rang">1</div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

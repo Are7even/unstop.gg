@@ -1,4 +1,5 @@
-<?php use yii\web\View;
+<?php use yii\helpers\Html;
+use yii\web\View;
 use yii\widgets\ActiveForm;
 
 $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', ['position' => View::POS_HEAD]);
@@ -17,135 +18,9 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                 </div>
             </div>
             <div class="games">
-                <div class="game">
-                    <div class="game-container">
-                        <img src="/web/site/img/cs.jpg" alt="">
-                        <div class="game-title">
-                            Cs go
-                        </div>
-                    </div>
-                    <div class="game-buttons">
-                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
-                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
-                    </div>
 
-                </div>
-                <div class="game">
-                    <div class="game-container">
-                        <img src="/web/site/img/cs.jpg" alt="">
-                        <div class="game-title">
-                            Cs go
-                        </div>
-                    </div>
-                    <div class="game-buttons">
-                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
-                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
-                    </div>
+            <?= \app\widgets\TournamentWidget::widget()?>
 
-                </div>
-                <div class="game">
-                    <div class="game-container">
-                        <img src="/web/site/img/cs.jpg" alt="">
-                        <div class="game-title">
-                            Cs go
-                        </div>
-                    </div>
-                    <div class="game-buttons">
-                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
-                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
-                    </div>
-
-                </div>
-                <div class="game">
-                    <div class="game-container">
-                        <img src="/web/site/img/cs.jpg" alt="">
-                        <div class="game-title">
-                            Cs go
-                        </div>
-                    </div>
-                    <div class="game-buttons">
-                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
-                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
-                    </div>
-
-                </div>
-                <div class="game">
-                    <div class="game-container">
-                        <img src="/web/site/img/cs.jpg" alt="">
-                        <div class="game-title">
-                            Cs go
-                        </div>
-                    </div>
-                    <div class="game-buttons">
-                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
-                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
-                    </div>
-
-                </div>
-                <div class="game">
-                    <div class="game-container">
-                        <img src="/web/site/img/cs.jpg" alt="">
-                        <div class="game-title">
-                            Cs go
-                        </div>
-                    </div>
-                    <div class="game-buttons">
-                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
-                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
-                    </div>
-
-                </div>
-                <div class="game">
-                    <div class="game-container">
-                        <img src="/web/site/img/cs.jpg" alt="">
-                        <div class="game-title">
-                            Cs go
-                        </div>
-                    </div>
-                    <div class="game-buttons">
-                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
-                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
-                    </div>
-
-                </div>
-                <div class="game">
-                    <div class="game-container">
-                        <img src="/web/site/img/cs.jpg" alt="">
-                        <div class="game-title">
-                            Cs go
-                        </div>
-                    </div>
-                    <div class="game-buttons">
-                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
-                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
-                    </div>
-
-                </div>
-                <div class="game">
-                    <div class="game-container">
-                        <img src="/web/site/img/cs.jpg" alt="">
-                        <div class="game-title">
-                            Cs go
-                        </div>
-                    </div>
-                    <div class="game-buttons">
-                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
-                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
-                    </div>
-
-                </div>
-                <div class="game">
-                    <div class="game-container">
-                        <img src="/web/site/img/cs.jpg" alt="">
-                        <div class="game-title">
-                            Cs go
-                        </div>
-                    </div>
-                    <div class="game-buttons">
-                        <div class="game-button"><a href="tr-without.html">Подробнее</a></div>
-                        <div class="game-button active"><a href="tr-without.html">Регистация</a></div>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="aside">

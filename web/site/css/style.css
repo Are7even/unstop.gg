@@ -394,6 +394,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  margin-bottom: 40px;
 }
 
 .content .aside .limiter form {
@@ -536,7 +537,6 @@
 }
 
 .content .aside .rating {
-  margin-top: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -635,7 +635,6 @@
 }
 
 .content .aside .advertising {
-  margin-top: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -847,6 +846,8 @@
 
 .footer {
   background-color: #272C31;
+  -webkit-box-shadow: 0 0 7px 3px rgba(0, 0, 2, 0.2);
+          box-shadow: 0 0 7px 3px rgba(0, 0, 2, 0.2);
 }
 
 .footer .container {
@@ -1085,19 +1086,23 @@ img {
   margin-right: 20px;
 }
 
-.games .game .game-buttons .game-button {
+.games .game .game-buttons a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.games .game .game-buttons a .game-button {
   padding: 15px 40px;
   border-radius: 10px;
   border: 1px solid black;
   cursor: pointer;
 }
 
-.games .game .game-buttons .game-button a {
-  text-decoration: none;
-  color: #000000;
+.games .game .game-buttons a:hover {
+  color: #FFFFFF;
 }
 
-.games .game .game-buttons .game-button:hover {
+.games .game .game-buttons a:hover .game-button {
   background-color: #5600FF;
   -webkit-transition: .2s ease-in-out;
   -o-transition: .2s ease-in-out;
@@ -1105,20 +1110,17 @@ img {
   border: none;
 }
 
-.games .game .game-buttons .game-button:hover a {
+.games .game .game-buttons .active {
   color: #FFFFFF;
+  background-color: transparent;
 }
 
-.games .game .game-buttons .active {
+.games .game .game-buttons .active .game-button {
   background-color: #5600FF;
   border: none;
 }
 
-.games .game .game-buttons .active a {
-  color: #FFFFFF;
-}
-
-.games .game .game-buttons .active:hover {
+.games .game .game-buttons .active:hover .game-button {
   -webkit-transition: .2s ease-in-out;
   -o-transition: .2s ease-in-out;
   transition: .2s ease-in-out;
@@ -2827,10 +2829,64 @@ a .lk-button:hover {
   color: #ffffff;
 }
 
-.faiting .faiter {
-  max-width: 502px;
+.faiting .faiting-container {
+  padding: 100px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.faiting .faiting-container .result {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.faiting .faiting-container .result .correct-result {
+  color: #ffffff;
+  background-color: #5600ff;
+  width: 368px;
+  height: 76px;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.faiting .faiting-container .result .vs {
+  margin-top: 80px;
+  color: #b91906;
+  font-weight: 900;
+  font-size: 100px;
+}
+
+.faiting .faiting-container .faiter {
+  max-width: 460px;
   width: 100%;
-  height: 330px;
   background: #323B45 0% 0% no-repeat padding-box;
   -webkit-box-shadow: 0px 0px 5px #00000029;
           box-shadow: 0px 0px 5px #00000029;
@@ -2838,7 +2894,7 @@ a .lk-button:hover {
   border-radius: 10px;
 }
 
-.faiting .faiter .fainer-content {
+.faiting .faiting-container .faiter .fainer-content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2848,15 +2904,17 @@ a .lk-button:hover {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-shadow: 0px 3px 15px #00000084;
+          box-shadow: 0px 3px 15px #00000084;
 }
 
-.faiting .faiter .fainer-content img {
+.faiting .faiting-container .faiter .fainer-content img {
   width: 127px;
   height: 127px;
   border-radius: 10px 0 0 10px;
 }
 
-.faiting .faiter .fainer-content .faiter-info {
+.faiting .faiting-container .faiter .fainer-content .faiter-info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2870,30 +2928,192 @@ a .lk-button:hover {
   background-color: #ED7F00;
   width: 100%;
   height: 127px;
-  border-radius: 0 10px 0 0;
+  border-radius: 0 10px 10px 0;
   color: #ffffff;
 }
 
-.faiting .faiter .fainer-content .faiter-info .name {
+.faiting .faiting-container .faiter .fainer-content .faiter-info .name {
   margin: 0 10px;
-  padding: 10px 5px;
+  padding: 10px 5px 5px 5px;
   color: #000000;
   border-bottom: 2px solid #5600ff;
-  font-weight: 500;
+  font-weight: 600;
   opacity: 0.7;
+  font-size: 22px;
 }
 
-.faiting .faiter .fainer-content .faiter-info .name .rep-container .reputation {
+.faiting .faiting-container .faiter .fainer-content .faiter-info .rep-container {
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 20px;
+  padding: 5px 0 5px 15px;
+  width: 100%;
+  max-width: 300px;
 }
 
-.faiting .faiter .fainer-content .faiter-info .name .rep-container .reputation p {
-  padding-right: 20px;
+.faiting .faiting-container .faiter .fainer-content .faiter-info .rep-container .reputation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.faiting .faiting-container .faiter .fainer-content .faiter-info .rep-container .reputation p {
+  padding: 5px 20px 5px 0;
+}
+
+.faiting .faiting-container .faiter .faiter-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 40px 50px;
+}
+
+.faiting .faiting-container .faiter .faiter-buttons .info {
+  color: #B91906;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.faiting .faiting-container .faiter .faiter-buttons .buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.faiting .faiting-container .faiter .faiter-buttons .buttons .won {
+  background: #329F3F;
+  border-radius: 10px;
+  width: 129px;
+  height: 49px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.faiting .faiting-container .faiter .faiter-buttons .buttons .lose {
+  background: #868996;
+  border-radius: 10px;
+  width: 129px;
+  height: 49px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  color: #000000;
+}
+
+.faiting .faiting-container .faiter .faiter-buttons .buttons .draw {
+  background: #5600FF;
+  border-radius: 10px;
+  width: 297px;
+  height: 49px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.faiting .faiting-container .oponent .fainer-content .faiter-info {
+  background-color: #868996;
+}
+
+.faiting .faiting-container .oponent .fainer-content .faiter-info .rep-container {
+  color: #FDDD80;
+}
+
+.faiting .faiting-container .oponent .faiter-buttons .info {
+  color: #b91906;
+  font-weight: 900;
+  font-size: 130px;
+}
+
+.faiting {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.faiting .faiting-result {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.faiting .faiting-result .result {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.faiting .faiting-result .result .status {
+  font-size: 45px;
+  color: #ffffff;
+  font-weight: 500;
+  padding-bottom: 45px;
+}
+
+.faiting .faiting-result .result .vinner-name {
+  font-size: 45px;
+  color: #FF0000;
+  font-weight: 600;
+  padding-bottom: 45px;
+}
+
+.faiting .faiting-result .result .vs {
+  color: #ffffff;
+  margin-top: 0;
 }
 
 @media screen and (min-width: 480px) {
@@ -3066,10 +3286,6 @@ a .lk-button:hover {
 }
 
 @media (max-width: 1366px) {
-  .container {
-    max-width: 1170px;
-  }
-
   .gallery-thumbs {
     display: none;
   }
@@ -3200,6 +3416,7 @@ a .lk-button:hover {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+    margin-top: 40px;
   }
 
   .content .content-body {

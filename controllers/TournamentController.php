@@ -4,6 +4,8 @@
 namespace app\controllers;
 
 use app\models\Games;
+use app\models\Tournament;
+use yii\web\Response;
 use yii\web\Controller;
 use Yii;
 
@@ -19,13 +21,21 @@ class TournamentController extends Controller
     }
 
     public function actionApi($id){
-
-        return $this->render('api');
+        $items=[];
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $items = ['some', 'array', 'of', 'data' => ['associative', 'array']];
+        return $items;
     }
 
     public function actionView($id){
+        $tournament = Tournament::findOne($id);
+        return $this->render('view',[
+            'tournament'=>$tournament,
+        ]);
+    }
 
-        return $this->render('view');
+   public function actionRegistration($userId){
+        return 'action is work';
     }
 
 }
