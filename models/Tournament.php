@@ -114,7 +114,7 @@ class Tournament extends \yii\db\ActiveRecord
 
     public function getIcon()
     {
-        return ($this->icon) ? '/upload/tournament/' . $this->icon : '/web/upload/user/no-image.png';
+        return ($this->icon) ? '/upload/' . $this->icon : '/web/upload/user/no-image.png';
     }
 
     public function allow(){
@@ -125,6 +125,16 @@ class Tournament extends \yii\db\ActiveRecord
     public function disallow(){
         $this->status = TournamentStatusHelper::$created;
         return $this->save(false);
+    }
+
+    public function start(){
+        $this->status = TournamentStatusHelper::$fighting;
+        return $this->save(false);
+    }
+
+    public function checkRegistration($userId,$tournamentId){
+        $links = TournamentToUser::find()->where(['user_id'=>$userId])->andWhere(['tournament_id'=>$tournamentId])->all();
+        return $links;
     }
 
     static function getCurrentStartTime($id){

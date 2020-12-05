@@ -20,7 +20,7 @@ class TournamentWidget extends Widget
     public function run()
     {
         $tournament = new ActiveDataProvider([
-            'query' => Tournament::find()->where(['status'=>TournamentStatusHelper::$waiting || TournamentStatusHelper::$fighting || TournamentStatusHelper::$created]),
+            'query' => Tournament::find()->where(['status'=>[TournamentStatusHelper::$waiting,TournamentStatusHelper::$fighting,TournamentStatusHelper::$created]]),
             'pagination' => false,
         ]);
 

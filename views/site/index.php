@@ -101,7 +101,7 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                 </div>
 
             </div>
-            <div class="match">
+            <div class="matchs">
                 <div class="match-title">
                     Active matches
                 </div>

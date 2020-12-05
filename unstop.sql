@@ -114,7 +114,7 @@ PRIMARY KEY(`id`)
 DROP TABLE IF EXISTS `fight`;
 CREATE TABLE `fight` (
 `id` int(11) AUTO_INCREMENT,
-`stage_id` int(11) DEFAULT 0,
+`tournament_id` int(11) DEFAULT 0,
 `first_user_id` varchar(255) DEFAULT NULL,
 `second_user_id` varchar(255) DEFAULT NULL,
 `first_user_id_score` int(11) DEFAULT 0,
@@ -160,6 +160,12 @@ DROP TABLE IF EXISTS `stage_to_user`;
 CREATE TABLE `stage_to_user`(
 `user_id` int(11) DEFAULT 0,
 `stage_id` int(11) DEFAULT 0
+);
+
+DROP TABLE IF EXISTS `tournament_to_user`;
+CREATE TABLE `tournament_to_user`(
+`user_id` int(11) DEFAULT 0,
+`tournament_id` int(11) DEFAULT 0
 );
 
 DROP TABLE IF EXISTS `games`;
@@ -213,6 +219,12 @@ PRIMARY KEY(`id`)
 );
 
 DELIMITER //
+CREATE TRIGGER `delete_tournament_to_user` BEFORE DELETE ON `tournament`
+    FOR EACH ROW BEGIN
+    DELETE FROM `tournament_to_user` WHERE `tournament_id`=OLD.`id`;
+END
+
+DELIMITER //
 CREATE TRIGGER `delete_stage` BEFORE DELETE ON `stage`
 FOR EACH ROW BEGIN
   DELETE FROM `stage` WHERE `tournament_id`=OLD.`id`;
@@ -221,7 +233,7 @@ END
 DELIMITER //
 CREATE TRIGGER `delete_fight` BEFORE DELETE ON `fight`
 FOR EACH ROW BEGIN
-  DELETE FROM `stage` WHERE `stage_id`=OLD.`id`;
+  DELETE FROM `tournament` WHERE `tournament_id`=OLD.`id`;
 END
 
 DELIMITER //

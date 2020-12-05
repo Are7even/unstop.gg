@@ -277,6 +277,68 @@ for (i = 0; i < acc.length; i++) {
         }
     });
 }
+var saveData = {
+    image: [
+        ['img']
+    ],
+    teams: [
+        ["Team 1", "Team 2"],
+        ["Team 3", null],
+        ["Team 4", null],
+        ["Team 5", null]
+    ],
+    results: [
+        [
+            [[1, 0], [null, null], [null, null], [null, null]],
+            [[null, null], [1, 4]],
+            [[null, null], [null, null]]
+        ]
+    ]
+};
+
+/* Called whenever bracket is modified
+ *
+ * data:     changed bracket object in format given to init
+ * userData: optional data given when bracket is created.
+ */
+function saveFn(data, userData) {
+    var json = jQuery.toJSON(data)
+    $('#saveOutput').text('POST '+userData+' '+json)
+
+    // jQuery.ajax("rest/"+userData, {contentType: 'application/json',
+    //                               dataType: 'json',
+    //                               type: 'post',
+    //                               data: json})
+
+}
+
+$(function() {
+    var container = $('.tournament')
+    container.bracket({
+        init: saveData,
+        save: saveFn,
+        userData: "http://unstop.gg/"})
+
+    /* You can also inquiry the current data */
+    var data = container.bracket('data')
+    $('#dataOutput').text(jQuery.toJSON(data))
+})
+
+
+var resizeParameters = {
+    teamWidth: 200,
+    scoreWidth: 50,
+    matchMargin: 120,
+    roundMargin: 100,
+    init: saveData
+};
+
+function updateResizeDemo() {
+    $('.tournament').bracket(resizeParameters);
+}
+
+$(updateResizeDemo)
+
 const gameRating = document.getElementById('game-rating');
 const game = document.getElementById('game');
 const selection = gameRating.querySelector('select');

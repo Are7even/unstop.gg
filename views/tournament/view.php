@@ -8,27 +8,49 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
 
 ?>
 <div class="container">
+    <div class="content ">
+        <div class="content-body tournament-menu">
+            <div class="lk-menu">
+                <div class="lk-nav">
+                    <ul>
+                        <li class="menu-link"><a href="tournament.html">Overview</a></li>
+                        <li class="menu-link"><a href="#">Current</a></li>
+                        <li class="menu-link"><a href="fating.html">Main part</a></li>
+                        <li class="menu-link"><a href="fating-result.html">Results</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="content">
         <div class="content-body tr">
             <div class="tournament-container">
                 <div class="tournament-image">
-                    <img src="/web/upload/<?= $tournament->icon?>" alt="">
+                    <img src="/web/upload/<?= $tournament->icon ?>" alt="">
                     <div class="tournament-text">
-                        <?= $tournament->header?>
+                        <?= $tournament->header ?>
                     </div>
                 </div>
                 <div class="tournament-table">
                     <div class="">
-                        <p><?= ($tournament->type == TournamentTypeHelper::$group) ? Yii::t('admin','Group') : Yii::t('admin','Individual')?> <?= Yii::t('admin','tournament')?></p>
-                        <p><?= Yii::t('admin','Registration start')?>: <br> <?= $tournament->getCutDate($tournament->checkin_start)?></p>
-                        <p><?= Yii::t('admin','Rating')?>: <br> <?= ($tournament->rating_on == StatusHelper::$active) ? Yii::t('admin','Active') : Yii::t('admin','Draft')?></p>
-                        <p class="last"><?= Yii::t('admin','Max players')?> <?= $tournament->players_count?></p>
+                        <p><?= ($tournament->type == TournamentTypeHelper::$group) ? Yii::t('admin', 'Group') : Yii::t('admin', 'Individual') ?> <?= Yii::t('admin', 'tournament') ?></p>
+                        <p><?= Yii::t('admin', 'Registration start') ?>:
+                            <br> <?= $tournament->getCutDate($tournament->checkin_start) ?></p>
+                        <p><?= Yii::t('admin', 'Rating') ?>:
+                            <br> <?= ($tournament->rating_on == StatusHelper::$active) ? Yii::t('admin', 'Active') : Yii::t('admin', 'Draft') ?>
+                        </p>
+                        <p class="last"><?= Yii::t('admin', 'Max players') ?> <?= $tournament->players_count ?></p>
                     </div>
                     <div class="">
-                        <p><?= Yii::t('admin','Checkin')?>: <br> <?= ($tournament->checkin == StatusHelper::$active) ? Yii::t('admin','Active') : Yii::t('admin','Draft')?></p>
-                        <p><?= Yii::t('admin','Tournament start')?>: <br> <?= $tournament->getCutDate($tournament->start)?></p>
-                        <p><?= Yii::t('admin','Tournament end')?>: <br> <?= $tournament->getCutDate($tournament->end)?></p>
-                        <p class="last"><?= Yii::t('admin','Registration end')?>: <br> <?= $tournament->getCutDate($tournament->checkin_end)?></p>
+                        <p><?= Yii::t('admin', 'Checkin') ?>:
+                            <br> <?= ($tournament->checkin == StatusHelper::$active) ? Yii::t('admin', 'Active') : Yii::t('admin', 'Draft') ?>
+                        </p>
+                        <p><?= Yii::t('admin', 'Tournament start') ?>:
+                            <br> <?= $tournament->getCutDate($tournament->start) ?></p>
+                        <p><?= Yii::t('admin', 'Tournament end') ?>:
+                            <br> <?= $tournament->getCutDate($tournament->end) ?></p>
+                        <p class="last"><?= Yii::t('admin', 'Registration end') ?>:
+                            <br> <?= $tournament->getCutDate($tournament->checkin_end) ?></p>
                     </div>
                 </div>
                 <div class="tournament-buttons">
@@ -36,11 +58,62 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                     <div class="button">О турнире <i class="fal fa-plus"></i></div>
                 </div>
                 <div class="reg-container">
-                    <div class="button-registration">
-                        <?= \yii\helpers\Html::a(Yii::t('admin','Registration'),Url::to(['tournament/registration','userId'=>Yii::$app->user->id]))?>
+                    <?php if ($tournament->author == Yii::$app->user->id): ?>
+                        <div class="button-registration">
+                            <?= \yii\helpers\Html::a(Yii::t('admin', 'Start tournament'), Url::to(['tournament/start', 'tournamentId' => $tournament->id])) ?>
+                        </div>
+                    <?php elseif (!$tournament->checkRegistration(Yii::$app->user->id, $tournament->id)): ?>
+                        <div class="button-registration">
+                            <?= \yii\helpers\Html::a(Yii::t('admin', 'Registration'), Url::to(['tournament/registration', 'userId' => Yii::$app->user->id, 'tournamentId' => $tournament->id])) ?>
+                        </div>
+                    <?php endif; ?>
+
+                </div>
+                <div class="tournament-gamers">
+                    <div class="match-tournament">
+                        <img src="img/cs.jpg" alt="">
+                        <div class="table">
+                            <div class="table-title">
+                                Ник
+                            </div>
+                            <div class="table-text">
+                                Petrovich
+                            </div>
+                        </div>
+                        <div class="table">
+                            <div class="table-title">
+                                Рейтинг
+                            </div>
+                            <div class="table-text">
+                                2341
+                            </div>
+                        </div>
+                        <div class="table">
+                            <div class="table-title">
+                                Роль
+                            </div>
+                            <div class="table-text">
+                                Премиум
+                            </div>
+                        </div>
+                        <div class="table">
+                            <div class="table-title">
+                                Чекин:
+                            </div>
+                            <div class="table-text">
+                                Открыт
+                            </div>
+                        </div>
+                        <div class="table-button">
+                            Профиль
+                        </div>
                     </div>
                 </div>
 
+                <div class="tournament-grid">
+                    <div class="tournament">
+                    </div>
+                </div>
             </div>
         </div>
     </div>

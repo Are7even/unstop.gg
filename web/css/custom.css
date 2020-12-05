@@ -29,3 +29,7 @@ a .lk-button {
     height: 240px;
     object-fit: cover;
 }
+
+.match-container {
+    width: 100%;
+}
