@@ -1,14 +1,14 @@
 <?php use yii\helpers\Html;
-use yii\web\View;
-use yii\widgets\ActiveForm;
 
+use yii\widgets\ActiveForm;
+use yii\web\View;
 $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', ['position' => View::POS_HEAD]);
 
 ?>
 
 <div class="container">
     <div class="content">
-        <div class="content-body">
+        <div class="content-body" id="game">
             <div onclick="myFunction2()" class="dropbtn dropdown gameslist dropdown-tournaments">
                 Выберите игру<i class="fas fa-angle-down"></i>
                 <div id="myDropdown3" class="dropdown-content">

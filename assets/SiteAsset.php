@@ -23,6 +23,7 @@ class SiteAsset extends AssetBundle
         'https://unpkg.com/swiper/swiper-bundle.min.js',
         'site/assets/swiper.min.js',
         'site/assets/jquery.bracket.min.js',
+        'site/assets/jquery.nicescroll.min.js',
         'site/js/script.js',
         'js/custom.js',
     ];

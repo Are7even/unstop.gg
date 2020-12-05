@@ -278,9 +278,6 @@ for (i = 0; i < acc.length; i++) {
     });
 }
 var saveData = {
-    image: [
-        ['img']
-    ],
     teams: [
         ["Team 1", "Team 2"],
         ["Team 3", null],
@@ -313,15 +310,27 @@ function saveFn(data, userData) {
 }
 
 $(function() {
-    var container = $('.tournament')
-    container.bracket({
-        init: saveData,
-        save: saveFn,
-        userData: "http://unstop.gg/"})
+    const url = new URLSearchParams(window.location.search)
+    const id = url.get('id')
+    fetch(`http://unstop.gg/tournament/api?tournamentId=${id}`)
+        .then(res => res.json())
+        .then(data => {
+            var container = $('.tournament')
+            container.bracket({
+                init: data,
+                save: saveFn,
+            })
+        })
+        .catch(console.error)
+    // var container = $('.tournament')
+    // container.bracket({
+    //     init: saveData,
+    //     save: saveFn,
+    //     userData: `http://unstop.gg/tournament/start?tournamentId=${id}`})
 
     /* You can also inquiry the current data */
-    var data = container.bracket('data')
-    $('#dataOutput').text(jQuery.toJSON(data))
+    // var data = container.bracket('data')
+    // $('#dataOutput').text(JSON.stringify(data))
 })
 
 
@@ -330,6 +339,9 @@ var resizeParameters = {
     scoreWidth: 50,
     matchMargin: 120,
     roundMargin: 100,
+  //  disableToolbar:true,
+  //  disableTeamEdit:false,
+
     init: saveData
 };
 
@@ -338,6 +350,29 @@ function updateResizeDemo() {
 }
 
 $(updateResizeDemo)
+
+function initRegisterTournament() {
+    const btn = $('#tournament-button');
+    let isPending = false;
+    const url = new URLSearchParams(window.location.search)
+    const id = url.get('id')
+    btn.on('click', function () {
+        if (isPending) return;
+        isPending = true;
+        fetch(`http://unstop.gg/tournament/registration?tournamentId=${id}`)
+    .then(()=>document.location.reload())
+            .catch(console.error)
+            .finally(() => isPending = false)
+    });
+}
+
+
+initRegisterTournament()
+$(document).ready(
+    function () {
+        $("#list").niceScroll();
+    }
+)
 
 const gameRating = document.getElementById('game-rating');
 const game = document.getElementById('game');

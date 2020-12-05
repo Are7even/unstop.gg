@@ -48,7 +48,7 @@ $userId = Yii::$app->user->id;
                                                 'type' => 'text',
                                                 'name' => 'first name',
                                                 'class' => 'input100',
-                                            ])->label(false); ?>
+                                            ]); ?>
 
                                             <?= $form->field($updateForm, 'last_name', ['options' => ['tag' => false]])->textInput([
                                                 'value' => $user->last_name,
@@ -56,7 +56,7 @@ $userId = Yii::$app->user->id;
                                                 'type' => 'text',
                                                 'name' => 'last name',
                                                 'class' => 'input100',
-                                            ])->label(false); ?>
+                                            ]); ?>
 
                                             <?= $form->field($updateForm, 'about', ['options' => ['tag' => false]])->textInput([
                                                 'value' => $user->about,
@@ -64,7 +64,7 @@ $userId = Yii::$app->user->id;
                                                 'type' => 'text',
                                                 'name' => 'about',
                                                 'class' => 'input100',
-                                            ])->label(false); ?>
+                                            ]); ?>
 
                                             <div class="text-center">
                                                 <span class="form-title">my social networks</span>
@@ -76,7 +76,7 @@ $userId = Yii::$app->user->id;
                                                         'type' => 'text',
                                                         'name' => 'vk',
                                                         'class' => 'input100',
-                                                    ])->label(false); ?>
+                                                    ]); ?>
 
                                                     <?= $form->field($updateForm, 'fb', ['options' => ['tag' => false]])->textInput([
                                                         'value' => $user->userLinks->fb,
@@ -84,7 +84,7 @@ $userId = Yii::$app->user->id;
                                                         'type' => 'text',
                                                         'name' => 'fb',
                                                         'class' => 'input100',
-                                                    ])->label(false); ?>
+                                                    ]); ?>
 
                                                     <?= $form->field($updateForm, 'twitch', ['options' => ['tag' => false]])->textInput([
                                                         'value' => $user->userLinks->twitch,
@@ -92,7 +92,7 @@ $userId = Yii::$app->user->id;
                                                         'type' => 'text',
                                                         'name' => 'twitch',
                                                         'class' => 'input100',
-                                                    ])->label(false); ?>
+                                                    ]); ?>
 
                                                     <?= $form->field($updateForm, 'steam', ['options' => ['tag' => false]])->textInput([
                                                         'value' => $user->userLinks->steam,
@@ -100,7 +100,7 @@ $userId = Yii::$app->user->id;
                                                         'type' => 'text',
                                                         'name' => 'steam',
                                                         'class' => 'input100',
-                                                    ])->label(false); ?>
+                                                    ]); ?>
 
                                                     <?= $form->field($updateForm, 'battle_net', ['options' => ['tag' => false]])->textInput([
                                                         'value' => $user->userLinks->battle_net,
@@ -108,7 +108,7 @@ $userId = Yii::$app->user->id;
                                                         'type' => 'text',
                                                         'name' => 'battle_net',
                                                         'class' => 'input100',
-                                                    ])->label(false); ?>
+                                                    ]); ?>
 
                                                     <?= $form->field($updateForm, 'youtube', ['options' => ['tag' => false]])->textInput([
                                                         'value' => $user->userLinks->youtube,
@@ -116,7 +116,7 @@ $userId = Yii::$app->user->id;
                                                         'type' => 'text',
                                                         'name' => 'youtube',
                                                         'class' => 'input100',
-                                                    ])->label(false); ?>
+                                                    ]); ?>
 
                                                     <?= $form->field($updateForm, 'xbox', ['options' => ['tag' => false]])->textInput([
                                                         'value' => $user->userLinks->xbox,
@@ -124,7 +124,7 @@ $userId = Yii::$app->user->id;
                                                         'type' => 'text',
                                                         'name' => 'xbox',
                                                         'class' => 'input100',
-                                                    ])->label(false); ?>
+                                                    ]); ?>
 
                                                     <?= $form->field($updateForm, 'ps', ['options' => ['tag' => false]])->textInput([
                                                         'value' => $user->userLinks->ps,
@@ -132,7 +132,7 @@ $userId = Yii::$app->user->id;
                                                         'type' => 'text',
                                                         'name' => 'ps',
                                                         'class' => 'input100',
-                                                    ])->label(false); ?>
+                                                    ]); ?>
                                                 </div>
                                             </div>
                                             <?= \yii\helpers\Html::submitButton(Yii::t('admin', 'Save'), ['class' => 'login100-form-btn']) ?>

@@ -42,10 +42,9 @@ use yii\helpers\Url;
             <?php echo ($model->checkin === StatusHelper::$active) ? Yii::t('admin', 'Open') : Yii::t('admin', 'Closed'); ?>
         </div>
     </div>
-    <div class="table-button">
-        <?= Html::a(Yii::t('admin', 'View tournament'), Url::toRoute(['tournament/index']), ['style' => 'color:white;text-align:center']) ?>
 
-    </div>
+        <?= Html::a(Yii::t('admin', 'View tournament'), Url::toRoute(['tournament/view','id'=>$model->id]), ['style' => 'color:white;text-align:center','class'=>'table-button']) ?>
+
 </div>
 
 <div class="swiper-container sliderMobile">

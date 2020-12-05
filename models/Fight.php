@@ -35,9 +35,8 @@ class Fight extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+
+
     public function attributeLabels()
     {
         return [
@@ -55,7 +54,7 @@ class Fight extends \yii\db\ActiveRecord
         $model->tournament_id = $tournamentId;
         $model->first_user_id = $firstUserId;
         $model->second_user_id = $secondUserId;
-        $model->save();
+        $model->save(false);
         return true;
     }
 

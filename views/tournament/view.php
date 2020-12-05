@@ -13,10 +13,10 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
             <div class="lk-menu">
                 <div class="lk-nav">
                     <ul>
-                        <li class="menu-link"><a href="tournament.html">Overview</a></li>
+                        <li class="menu-link"><a href="<?= Url::to(['tournament/view','id'=>$tournament->id])?>"><?=Yii::t('admin','Overview')?></a></li>
                         <li class="menu-link"><a href="#">Current</a></li>
-                        <li class="menu-link"><a href="fating.html">Main part</a></li>
-                        <li class="menu-link"><a href="fating-result.html">Results</a></li>
+                        <li class="menu-link"><a href="<?= Url::to(['tournament/fight','tournamentId'=>$tournament->id,'userId'=>Yii::$app->user->id])?>"><?=Yii::t('admin','Fight')?></a></li>
+                        <li class="menu-link"><a href="<?= Url::to(['tournament/results','tournamentId'=>$tournament->id,'userId'=>Yii::$app->user->id])?>"><?=Yii::t('admin','Results')?></a></li>
                     </ul>
                 </div>
             </div>
@@ -54,7 +54,6 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                     </div>
                 </div>
                 <div class="tournament-buttons">
-                    <div class="button">Участники <i class="fal fa-plus"></i></div>
                     <div class="button">О турнире <i class="fal fa-plus"></i></div>
                 </div>
                 <div class="reg-container">
@@ -64,7 +63,7 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                         </div>
                     <?php elseif (!$tournament->checkRegistration(Yii::$app->user->id, $tournament->id)): ?>
                         <div class="button-registration">
-                            <?= \yii\helpers\Html::a(Yii::t('admin', 'Registration'), Url::to(['tournament/registration', 'userId' => Yii::$app->user->id, 'tournamentId' => $tournament->id])) ?>
+                            <?= \yii\helpers\Html::a(Yii::t('admin', 'Registration'), '#',['id'=>'tournament-button']) ?>
                         </div>
                     <?php endif; ?>
 
@@ -110,7 +109,7 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                     </div>
                 </div>
 
-                <div class="tournament-grid">
+                <div class="tournament-grid" id="list">
                     <div class="tournament">
                     </div>
                 </div>
