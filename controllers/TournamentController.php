@@ -47,7 +47,7 @@ class TournamentController extends Controller
         $response = Yii::$app->response;
         $response->format = Response::FORMAT_JSON;
         $response->getHeaders()->set('Content-Type', 'application/json');
-
+        $tournament = Tournament::findOne($tournamentId);
         $pairs = Fight::find()->select(['first_user_id','second_user_id'])->where(['tournament_id'=>$tournamentId])->all();
         $pairs_scores = Fight::find()->select(['first_user_id_score','second_user_id_score'])->where(['tournament_id'=>$tournamentId])->all();
         $players = [];
@@ -58,13 +58,39 @@ class TournamentController extends Controller
         $items = [];
         $items = [
             'teams' => $players,
-            'results' => [
-                [[1,2],[1,2]],
-                [[1,2],[1,2]],
-            ],
+            'results' => [self::createStages(self::countRegistered($tournament->id))],
         ];
+
+        echo '<pre>';
+        print_r($items);
+        echo '</pre>';
+        die;
         return $items;
     }
+
+
+
+    static function createStages($playersCount){
+        $stageCount = ceil(log($playersCount,2));
+        while ($stageCount > 2){
+            for ($i = 0 ; $i < pow(2,$stageCount)/2; $i++){
+                $data[] = [1,0];
+            }
+            $result[] = $data;
+            $stageCount -= 1;
+        }
+        $result[] = [[2,1],[NULL,NULL]];
+        $result[] = [[NULL,NULL],[NULL,NULL]];
+
+        return $result;
+    }
+
+    static function countRegistered($tournamentId){
+        $registeredUsers = TournamentToUser::find()->select('user_id')->where(['tournament_id'=>$tournamentId])->all();
+        $count = count($registeredUsers);
+        return $count;
+    }
+
 
     public function actionView($id)
     {
