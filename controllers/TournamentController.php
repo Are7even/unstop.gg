@@ -44,31 +44,39 @@ class TournamentController extends Controller
     }
 
     public function actionApi($tournamentId){
+        $headers = Yii::$app->response->headers;
+        $headers->add('Access-Control-Allow-Origin','*');
         $response = Yii::$app->response;
         $response->format = Response::FORMAT_JSON;
         $response->getHeaders()->set('Content-Type', 'application/json');
+        $items = $this->createBrackets($tournamentId);
+
+//        echo '<pre>';
+//        print_r($items);
+//        echo '</pre>';
+//        die;
+        return $items;
+    }
+
+    private function createBrackets($tournamentId){
         $tournament = Tournament::findOne($tournamentId);
         $pairs = Fight::find()->select(['first_user_id','second_user_id'])->where(['tournament_id'=>$tournamentId])->all();
-        $pairs_scores = Fight::find()->select(['first_user_id_score','second_user_id_score'])->where(['tournament_id'=>$tournamentId])->all();
         $players = [];
-        $results = [];
         foreach ($pairs as $pair){
             $players[] = [$pair['first_user_id'],$pair['second_user_id']];
         }
-        $items = [];
         $items = [
             'teams' => $players,
             'results' => [self::createStages(self::countRegistered($tournament->id))],
         ];
-
-        echo '<pre>';
-        print_r($items);
-        echo '</pre>';
-        die;
         return $items;
     }
 
-
+    private function updateBrackets($tournamentId,$fightId){
+        $items = $this->createBrackets($tournamentId);
+        $fight = Fight::find()->where(['id'=>$fightId])->one();
+        //$score = Fight::find()->se
+    }
 
     static function createStages($playersCount){
         $stageCount = ceil(log($playersCount,2));
@@ -79,7 +87,7 @@ class TournamentController extends Controller
             $result[] = $data;
             $stageCount -= 1;
         }
-        $result[] = [[2,1],[NULL,NULL]];
+        $result[] = [[NULL,NULL],[NULL,NULL]];
         $result[] = [[NULL,NULL],[NULL,NULL]];
 
         return $result;

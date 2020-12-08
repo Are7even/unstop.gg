@@ -15,7 +15,7 @@ use app\helpers\RoleHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'auth_key')->textInput() ?>
+    <?= $form->field($model, 'auth_key')->hiddenInput()->label(false) ?>
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
@@ -27,7 +27,7 @@ use app\helpers\RoleHelper;
 
     <?= $form->field($model, 'about')->textArea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'password_reset_token')->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'password_reset_token')->hiddenInput(['maxlength' => true])->label(false) ?>
 
     <?= $form->field($model, 'reputation')->textInput() ?>
 

@@ -277,21 +277,6 @@ for (i = 0; i < acc.length; i++) {
         }
     });
 }
-var saveData = {
-    teams: [
-        ["Team 1", "Team 2"],
-        ["Team 3", null],
-        ["Team 4", null],
-        ["Team 5", null]
-    ],
-    results: [
-        [
-            [[1, 0], [null, null], [null, null], [null, null]],
-            [[null, null], [1, 4]],
-            [[null, null], [null, null]]
-        ]
-    ]
-};
 
 /* Called whenever bracket is modified
  *
@@ -312,14 +297,24 @@ function saveFn(data, userData) {
 $(function() {
     const url = new URLSearchParams(window.location.search)
     const id = url.get('id')
-    fetch(`http://unstop.gg/tournament/api?tournamentId=${id}`)
+    fetch(`https://unstop.gg/tournament/api?tournamentId=${id}`)
         .then(res => res.json())
         .then(data => {
-            var container = $('.tournament')
-            container.bracket({
-                init: data,
-                save: saveFn,
-            })
+            var resizeParameters = {
+                teamWidth: 200,
+                scoreWidth: 50,
+                matchMargin: 120,
+                roundMargin: 100,
+                // disableToolbar:true,
+                // disableTeamEdit:true,
+                init: data
+            };
+
+            function updateResizeDemo() {
+                $('.tournament').bracket(resizeParameters);
+            }
+
+            $(updateResizeDemo)
         })
         .catch(console.error)
     // var container = $('.tournament')
@@ -333,24 +328,6 @@ $(function() {
     // $('#dataOutput').text(JSON.stringify(data))
 })
 
-
-var resizeParameters = {
-    teamWidth: 200,
-    scoreWidth: 50,
-    matchMargin: 120,
-    roundMargin: 100,
-  //  disableToolbar:true,
-  //  disableTeamEdit:false,
-
-    init: saveData
-};
-
-function updateResizeDemo() {
-    $('.tournament').bracket(resizeParameters);
-}
-
-$(updateResizeDemo)
-
 function initRegisterTournament() {
     const btn = $('#tournament-button');
     let isPending = false;
@@ -359,15 +336,16 @@ function initRegisterTournament() {
     btn.on('click', function () {
         if (isPending) return;
         isPending = true;
-        fetch(`http://unstop.gg/tournament/registration?tournamentId=${id}`)
+        fetch(`https://unstop.gg/tournament/registration?tournamentId=${id}`)
     .then(()=>document.location.reload())
             .catch(console.error)
             .finally(() => isPending = false)
     });
 }
 
-
 initRegisterTournament()
+
+
 $(document).ready(
     function () {
         $("#list").niceScroll();
