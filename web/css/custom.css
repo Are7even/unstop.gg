@@ -64,3 +64,11 @@ a .lk-button {
 .content .aside .rating .rating-list .icon-background{
     overflow: hidden;
 }
+
+.tournament-gamers .match-tournament {
+    justify-content: center;
+}
+
+#w2 {
+    padding-top: 30px !important;
+}

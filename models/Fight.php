@@ -30,7 +30,7 @@ class Fight extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tournament_id', 'first_user_id_score', 'second_user_id_score'], 'integer'],
+            [['tournament_id', 'first_user_id_score', 'second_user_id_score','stage_id','game_number'], 'integer'],
             [['first_user_id', 'second_user_id'], 'string', 'max' => 255],
         ];
     }
@@ -42,6 +42,8 @@ class Fight extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('admin', 'ID'),
             'tournament_id' => Yii::t('admin', 'Tournament ID'),
+            'stage_id' => Yii::t('admin', 'Stage ID'),
+            'game_number' => Yii::t('admin', 'Game number'),
             'first_user_id' => Yii::t('admin', 'First User ID'),
             'second_user_id' => Yii::t('admin', 'Second User ID'),
             'first_user_id_score' => Yii::t('admin', 'First User Id Score'),
@@ -60,6 +62,18 @@ class Fight extends \yii\db\ActiveRecord
 
     public function getStage () {
         return $this -> hasOne(Stage::className(), ['id'=>'stage_id']);
+    }
+
+    public function getTournament () {
+        return $this -> hasOne(Tournament::className(), ['id'=>'tournament_id']);
+    }
+
+    static function getFightingUser(){
+        return User::findOne(Yii::$app->user->id);
+    }
+
+    static function getEnemy($enemyId){
+        return User::findOne($enemyId);
     }
 
 }

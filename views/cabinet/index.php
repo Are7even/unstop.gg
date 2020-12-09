@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 use yii\bootstrap\Modal;
 
 $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', ['position' => View::POS_HEAD]);
-$userId = Yii::$app->user->id;
+$userId = $user->id;
 ?>
 
 <div class="container">
@@ -14,6 +14,7 @@ $userId = Yii::$app->user->id;
         <div class="content-body tr">
             <div class="lk-container ">
                 <div class="lk-menu">
+                    <?php if ($userId === Yii::$app->user->id):?>
                     <div class="lk-nav">
                         <ul>
                             <li class="menu-link"><?= Html::a(Yii::t('admin', 'Profile'), Url::to(['cabinet/index', 'id' => $userId])) ?></li>
@@ -22,21 +23,56 @@ $userId = Yii::$app->user->id;
                             <li class="menu-link"><?= Html::a(Yii::t('admin', 'Archive'), Url::to(['cabinet/rating', 'id' => $userId])) ?></li>
                         </ul>
                     </div>
+                    <?php endif;?>
                 </div>
                 <div class="tabs-content">
                     <div class="lk-content">
 
-                        <?= \app\widgets\UserCabinetWidget::widget(['userId' => Yii::$app->user->id]) ?>
+                        <?= \app\widgets\UserCabinetWidget::widget(['userId' => $userId]) ?>
 
                         <div class="page__item" id="page__tabs">
                             <div class="page__tabs__inner">
                                 <div class="page__tabs">
+                                    <?php if ($userId !== Yii::$app->user->id):?>
+                                    <div class="page__tabs__item active js-tab-trigger" data-tab="8">О себе</div>
+                                    <div class="page__tabs__item js-tab-trigger" data-tab="9">Награды</div>
+                                    <?php elseif ($userId === Yii::$app->user->id):?>
                                     <div class="page__tabs__item active js-tab-trigger" data-tab="6">Мои данные</div>
                                     <div class="page__tabs__item js-tab-trigger" data-tab="7">Мои турниры</div>
                                     <div class="page__tabs__item js-tab-trigger" data-tab="8">О себе</div>
                                     <div class="page__tabs__item js-tab-trigger" data-tab="9">Награды</div>
+                                    <?php endif;?>
                                 </div>
                                 <div class="page__tabs-content">
+                                    <?php if ($userId !== Yii::$app->user->id):?>
+                                    <div class="page__tabs-content__item active js-tab-content" data-tab="8">
+                                        <div class="page__item">
+                                            <div class="page__item-content">
+                                                <div style="width: 1000px;">
+                                                    <?= $user->about ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="page__tabs-content__item js-tab-content" data-tab="9">
+                                        <div class="page__item">
+                                            <div class="page__item-content reward">
+                                                <?php foreach ($gifts as $gift): ?>
+                                                    <div class="reward-container" style="width: 985px">
+                                                        <div class="icons">
+                                                            <img src="/web/upload/gifts/<?= $gift->gifts->icon ?>"
+                                                                 alt="">
+                                                        </div>
+                                                        <div class="name"><?= $gift->gifts->title ?></div>
+                                                        <div class="text">
+                                                            <?= $gift->gifts->description ?>
+                                                        </div>
+                                                    </div>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php elseif ($userId === Yii::$app->user->id):?>
                                     <div class="page__tabs-content__item active js-tab-content" data-tab="6">
                                         <div class="page__item-content">
 
@@ -187,6 +223,7 @@ $userId = Yii::$app->user->id;
                                             </div>
                                         </div>
                                     </div>
+                                    <?php endif;?>
                                 </div>
                             </div>
                         </div>

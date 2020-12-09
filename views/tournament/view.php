@@ -13,10 +13,18 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
             <div class="lk-menu">
                 <div class="lk-nav">
                     <ul>
-                        <li class="menu-link"><a href="<?= Url::to(['tournament/view','id'=>$tournament->id])?>"><?=Yii::t('admin','Overview')?></a></li>
+                        <?php if ($tournament->status == \app\helpers\TournamentStatusHelper::$fighting): ?>
+                        <li class="menu-link"><a
+                                    href="<?= Url::to(['tournament/view', 'id' => $tournament->id]) ?>"><?= Yii::t('admin', 'Overview') ?></a>
+                        </li>
                         <li class="menu-link"><a href="#">Current</a></li>
-                        <li class="menu-link"><a href="<?= Url::to(['tournament/fight','tournamentId'=>$tournament->id,'userId'=>Yii::$app->user->id])?>"><?=Yii::t('admin','Fight')?></a></li>
-                        <li class="menu-link"><a href="<?= Url::to(['tournament/results','tournamentId'=>$tournament->id,'userId'=>Yii::$app->user->id])?>"><?=Yii::t('admin','Results')?></a></li>
+                        <li class="menu-link"><a
+                                    href="<?= Url::to(['tournament/fight', 'tournamentId' => $tournament->id]) ?>"><?= Yii::t('admin', 'Fight') ?></a>
+                        </li>
+                        <li class="menu-link"><a
+                                    href="<?= Url::to(['tournament/results', 'tournamentId' => $tournament->id]) ?>"><?= Yii::t('admin', 'Results') ?></a>
+                        </li>
+                        <?php endif;?>
                     </ul>
                 </div>
             </div>
@@ -58,61 +66,25 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                 </div>
                 <div class="reg-container">
                     <?php if ($tournament->author == Yii::$app->user->id): ?>
-                        <div class="button-registration">
-                            <?= \yii\helpers\Html::a(Yii::t('admin', 'Start tournament'), Url::to(['tournament/start', 'tournamentId' => $tournament->id])) ?>
-                        </div>
+                        <?php if (!$tournament->status == \app\helpers\TournamentStatusHelper::$fighting): ?>
+                            <div class="button-registration">
+                                <?= \yii\helpers\Html::a(Yii::t('admin', 'Start tournament'), Url::to(['tournament/start', 'tournamentId' => $tournament->id])) ?>
+                            </div>
+                        <?php endif; ?>
                     <?php elseif (!$tournament->checkRegistration(Yii::$app->user->id, $tournament->id)): ?>
                         <div class="button-registration">
-                            <?= \yii\helpers\Html::a(Yii::t('admin', 'Registration'), '#',['id'=>'tournament-button']) ?>
+                            <?= \yii\helpers\Html::a(Yii::t('admin', 'Registration'), '#', ['id' => 'tournament-button']) ?>
                         </div>
                     <?php endif; ?>
-
-                </div>
-                <div class="tournament-gamers">
-                    <div class="match-tournament">
-                        <img src="img/cs.jpg" alt="">
-                        <div class="table">
-                            <div class="table-title">
-                                Ник
-                            </div>
-                            <div class="table-text">
-                                Petrovich
-                            </div>
-                        </div>
-                        <div class="table">
-                            <div class="table-title">
-                                Рейтинг
-                            </div>
-                            <div class="table-text">
-                                2341
-                            </div>
-                        </div>
-                        <div class="table">
-                            <div class="table-title">
-                                Роль
-                            </div>
-                            <div class="table-text">
-                                Премиум
-                            </div>
-                        </div>
-                        <div class="table">
-                            <div class="table-title">
-                                Чекин:
-                            </div>
-                            <div class="table-text">
-                                Открыт
-                            </div>
-                        </div>
-                        <div class="table-button">
-                            Профиль
-                        </div>
-                    </div>
                 </div>
 
+                <?= \app\widgets\UserTournamentWidget::widget(['tournamentId' => $tournament->id]) ?>
+                <?php if ($tournament->status == \app\helpers\TournamentStatusHelper::$fighting && $tournament->status == \app\helpers\TournamentStatusHelper::$end ): ?>
                 <div class="tournament-grid" id="list">
                     <div class="tournament">
                     </div>
                 </div>
+                <?php endif;?>
             </div>
         </div>
     </div>

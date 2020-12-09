@@ -29,7 +29,12 @@ class CabinetController extends Controller
                 return $this->redirect(Url::toRoute(['/cabinet','id'=>Yii::$app->user->id]));
             }
         }
-        return $this->render('index',['user'=>$user,'updateForm'=>$updateForm,'gifts'=>$gifts,'photoForm'=>$setPhotoForm]);
+        return $this->render('index',[
+            'user'=>$user,
+            'updateForm'=>$updateForm,
+            'gifts'=>$gifts,
+            'photoForm'=>$setPhotoForm,
+            ]);
     }
 
     public function actionHistory($id){

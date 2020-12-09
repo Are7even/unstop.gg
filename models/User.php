@@ -11,6 +11,8 @@ use yii\web\IdentityInterface;
  *
  * @property int $id
  * @property int|null $auth_key
+ * @property int|null $kudos
+ * @property int|null $status
  * @property string|null $last_name
  * @property string|null $first_name
  * @property string|null $username
@@ -37,10 +39,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['reputation'], 'integer'],
-            [['reputation'], 'default', 'value' => '0'],
-            [['status'], 'integer'],
-            [['status'], 'default', 'value' => '1'],
+            [['reputation','kudos','status'], 'integer'],
+            [['reputation','kudos'], 'default', 'value' => '0'],
+            [['status'], 'default', 'value' => '0'],
             [['first_name', 'last_name','username', 'email', 'about','password_reset_token', 'auth_key', 'password', 'photo'], 'string', 'max' => 255],
             [['photo'], 'default', 'value' => 'no-image.png'],
             [['created_at','updated_at'], 'safe'],
@@ -57,6 +58,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             'id' => Yii::t('admin', 'ID'),
             'auth_key' => Yii::t('admin', 'Auth key'),
+            'kudos' => Yii::t('admin', 'Kudos'),
             'status' => Yii::t('admin', 'Status'),
             'username' => Yii::t('admin', 'Username'),
             'first_name' => Yii::t('admin', 'First name'),
@@ -184,7 +186,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $imageUploadModel->deleteCurrentPhoto($this->photo);
     }
 
-    public function getUsername($id){
+    static function getUsername($id){
         $user = self::findIdentity($id);
         return $user->username;
     }

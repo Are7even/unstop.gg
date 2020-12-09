@@ -10,7 +10,7 @@ use yii\helpers\Html;
             <?= (Yii::$app->user->can('premium_user')) ? '<img class="diamond" src="/web/site/img/diamond.png" alt="">' : ''?>
         </div>
         <p class="name"><?= Yii::t('admin','Username')?>: <?= $model->username?></p>
-        <p class="status"><?= Yii::t('admin','Status')?>: <?= (Yii::$app->user->can('admin')?'admin':'user')?></p>
+        <p class="status"><?= Yii::t('admin','Status')?>: <?= ($model->authAssignment->item_name)?'admin':'user'?></p>
         <p><?= Yii::t('admin','Reputation')?>: <?= $model->reputation?></p>
         <p class="star">
             <i class="fas fa-star"></i>

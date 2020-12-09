@@ -37,13 +37,13 @@ $config = [
             'clients' => [
                 'google' => [
                     'class' => 'yii\authclient\clients\Google',
-                    'clientId' => '413438028153-7j7ogp33k4u93p29bjqkln3j9d5k2g1e.apps.googleusercontent.com',
-                    'clientSecret' => 'VTaM2X1dIeNcegBlFiQsxvXl',
+                    'clientId' => '47812081007-ujho43p3p49imna2qaassekqcg6u84uj.apps.googleusercontent.com',
+                    'clientSecret' => 'ucjgMBYpc1LFu5aHD2QHYOr3',
                 ],
                 'facebook' => [
                     'class' => 'yii\authclient\clients\Facebook',
-                    'clientId' => '671984006835673',
-                    'clientSecret' => 'a3f0a52345a72fea95fa1cec86c676ff',
+                    'clientId' => '3803066436432297',
+                    'clientSecret' => '2a3ca785e525b039c6268d8deebce2cc',
                 ],
             ],
         ],

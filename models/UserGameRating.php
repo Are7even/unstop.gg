@@ -45,6 +45,11 @@ class UserGameRating extends \yii\db\ActiveRecord
         ];
     }
 
+    static function getUserRatingByGame($gameId,$userId){
+        $rating = self::find()->select(['rating'])->where(['games_id'=>$gameId])->andWhere(['user_id'=>$userId])->one();
+        return $rating->rating;
+    }
+
     public function getUser(){
         return $this->hasOne(User::className(),['id'=>'user_id']);
     }

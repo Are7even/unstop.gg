@@ -8,7 +8,7 @@ use yii\helpers\Url; ?>
 <!--            <p>--><?php //echo $model->authAssignment->item_name?><!--</p>-->
         </div>
         <a href="#"><?php echo Yii::t('admin','Reputation')?>: <?php echo $model->reputation?></a>
-        <a href="#"><?php echo Yii::t('admin','Kudo')?>: 100500</a>
+        <a href="#"><?php echo Yii::t('admin','Kudos')?>: <?php echo $model->kudos?></a>
         <a href="<?=Url::toRoute(['cabinet/index','id'=>Yii::$app->user->id])?>"><?php echo Yii::t('admin','Cabinet')?></a>
         <a href="/admin/default"><?php echo Yii::t('admin','Admin panel')?></a>
         <?php echo Html::a(Yii::t('admin','Exit'),Url::toRoute(['auth/logout']))?>

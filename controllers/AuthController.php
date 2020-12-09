@@ -75,7 +75,7 @@ class AuthController extends Controller
     {
         $user = new User();
         if ($user->saveFromVk($uid, $first_name, $last_name, $photo)) {
-            if (empty($user->getUsername(Yii::$app->user->id))) {
+            if (empty(User::getUsername(Yii::$app->user->id))) {
                 return $this->redirect(['auth/further-information']);
             }
         }
