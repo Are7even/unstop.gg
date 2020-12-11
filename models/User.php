@@ -242,6 +242,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $this->hasMany(UserGameRating::className(),['user_id'=>'id']);
     }
 
+    static function getRating($gameId,$userId){
+        $rating = UserGameRating::find()->select('rating')->where(['games_id'=>$gameId])->andWhere(['user_id'=>$userId])->one();
+        return $rating->rating;
+    }
+
     public function getUserLinks(){
         return $this->hasOne(UserLinks::className(),['user_id'=>'id']);
     }

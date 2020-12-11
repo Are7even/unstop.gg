@@ -1,3 +1,8 @@
+<?php
+
+use app\models\User;
+
+?>
 <div class="match-tournament">
     <img src="/web/upload/user/<?= $model->user->photo?>" alt="avatar">
     <div class="table">
@@ -13,7 +18,7 @@
             <?= Yii::t('admin','Rating')?>
         </div>
         <div class="table-text">
-            <?= \app\models\UserGameRating::getUserRatingByGame($model->tournament->game,$model->user->id)?>
+            <?php echo User::getRating($model->tournament->game,$model->user->id)?>
         </div>
     </div>
     <div class="table">
@@ -21,7 +26,7 @@
             <?= Yii::t('admin','Status')?>
         </div>
         <div class="table-text">
-            <?= ($model->user->authAssignment->item_name)?'admin':'user'?>
+            <?= (isset($model->user->authAssignment->item_name))?'admin':'user'?>
         </div>
     </div>
 
