@@ -79,7 +79,7 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                 </div>
 
                 <?= \app\widgets\UserTournamentWidget::widget(['tournamentId' => $tournament->id]) ?>
-                <?php if ($tournament->status == \app\helpers\TournamentStatusHelper::$fighting && $tournament->status == \app\helpers\TournamentStatusHelper::$end ): ?>
+                <?php if ($tournament->status == \app\helpers\TournamentStatusHelper::$fighting || $tournament->status == \app\helpers\TournamentStatusHelper::$end ): ?>
                 <div class="tournament-grid" id="list">
                     <div class="tournament">
                     </div>
