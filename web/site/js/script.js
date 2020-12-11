@@ -297,7 +297,7 @@ function saveFn(data, userData) {
 $(function() {
     const url = new URLSearchParams(window.location.search)
     const id = url.get('id')
-    fetch(`https://unstop.gg/tournament/api?tournamentId=${id}`)
+    fetch(`http://unstop.gg/tournament/api?tournamentId=${id}`)
         .then(res => res.json())
         .then(data => {
             var resizeParameters = {
@@ -336,7 +336,7 @@ function initRegisterTournament() {
     btn.on('click', function () {
         if (isPending) return;
         isPending = true;
-        fetch(`https://unstop.gg/tournament/registration?tournamentId=${id}`)
+        fetch(`http://unstop.gg/tournament/registration?tournamentId=${id}`)
     .then(()=>document.location.reload())
             .catch(console.error)
             .finally(() => isPending = false)
@@ -353,16 +353,19 @@ $(document).ready(
 )
 
 const gameRating = document.getElementById('game-rating');
-const game = document.getElementById('game');
-const selection = gameRating.querySelector('select');
-const lists = gameRating.querySelectorAll('.dropdownlist');
+if (gameRating) {
+    const selection = gameRating.querySelector('select');
+    const lists = gameRating.querySelectorAll('.dropdownlist');
 
-selection.addEventListener('change', () => {
-    const id = selection.options[selection.selectedIndex].value;
-    Array.from(lists).forEach((list) => list.classList.add('shadow'))
-    const target = gameRating.querySelector('#'+id);
-    target.classList.remove('shadow');
-});
+    if (selection) {
+        selection.addEventListener('change', () => {
+            const id = selection.options[selection.selectedIndex].value;
+            Array.from(lists).forEach((list) => list.classList.add('shadow'))
+            const target = gameRating.querySelector('#'+id);
+            target.classList.remove('shadow');
+        });
+    }
+}
 
 
 /* When the user clicks on the button,
