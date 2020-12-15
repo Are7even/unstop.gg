@@ -72,3 +72,7 @@ a .lk-button {
 #w2 {
     padding-top: 30px !important;
 }
+
+.open {
+    z-index: 100;
+}

@@ -7,6 +7,7 @@ namespace app\controllers;
 use app\models\CabinetSetPhotoForm;
 use app\models\CabinetUpdateForm;
 use app\models\User;
+use app\models\UserLinks;
 use app\models\UserToGifts;
 use yii\helpers\Url;
 use yii\web\Controller;
@@ -19,6 +20,9 @@ class CabinetController extends Controller
 {
 
     public function actionIndex($id){
+        if (!UserLinks::find()->where(['user_id'=>$id])->one()){
+            UserLinks::add($id);
+        }
         $gifts = UserToGifts::find()->where(['user_id'=>Yii::$app->user->id])->all();
         $user = User::findOne($id);
         $updateForm = new CabinetUpdateForm();

@@ -8,6 +8,7 @@ use app\models\Games;
 use app\models\Tournament;
 use app\models\TournamentToUser;
 use app\models\User;
+use app\models\UserGameRating;
 use yii\web\Response;
 use yii\web\Controller;
 use yii\web\Session;
@@ -106,7 +107,6 @@ class TournamentController extends Controller
         return $count;
     }
 
-
     public function actionView($id)
     {
         $session = Yii::$app->session;
@@ -120,9 +120,13 @@ class TournamentController extends Controller
 
     public function actionRegistration($tournamentId)
     {
+        $tournament = Tournament::findOne($tournamentId);
         $registration = new TournamentToUser();
         $registration->add(Yii::$app->user->id, $tournamentId);
-
+        if (!UserGameRating::find()->where(['user_id'=>Yii::$app->user->id])->andWhere(['games_id'=>$tournament->game])->one())
+        {
+            UserGameRating::addRating(Yii::$app->user->id,$tournament->game);
+        }
         return $this->goBack(['tournament/view', 'id' => $tournamentId]);
     }
 

@@ -110,17 +110,6 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionRegistration()
-    {
-        $model = new RegistrationForm();
-        if (!$model->validate()) {
-            return $this->actionIndex();
-        }
-        if ($model->load(Yii::$app->request->post(), '') && $model->save()) {
-            Yii::$app->session->setFlash('registration', Yii::t('admin', 'User registered!'));
-            return $this->goHome();
-        }
-    }
 
 
     public function actionContact()

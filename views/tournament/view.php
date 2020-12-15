@@ -12,6 +12,7 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
         <div class="content-body tournament-menu">
             <div class="lk-menu">
                 <div class="lk-nav">
+                    <?php if (!Yii::$app->user->isGuest):?>
                     <ul>
                         <?php if ($tournament->status == \app\helpers\TournamentStatusHelper::$fighting): ?>
                         <li class="menu-link"><a
@@ -26,10 +27,12 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                         </li>
                         <?php endif;?>
                     </ul>
+                    <?php endif;?>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="content">
         <div class="content-body tr">
             <div class="tournament-container">
@@ -61,8 +64,10 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                             <br> <?= $tournament->getCutDate($tournament->checkin_end) ?></p>
                     </div>
                 </div>
-                <div class="tournament-buttons">
-                    <div class="button">О турнире <i class="fal fa-plus"></i></div>
+                <div class="tournament-buttons game-container">
+                    <div class="button">О турнире <i class="fal fa-plus"></i>
+                    <div class="panel">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci alias amet at blanditiis consectetur corporis culpa debitis distinctio dolorum ex incidunt labore, laborum laudantium minus molestiae necessitatibus, nisi numquam obcaecati, odio odit pariatur placeat quia quidem quis ratione recusandae repellendus sapiente sequi tenetur unde voluptatem voluptatibus voluptatum. Ex, fugiat, voluptatem. Aperiam assumenda eum eveniet fuga illo itaque iure, laudantium modi neque nisi, omnis optio, quis quo suscipit temporibus voluptas.</div>
+                    </div>
                 </div>
                 <div class="reg-container">
                     <?php if ($tournament->author == Yii::$app->user->id): ?>
@@ -73,7 +78,7 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                         <?php endif; ?>
                     <?php elseif (!$tournament->checkRegistration(Yii::$app->user->id, $tournament->id)): ?>
                         <div class="button-registration">
-                            <?= \yii\helpers\Html::a(Yii::t('admin', 'Registration'), '#', ['id' => 'tournament-button']) ?>
+                            <?= \yii\helpers\Html::a(Yii::t('admin', 'Registration'), Url::to(['tournament/registration', 'tournamentId' => $tournament->id]), ['id' => 'tournament-button']) ?>
                         </div>
                     <?php endif; ?>
                 </div>

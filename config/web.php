@@ -8,7 +8,7 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log','simplechat'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
@@ -51,7 +51,7 @@ $config = [
             'translations' => [
                 'admin' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@app/messages',
+                    'basePath' => '@app/message',
                     'sourceLanguage' => 'en',
                     'fileMap' => [
                         'admin' => 'admin.php'
@@ -135,6 +135,9 @@ $config = [
         ],
         'mm' => [
             'class' => 'iutbay\yii2\mm\Module',
+        ],
+        'simplechat' => [
+            'class' => 'bubasuma\simplechat\Module',
         ],
     ],
     'as access' => [

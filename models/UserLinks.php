@@ -71,6 +71,12 @@ class UserLinks extends \yii\db\ActiveRecord
         return $userLinks->save();
     }
 
+    static function add($id){
+        $user = new UserLinks();
+        $user->user_id = $id;
+        return $user->save();
+    }
+
     public static function findById($id)
     {
         return UserLinks::find()->where(['user_id' => $id])->one();

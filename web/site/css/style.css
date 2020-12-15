@@ -215,9 +215,9 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -1138,6 +1138,7 @@ img {
 
 .games .game .game-container {
   position: relative;
+  max-height: 100% !important;
 }
 
 .dropdown-tournaments {
@@ -1683,6 +1684,28 @@ a .lk-button:hover {
   margin: 0 auto;
 }
 
+.tournament-container .panel {
+  background-color: transparent;
+}
+
+.tournament-container .active {
+  background-color: transparent;
+}
+
+.tournament-container .active .button {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: 100% !important;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: transparent;
+}
+
+.tournament-container .active .button .panel {
+  display: block;
+  padding: 20px 30px 20px 0px;
+}
+
 .tournament-image {
   position: relative;
 }
@@ -2029,6 +2052,7 @@ a .lk-button:hover {
 
 .news .game-container {
   margin-bottom: 40px;
+  max-height: 100% !important;
 }
 
 .news .game-container .game-title {
@@ -2154,6 +2178,7 @@ a .lk-button:hover {
   width: 100%;
   max-width: 500px;
   margin-bottom: 30px;
+  max-height: 100% !important;
 }
 
 .top100 .game-title {
@@ -2291,9 +2316,9 @@ a .lk-button:hover {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
 }
 
 .lk-nav ul li {
@@ -2415,6 +2440,7 @@ a .lk-button:hover {
       -ms-flex-align: center;
           align-items: center;
   padding-top: 20px;
+  padding-bottom: 15px;
 }
 
 .lk-content .lk-aside .lk-social img {
@@ -2569,6 +2595,7 @@ a .lk-button:hover {
 
 .archive-game-rating .game-container {
   margin-bottom: 40px;
+  max-height: 100% !important;
   cursor: pointer;
   position: relative;
 }
@@ -3248,6 +3275,216 @@ a .lk-button:hover {
   padding-top: 80px;
 }
 
+.inbox_people {
+  background: #f8f8f8 none repeat scroll 0 0;
+  float: left;
+  overflow: hidden;
+  width: 40%;
+  border-right: 1px solid #c4c4c4;
+}
+
+.inbox_msg {
+  border: 1px solid #c4c4c4;
+  clear: both;
+  overflow: hidden;
+}
+
+.top_spac {
+  margin: 20px 0 0;
+}
+
+.recent_heading {
+  float: left;
+  width: 40%;
+}
+
+.srch_bar {
+  display: inline-block;
+  text-align: right;
+  width: 60%;
+}
+
+.recent_heading h4 {
+  color: #05728f;
+  font-size: 21px;
+  margin: auto;
+}
+
+.srch_bar input {
+  border: 1px solid #cdcdcd;
+  border-width: 0 0 1px 0;
+  width: 80%;
+  padding: 2px 0 4px 6px;
+  background: none;
+}
+
+.srch_bar .input-group-addon button {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  padding: 0;
+  color: #707070;
+  font-size: 18px;
+}
+
+.srch_bar .input-group-addon {
+  margin: 0 0 0 -27px;
+}
+
+.chat_ib h5 {
+  font-size: 15px;
+  color: #464646;
+  margin: 0 0 8px 0;
+}
+
+.chat_ib h5 span {
+  font-size: 13px;
+  float: right;
+}
+
+.chat_ib p {
+  font-size: 14px;
+  color: #989898;
+  margin: auto;
+}
+
+.chat_img {
+  float: left;
+  width: 11%;
+}
+
+.chat_ib {
+  float: left;
+  padding: 0 0 0 15px;
+  width: 88%;
+}
+
+.chat_people {
+  overflow: hidden;
+  clear: both;
+}
+
+.chat_list {
+  border-bottom: 1px solid #c4c4c4;
+  margin: 0;
+  padding: 18px 16px 10px;
+}
+
+.inbox_chat {
+  height: 595px;
+  overflow-y: scroll;
+}
+
+.active_chat {
+  background: #ebebeb;
+}
+
+.incoming_msg_img {
+  display: inline-block;
+  width: 6%;
+}
+
+.received_msg {
+  display: inline-block;
+  padding: 0 0 0 10px;
+  vertical-align: top;
+  width: 92%;
+}
+
+.received_withd_msg p {
+  background: #ebebeb none repeat scroll 0 0;
+  border-radius: 3px;
+  color: #646464;
+  font-size: 14px;
+  margin: 0;
+  padding: 5px 10px 5px 12px;
+  width: 100%;
+}
+
+.time_date {
+  color: #747474;
+  display: block;
+  font-size: 12px;
+  margin: 8px 0 0;
+}
+
+.received_withd_msg {
+  width: 57%;
+}
+
+.mesgs {
+  float: left;
+  padding: 30px 15px 0 25px;
+  width: 60%;
+}
+
+.sent_msg p {
+  background: #5600FF none repeat scroll 0 0;
+  border-radius: 3px;
+  font-size: 14px;
+  margin: 0;
+  color: #fff;
+  padding: 5px 10px 5px 12px;
+  width: 100%;
+}
+
+.outgoing_msg {
+  overflow: hidden;
+  margin: 26px 0 26px;
+}
+
+.sent_msg {
+  float: right;
+  width: 46%;
+}
+
+.input_msg_write input {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  color: #4c4c4c;
+  font-size: 15px;
+  min-height: 48px;
+  width: 100%;
+  outline: none;
+}
+
+.type_msg {
+  border-top: 1px solid #c4c4c4;
+  position: relative;
+}
+
+.msg_send_btn {
+  background: #5600FF none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 17px;
+  height: 33px;
+  position: absolute;
+  right: 0;
+  top: 11px;
+  width: 33px;
+  outline: none;
+}
+
+.msg_send_btn i {
+  padding-top: 2px;
+  padding-right: 2px;
+}
+
+.messaging {
+  background-color: #ffffff;
+}
+
+.msg_history {
+  height: 516px;
+  overflow-y: auto;
+}
+
+#popup-content .popup__body .popup__content {
+  background-color: transparent;
+}
+
 .faiting {
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -3486,6 +3723,10 @@ a .lk-button:hover {
     margin-right: 0 !important;
   }
 
+  .tournament-container .tournament-buttons .button {
+    padding-left: 30px;
+  }
+
   .top100 .game-container {
     max-width: 485px;
   }
@@ -3505,9 +3746,28 @@ a .lk-button:hover {
         -ms-flex-align: center;
             align-items: center;
   }
+
+  .faiting .faiting-container .result .correct-result {
+    margin-top: 50px;
+  }
+
+  .faiting .faiting-container .result .vs {
+    margin: 30px 0;
+  }
 }
 
 @media (max-width: 992px) {
+  .top100 .active .rating-panel {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+
+  .top100 .active .rating-panel .panel-container .panel-container-rating .rating-list {
+    width: 95%;
+  }
+
   .lk-content {
     -webkit-box-orient: vertical;
     -webkit-box-direction: reverse;
@@ -3592,6 +3852,15 @@ a .lk-button:hover {
     font-size: 20px;
   }
 
+  .tournament-container .tournament-buttons .button {
+    padding-left: 15px;
+  }
+
+  .tournament-container .tournament-buttons .button .panel {
+    font-size: 22px;
+    font-weight: 500;
+  }
+
   .tournament-image .tournament-text {
     -webkit-backdrop-filter: blur(0);
             backdrop-filter: blur(0);
@@ -3610,6 +3879,36 @@ a .lk-button:hover {
 
   .lk-nav ul li {
     padding-bottom: 15px;
+  }
+
+  .faiting .faiting-container {
+    padding: 50px 0;
+  }
+
+  .faiting .faiting-container .result {
+    width: 100%;
+  }
+
+  .faiting .faiting-container .result .correct-result {
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .faiting .faiting-container .faiter-buttons {
+    width: 100%;
+  }
+
+  .faiting .faiting-container .faiter-buttons .buttons {
+    max-width: 100% !important;
+  }
+
+  .faiting .faiting-container .faiter-buttons .buttons .won {
+    max-width: 100% !important;
+  }
+
+  .faiting .faiting-container .faiter-buttons .buttons .lose {
+    max-width: 100% !important;
+    width: 100% !important;
   }
 }
 
@@ -3762,6 +4061,20 @@ a .lk-button:hover {
     margin-bottom: 20px;
     text-align: center;
     max-width: 100% !important;
+  }
+
+  .faiting .faiting-container .faiter .fainer-content {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+
+  .faiting .faiting-container .faiter .fainer-content img {
+    width: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+    height: 300px;
   }
 }
 
