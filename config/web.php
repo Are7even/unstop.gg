@@ -20,7 +20,7 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'LKjmAuGCr3XVEWZmUEiqdFrBpUoV5dkH',
             'baseUrl' => '',
-            'csrfParam' => '_csrf-app',
+            'csrfParam' => '_csrf-app'
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -101,6 +101,24 @@ $config = [
             'rules' => [
                 'thumbs/<path:.*>' => 'mm/thumb/thumb',
                 '<controller>/<action>' => '<controller>/<action>',
+                [
+                    'class' => \yii\rest\UrlRule::class,
+                    'controller' => ['v1/tournament'],
+                    'prefix' => 'api',
+                    'tokens' => [
+                        '{tournamentId}' => '<tournamentId:\\w+>',
+                        '{fightId}'=>'<fightId:\\w+>'
+                    ],
+                    'extraPatterns' => [
+                        'GET /' => 'tournaments',
+                        'GET {tournamentId}' => 'tournament',
+                        'GET {tournamentId}/fights' => 'fights',
+                        'GET {tournamentId}/fights/{fightId}/scores' => 'score',
+                        'POST /' => 'create-tournament',
+                        'POST {tournamentId}/fights' => 'create-fight',
+                        'PATCH {tournamentId}/fights/{fightId}/scores' => 'update-score'
+                    ]
+                ]
             ],
             'languages' => ['ru', 'en'],
         ],
@@ -119,6 +137,9 @@ $config = [
         'admin' => [
             'class' => 'app\modules\admin\Module',
             'layout' => 'main'
+        ],
+        'v1' => [
+            'class' => 'app\modules\v1\Module'
         ],
         'rbac' => [
             'class' => 'mdm\admin\Module',
@@ -140,6 +161,7 @@ $config = [
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
+            'v1/*',
             'site/*',
             'auth/*',
             'mm/*',
