@@ -60,5 +60,4 @@ class TournamentToUser extends \yii\db\ActiveRecord
     public function getTournament(){
         return $this->hasOne(Tournament::className(),['id'=>'tournament_id']);
     }
-
 }

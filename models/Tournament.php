@@ -100,6 +100,14 @@ class Tournament extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getTournaments() {
+        return $this->find()->all();
+    }
+
+    public function getTournament($id) {
+        return $this->findOne($id);
+    }
+
     public function getTranslations () {
         return $this -> hasMany(TournamentTranslate::className(), ['tournament_id'=>'id']);
     }
