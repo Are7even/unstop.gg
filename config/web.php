@@ -114,11 +114,24 @@ $config = [
                         'GET {tournamentId}' => 'tournament',
                         'GET {tournamentId}/fights' => 'fights',
                         'GET {tournamentId}/fights/{fightId}/scores' => 'score',
-                        'POST /' => 'create-tournament',
+                        'GET {tournamentId}/brackets' => 'brackets',
+                        'POST {tournamentId}/start' => 'start',
                         'POST {tournamentId}/fights' => 'create-fight',
                         'PATCH {tournamentId}/fights/{fightId}/scores' => 'update-score'
                     ]
-                ]
+                ],
+                // [
+                //     'class' => \yii\rest\UrlRule::class,
+                //     'controller' => ['v1/league'],
+                //     'prefix' => 'api',
+                //     'tokens' => [
+                //         '{leagueId}' => '<leagueId:\\w+>',
+                //     ],
+                //     'extraPatterns' => [
+                //         'GET /' => 'leagues',
+                //         'GET {leagueId}/fights' => 'fights',
+                //     ]
+                // ]
             ],
             'languages' => ['ru', 'en'],
         ],

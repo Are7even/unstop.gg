@@ -30,6 +30,33 @@ if (popupCloseIcon.length > 0) {
     }
 }
 
+function startTournament() {
+    const btn = document.getElementById('start-tournament');
+    if (btn) {
+        let isPending = false;
+        const config = {
+            method: 'POST',
+            mode: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const id = new URLSearchParams(window.location.search).get('id');
+            if (isPending) return
+            isPending = true;
+            fetch(`/api/v1/tournaments/${id}/start`, config)
+                .then(() => window.location.reload())
+                .catch(console.error)
+                .finally(() => (isPending = false));
+        });
+    }
+}
+
+startTournament();
+
 
 function popupOpen (currentPopup) {
     if (currentPopup && unlock) {
@@ -278,26 +305,10 @@ for (i = 0; i < acc.length; i++) {
     });
 }
 
-/* Called whenever bracket is modified
- *
- * data:     changed bracket object in format given to init
- * userData: optional data given when bracket is created.
- */
-function saveFn(data, userData) {
-    var json = jQuery.toJSON(data)
-    $('#saveOutput').text('POST '+userData+' '+json)
-
-    // jQuery.ajax("rest/"+userData, {contentType: 'application/json',
-    //                               dataType: 'json',
-    //                               type: 'post',
-    //                               data: json})
-
-}
-
 $(function() {
     const url = new URLSearchParams(window.location.search)
     const id = url.get('id')
-    fetch(`http://unstop.gg/tournament/api?tournamentId=${id}`)
+    fetch(`/api/v1/tournaments/${id}/brackets`)
         .then(res => res.json())
         .then(data => {
             var resizeParameters = {
@@ -305,27 +316,17 @@ $(function() {
                 scoreWidth: 50,
                 matchMargin: 120,
                 roundMargin: 100,
-                // disableToolbar:true,
-                // disableTeamEdit:true,
                 init: data
             };
+            $('#tournament-bracket').bracket(resizeParameters);
 
-            function updateResizeDemo() {
-                $('.tournament').bracket(resizeParameters);
-            }
+            // function updateResizeDemo() {
+            //     $('#tournament-bracket').bracket(resizeParameters);
+            // }
 
-            $(updateResizeDemo)
+            // $(updateResizeDemo)
         })
         .catch(console.error)
-    // var container = $('.tournament')
-    // container.bracket({
-    //     init: saveData,
-    //     save: saveFn,
-    //     userData: `http://unstop.gg/tournament/start?tournamentId=${id}`})
-
-    /* You can also inquiry the current data */
-    // var data = container.bracket('data')
-    // $('#dataOutput').text(JSON.stringify(data))
 })
 
 function initRegisterTournament() {
@@ -336,7 +337,7 @@ function initRegisterTournament() {
     btn.on('click', function () {
         if (isPending) return;
         isPending = true;
-        fetch(`http://unstop.gg/tournament/registration?tournamentId=${id}`)
+        fetch(`/tournament/registration?tournamentId=${id}`)
     .then(()=>document.location.reload())
             .catch(console.error)
             .finally(() => isPending = false)

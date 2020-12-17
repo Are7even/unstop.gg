@@ -30,8 +30,8 @@ class Fight extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tournament_id', 'first_user_id_score', 'second_user_id_score','stage_id','game_number'], 'integer'],
-            [['first_user_id', 'second_user_id'], 'string', 'max' => 255],
+            [['tournament_id', 'first_user_id_score', 'second_user_id_score','stage_id','fight_order', 'score_id', 'status'], 'integer'],
+            [['first_user_id', 'second_user_id', 'type'], 'string', 'max' => 255],
         ];
     }
 
@@ -41,9 +41,12 @@ class Fight extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('admin', 'ID'),
+            'type' => Yii::t('admin', 'Type'),
+            'score_id' => Yii::t('admin', 'Score ID'),
+            'status' => Yii::t('admin', 'Status'),
             'tournament_id' => Yii::t('admin', 'Tournament ID'),
             'stage_id' => Yii::t('admin', 'Stage ID'),
-            'game_number' => Yii::t('admin', 'Game number'),
+            'fight_order' => Yii::t('admin', 'Fight Order'),
             'first_user_id' => Yii::t('admin', 'First User ID'),
             'second_user_id' => Yii::t('admin', 'Second User ID'),
             'first_user_id_score' => Yii::t('admin', 'First User Id Score'),
@@ -51,13 +54,25 @@ class Fight extends \yii\db\ActiveRecord
         ];
     }
 
-    static function add($firstUserId,$secondUserId,$tournamentId){
+    static function add($firstUserId,$secondUserId,$tournamentId, $order, $scoreId, $type){
         $model = new self();
         $model->tournament_id = $tournamentId;
         $model->first_user_id = $firstUserId;
         $model->second_user_id = $secondUserId;
+        $model->fight_order = $order;
+        $model->score_id = $scoreId;
+        $model->type = $type;
         $model->save(false);
         return true;
+    }
+
+    public function getTournamentFights($tournamentId)
+    {
+        return $this
+            ->find()
+            ->where(['tournament_id' => $tournamentId])
+            ->orderBy('fight_order')
+            ->all();
     }
 
     public function getStage () {

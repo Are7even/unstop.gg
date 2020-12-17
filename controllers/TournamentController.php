@@ -25,26 +25,6 @@ class TournamentController extends Controller
         return $this->render('index', ['games' => $games,]);
     }
 
-    public function actionStart($tournamentId)
-    {
-        $response = Yii::$app->response;
-        $response->format = Response::FORMAT_JSON;
-        $response->getHeaders()->set('Content-Type', 'application/json');
-        $tournament = Tournament::findOne($tournamentId);
-        $userList = TournamentToUser::getUserList($tournamentId);
-        if ($tournament->start()) {
-            foreach ($userList as $user) {
-                $playersId[] = $user->user_id;
-            }
-            shuffle($playersId);
-            $playersId = array_chunk($playersId, 2);
-            foreach ($playersId as $pair) {
-                Fight::add($pair[0], $pair[1], $tournamentId);
-            }
-            return ['ids' => $playersId];
-        }
-    }
-
     public function actionApi($tournamentId)
     {
         $headers = Yii::$app->response->headers;
@@ -53,11 +33,6 @@ class TournamentController extends Controller
         $response->format = Response::FORMAT_JSON;
         $response->getHeaders()->set('Content-Type', 'application/json');
         $items = $this->createBrackets($tournamentId);
-
-//        echo '<pre>';
-//        print_r($items);
-//        echo '</pre>';
-//        die;
         return $items;
     }
 
