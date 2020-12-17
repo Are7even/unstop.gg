@@ -7,10 +7,11 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Registration';
+$this->title = Yii::t('admin','Further information');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
+
+<div class="further-information container">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p><?php echo Yii::t('admin','fill out the following fields to end registration')?>:</p>
@@ -25,14 +26,14 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-    <?= $form->field($furtherInformation, 'username')->textInput(['autofocus' => true]) ?>
+    <?= $form->field($furtherInformation, 'username')->textInput(['autofocus' => true,'placeholder'=>'username'])->label(false) ?>
 
-    <?= $form->field($furtherInformation, 'email')->textInput() ?>
+    <?= $form->field($furtherInformation, 'email')->textInput(['placeholder'=>'email'])->label(false) ?>
 
 
     <div class="form-group">
         <div class="col-lg-offset-1 col-lg-11">
-            <?= Html::submitButton('Register now', ['class' => 'btn btn-primary', 'name' => 'further-information-button']) ?>
+            <?= Html::submitButton('Register now', ['class' => 'btn btn-primary ftr-info', 'name' => 'further-information-button']) ?>
         </div>
     </div>
 

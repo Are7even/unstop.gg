@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f52a2108077eb87d9954c361a765e8f",
+    "content-hash": "09c065834c2c0cc180a7faa199919a44",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -5934,7 +5934,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "kartik-v/yii2-widget-datetimepicker": 20,
-        "codemix/yii2-localeurls": 20
+        "codemix/yii2-localeurls": 20,
+        "bubasuma/yii2-simplechat": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

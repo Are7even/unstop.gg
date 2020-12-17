@@ -31,8 +31,8 @@ use yii\helpers\Html;
                                                                                                                   alt=""></a>
     <a href="<?= (isset($model->userLinks->youtube))?$model->userLinks->youtube:'#'?>" target="_blank"><img src="/web/site/img/lk_items/youtube.png"
                                                                                                             alt=""></a>
-    <a href="<?= (isset($model->userLinks->xbox))?$model->userLinks->xbox:'#'?>" target="_blank"><img src="/web/site/img/lk_items/xbox.png" alt=""></a>
-    <a href="<?= (isset($model->userLinks->ps))?$model->userLinks->ps:'#'?>" target="_blank"><img src="/web/site/img/lk_items/ps.png" alt=""></a>
+    <a class="popup-link" href="#popup-href" target="_blank"><img src="/web/site/img/lk_items/xbox.png" alt=""></a>
+    <a class="popup-link" href="#popup-href2" target="_blank"><img src="/web/site/img/lk_items/ps.png" alt=""></a>
 </div>
 <a class="popup-link" href="#popup-content">
     <div class="lk-button">Написать сообщение</div>
@@ -42,7 +42,7 @@ use yii\helpers\Html;
         <div class="popup__body">
             <div class="popup__content">
                 <div class="container">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab at atque blanditiis debitis nemo pariatur reiciendis similique sit suscipit voluptas!</p>
+                    <p><?= (isset($model->userLinks->xbox))?$model->userLinks->xbox:'#'?></p>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@ use yii\helpers\Html;
         <div class="popup__body">
             <div class="popup__content">
                 <div class="container">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab at atque blanditiis debitis nemo pariatur reiciendis similique sit suscipit voluptas!</p>
+                    <p><?= (isset($model->userLinks->ps))?$model->userLinks->ps:'#'?></p>
                 </div>
             </div>
         </div>
