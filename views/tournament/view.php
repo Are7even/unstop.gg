@@ -71,9 +71,9 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                 </div>
                 <div class="reg-container">
                     <?php if ($tournament->author == Yii::$app->user->id): ?>
-                        <?php if (!$tournament->status == \app\helpers\TournamentStatusHelper::$fighting): ?>
+                        <?php if ($tournament->status == \app\helpers\TournamentStatusHelper::$waiting): ?>
                             <div class="button-registration">
-                                <?= \yii\helpers\Html::a(Yii::t('admin', 'Start tournament'), Url::to(['tournament/start', 'tournamentId' => $tournament->id])) ?>
+                                <?= \yii\helpers\Html::a(Yii::t('admin', 'Start tournament'), '#'.$tournament->id, ['id' => 'start-tournament']) ?>
                             </div>
                         <?php endif; ?>
                     <?php elseif (!$tournament->checkRegistration(Yii::$app->user->id, $tournament->id)): ?>
@@ -86,7 +86,7 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                 <?= \app\widgets\UserTournamentWidget::widget(['tournamentId' => $tournament->id]) ?>
                 <?php if ($tournament->status == \app\helpers\TournamentStatusHelper::$fighting || $tournament->status == \app\helpers\TournamentStatusHelper::$end ): ?>
                 <div class="tournament-grid" id="list">
-                    <div class="tournament">
+                    <div class="tournament" id="tournament-bracket">
                     </div>
                 </div>
                 <?php endif;?>
