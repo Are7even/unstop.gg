@@ -6,7 +6,7 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic-console',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log','simplechat'],
     'controllerNamespace' => 'app\commands',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -29,6 +29,11 @@ $config = [
             'class'=>'yii\rbac\DbManager',
         ],
         'db' => $db,
+    ],
+    'modules'=>[
+        'simplechat' => [
+            'class' => 'bubasuma\simplechat\Module',
+        ],
     ],
     'params' => $params,
     /*

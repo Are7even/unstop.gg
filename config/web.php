@@ -51,7 +51,7 @@ $config = [
             'translations' => [
                 'admin' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@app/message',
+                    'basePath' => '@app/locale',
                     'sourceLanguage' => 'en',
                     'fileMap' => [
                         'admin' => 'admin.php'
@@ -59,7 +59,7 @@ $config = [
                 ],
                 'app*' => [
                     'class' => 'yii \ i18n \ PhpMessageSource',
-                    'basePath' => '@app / messages',
+                    'basePath' => '@app / locale',
                     'sourceLanguage' => 'ru',
                     'fileMap' => [
                         'app' => 'app.php',
@@ -171,7 +171,7 @@ $config = [
             'class' => 'iutbay\yii2\mm\Module',
         ],
         'simplechat' => [
-            'class' => 'bubasuma\simplechat\Module',
+            'class' => '\bubasuma\simplechat\Module',
         ],
     ],
     'as access' => [
@@ -185,6 +185,7 @@ $config = [
             'debug/*',
             'cabinet/*',
             'tournament/*',
+            'simplechat/*',
         ]
     ],
     'params' => $params,

@@ -123,6 +123,16 @@ CREATE TABLE `fight` (
 PRIMARY KEY(`id`)
 );
 
+DROP TABLE IF EXISTS `intermediate_score`;
+CREATE TABLE `intermediate_score` (
+`id` int(11) AUTO_INCREMENT,
+`fight_id` int(11) DEFAULT 0,
+`first_user_id_status` int(11) DEFAULT 0,
+`second_user_id_status` int(11) DEFAULT 0,
+
+PRIMARY KEY(`id`)
+);
+
 DROP TABLE IF EXISTS `score`;
 CREATE TABLE `score` (
 `id` int(11) AUTO_INCREMENT,
