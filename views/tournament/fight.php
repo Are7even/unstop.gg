@@ -46,15 +46,38 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                                 <?= Yii::t('admin','Choose your result')?>
                             </div>
                             <div class="buttons">
-                                <a class="won" href="<?= Url::to(['tournament/won'])?>" style="color: #FFFFFF"><?= Yii::t('admin','I won')?></a>
-                                <a class="lose" href="<?= Url::to(['tournament/lose'])?>" style="color: #000000"><?= Yii::t('admin','I lose')?></a>
-                                <a class="draw" href="<?= Url::to(['tournament/draw'])?>" style="color: #FFFFFF"><?= Yii::t('admin','Draw match')?></a>
+                                <a
+                                    class="won"
+                                    id="iWonBtn"
+                                    href="#"
+                                    data-user-id="<?= Yii::$app->user->id ?>"
+                                    data-fight-id="<?= $fightId ?>"
+                                    data-param="<?= $statusParam ?>"
+                                    data-value="<?= $statuses['win'] ?>"
+                                    style="color: #FFFFFF"
+                                >
+                                    <?= Yii::t('admin','I won')?>
+                                </a>
+                                <a
+                                    class="lose"
+                                    id="iLoseBtn"
+                                    href="#"
+                                    data-user-id="<?= Yii::$app->user->id ?>"
+                                    data-fight-id="<?= $fightId ?>"
+                                    data-param="<?= $statusParam ?>"
+                                    data-value="<?= $statuses['lose'] ?>"
+                                    style="color: #000000"
+                                >
+                                    <?= Yii::t('admin','I lose')?>
+                                </a>
+                                <a class="draw" href="<?= Url::to(['tournament/draw'])?>" style="color: #FFFFFF"><?= Yii::t('admin','Draw match') ?></a>
                             </div>
                         </div>
                     </div>
                     <div class="result">
                         <div class="correct-result">Not correct result</div>
                         <div class="vs">VS</div>
+                        <div class="correct-result correct-result-admin">Call admin</div>
                     </div>
                     <div class="faiter oponent">
                         <div class="fainer-content">

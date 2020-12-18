@@ -20,7 +20,10 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'LKjmAuGCr3XVEWZmUEiqdFrBpUoV5dkH',
             'baseUrl' => '',
-            'csrfParam' => '_csrf-app'
+            'csrfParam' => '_csrf-app',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -116,7 +119,7 @@ $config = [
                         'GET {tournamentId}/fights/{fightId}/scores' => 'score',
                         'GET {tournamentId}/brackets' => 'brackets',
                         'POST {tournamentId}/start' => 'start',
-                        'POST {tournamentId}/fights' => 'create-fight',
+                        'PUT {tournamentId}/fights/{fightId}/status' => 'update-fight-status',
                         'PATCH {tournamentId}/fights/{fightId}/scores' => 'update-score'
                     ]
                 ],

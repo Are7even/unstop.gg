@@ -9,10 +9,12 @@ use app\models\Tournament;
 use app\models\Fight;
 use app\models\Score;
 use app\models\User;
+use app\models\IntermediateScore;
 use app\modules\v1\helpers\TournamentHelper;
 use app\helpers\TournamentStatusHelper;
 use yii\web\NotFoundHttpException;
 use yii\web\NotAcceptableHttpException;
+use yii\web\BadRequestHttpException;
 use Yii;
 
 class TournamentController extends Controller
@@ -21,6 +23,7 @@ class TournamentController extends Controller
     private $scoreModel;
     private $fightModel;
     private $userModel;
+    private $intermediateScoreModel;
     private $tournamentHelper;
 
     public function init() {
@@ -29,6 +32,7 @@ class TournamentController extends Controller
         $this->tournametModel = new Tournament();
         $this->fightModel = new Fight();
         $this->userModel = new User();
+        $this->intermediateScoreModel = new IntermediateScore();
     }
 
     public function actionTournaments() {
@@ -97,11 +101,24 @@ class TournamentController extends Controller
         return $this->tournamentHelper->buildBracket($teams, $scores);
     }
 
-    public function actionCreateFight($tournamentId) {
+    public function actionUpdateFightStatus($tournamentId, $fightId) {
+        $request = Yii::$app->request;
+        $firstStatus = $request->getBodyParam('firstStatus');
+        if (!$firstStatus) $firstStatus = 0;
+
+        $secondStatus = $request->getBodyParam('secondStatus');
+        if (!$secondStatus) $secondStatus = 0;
+
+        $status = $this->intermediateScoreModel->updateStatuses($fightId, $firstStatus, $secondStatus);
+        if (!$status) {
+            throw new BadRequestHttpException('Bad request');
+        }
+
         return [];
     }
 
     public function actionUpdateScore($tournamentId, $fightId) {
+        
         return [];
     }
 }

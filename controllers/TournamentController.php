@@ -9,6 +9,7 @@ use app\models\Tournament;
 use app\models\TournamentToUser;
 use app\models\User;
 use app\models\UserGameRating;
+use app\models\IntermediateScore;
 use yii\web\Response;
 use yii\web\Controller;
 use yii\web\Session;
@@ -108,17 +109,22 @@ class TournamentController extends Controller
     public function actionFight($tournamentId)
     {
         $fight = $this->findFight($tournamentId);
-        if ($fight->first_user_id == Fight::getFightingUser()->id) {
-            $fightingUser = Fight::getFightingUser();
+        $fightingUser = Fight::getFightingUser();
+        if ($fight->first_user_id == $fightingUser->id) {
             $enemy = Fight::getEnemy($fight->second_user_id);
-            return $this->render('fight',[
+            return $this->render('fight', [
+                'fightId' => $fight->id,
+                'statuses' => IntermediateScore::$status,
+                'statusParam' => 'firstStatus',
                 'user'=> $fightingUser,
                 'enemy'=> $enemy,
             ]);
-        } elseif ($fight->second_user_id == Fight::getFightingUser()->id) {
-            $fightingUser = Fight::getFightingUser();
+        } elseif ($fight->second_user_id == $fightingUser->id) {
             $enemy = Fight::getEnemy($fight->first_user_id);
-            return $this->render('fight',[
+            return $this->render('fight', [
+                'fightId' => $fight->id,
+                'statuses' => IntermediateScore::$status,
+                'statusParam' => 'secondStatus',
                 'user'=> $fightingUser,
                 'enemy'=> $enemy,
             ]);

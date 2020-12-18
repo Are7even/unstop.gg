@@ -3032,6 +3032,7 @@ a .lk-button:hover {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  padding: 0 15px;
 }
 
 .faiting .faiting-container .result .correct-result {
@@ -3051,10 +3052,31 @@ a .lk-button:hover {
           align-items: center;
   font-size: 20px;
   font-weight: 500;
+  cursor: pointer;
+}
+
+.faiting .faiting-container .result .correct-result:hover {
+  -webkit-transition: .2ms ease-in-out;
+  -o-transition: .2ms ease-in-out;
+  transition: .2ms ease-in-out;
+  background-color: #ED7F00;
+}
+
+.faiting .faiting-container .result .correct-result-admin {
+  background-color: #ED7F00;
+  margin-bottom: 20px;
+  margin-top: 0 !important;
+}
+
+.faiting .faiting-container .result .correct-result-admin:hover {
+  -webkit-transition: .2ms ease-in-out;
+  -o-transition: .2ms ease-in-out;
+  transition: .2ms ease-in-out;
+  background-color: #5600ff;
 }
 
 .faiting .faiting-container .result .vs {
-  margin-top: 80px;
+  margin: 80px 0;
   color: #b91906;
   font-weight: 900;
   font-size: 100px;
@@ -3485,6 +3507,57 @@ a .lk-button:hover {
   background-color: transparent;
 }
 
+.content404 {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.content404 .text {
+  color: #272c31;
+  font-size: 22px;
+  font-weight: 600;
+  padding: 20px 0 40px 0;
+}
+
+.content404 .button {
+  background-color: #5600ff;
+  height: 50px;
+  width: 100%;
+  max-width: 350px;
+  outline: 0;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.content404 .button:hover {
+  -webkit-transition: .2ms ease-in-out;
+  -o-transition: .2ms ease-in-out;
+  transition: .2ms ease-in-out;
+  background-color: #fc5700;
+}
+
 .faiting {
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -3754,6 +3827,12 @@ a .lk-button:hover {
   .faiting .faiting-container .result .vs {
     margin: 30px 0;
   }
+
+
+  .won {
+    margin-bottom: 15px;
+  }
+
 }
 
 @media (max-width: 992px) {
