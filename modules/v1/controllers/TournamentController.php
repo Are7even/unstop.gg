@@ -53,17 +53,6 @@ class TournamentController extends Controller
         ];
     }
 
-    public function actionFights($tournamentId) {
-        return [];
-    }
-
-    public function actionScore($tournamentId, $fightId) {
-        return [
-            'id' => $tournamentId,
-            'fightId' => $fightId
-        ];
-    }
-
     public function actionStart($tournamentId)
     {
         $tournament = Tournament::findOne($tournamentId);
@@ -102,23 +91,72 @@ class TournamentController extends Controller
     }
 
     public function actionUpdateFightStatus($tournamentId, $fightId) {
-        $request = Yii::$app->request;
-        $firstStatus = $request->getBodyParam('firstStatus');
-        if (!$firstStatus) $firstStatus = 0;
+        try {
+            $request = Yii::$app->request;
+            $fight = $this->fightModel->getFightById($fightId);
+            if ($fight->status == Fight::$status['finished']) {
+                throw new NotAcceptableHttpException('Fight already finished');
+            }
 
-        $secondStatus = $request->getBodyParam('secondStatus');
-        if (!$secondStatus) $secondStatus = 0;
+            $firstStatus = $request->getBodyParam('firstStatus');
+            if (!$firstStatus) $firstStatus = 0;
 
-        $status = $this->intermediateScoreModel->updateStatuses($fightId, $firstStatus, $secondStatus);
-        if (!$status) {
-            throw new BadRequestHttpException('Bad request');
+            $secondStatus = $request->getBodyParam('secondStatus');
+            if (!$secondStatus) $secondStatus = 0;
+
+            $updateStatus = $this->intermediateScoreModel->updateStatuses($fightId, $firstStatus, $secondStatus);
+            if (!$updateStatus) {
+                throw new BadRequestHttpException('Bad request');
+            }
+
+            $status = $this->intermediateScoreModel->getByFight($fightId);
+            if (!$status->active) {
+                $score = $this->scoreModel->getScore($fight->score_id);
+                $first = $score->first_user_score || 0;
+                $second = $score->second_user_score || 0;
+
+                if (
+                    $status->first_user_id_status == IntermediateScore::$status['win'] &&
+                    $status->second_user_id_status == IntermediateScore::$status['lose']
+                ) {
+                    $first += 1;
+                } elseif (
+                    $status->second_user_id_status == IntermediateScore::$status['win'] &&
+                    $status->first_user_id_status == IntermediateScore::$status['lose']
+                ) {
+                    $second += 1;
+                }
+
+                $scoreStatus = $this->scoreModel->updateScore($fight->score_id, $first, $second);
+                if ($scoreStatus) {
+                    $this->fightModel->updateFightStatus($fight->id);
+                }
+            }
+
+            return [
+                'status' => $status
+            ];
+        } catch(Exception $e) {
+            return [
+                'error' => $e
+            ];
         }
-
-        return [];
     }
 
     public function actionUpdateScore($tournamentId, $fightId) {
-        
-        return [];
+        $request = Yii::$app->request;
+        $fight = $this->fightModel->getFightById($fightId);
+        if ($fight->status == Fight::$status['finished']) {
+            throw new NotAcceptableHttpException('Fight already finished');
+        }
+
+        $first = $request->getBodyParam('first');
+        $second = $request->getBodyParam('second');
+        $this->scoreModel->updateScore($fight->score_id, $first, $second);
+        $score = $this->scoreModel->getScore($fight->score_id);
+
+        return [
+            'score' => $score
+        ];
     }
 }

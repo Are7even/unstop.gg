@@ -59,9 +59,9 @@ startTournament();
 
 function initFightStatuses() {
     let isPending = false;
+    const errorBlock = document.getElementById('error-block');
     const winBtn = document.getElementById('iWonBtn');
     const loseBtn = document.getElementById('iLoseBtn');
-    console.log(winBtn, loseBtn)
     const tournamentId = new URLSearchParams(window.location.search).get('tournamentId');
     const config = {
         method: 'PUT',
@@ -71,12 +71,20 @@ function initFightStatuses() {
         }
     };
 
+    const checkStatus = ({ active, first_user_id_status, second_user_id_status }) => {
+        return (
+            active &&
+            first_user_id_status != 0 &&
+            second_user_id_status != 0 &&
+            first_user_id_status == second_user_id_status
+        );
+    }
+
     if (winBtn) {
         const fightId = winBtn.dataset.fightId;
         const statusParam = winBtn.dataset.param;
         const value = winBtn.dataset.value;
         const req = { ...config, body: JSON.stringify({ [statusParam]: value }) };
-        console.log(req);
 
         winBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -89,7 +97,16 @@ function initFightStatuses() {
                     }
                     return response.json();
                 })
-                .then(() => alert('Успех'))
+                .then(({ status }) => {
+                    const isConflict = checkStatus(status);
+                    if (isConflict && errorBlock) {
+                        errorBlock.classList.remove('hidden');
+                    } else {
+                        errorBlock.classList.add('hidden');
+                    }
+
+                    alert('Успех');
+                })
                 .catch((err) => {
                     alert('Провал');
                     console.error(err);

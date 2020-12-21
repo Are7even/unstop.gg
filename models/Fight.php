@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\Score;
 use Yii;
 
 /**
@@ -16,6 +17,18 @@ use Yii;
  */
 class Fight extends \yii\db\ActiveRecord
 {
+    public static $status = [
+        'ongoing' => 0,
+        'finished' => 1
+    ];
+
+    public static $winLimit = [
+        'bo1' => 1,
+        'bo3' => 2,
+        'bo5' => 3,
+        'bo7' => 4
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -30,7 +43,7 @@ class Fight extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tournament_id', 'first_user_id_score', 'second_user_id_score','stage_id','fight_order', 'score_id', 'status'], 'integer'],
+            [['tournament_id', 'first_user_id_score', 'second_user_id_score','fight_order', 'score_id', 'status'], 'integer'],
             [['first_user_id', 'second_user_id', 'type'], 'string', 'max' => 255],
         ];
     }
@@ -45,7 +58,6 @@ class Fight extends \yii\db\ActiveRecord
             'score_id' => Yii::t('admin', 'Score ID'),
             'status' => Yii::t('admin', 'Status'),
             'tournament_id' => Yii::t('admin', 'Tournament ID'),
-            'stage_id' => Yii::t('admin', 'Stage ID'),
             'fight_order' => Yii::t('admin', 'Fight Order'),
             'first_user_id' => Yii::t('admin', 'First User ID'),
             'second_user_id' => Yii::t('admin', 'Second User ID'),
@@ -54,7 +66,7 @@ class Fight extends \yii\db\ActiveRecord
         ];
     }
 
-    static function add($firstUserId,$secondUserId,$tournamentId, $order, $scoreId, $type){
+    static function add($firstUserId, $secondUserId, $tournamentId, $order, $scoreId, $type){
         $model = new self();
         $model->tournament_id = $tournamentId;
         $model->first_user_id = $firstUserId;
@@ -62,8 +74,7 @@ class Fight extends \yii\db\ActiveRecord
         $model->fight_order = $order;
         $model->score_id = $scoreId;
         $model->type = $type;
-        $model->save(false);
-        return true;
+        return $model->save();
     }
 
     public function getTournamentFights($tournamentId)
@@ -81,6 +92,32 @@ class Fight extends \yii\db\ActiveRecord
 
     public function getTournament () {
         return $this -> hasOne(Tournament::className(), ['id'=>'tournament_id']);
+    }
+
+    public function getFightById($fightId)
+    {
+        return $this->findOne($fightId);
+    }
+
+    public function updateFightStatus($fightId, $status = null) {
+        $fight = $this->getFightById($fightId);
+
+        if ($fight) {
+            if ($status == self::$status['ongoing'] || $status == self::$status['finished']) {
+                $fight->status = $status;
+                return $fight->save();
+            }
+
+            $scoreModel = new Score();
+            $score = $scoreModel->getScore($fight->score_id);
+            $limit = self::$winLimit[$fight->type];
+            if ($score->first_user_score >= $limit || $score->second_user_score >= $limit) {
+                $fight->status = self::$status['finished'];
+                return $fight->save();
+            }
+        }
+
+        return false;
     }
 
     static function getFightingUser(){

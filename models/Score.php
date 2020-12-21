@@ -56,4 +56,23 @@ class Score extends \yii\db\ActiveRecord
     {
         return $this->findOne($id);
     }
+
+    public function updateScore($id, $first = 0, $second = 0)
+    {
+        $score = $this->getScore($id);
+
+        if ($score) {
+            if ($first) {
+                $score->first_user_score = $first;
+            }
+
+            if ($second) {
+                $score->second_user_score = $second;
+            }
+
+            return $score->save();
+        }
+
+        return false;
+    }
 }
