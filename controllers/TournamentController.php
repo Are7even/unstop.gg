@@ -148,10 +148,27 @@ class TournamentController extends Controller
         }
     }
 
-    public function actionResults($tournamentId, $userId)
+    public function actionResults($tournamentId)
     {
+        $fight = $this->findFight($tournamentId);
+        $fightingUser = Fight::getFightingUser();
+        if ($fight->first_user_id == $fightingUser->id) {
+            $enemy = Fight::getEnemy($fight->second_user_id);
+            return $this->render('results', [
+                'user'=> $fightingUser,
+                'enemy'=> $enemy,
+                'fight'=>$fight,
+            ]);
+        } elseif ($fight->second_user_id == $fightingUser->id) {
+            $enemy = Fight::getEnemy($fight->first_user_id);
+            return $this->render('results', [
+                'user'=> $fightingUser,
+                'enemy'=> $enemy,
+                'fight'=>$fight,
+            ]);
+        }
+
         return $this->render('results');
     }
-
 
 }

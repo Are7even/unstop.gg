@@ -255,4 +255,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $this->hasOne(UserToGifts::className(),['user_id'=>'id']);
     }
 
+    public function getMessageSender(){
+        return $this->hasMany(Message::className(),['sender_id'=>'id']);
+    }
+    public function getMessageReceiver(){
+        return $this->hasMany(Message::className(),['receiver_id'=>'id']);
+    }
+
 }

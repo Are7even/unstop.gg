@@ -92,7 +92,7 @@ class AuthController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $user->updateFurtherInformation(Yii::$app->user->id, $model->username, $model->email);
             Yii::$app->session->setFlash('success', Yii::t('admin', 'User registered!'));
-            return $this->redirect(Url::to(['auth/login']));
+            return $this->redirect(Url::to(['site/index']));
         }
         return $this->render('further-information', [
             'furtherInformation' => $model,

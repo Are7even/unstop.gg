@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php $form = ActiveForm::begin([
         'id' => 'further-information-form',
         'layout' => 'horizontal',
-        'action' => 'auth/further-information',
+        'action' => \yii\helpers\Url::to(['auth/further-information']),
         'fieldConfig' => [
             'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
             'labelOptions' => ['class' => 'col-lg-1 control-label'],

@@ -31,7 +31,7 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                                 </div>
                                 <div class="rep-container">
                                     <div class="reputation">
-                                        <p><?php echo Yii::t('admin','Reputation')?></p>
+                                        <p><?= Yii::t('admin','Reputation')?></p>
                                         <p><?= $user->reputation?></p>
                                     </div>
                                     <div class="reputation">
@@ -88,7 +88,7 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                                 </div>
                                 <div class="rep-container">
                                     <div class="reputation">
-                                        <p><?php echo Yii::t('admin','Reputation')?></p>
+                                        <p><?= Yii::t('admin','Reputation')?></p>
                                         <p><?= $enemy->reputation?></p>
                                     </div>
                                     <div class="reputation">

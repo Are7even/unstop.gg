@@ -14,25 +14,25 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                 <div class="lk-menu">
                     <div class="lk-nav">
                         <ul>
-                            <li class="menu-link"><a href="<?= Url::to(['tournament/view','id'=>$tournament->id])?>"><?=Yii::t('admin','Overview')?></a></li>
+                            <li class="menu-link"><a href="<?= Url::to(['tournament/view','id'=>Yii::$app->session['tournamentId']])?>"><?=Yii::t('admin','Overview')?></a></li>
                             <li class="menu-link"><a href="#">Current</a></li>
-                            <li class="menu-link"><a href="<?= Url::to(['tournament/fight','tournamentId'=>$tournament->id,'userId'=>Yii::$app->user->id])?>"><?=Yii::t('admin','Fight')?></a></li>
-                            <li class="menu-link"><a href="<?= Url::to(['tournament/results','tournamentId'=>$tournament->id,'userId'=>Yii::$app->user->id])?>"><?=Yii::t('admin','Results')?></a></li>
+                            <li class="menu-link"><a href="<?= Url::to(['tournament/fight','tournamentId'=>Yii::$app->session['tournamentId']])?>"><?=Yii::t('admin','Fight')?></a></li>
+                            <li class="menu-link"><a href="<?= Url::to(['tournament/results','tournamentId'=>Yii::$app->session['tournamentId']])?>"><?=Yii::t('admin','Results')?></a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="faiting-container faiting-result">
                     <div class="faiter">
                         <div class="fainer-content">
-                            <img src="/web/site/img/lk-image.png" alt="">
+                            <img src="/web/upload/user/<?= $user->photo ?>" alt="">
                             <div class="faiter-info">
                                 <div class="name">
-                                    JasonStathem
+                                    <?= $user->username?>
                                 </div>
                                 <div class="rep-container">
                                     <div class="reputation">
-                                        <p>Reputation</p>
-                                        <p>300</p>
+                                        <p><?= Yii::t('admin','Reputation')?></p>
+                                        <p><?= $user->reputation?></p>
                                     </div>
                                     <div class="reputation">
                                         <p>Rate</p>
@@ -43,21 +43,25 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                         </div>
                     </div>
                     <div class="result">
-                        <div class="status">Winner</div>
-                        <div class="vinner-name">JasonStathem</div>
-                        <div class="vs">1 - 0</div>
+<!--                        <div class="status">--><?//= Yii::t('admin','Winner')?><!--</div>-->
+<!--                        <div class="vinner-name">JasonStathem</div>-->
+                        <?php if (Yii::$app->user->id !== $fight->first_user_id):?>
+                        <div class="vs"><?= $fight->score->second_user_score ?> - <?= $fight->score->first_user_score ?></div>
+                        <?php else:?>
+                        <div class="vs"><?= $fight->score->first_user_score ?> - <?= $fight->score->second_user_score ?></div>
+                        <?php endif;?>
                     </div>
                     <div class="faiter oponent">
                         <div class="fainer-content">
-                            <img src="/web/site/img/lk-image.png" alt="">
+                            <img src="/web/upload/user/<?= $enemy->photo ?>" alt="">
                             <div class="faiter-info">
                                 <div class="name">
-                                    JasonStathem
+                                    <?= $enemy->username?>
                                 </div>
                                 <div class="rep-container">
                                     <div class="reputation">
-                                        <p>Reputation</p>
-                                        <p>300</p>
+                                        <p><?= Yii::t('admin','Reputation')?></p>
+                                        <p><?= $enemy->reputation?></p>
                                     </div>
                                     <div class="reputation">
                                         <p>Rate</p>

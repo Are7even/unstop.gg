@@ -91,4 +91,8 @@ class Fight extends \yii\db\ActiveRecord
         return User::findOne($enemyId);
     }
 
+    public function getScore(){
+        return $this->hasOne(Score::className(),['id'=>'score_id']);
+    }
+
 }
