@@ -106,9 +106,12 @@ class TournamentController extends Controller
     {
         $fight = $this->findFight($tournamentId);
         $fightingUser = Fight::getFightingUser();
+        $statusModel = new IntermediateScore();
+        $status = $statusModel->getByFight($fight->id);
         if ($fight->first_user_id == $fightingUser->id) {
             $enemy = Fight::getEnemy($fight->second_user_id);
             return $this->render('fight', [
+                'status' => $status,
                 'fightId' => $fight->id,
                 'statuses' => IntermediateScore::$status,
                 'statusParam' => 'firstStatus',
@@ -118,6 +121,7 @@ class TournamentController extends Controller
         } elseif ($fight->second_user_id == $fightingUser->id) {
             $enemy = Fight::getEnemy($fight->first_user_id);
             return $this->render('fight', [
+                'status' => $status,
                 'fightId' => $fight->id,
                 'statuses' => IntermediateScore::$status,
                 'statusParam' => 'secondStatus',

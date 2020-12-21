@@ -3,6 +3,12 @@
 use yii\helpers\Url;
 use yii\web\View;
 $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', ['position' => View::POS_HEAD]);
+$isHasConflict = (
+    $status->active &&
+    $status->first_user_id_status != $statuses['unset'] &&
+    $status->second_user_id_status != $statuses['unset'] &&
+    $status->first_user_id_status == $status->second_user_id_status
+);
 
 ?>
 
@@ -21,6 +27,7 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                         </ul>
                     </div>
                 </div>
+                <div id="error-block" class="error <?= $isHasConflict ? '' : 'hidden' ?>">Conflicted Score Suka</div>
                 <div class="faiting-container">
                     <div class="faiter">
                         <div class="fainer-content">

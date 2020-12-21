@@ -62,13 +62,22 @@ class IntermediateScore extends \yii\db\ActiveRecord
     public function updateStatuses($fightId, $firstStatus = 0, $secondStatus = 0)
     {
         $status = $this->getByFight($fightId);
-        if ($status) {
+        if ($status && $status->active) {
             if ($firstStatus == self::$status['win'] || $firstStatus == self::$status['lose']) {
                 $status->first_user_id_status = $firstStatus;
             }
             if ($secondStatus == self::$status['win'] || $secondStatus == self::$status['lose']) {
                 $status->second_user_id_status = $secondStatus;
             }
+
+            if (
+                $status->first_user_id_status != self::$status['unset'] &&
+                $status->second_user_id_status != self::$status['unset'] &&
+                $status->first_user_id_status != $status->second_user_id_status
+            ) {
+                $status->active = false;
+            }
+
             return $status->save();
         } else {
             return $this->create($fightId, $firstStatus, $secondStatus);

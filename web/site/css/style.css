@@ -1,3 +1,15 @@
+.hidden {
+  display: none;
+}
+
+.error {
+  color: #ff0808;
+  font-size: 32px;
+  width: 100%;
+  text-align: center;
+  margin-top: 2em;
+}
+
 .header {
   background-color: #323B45;
   display: -webkit-box;
