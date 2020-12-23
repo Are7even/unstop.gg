@@ -1,6 +1,8 @@
 <?php
 
 namespace app\modules\v1\helpers;
+
+use app\models\IntermediateScore;
 use Yii;
 
 class TournamentHelper
@@ -61,5 +63,25 @@ class TournamentHelper
             'teams' => $teams,
             'results' => $results
         ];
+    }
+
+    public function getUpdatedResult($score, $status)
+    {
+        $first = $score->first_user_score;
+        $second = $score->second_user_score;
+
+        if (
+            $status->first_user_id_status == IntermediateScore::$status['win'] &&
+            $status->second_user_id_status == IntermediateScore::$status['lose']
+        ) {
+            $first += 1;
+        } elseif (
+            $status->second_user_id_status == IntermediateScore::$status['win'] &&
+            $status->first_user_id_status == IntermediateScore::$status['lose']
+        ) {
+            $second += 1;
+        }
+
+        return [$first, $second];
     }
 }

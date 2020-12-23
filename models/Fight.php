@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\Tournament;
 use app\models\Score;
 use Yii;
 
@@ -18,8 +19,9 @@ use Yii;
 class Fight extends \yii\db\ActiveRecord
 {
     public static $status = [
-        'ongoing' => 0,
-        'finished' => 1
+        'waiting' => 0,
+        'ongoing' => 1,
+        'finished' => 2
     ];
 
     public static $winLimit = [
@@ -66,6 +68,38 @@ class Fight extends \yii\db\ActiveRecord
         ];
     }
 
+    private function createStageFight($fight, $score)
+    {
+        $tournamentModel = new Tournament();
+        $tournament = $tournamentModel->getTournament($fight->tournament_id);
+        $size = $tournament->players_count / $fight->stage / 2;
+        $fightOrder = $fight->fight_order + $size;
+        $current = $this
+            ->find()
+            ->where([
+                'tournament_id' => $tournament->id,
+                'fight_order' => $fightOrder
+            ])
+            ->one();
+
+        $winner = $score->first_user_score > $score->second_user_score
+            ? $fight->first_user_id
+            : $fight->second_user_id;
+
+        if (!$current) {
+            $score = new Score();
+            $scoreId = $score->create();
+            return self::add($winner, null, $tournament->id, $fightOrder, $scoreId, $fight->type);
+        } else {
+            if ($current->first_user_id == null) {
+                $current->first_user_id = $winner;
+            } elseif ($current->second_user_id == null) {
+                $current->second_user_id = $winner;
+            }
+            return $current->save();
+        }
+    }
+
     static function add($firstUserId, $secondUserId, $tournamentId, $order, $scoreId, $type){
         $model = new self();
         $model->tournament_id = $tournamentId;
@@ -99,11 +133,15 @@ class Fight extends \yii\db\ActiveRecord
         return $this->findOne($fightId);
     }
 
-    public function updateFightStatus($fightId, $status = null) {
+    public function updateFightStatus($fightId, $status = -1) {
         $fight = $this->getFightById($fightId);
 
         if ($fight) {
-            if ($status == self::$status['ongoing'] || $status == self::$status['finished']) {
+            if (
+                $status === self::$status['ongoing'] ||
+                $status === self::$status['finished'] ||
+                $status === self::$status['waiting']
+            ) {
                 $fight->status = $status;
                 return $fight->save();
             }
@@ -113,7 +151,10 @@ class Fight extends \yii\db\ActiveRecord
             $limit = self::$winLimit[$fight->type];
             if ($score->first_user_score >= $limit || $score->second_user_score >= $limit) {
                 $fight->status = self::$status['finished'];
-                return $fight->save();
+                $isSaved = $fight->save();
+                if ($isSaved) {
+                    return $this->createStageFight($fight, $score);
+                }
             }
         }
 
