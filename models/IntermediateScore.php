@@ -79,9 +79,11 @@ class IntermediateScore extends \yii\db\ActiveRecord
             }
 
             return $status->save();
-        } else {
+        } else if (!$status) {
             return $this->create($fightId, $firstStatus, $secondStatus);
         }
+
+        return false;
     }
 
     public function getByFight($fightId)
