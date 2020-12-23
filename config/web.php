@@ -187,6 +187,7 @@ $config = [
             'cabinet/*',
             'tournament/*',
             'simplechat/*',
+            'chat/*',
         ]
     ],
     'params' => $params,

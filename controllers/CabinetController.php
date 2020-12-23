@@ -62,11 +62,11 @@ class CabinetController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionPhoto($id){
+    public function actionPhoto(){
         $model = new CabinetSetPhotoForm();
 
         if (Yii::$app->request->isPost) {
-            $user = $this->findModel($id);
+            $user = $this->findModel(Yii::$app->user->id);
             $file = UploadedFile::getInstance($model, 'photo');
             if ($user->savePhoto($model->uploadFile($file, $user->image)))
             {

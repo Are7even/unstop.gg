@@ -1,3 +1,15 @@
+(function () {
+    const id = new URLSearchParams(window.location.search).get('id');
+    const chat = document.getElementById('chat');
+    if (chat && id){
+        const iframe = document.createElement('iframe');
+        iframe.classList.add('chat-iframe');
+        iframe.src = `/chat/chat?id=${id}`;
+        iframe.frameBorder = 0;
+        chat.appendChild(iframe);
+    }
+})();
+
 const popupLinks = document.querySelectorAll('.popup-link');
 const body = document.querySelector('body');
 const lockPadding = document.querySelectorAll(".lock-padding");

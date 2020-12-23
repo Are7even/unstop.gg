@@ -27,7 +27,7 @@ $isHasConflict = (
                         </ul>
                     </div>
                 </div>
-                <div id="error-block" class="error <?= $isHasConflict ? '' : 'hidden' ?>">Conflicted Score Suka</div>
+                <div id="error-block" class="error <?= $isHasConflict ? '' : 'hidden' ?>"><?= Yii::t('admin','Conflicted Score!')?></div>
                 <div class="faiting-container">
                     <div class="faiter">
                         <div class="fainer-content">

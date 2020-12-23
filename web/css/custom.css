@@ -115,3 +115,7 @@ a .lk-button {
     border: none;
     cursor: pointer;
 }
+
+.chat-iframe{
+    width: 100%;
+}

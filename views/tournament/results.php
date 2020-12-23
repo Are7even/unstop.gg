@@ -45,7 +45,7 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                     <div class="result">
 <!--                        <div class="status">--><?//= Yii::t('admin','Winner')?><!--</div>-->
 <!--                        <div class="vinner-name">JasonStathem</div>-->
-                        <?php if (Yii::$app->user->id !== $fight->first_user_id):?>
+                        <?php if (Yii::$app->user->id != $fight->first_user_id):?>
                         <div class="vs"><?= $fight->score->second_user_score ?> - <?= $fight->score->first_user_score ?></div>
                         <?php else:?>
                         <div class="vs"><?= $fight->score->first_user_score ?> - <?= $fight->score->second_user_score ?></div>

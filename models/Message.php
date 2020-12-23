@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property int $sender_id
  * @property int $receiver_id
- * @property int $text
+ * @property string $text
  * @property string $created_at
  */
 class Message extends \yii\db\ActiveRecord
@@ -29,9 +29,11 @@ class Message extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'sender_id', 'receiver_id', 'text', 'created_at'], 'required'],
-            [['id', 'sender_id', 'receiver_id', 'text'], 'integer'],
+            [['sender_id', 'receiver_id', 'text'], 'required'],
+            [['sender_id', 'receiver_id'], 'integer'],
+            [['text'], 'string'],
             [['created_at'], 'safe'],
+            [['created_at'], 'default', 'value' => gmdate("Y-m-d H:i:s")],
         ];
     }
 
@@ -60,8 +62,7 @@ class Message extends \yii\db\ActiveRecord
     public static function findMessages($senderId,$receiverId){
         return self::find()
             ->where(['sender_id'=>$senderId,'receiver_id'=>$receiverId])
-            ->orWhere(['sender_id'=>$receiverId,'receiver_id'=>$senderId])
-            ->all();
+            ->orWhere(['sender_id'=>$receiverId,'receiver_id'=>$senderId]);
     }
 
 }
