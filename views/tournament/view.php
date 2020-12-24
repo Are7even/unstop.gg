@@ -78,7 +78,7 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                         <?php endif; ?>
                     <?php elseif (!$tournament->checkRegistration(Yii::$app->user->id, $tournament->id)): ?>
                         <div class="button-registration">
-                            <?= \yii\helpers\Html::a(Yii::t('admin', 'Registration'), Url::to(['tournament/registration', 'tournamentId' => $tournament->id]), ['id' => 'tournament-button']) ?>
+                            <?= \yii\helpers\Html::a(Yii::t('admin', 'Registration'), Url::to(['tournament/registration', 'tournamentId' => $tournament->id])); ?>
                         </div>
                     <?php endif; ?>
                 </div>

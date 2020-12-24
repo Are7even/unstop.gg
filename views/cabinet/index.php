@@ -192,10 +192,9 @@ $userId = $user->id;
                                         </div>
                                     </div>
                                     <div class="page__tabs-content__item js-tab-content" data-tab="7">
-
                                         <?= \app\widgets\TournamentIndexWidget::widget(['author' => Yii::$app->user->id]) ?>
-
                                     </div>
+
                                     <div class="page__tabs-content__item js-tab-content" data-tab="8">
                                         <div class="page__item">
                                             <div class="page__item-content">
@@ -209,7 +208,7 @@ $userId = $user->id;
                                         <div class="page__item">
                                             <div class="page__item-content reward">
                                                 <?php foreach ($gifts as $gift): ?>
-                                                    <div class="reward-container" style="width: 985px">
+                                                    <div class="reward-container">
                                                         <div class="icons">
                                                             <img src="/web/upload/gifts/<?= $gift->gifts->icon ?>"
                                                                  alt="">
