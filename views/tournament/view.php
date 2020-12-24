@@ -65,8 +65,8 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                     </div>
                 </div>
                 <div class="tournament-buttons game-container">
-                    <div class="button">О турнире <i class="fal fa-plus"></i>
-                    <div class="panel">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci alias amet at blanditiis consectetur corporis culpa debitis distinctio dolorum ex incidunt labore, laborum laudantium minus molestiae necessitatibus, nisi numquam obcaecati, odio odit pariatur placeat quia quidem quis ratione recusandae repellendus sapiente sequi tenetur unde voluptatem voluptatibus voluptatum. Ex, fugiat, voluptatem. Aperiam assumenda eum eveniet fuga illo itaque iure, laudantium modi neque nisi, omnis optio, quis quo suscipit temporibus voluptas.</div>
+                    <div class="button"><?= Yii::t('admin','About tournament')?> <i class="fal fa-plus"></i>
+                    <div class="panel"><?= $tournament->text ?></div>
                     </div>
                 </div>
                 <div class="reg-container">

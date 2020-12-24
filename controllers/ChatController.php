@@ -19,7 +19,7 @@ class ChatController extends Controller
         $this->layout = false;
     }
 
-    public function actionIndex()
+    public function usersList()
     {
         $messagesUser = Message::find()
             ->where(['sender_id' => Yii::$app->user->id])
@@ -35,19 +35,18 @@ class ChatController extends Controller
                 $arrayUser[] = $user->receiver_id;
             }
         }
-
         $arrayUser = array_unique($arrayUser);
         $users = User::find()
-            ->where(['id' => $arrayUser])
-            ->all();
+            ->where(['id' => $arrayUser]);
 
-        return $this->render('list', compact('users'));
+        return $users;
     }
 
     public function actionChat($id)
     {
         $currentUserId = Yii::$app->user->id;
         $messagesQuery = Message::findMessages($currentUserId, $id);
+        $usersList = $this->usersList();
 
         $message = new Message([
             'sender_id' => $currentUserId,
@@ -79,7 +78,7 @@ class ChatController extends Controller
         return $this->render('chat', [
             'message'=>$message,
             'messagesQuery'=>$messagesQuery,
-            'chatId'=>$id,
+            'usersList'=>$usersList,
         ]);
     }
 

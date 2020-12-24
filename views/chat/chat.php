@@ -11,6 +11,7 @@ use yii\widgets\Pjax;
 <?php echo $this->render('_chat',[
     'message'=>$message,
     'messagesQuery'=>$messagesQuery,
+    'usersList'=>$usersList,
 ]);?>
 <?php Pjax::end()?>
 

@@ -198,7 +198,7 @@ $userId = $user->id;
                                     <div class="page__tabs-content__item js-tab-content" data-tab="8">
                                         <div class="page__item">
                                             <div class="page__item-content">
-                                                <div style="width: 1000px;">
+                                                <div>
                                                     <?= $user->about ?>
                                                 </div>
                                             </div>

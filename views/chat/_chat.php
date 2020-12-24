@@ -12,6 +12,10 @@ use yii\widgets\Pjax;
     'linkSelector' => false,
     'formSelector' => false,
 ]) ?>
+<?= $this->render('_list-users', [
+    'usersList' => $usersList,
+]) ?>
+
 
 <?= $this->render('_list', [
     'messagesQuery' => $messagesQuery,

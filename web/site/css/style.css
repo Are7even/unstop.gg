@@ -1,15 +1,3 @@
-.hidden {
-  display: none;
-}
-
-.error {
-  color: #ff0808;
-  font-size: 32px;
-  width: 100%;
-  text-align: center;
-  margin-top: 2em;
-}
-
 .header {
   background-color: #323B45;
   display: -webkit-box;
@@ -90,7 +78,12 @@
 .header .container .control_login .control_login .avatar {
   border-radius: 100%;
   width: 80px;
+  height: 80px;
+  -o-object-fit: cover;
+     object-fit: cover;
   cursor: pointer;
+  -o-object-position: top;
+     object-position: top;
 }
 
 .header .container .control .control_login i,
@@ -1722,6 +1715,16 @@ a .lk-button:hover {
   position: relative;
 }
 
+.tournament-image img {
+  width: 100%;
+  max-height: 600px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-color: #000000;
+  -o-object-position: top;
+     object-position: top;
+}
+
 .tournament-image .tournament-text {
   height: 170px;
   -webkit-backdrop-filter: blur(23px);
@@ -2382,6 +2385,7 @@ a .lk-button:hover {
 .lk-content .lk-aside {
   max-width: 360px;
   margin-right: 15px;
+  min-width: 290px;
 }
 
 .lk-content .lk-aside .lk-info {
@@ -2411,6 +2415,11 @@ a .lk-button:hover {
   max-width: 490px;
   border-radius: 8px 8px 0 0;
   vertical-align: bottom;
+  max-height: 360px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
 }
 
 .lk-content .lk-aside .lk-info .image-container .diamond {
@@ -3840,11 +3849,9 @@ a .lk-button:hover {
     margin: 30px 0;
   }
 
-
   .won {
     margin-bottom: 15px;
   }
-
 }
 
 @media (max-width: 992px) {
