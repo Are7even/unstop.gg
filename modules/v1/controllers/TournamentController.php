@@ -15,6 +15,7 @@ use app\helpers\TournamentStatusHelper;
 use yii\web\NotFoundHttpException;
 use yii\web\NotAcceptableHttpException;
 use yii\web\BadRequestHttpException;
+use yii\web\ServerErrorHttpException;
 use Yii;
 
 class TournamentController extends Controller
@@ -55,7 +56,7 @@ class TournamentController extends Controller
 
     public function actionStart($tournamentId)
     {
-        $tournament = Tournament::findOne($tournamentId);
+        $tournament = $this->tournametModel->getTournament($tournamentId);
         $userList = TournamentToUser::getUserList($tournamentId);
         if ($tournament->status !== TournamentStatusHelper::$waiting) {
             throw new NotAcceptableHttpException('Tournament already started');
@@ -69,11 +70,19 @@ class TournamentController extends Controller
             $pairs = $this->tournamentHelper->getPairs($userList);
             foreach ($pairs as $key => $pair) {
                 $score = new Score();
+                $fight = new Fight();
                 $scoreId = $score->create();
                 $type = 'bo1';
-                Fight::add($pair[0], $pair[1], $tournamentId, $key + 1, $scoreId, $type);
+                $isFightSaved = $fight->createFight($pair[0], $pair[1], $tournamentId, $key + 1, $scoreId, $type);
+                if (!$isFightSaved) {
+                    $tournament->allow();
+                    $score->delete();
+                    return ['errors' => $fight->errors];
+                }
             }
             return ['pairs' => $pairs];
+        } else {
+            return ['errors' => $tournament->errors];
         }
     }
 
@@ -121,14 +130,13 @@ class TournamentController extends Controller
         }
 
         $status = $this->intermediateScoreModel->getByFight($fightId);
+        $score = $this->scoreModel->getScore($fight->score_id);
+        $result = $this->tournamentHelper->getUpdatedResult($score, $status);
         if (!$status->active) {
-            $score = $this->scoreModel->getScore($fight->score_id);
-            $result = $this->tournamentHelper->getUpdatedResult($score, $status);
             $scoreStatus = $this->scoreModel->updateScore($fight->score_id, $result[0], $result[1]);
-            if ($scoreStatus) {
-                $this->fightModel->updateFightStatus($fight->id);
-            }
         }
+
+        $this->fightModel->updateFightStatus($fight->id);
 
         return [
             'status' => $status,
