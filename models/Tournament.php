@@ -64,8 +64,8 @@ class Tournament extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['hidden','status', 'handheld', 'rating_on', 'players_count', 'checkin', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place'], 'integer'],
-            [['icon', 'game','author', 'type'], 'string', 'max' => 255],
+            [['hidden','status', 'handheld', 'rating_on', 'players_count', 'checkin', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place', 'game'], 'integer'],
+            [['icon', 'author', 'type'], 'string', 'max' => 255],
             [['created_at', 'start', 'end','checkin_start', 'checkin_end'], 'safe'],
             [['created_at'], 'default', 'value' => date('Y-m-j')],
             [['author'], 'default', 'value' => Yii::$app->user->id],
@@ -127,7 +127,7 @@ class Tournament extends \yii\db\ActiveRecord
 
     public function allow(){
         $this->status = TournamentStatusHelper::$waiting;
-        return $this->save(false);
+        return $this->save();
     }
 
     public function disallow(){
@@ -135,9 +135,9 @@ class Tournament extends \yii\db\ActiveRecord
         return $this->save(false);
     }
 
-    public function start(){
+    public function start() {
         $this->status = TournamentStatusHelper::$fighting;
-        return $this->save(false);
+        return $this->save();
     }
 
     public function checkRegistration($userId,$tournamentId){

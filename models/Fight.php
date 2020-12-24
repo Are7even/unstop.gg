@@ -45,8 +45,8 @@ class Fight extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tournament_id', 'first_user_id_score', 'second_user_id_score','fight_order', 'score_id', 'status'], 'integer'],
-            [['first_user_id', 'second_user_id', 'type'], 'string', 'max' => 255],
+            [['first_user_id', 'second_user_id', 'tournament_id', 'first_user_id_score', 'second_user_id_score','fight_order', 'score_id', 'status'], 'integer'],
+            [['type'], 'string', 'max' => 255],
         ];
     }
 
@@ -73,7 +73,7 @@ class Fight extends \yii\db\ActiveRecord
         $tournamentModel = new Tournament();
         $tournament = $tournamentModel->getTournament($fight->tournament_id);
         $size = $tournament->players_count / $fight->stage / 2;
-        $fightOrder = $fight->fight_order + $size;
+        $fightOrder = ceil($fight->fight_order / 2) + $size;
         $current = $this
             ->find()
             ->where([
@@ -85,15 +85,16 @@ class Fight extends \yii\db\ActiveRecord
         $winner = $score->first_user_score > $score->second_user_score
             ? $fight->first_user_id
             : $fight->second_user_id;
+        
 
         if (!$current) {
             $score = new Score();
             $scoreId = $score->create();
             return self::add($winner, null, $tournament->id, $fightOrder, $scoreId, $fight->type);
         } else {
-            if ($current->first_user_id == null) {
+            if (!$current->first_user_id) {
                 $current->first_user_id = $winner;
-            } elseif ($current->second_user_id == null) {
+            } else {
                 $current->second_user_id = $winner;
             }
             return $current->save();
@@ -109,6 +110,16 @@ class Fight extends \yii\db\ActiveRecord
         $model->score_id = $scoreId;
         $model->type = $type;
         return $model->save();
+    }
+
+    public function createFight($firstUserId, $secondUserId, $tournamentId, $order, $scoreId, $type) {
+        $this->tournament_id = $tournamentId;
+        $this->first_user_id = $firstUserId;
+        $this->second_user_id = $secondUserId;
+        $this->fight_order = $order;
+        $this->score_id = $scoreId;
+        $this->type = $type;
+        return $this->save();
     }
 
     public function getTournamentFights($tournamentId)
