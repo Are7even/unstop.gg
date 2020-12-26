@@ -11,7 +11,7 @@ use yii\helpers\Html;
     </div>
     <p class="name"><?= Yii::t('admin', 'Username') ?>: <?= $model->username ?></p>
     <p class="status"><?= Yii::t('admin', 'Status') ?>
-        : <?= ($model->authAssignment->item_name) ? 'admin' : 'user' ?></p>
+        : <?= (isset($model->authAssignment->item_name)) ? 'admin' : 'user' ?></p>
     <p><?= Yii::t('admin', 'Reputation') ?>: <?= $model->reputation ?></p>
     <p class="star">
         <i class="fas fa-star"></i>
