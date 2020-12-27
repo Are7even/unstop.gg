@@ -90,6 +90,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return User::find()->where(['email' => $email])->one();
     }
 
+    public static function findById($id)
+    {
+        return User::find()->where(['id' => $id])->one();
+    }
+
     static function getAllUsers()
     {
         return self::find()->all();

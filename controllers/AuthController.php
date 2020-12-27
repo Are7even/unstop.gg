@@ -73,6 +73,10 @@ class AuthController extends Controller
 
     public function actionLoginVk($uid, $first_name, $last_name, $photo)
     {
+        if (User::findById($uid)){
+            Yii::$app->getUser()->login($uid);
+            return $this->redirect(Url::to(['site/index']));
+        }
         $user = new User();
         if ($user->saveFromVk($uid, $first_name, $last_name, $photo)) {
             if (empty(User::getUsername(Yii::$app->user->id))) {

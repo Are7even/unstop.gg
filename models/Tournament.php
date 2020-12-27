@@ -166,4 +166,13 @@ class Tournament extends \yii\db\ActiveRecord
         return $date;
     }
 
+    public static function maxPlayersCheck($tournamentId,$maxPlayers){
+        $playersCount = TournamentToUser::find()->where(['tournament_id'=>$tournamentId])->all();
+        $playersCount = count($playersCount);
+        if ($playersCount <= $maxPlayers){
+            return true;
+        }
+        return false;
+    }
+
 }
