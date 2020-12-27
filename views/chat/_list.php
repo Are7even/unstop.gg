@@ -12,7 +12,7 @@ use yii\data\ActiveDataProvider;
 ?>
 
 <?= ListView::widget([
-   // 'id'=>'list-messages',
+    'id'=>'list-scroll',
     'itemView' => '_row',
     'layout' => '{items}',
     'dataProvider' => new ActiveDataProvider([
