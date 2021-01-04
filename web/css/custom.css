@@ -173,3 +173,15 @@ a .lk-button {
 .hidden {
     display: none;
 }
+
+.tournament-gamers .match-tournament .table-button {
+    position: relative;
+}
+
+.tournament-gamers .match-tournament .table-button .close{
+    position: absolute;
+    top: 5px;
+    right: 12px;
+    color: #fff;
+    z-index: 2;
+}

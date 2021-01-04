@@ -4,8 +4,7 @@ use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 
 ?>
-<style><?php include(Yii::getAlias('@app/web/site/css/style.css'));?></style>
-<style><?php include(Yii::getAlias('@app/web/css/custom.css'));?></style>
+
 <?php Pjax::begin([
     'id' => 'list-messages',
     'enablePushState' => false,

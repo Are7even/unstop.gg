@@ -1,6 +1,10 @@
 <?php
 use yii\widgets\Pjax;
+\app\assets\SiteAsset::register($this);
 ?>
+<style><?php include(Yii::getAlias('@app/web/site/css/style.css'));?></style>
+<style><?php include(Yii::getAlias('@app/web/css/custom.css'));?></style>
+
 
 <?php Pjax::begin([
    'timeout'=>3000,
@@ -22,6 +26,5 @@ function updateList() {
     }
     setInterval(updateList, 1000);
 JS;
-
 ?>
 
