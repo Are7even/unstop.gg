@@ -10,6 +10,7 @@ use app\models\TournamentToUser;
 use app\models\User;
 use app\models\UserGameRating;
 use app\models\IntermediateScore;
+use yii\db\Exception;
 use yii\web\Response;
 use yii\web\Controller;
 use yii\web\Session;
@@ -109,13 +110,25 @@ class TournamentController extends Controller
         return $this->goBack(['tournament/view', 'id' => $tournamentId]);
     }
 
+    public function actionDeletePlayer($userId,$tournamentId){
+        $model = new TournamentToUser();
+        $tournament = Tournament::findOne($tournamentId);
+        if ($tournament->author==Yii::$app->user->id) {
+            if ($model->deleteFromTournament($userId, $tournamentId)) {
+                return $this->goBack(['tournament/view', 'id' => $tournamentId]);
+            }
+            return new Exception("Something problem with DataBase");
+        }
+        return new Exception("You are not ".Yii::t('admin','Author'));
+    }
+
     public function actionFight($tournamentId)
     {
         if (!Yii::$app->user->isGuest) {
             $fight = $this->findFight($tournamentId);
             $fightingUser = Fight::getFightingUser();
             $statusModel = new IntermediateScore();
-            $status = $statusModel->getByFight($fight->id);
+            $status = $statusModel->getByFight($fight->id) ?? $statusModel;
             if ($fight->first_user_id == $fightingUser->id) {
                 $enemy = Fight::getEnemy($fight->second_user_id);
                 return $this->render('fight', [
@@ -146,12 +159,14 @@ class TournamentController extends Controller
         if ($fight = Fight::find()
             ->where(['first_user_id' => Yii::$app->user->id])
             ->andWhere(['tournament_id' => $tournamentId])
+            ->andWhere(['!=', 'status', Fight::$status['finished']])
             ->one()) {
 
             return $fight;
         } elseif ($fight = Fight::find()
             ->where(['second_user_id' => Yii::$app->user->id])
             ->andWhere(['tournament_id' => $tournamentId])
+            ->andWhere(['!=', 'status', Fight::$status['finished']])
             ->one()) {
 
             return $fight;

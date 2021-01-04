@@ -161,3 +161,15 @@ a .lk-button {
     height: 475px;
     justify-content: end;
 }
+
+.lk-content .lk-aside .lk-info .image-container .lk-image {
+    height: 360px;
+}
+
+.faiting .faiting-container .faiter .fainer-content img {
+    object-fit: cover;
+}
+
+.hidden {
+    display: none;
+}

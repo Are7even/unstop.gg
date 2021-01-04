@@ -20,9 +20,14 @@ class TournamentToUser extends \yii\db\ActiveRecord
         return 'tournament_to_user';
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public static function primaryKey()
+    {
+        return [
+            'user_id',
+            'tournament_id',
+        ];
+    }
+
     public function rules()
     {
         return [
@@ -41,7 +46,8 @@ class TournamentToUser extends \yii\db\ActiveRecord
         ];
     }
 
-    public function add($userId,$tournamentId){
+    public function add($userId, $tournamentId)
+    {
         $model = new self();
         $model->user_id = $userId;
         $model->tournament_id = $tournamentId;
@@ -49,15 +55,37 @@ class TournamentToUser extends \yii\db\ActiveRecord
         return true;
     }
 
-    static function getUserList($tournamentId){
-        return self::find()->select(['user_id'])->where(['tournament_id'=>$tournamentId])->all();
+    public function deleteFromTournament($userId, $tournamentId)
+    {
+        $model = TournamentToUser::find()
+            ->where(['user_id' => $userId, 'tournament_id' => $tournamentId])
+            ->one();
+        $model->delete();
+        return true;
     }
 
-    public function getUser(){
-        return $this->hasOne(User::className(),['id'=>'user_id']);
+    public function checkUser($userId, $tournamentId)
+    {
+        $model = new TournamentToUser();
+        if ($model->find()
+            ->where(['user_id' => $userId, 'tournament_id' => $tournamentId])) {
+            return true;
+        }
+        return false;
     }
 
-    public function getTournament(){
-        return $this->hasOne(Tournament::className(),['id'=>'tournament_id']);
+    static function getUserList($tournamentId)
+    {
+        return self::find()->select(['user_id'])->where(['tournament_id' => $tournamentId])->all();
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function getTournament()
+    {
+        return $this->hasOne(Tournament::className(), ['id' => 'tournament_id']);
     }
 }

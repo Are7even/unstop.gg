@@ -132,6 +132,7 @@ class TournamentController extends Controller
         $status = $this->intermediateScoreModel->getByFight($fightId);
         $score = $this->scoreModel->getScore($fight->score_id);
         $result = $this->tournamentHelper->getUpdatedResult($score, $status);
+        $scoreStatus = true;
         if (!$status->active) {
             $scoreStatus = $this->scoreModel->updateScore($fight->score_id, $result[0], $result[1]);
         }

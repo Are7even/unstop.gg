@@ -90,7 +90,7 @@ class Fight extends \yii\db\ActiveRecord
         if (!$current) {
             $score = new Score();
             $scoreId = $score->create();
-            return self::add($winner, null, $tournament->id, $fightOrder, $scoreId, $fight->type);
+            return self::add($winner, null, $tournament->id, $fightOrder, $scoreId, $fight->type, $fight->stage+1);
         } else {
             if (!$current->first_user_id) {
                 $current->first_user_id = $winner;
@@ -101,7 +101,7 @@ class Fight extends \yii\db\ActiveRecord
         }
     }
 
-    static function add($firstUserId, $secondUserId, $tournamentId, $order, $scoreId, $type){
+    static function add($firstUserId, $secondUserId, $tournamentId, $order, $scoreId, $type, $stage = 1){
         $model = new self();
         $model->tournament_id = $tournamentId;
         $model->first_user_id = $firstUserId;
@@ -109,6 +109,7 @@ class Fight extends \yii\db\ActiveRecord
         $model->fight_order = $order;
         $model->score_id = $scoreId;
         $model->type = $type;
+        $model->stage = $stage;
         return $model->save();
     }
 
