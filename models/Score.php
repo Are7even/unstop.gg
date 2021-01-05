@@ -57,16 +57,16 @@ class Score extends \yii\db\ActiveRecord
         return $this->findOne($id);
     }
 
-    public function updateScore($id, $first = 0, $second = 0)
+    public function updateScore($id, $first = null, $second = null)
     {
         $score = $this->getScore($id);
 
         if ($score) {
-            if ($first) {
+            if ($first !== null && $first > 0) {
                 $score->first_user_score = $first;
             }
 
-            if ($second) {
+            if ($second !== null && $second > 0) {
                 $score->second_user_score = $second;
             }
 
