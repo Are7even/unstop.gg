@@ -183,7 +183,7 @@ $config = [
             'auth/*',
             'mm/*',
            // 'rbac/*',
-            'debug/*',
+            //'debug/*',
             'cabinet/*',
             'tournament/*',
             'simplechat/*',

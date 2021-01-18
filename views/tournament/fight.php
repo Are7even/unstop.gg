@@ -88,15 +88,15 @@ $isHasConflict = (
                     </div>
                     <div class="faiter oponent">
                         <div class="fainer-content">
-                            <img src="/web/upload/user/<?= (isset($enemy->photo)) ? '?' : $enemy->photo ?>" alt="">
+                            <img src="/web/upload/user/<?= (!isset($enemy->photo)) ? '?' : $enemy->photo ?>" alt="">
                             <div class="faiter-info">
                                 <div class="name">
-                                    <?= (isset($enemy->username)) ? '?' : $enemy->username ?>
+                                    <?= (!isset($enemy->username)) ? '?' : $enemy->username ?>
                                 </div>
                                 <div class="rep-container">
                                     <div class="reputation">
                                         <p><?= Yii::t('admin','Reputation')?></p>
-                                        <p><?= (isset($enemy->reputation)) ? '?' : $enemy->reputation ?></p>
+                                        <p><?= (!isset($enemy->reputation)) ? '?' : $enemy->reputation ?></p>
                                     </div>
                                     <div class="reputation">
                                         <p>Rate</p>

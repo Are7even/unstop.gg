@@ -72,6 +72,9 @@ AdminAsset::register($this);
                             <a href="<?php echo Url::to(['/admin/tournament'])?>" class="waves-effect"><i class="mdi mdi-tournament"></i><span><?php echo Yii::t('admin','Tournament')?></span></a>
                         </li>
                         <li>
+                            <a href="<?php echo Url::to(['/admin/fight'])?>" class="waves-effect"><i class="mdi mdi-tournament"></i><span><?php echo Yii::t('admin','Fight')?></span></a>
+                        </li>
+                        <li>
                             <a href="<?php echo Url::to(['/admin/language'])?>" class="waves-effect"><i class="mdi mdi-flag-variant"></i><span><?php echo Yii::t('admin','Language')?></span></a>
                         </li>
                         <li>

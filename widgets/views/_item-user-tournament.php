@@ -31,11 +31,15 @@ use yii\helpers\Url;
         </div>
     </div>
 
-<div class="table-button">
-    <a class="close"
-       href="<?= Url::to(['tournament/delete-player', 'userId' => $model->user->id, 'tournamentId'=>$model->tournament->id]) ?>">
-        <i class="fa fa-times"></i>
-    </a>
-    <?= \yii\helpers\Html::a(Yii::t('admin', 'Profile'), \yii\helpers\Url::to(['cabinet/index', 'id' => $model->user->id]),['style'=>'color:white;']) ?>
-</div>
+    <div class="table-button">
+        <?php if ($model->tournament->status == \app\helpers\TournamentStatusHelper::$waiting):?>
+        <?php if (Yii::$app->user->can('admin') || $model->tournament->isAuthor($model->tournament->id)): ?>
+            <a class="close"
+               href="<?= Url::to(['tournament/delete-player', 'userId' => $model->user->id, 'tournamentId' => $model->tournament->id]) ?>">
+                <i class="fa fa-times"></i>
+            </a>
+        <?php endif; ?>
+        <?php endif;?>
+        <?= \yii\helpers\Html::a(Yii::t('admin', 'Profile'), \yii\helpers\Url::to(['cabinet/index', 'id' => $model->user->id]), ['style' => 'color:white;']) ?>
+    </div>
 </div>

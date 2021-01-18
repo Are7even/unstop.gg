@@ -5,19 +5,18 @@
  * Date: 02.12.2017
  * Time: 22:11
  */
-?>
 
-<div class="incoming_msg">
-    <div class="received_msg">
-        <div class="received_withd_msg">
-            <h1><?= $model->username ?></h1>
+use app\models\Message;
+
+?>
+<a href="<?= \yii\helpers\Url::to(['chat/chat','id'=>$model->id])?>">
+<div class="chat_people">
+    <div class="chat_img"><img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"></div>
+    <div class="chat_ib">
+        <h5><?= $model->username ?> <span class="chat_date"><?= Message::findLastMessage(Yii::$app->user->id,$model->id)->created_at?></span></h5>
+        <p>
+            <?= Message::findLastMessage(Yii::$app->user->id,$model->id)->text?>
+        </p>
     </div>
 </div>
-
-<!--<div class="container">-->
-<!--    <div class="row">-->
-<!--        <div class="col-md-3"> --><?//= $model->sender->username ?><!-- </div>-->
-<!--        <div class="col-md-9"> --><?//= $model->text ?><!--</div>-->
-<!--        <div class="col-md-9"> --><?//= $model->created_at ?><!--</div>-->
-<!--    </div>-->
-<!--</div>-->
+</a>

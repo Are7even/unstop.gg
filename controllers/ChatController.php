@@ -13,10 +13,11 @@ use yii\web\Controller;
 class ChatController extends Controller
 {
 
+
     public function init()
     {
         parent::init();
-        $this->layout = false;
+        $this->layout = 'chat';
     }
 
     public function usersList()
@@ -61,24 +62,25 @@ class ChatController extends Controller
                     'receiver_id' => $id
                 ]);
                 if (Yii::$app->request->isPjax) {
-                    return $this->renderAjax('_chat',[
-                        'message'=>$message,
-                        'messagesQuery'=>$messagesQuery,
+                    return $this->renderAjax('chat', [
+                        'message' => $message,
+                        'messagesQuery' => $messagesQuery,
+                        'usersList' => $usersList,
                     ]);
                 }
             }
         }
         if (Yii::$app->request->isPjax) {
-            return $this->renderAjax('_list', [
-                'message'=>$message,
-                'messagesQuery'=>$messagesQuery,
+            return $this->renderAjax('_chat', [
+                'message' => $message,
+                'messagesQuery' => $messagesQuery,
+                'usersList' => $usersList,
             ]);
         }
-
         return $this->render('chat', [
-            'message'=>$message,
-            'messagesQuery'=>$messagesQuery,
-            'usersList'=>$usersList,
+            'message' => $message,
+            'messagesQuery' => $messagesQuery,
+            'usersList' => $usersList,
         ]);
     }
 

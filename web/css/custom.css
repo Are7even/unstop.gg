@@ -127,10 +127,10 @@ a .lk-button {
 #p0,
 .chat-iframe {
     width: 100%;
-    height: 560px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    height: 560px;
 }
 
 .help-block {
@@ -145,7 +145,7 @@ a .lk-button {
 }
 
 .list-view {
-    height: 570px;
+
     overflow: VISIBLE;
     display: flex;
     flex-direction: column;
@@ -157,8 +157,8 @@ a .lk-button {
 }
 
 #list-scroll {
-    overflow-y: scroll;
-    height: 475px;
+    overflow-y: visible;
+
     justify-content: end;
 }
 
@@ -184,4 +184,16 @@ a .lk-button {
     right: 12px;
     color: #fff;
     z-index: 2;
+}
+
+.pjax-form {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white
+}
+
+#osnova {
+    padding-bottom: 50px;
 }

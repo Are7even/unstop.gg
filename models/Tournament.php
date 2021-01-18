@@ -46,7 +46,7 @@ class Tournament extends \yii\db\ActiveRecord
         return [
             'translateable' => [
                 'class' => TranslateableBehavior::className(),
-                'translationAttributes' => ['header','short_text','text'],
+                'translationAttributes' => ['header', 'short_text', 'text'],
             ],
         ];
     }
@@ -64,9 +64,9 @@ class Tournament extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['hidden','status', 'handheld', 'rating_on', 'players_count', 'checkin', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place', 'game'], 'integer'],
+            [['hidden', 'status', 'handheld', 'rating_on', 'players_count', 'checkin', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place', 'game'], 'integer'],
             [['icon', 'author', 'type'], 'string', 'max' => 255],
-            [['created_at', 'start', 'end','checkin_start', 'checkin_end'], 'safe'],
+            [['created_at', 'start', 'end', 'checkin_start', 'checkin_end'], 'safe'],
             [['created_at'], 'default', 'value' => date('Y-m-j')],
             [['author'], 'default', 'value' => Yii::$app->user->id],
             [['status'], 'default', 'value' => TournamentStatusHelper::$created],
@@ -100,24 +100,29 @@ class Tournament extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getTournaments() {
+    public function getTournaments()
+    {
         return $this->find()->all();
     }
 
-    public function getTournament($id) {
+    public function getTournament($id)
+    {
         return $this->findOne($id);
     }
 
-    public function getTranslations () {
-        return $this -> hasMany(TournamentTranslate::className(), ['tournament_id'=>'id']);
+    public function getTranslations()
+    {
+        return $this->hasMany(TournamentTranslate::className(), ['tournament_id' => 'id']);
     }
 
-    public function getStage () {
-        return $this -> hasMany(Stage::className(), ['tournament_id'=>'id']);
+    public function getStage()
+    {
+        return $this->hasMany(Stage::className(), ['tournament_id' => 'id']);
     }
 
-    public function getUser(){
-        return $this->hasOne(User::className(),['id'=>'author']);
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'author']);
     }
 
     public function getIcon()
@@ -125,51 +130,71 @@ class Tournament extends \yii\db\ActiveRecord
         return ($this->icon) ? '/upload/' . $this->icon : '/web/upload/user/no-image.png';
     }
 
-    public function allow(){
+    public function allow()
+    {
         $this->status = TournamentStatusHelper::$waiting;
         return $this->save();
     }
 
-    public function disallow(){
+    public function disallow()
+    {
         $this->status = TournamentStatusHelper::$created;
         return $this->save(false);
     }
 
-    public function start() {
+    public function start()
+    {
         $this->status = TournamentStatusHelper::$fighting;
         return $this->save();
     }
 
-    public function checkRegistration($userId,$tournamentId){
-        $links = TournamentToUser::find()->where(['user_id'=>$userId])->andWhere(['tournament_id'=>$tournamentId])->all();
+    public function checkRegistration($userId, $tournamentId)
+    {
+        $links = TournamentToUser::find()->where(['user_id' => $userId])->andWhere(['tournament_id' => $tournamentId])->all();
         return $links;
     }
 
-    static function getCurrentStartTime($id){
+    static function getCurrentStartTime($id)
+    {
         return true;
     }
 
-    static function getCurrentEndTime($id){
+    static function getCurrentEndTime($id)
+    {
         return true;
     }
 
-    static function getCurrentCheckinStartTime($id){
+    static function getCurrentCheckinStartTime($id)
+    {
         return true;
     }
 
-    static function getCurrentCheckinEndTime($id){
+    static function getCurrentCheckinEndTime($id)
+    {
         return true;
     }
 
-    public function getCutDate($modelDate){
+    public function getCutDate($modelDate)
+    {
         $date = date('d.m.Y', strtotime($modelDate));
         return $date;
     }
 
-    public static function maxPlayersCheck($tournamentId,$maxPlayers){
-        $playersCount = TournamentToUser::find()->where(['tournament_id'=>$tournamentId])->all();
+    public static function maxPlayersCheck($tournamentId, $maxPlayers)
+    {
+        $playersCount = TournamentToUser::find()->where(['tournament_id' => $tournamentId])->all();
         $playersCount = count($playersCount);
-        if ($playersCount <= $maxPlayers){
+        if ($playersCount <= $maxPlayers) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isAuthor($tournamentId)
+    {
+        if ($author = self::find()
+            ->where(['id' => $tournamentId, 'author' => Yii::$app->user->id])
+            ->one()) {
             return true;
         }
         return false;

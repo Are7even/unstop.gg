@@ -65,4 +65,12 @@ class Message extends \yii\db\ActiveRecord
             ->orWhere(['sender_id'=>$receiverId,'receiver_id'=>$senderId]);
     }
 
+    public static function findLastMessage($senderId,$receiverId){
+        return self::find()
+            ->where(['sender_id'=>$senderId,'receiver_id'=>$receiverId])
+            ->orWhere(['sender_id'=>$receiverId,'receiver_id'=>$senderId])
+            ->orderBy(['id'=>SORT_DESC])
+            ->one();
+    }
+
 }
