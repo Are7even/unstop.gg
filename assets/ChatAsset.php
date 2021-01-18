@@ -15,7 +15,7 @@ class ChatAsset extends AssetBundle
         'https://pro.fontawesome.com/releases/v5.10.0/css/all.css',
     ];
     public $js = [
-       // 'js/custom.js',
+        'js/chat.js',
     ];
     public $depends = [
 //        'yii\web\YiiAsset',

@@ -1,7 +1,8 @@
 (function () {
     const id = new URLSearchParams(window.location.search).get('id');
     const chat = document.getElementById('chat');
-    if (chat && id){
+    console.log(id);
+    if (chat && id || id === null){
         const iframe = document.createElement('iframe');
         iframe.classList.add('chat-iframe');
         iframe.src = `/chat/chat?id=${id}`;

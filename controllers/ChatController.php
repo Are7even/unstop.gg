@@ -45,6 +45,9 @@ class ChatController extends Controller
 
     public function actionChat($id)
     {
+        if (empty($id)){
+            $id = Yii::$app->user->id;
+        }
         $currentUserId = Yii::$app->user->id;
         $messagesQuery = Message::findMessages($currentUserId, $id);
         $usersList = $this->usersList();

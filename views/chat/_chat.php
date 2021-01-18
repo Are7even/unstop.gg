@@ -11,10 +11,13 @@ use yii\widgets\Pjax;
     'formSelector' => false,
 ]) ?>
 <div class="osnova" id="osnova">
+    <div class="inbox_people">
+        <div class="inbox_chat">
 <?= $this->render('_list-users', [
     'usersList' => $usersList,
 ]) ?>
-
+        </div>
+    </div>
 
 <?= $this->render('_list', [
     'messagesQuery' => $messagesQuery,

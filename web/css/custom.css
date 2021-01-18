@@ -120,16 +120,46 @@ a .lk-button {
     padding: 15px 15px 0 15px;
 }
 
-.msg_history {
-    height: 560px !important;
-}
+/*.msg_history {*/
+/*    height: 560px !important;*/
+/*}*/
 
 #p0,
 .chat-iframe {
     width: 100%;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: flex-end;*/
+    height: 560px;
+    vertical-align: bottom;
+    overflow: hidden;
+}
+
+#list-scroll {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    height: 510px;
+    overflow-y: scroll;
+}
+
+.received_withd_msg {
+    width: 100%;
+}
+
+.input_msg_write input {
+    padding: 0 15px;
+}
+
+.msg_send_btn {
+    right: 10px;
+    top: 9px;
+}
+
+.empty {
+    padding: 20px;
+}
+
+.inbox_chat {
     height: 560px;
 }
 
@@ -144,23 +174,22 @@ a .lk-button {
 
 }
 
-.list-view {
-
-    overflow: VISIBLE;
-    display: flex;
-    flex-direction: column;
-    JUSTIFY-CONTENT: flex-end;
-}
+/*.list-view {*/
+/*    overflow: VISIBLE;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    JUSTIFY-CONTENT: flex-end;*/
+/*}*/
 
 .tournament-container .active .button .panel {
     width: 100%;
 }
 
-#list-scroll {
-    overflow-y: visible;
+/*#list-scroll {*/
+/*    overflow-y: visible;*/
 
-    justify-content: end;
-}
+/*    justify-content: end;*/
+/*}*/
 
 .lk-content .lk-aside .lk-info .image-container .lk-image {
     height: 360px;
@@ -189,11 +218,12 @@ a .lk-button {
 .pjax-form {
     position: fixed;
     bottom: 0;
-    left: 0;
-    width: 100%;
+    right: 0;
+    width: 60%;
+    float: right;
     background: white
 }
 
 #osnova {
-    padding-bottom: 50px;
+    /*padding-bottom: 50px;*/
 }

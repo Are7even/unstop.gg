@@ -6,8 +6,6 @@ use yii\widgets\Pjax;
 
 ?>
 
-<!--<style>--><?php //include(Yii::getAlias('@app/web/site/css/style.css'));?><!--</style>-->
-<!--<style>--><?php //include(Yii::getAlias('@app/web/css/custom.css'));?><!--</style>-->
 
 
 <?php echo $this->render('_chat', [
@@ -95,5 +93,5 @@ $this->registerJs($script);
 
 ?>
 
-<script><?php include(Yii::getAlias('@app/web/js/chat.js')); ?></script>
+<!--<script>--><?php //include(Yii::getAlias('@app/web/js/chat.js')); ?><!--</script>-->
 
