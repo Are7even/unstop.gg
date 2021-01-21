@@ -73,4 +73,15 @@ class Message extends \yii\db\ActiveRecord
             ->one();
     }
 
+    public static function deleteMessages($senderId,$receiverId){
+        $models = Message::find()
+            ->where(['sender_id'=>$senderId,'receiver_id'=>$receiverId])
+            ->orWhere(['sender_id'=>$receiverId,'receiver_id'=>$senderId])
+            ->all();
+        foreach ($models as $model){
+            $model->delete();
+        }
+        return true;
+    }
+
 }

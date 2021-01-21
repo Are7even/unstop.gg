@@ -3412,10 +3412,6 @@ a .lk-button:hover {
   padding: 18px 16px 10px;
 }
 
-.inbox_chat {
-  height: 595px;
-  overflow-y: scroll;
-}
 
 .active_chat {
   background: #ebebeb;

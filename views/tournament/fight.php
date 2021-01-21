@@ -82,6 +82,7 @@ $isHasConflict = (
                         </div>
                     </div>
                     <div class="result">
+                        <div class="correct-result"><?= Yii::t('admin','Fight')?> :<?=$fightId ?></div>
                         <div class="correct-result">Not correct result</div>
                         <div class="vs">VS</div>
                         <div class="correct-result correct-result-admin">Call admin</div>

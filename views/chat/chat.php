@@ -39,7 +39,6 @@ use yii\widgets\Pjax;
 $script = <<< JS
 var input = document.getElementById('message-text');
 var scroll = document.getElementById('scrollTo');
-var form = document.getElementById('w1');
 $(document).on('beforeSubmit', '#w1', function () {
         var _this = $(this);
 

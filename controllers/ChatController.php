@@ -45,7 +45,7 @@ class ChatController extends Controller
 
     public function actionChat($id)
     {
-        if (empty($id)){
+        if (empty($id)) {
             $id = Yii::$app->user->id;
         }
         $currentUserId = Yii::$app->user->id;
@@ -87,5 +87,12 @@ class ChatController extends Controller
         ]);
     }
 
+    public function actionDelete($receiverId)
+    {
+        if (Message::deleteMessages(Yii::$app->user->id,$receiverId)) {
+            return $this->goBack(['chat/chat','id'=>Yii::$app->user->id]);
+        }
+        return false;
+    }
 
 }

@@ -12,7 +12,6 @@ use yii\data\ActiveDataProvider;
 ?>
 
 <?= ListView::widget([
-   // 'id'=>'list-messages',
     'itemView' => '_row-users',
     'layout' => '{items}',
     'dataProvider' => new ActiveDataProvider([

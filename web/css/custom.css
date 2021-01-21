@@ -127,9 +127,6 @@ a .lk-button {
 #p0,
 .chat-iframe {
     width: 100%;
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*justify-content: flex-end;*/
     height: 560px;
     vertical-align: bottom;
     overflow: hidden;
@@ -138,8 +135,9 @@ a .lk-button {
 #list-scroll {
     display: flex;
     flex-direction: column;
-    height: 510px;
-    overflow-y: scroll;
+    height: auto;
+    width: 60%;
+    padding-bottom: 50px;
 }
 
 .received_withd_msg {
@@ -160,7 +158,14 @@ a .lk-button {
 }
 
 .inbox_chat {
-    height: 560px;
+    height: auto;
+    position: fixed;
+    width: 40%;
+}
+
+.inbox_people{
+    float: none;
+    height: 100%;
 }
 
 .help-block {
@@ -174,22 +179,11 @@ a .lk-button {
 
 }
 
-/*.list-view {*/
-/*    overflow: VISIBLE;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    JUSTIFY-CONTENT: flex-end;*/
-/*}*/
 
 .tournament-container .active .button .panel {
     width: 100%;
 }
 
-/*#list-scroll {*/
-/*    overflow-y: visible;*/
-
-/*    justify-content: end;*/
-/*}*/
 
 .lk-content .lk-aside .lk-info .image-container .lk-image {
     height: 360px;
@@ -225,5 +219,25 @@ a .lk-button {
 }
 
 #osnova {
-    /*padding-bottom: 50px;*/
+    width: 100%;
+    display: flex;
+}
+
+#list-messages {
+    width: 100%;
+}
+
+.delete_chat {
+    bottom: 10px;
+    right: 20px;
+    position: absolute;
+    z-index: 2;
+}
+
+.people_list {
+    position: relative;
+}
+
+.chat_people {
+    position: relative;
 }

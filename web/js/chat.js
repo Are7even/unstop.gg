@@ -62,16 +62,12 @@ function loadScroll() {
     }
 }
 
-// document.addEventListener("DOMContentLoaded", function(event) {
-//     setInterval(function (){$.pjax.reload({container: '#list-messages'})},3000);
-// })
-// document.addEventListener("DOMContentLoaded", function(event) {
-//     loadScroll();
-//     setTimeout(function (){
-//         window.location.href = window.location.href
-//     },3000)
-// })
+// function deleteChat(chat){
+//     const forms = document.querySelectorAll("[data-key]");
 //
-// window.addEventListener('unload', function(event) {
-//     saveScroll();
-// });
+//     forms.forEach((form) => {
+//         if (form.dataset.key == chat){
+//             return form.style.display = 'none';
+//         }
+//     });
+// }
