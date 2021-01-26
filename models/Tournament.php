@@ -6,6 +6,7 @@ use app\helpers\StatusHelper;
 use app\helpers\TournamentStatusHelper;
 use creocoder\translateable\TranslateableBehavior;
 use Yii;
+use yii\web\NotAcceptableHttpException;
 
 /**
  * This is the model class for table "tournament".
@@ -145,7 +146,10 @@ class Tournament extends \yii\db\ActiveRecord
     public function start()
     {
         $this->status = TournamentStatusHelper::$fighting;
-        return $this->save();
+        if ($this->save()){
+            return true;
+        }
+        throw new NotAcceptableHttpException('Tournament not started');
     }
 
     public function checkRegistration($userId, $tournamentId)
