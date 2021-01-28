@@ -53,6 +53,13 @@ class UserGameRating extends \yii\db\ActiveRecord
         $rating->save(false);
     }
 
+    static function updateRating($userId,$gamesId){
+        $model = self::find()
+            ->where(['user_id'=>$userId,'games_id'=>$gamesId])
+            ->one();
+
+    }
+
     static function getUserRatingByGame($gameId,$userId){
         $rating = self::find()->select(['rating'])->where(['games_id'=>$gameId])->andWhere(['user_id'=>$userId])->one();
         return $rating->rating;
