@@ -43,7 +43,7 @@ class Fight extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_user_id', 'second_user_id', 'tournament_id','fight_order', 'score_id', 'status'], 'integer'],
+            [['first_user_id', 'second_user_id', 'tournament_id', 'fight_order', 'score_id', 'status'], 'integer'],
             [['type'], 'string', 'max' => 255],
         ];
     }

@@ -42,6 +42,11 @@ class TournamentHelper
         return $results;
     }
 
+    public function validateFightType($value)
+    {
+        return array_key_exists($value, self::$types);
+    }
+
     public function getPairs($players)
     {
         $ids = [];
