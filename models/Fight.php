@@ -13,8 +13,6 @@ use Yii;
  * @property int|null $tournament_id
  * @property string|null $first_user_id
  * @property string|null $second_user_id
- * @property int|null $first_user_id_score
- * @property int|null $second_user_id_score
  */
 class Fight extends \yii\db\ActiveRecord
 {
@@ -45,7 +43,7 @@ class Fight extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_user_id', 'second_user_id', 'tournament_id', 'first_user_id_score', 'second_user_id_score','fight_order', 'score_id', 'status'], 'integer'],
+            [['first_user_id', 'second_user_id', 'tournament_id', 'fight_order', 'score_id', 'status'], 'integer'],
             [['type'], 'string', 'max' => 255],
         ];
     }
@@ -63,8 +61,6 @@ class Fight extends \yii\db\ActiveRecord
             'fight_order' => Yii::t('admin', 'Fight Order'),
             'first_user_id' => Yii::t('admin', 'First User ID'),
             'second_user_id' => Yii::t('admin', 'Second User ID'),
-            'first_user_id_score' => Yii::t('admin', 'First User Id Score'),
-            'second_user_id_score' => Yii::t('admin', 'Second User Id Score'),
         ];
     }
 

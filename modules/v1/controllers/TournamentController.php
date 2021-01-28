@@ -56,8 +56,20 @@ class TournamentController extends Controller
 
     public function actionStart($tournamentId)
     {
+        $request = Yii::$app->request;
+        $type = $request->getBodyParam('type');
+        $type = isset($type) ? $type : 'bo1';
+
+        if (!$this->tournamentHelper->validateFightType($type)) {
+            throw new NotAcceptableHttpException('Type should be bo1, bo3, bo5 or bo7');
+        }
+
         $tournament = $this->tournametModel->getTournament($tournamentId);
         $userList = TournamentToUser::getUserList($tournamentId);
+        if (!$tournament) {
+            throw new NotFoundHttpException('Tournament not found');
+        }
+
         if ($tournament->status !== TournamentStatusHelper::$waiting) {
             throw new NotAcceptableHttpException('Tournament already started');
         }
@@ -72,7 +84,6 @@ class TournamentController extends Controller
                 $score = new Score();
                 $fight = new Fight();
                 $scoreId = $score->create();
-                $type = 'bo1';
                 $isFightSaved = $fight->createFight($pair[0], $pair[1], $tournamentId, $key + 1, $scoreId, $type);
                 if (!$isFightSaved) {
                     $tournament->allow();
