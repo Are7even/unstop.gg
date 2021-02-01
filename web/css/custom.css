@@ -241,3 +241,9 @@ a .lk-button {
 .chat_people {
     position: relative;
 }
+
+.fight_number {
+    margin-bottom: 20px;
+    font-size: large;
+    color: #FFFFFF;
+}

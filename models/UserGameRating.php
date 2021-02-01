@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\EloTable;
 use Yii;
 
 /**
@@ -14,9 +15,9 @@ use Yii;
  */
 class UserGameRating extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+
+    static public $N = 1;
+
     public static function tableName()
     {
         return 'user_game_rating';
@@ -45,7 +46,8 @@ class UserGameRating extends \yii\db\ActiveRecord
         ];
     }
 
-    static function addRating($userId,$gamesId){
+    static function addRating($userId, $gamesId)
+    {
         $rating = new UserGameRating();
         $rating->user_id = $userId;
         $rating->games_id = $gamesId;
@@ -53,24 +55,81 @@ class UserGameRating extends \yii\db\ActiveRecord
         $rating->save(false);
     }
 
-    static function updateRating($userId,$gamesId){
-        $model = self::find()
-            ->where(['user_id'=>$userId,'games_id'=>$gamesId])
+    static function updateRating($userId, $gamesId, $Nozh, $winner = true)
+    {
+        $user = self::find()
+            ->where(['user_id' => $userId, 'games_id' => $gamesId])
             ->one();
 
+        $Rst = $user->rating;
+        if ($winner) {
+            $user->rating = $Rst + self::K($Rst) * (self::$N - $Nozh);
+            $user->save();
+            return true;
+        }
+        $N = self::$N = -1 * abs(self::$N);
+        $user->rating = $Rst + self::K($Rst) * ($N - $Nozh);
+        $user->save();
+
+        return true;
     }
 
-    static function getUserRatingByGame($gameId,$userId){
-        $rating = self::find()->select(['rating'])->where(['games_id'=>$gameId])->andWhere(['user_id'=>$userId])->one();
+    static function Nozh($first_user_id, $second_user_id, $gamesId)
+    {
+        $firstUserScore = self::find()
+            ->select('rating')
+            ->where(['user_id' => $first_user_id, 'games_id' => $gamesId])
+            ->one();
+
+        $secondUserScore = self::find()
+            ->select('rating')
+            ->where(['user_id' => $second_user_id, 'games_id' => $gamesId])
+            ->one();
+
+        $dR = abs($firstUserScore - $secondUserScore);
+
+        if ($firstUserScore > $secondUserScore) {
+            $more = true;
+        } elseif ($firstUserScore < $secondUserScore) {
+            $more = false;
+        }
+
+        for ($i = 1; $i <= 50; $i++) {
+            if (EloTable::$dR[0] <= $dR && $dR <= EloTable::$dR[1]) {
+                if ($more) {
+                    $Nozh = EloTable::$RstH[$i];
+                }
+                $Nozh = EloTable::$RstL[$i];
+            }
+        }
+        return $Nozh;
+    }
+
+    static function K($rating): int
+    {
+        if ($rating >= 2400) {
+            return $k = 10;
+        } elseif ($rating >= 1200) {
+            return $k = 15;
+        }
+        return $k = 25;
+    }
+
+
+    static function getUserRatingByGame($gameId, $userId)
+    {
+        $rating = self::find()->select(['rating'])->where(['games_id' => $gameId])->andWhere(['user_id' => $userId])->one();
         return $rating->rating;
     }
 
-    public function getUser(){
-        return $this->hasOne(User::className(),['id'=>'user_id']);
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
-    public function getGames(){
-        return $this->hasOne(Games::className(),['id'=>'games_id']);
+    public function getGames()
+    {
+        return $this->hasOne(Games::className(), ['id' => 'games_id']);
     }
 
 }

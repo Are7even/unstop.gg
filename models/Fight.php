@@ -13,6 +13,7 @@ use Yii;
  * @property int|null $tournament_id
  * @property string|null $first_user_id
  * @property string|null $second_user_id
+ * @property string|null $score_id
  */
 class Fight extends \yii\db\ActiveRecord
 {
@@ -49,7 +50,6 @@ class Fight extends \yii\db\ActiveRecord
     }
 
 
-
     public function attributeLabels()
     {
         return [
@@ -81,12 +81,12 @@ class Fight extends \yii\db\ActiveRecord
         $winner = $score->first_user_score > $score->second_user_score
             ? $fight->first_user_id
             : $fight->second_user_id;
-        
+
 
         if (!$current) {
             $score = new Score();
             $scoreId = $score->create();
-            return self::add($winner, null, $tournament->id, $fightOrder, $scoreId, $fight->type, $fight->stage+1);
+            return self::add($winner, null, $tournament->id, $fightOrder, $scoreId, $fight->type, $fight->stage + 1);
         } else {
             if (!$current->first_user_id) {
                 $current->first_user_id = $winner;
@@ -97,7 +97,8 @@ class Fight extends \yii\db\ActiveRecord
         }
     }
 
-    static function add($firstUserId, $secondUserId, $tournamentId, $order, $scoreId, $type, $stage = 1){
+    static function add($firstUserId, $secondUserId, $tournamentId, $order, $scoreId, $type, $stage = 1)
+    {
         $model = new self();
         $model->tournament_id = $tournamentId;
         $model->first_user_id = $firstUserId;
@@ -109,7 +110,8 @@ class Fight extends \yii\db\ActiveRecord
         return $model->save();
     }
 
-    public function createFight($firstUserId, $secondUserId, $tournamentId, $order, $scoreId, $type) {
+    public function createFight($firstUserId, $secondUserId, $tournamentId, $order, $scoreId, $type)
+    {
         $this->tournament_id = $tournamentId;
         $this->first_user_id = $firstUserId;
         $this->second_user_id = $secondUserId;
@@ -128,12 +130,14 @@ class Fight extends \yii\db\ActiveRecord
             ->all();
     }
 
-    public function getStage () {
-        return $this -> hasOne(Stage::className(), ['id'=>'stage_id']);
+    public function getStage()
+    {
+        return $this->hasOne(Stage::className(), ['id' => 'stage_id']);
     }
 
-    public function getTournament () {
-        return $this -> hasOne(Tournament::className(), ['id'=>'tournament_id']);
+    public function getTournament()
+    {
+        return $this->hasOne(Tournament::className(), ['id' => 'tournament_id']);
     }
 
     public function getFightById($fightId)
@@ -141,8 +145,11 @@ class Fight extends \yii\db\ActiveRecord
         return $this->findOne($fightId);
     }
 
-    public function updateFightStatus($fightId, $status = -1) {
+    public function updateFightStatus($fightId, $status = -1)
+    {
         $fight = $this->getFightById($fightId);
+        $gamesId = $fight->tournament->game;
+        $ratingModel = new UserGameRating();
 
         if ($fight) {
             if (
@@ -160,6 +167,21 @@ class Fight extends \yii\db\ActiveRecord
             if ($score->first_user_score >= $limit || $score->second_user_score >= $limit) {
                 $fight->status = self::$status['finished'];
                 $isSaved = $fight->save();
+
+                $ratingModel::updateRating(
+                    self::player($fight->id,true),
+                    $gamesId,
+                    $ratingModel::Nozh(self::player($fight->id,true),self::player($fight->id,false),$gamesId),
+                    true
+                );
+
+                $ratingModel::updateRating(
+                    self::player($fight->id,false),
+                    $gamesId,
+                    $ratingModel::Nozh(self::player($fight->id,false),self::player($fight->id,true),$gamesId),
+                    false
+                );
+
                 if ($isSaved) {
                     return $this->createStageFight($fight, $score);
                 }
@@ -169,16 +191,39 @@ class Fight extends \yii\db\ActiveRecord
         return false;
     }
 
-    static function getFightingUser(){
+    static function player($fightId, $winner = true)
+    {
+        $fight = self::findOne($fightId);
+        $score_id = $fight->score_id;
+        $score = Score::findOne($score_id);
+        $first_user_score = $score->first_user_score;
+        $second_user_score = $score->second_user_score;
+        if ($first_user_score > $second_user_score) {
+            if ($winner) {
+                return $fight->first_user_id;
+            }
+            return $fight->second_user_id;
+        } elseif ($first_user_score < $second_user_score) {
+            if ($winner) {
+                return $fight->second_user_id;
+            }
+            return $fight->first_user_id;
+        }
+    }
+
+    static function getFightingUser()
+    {
         return User::findOne(Yii::$app->user->id);
     }
 
-    static function getEnemy($enemyId){
+    static function getEnemy($enemyId)
+    {
         return User::findOne($enemyId);
     }
 
-    public function getScore(){
-        return $this->hasOne(Score::className(),['id'=>'score_id']);
+    public function getScore()
+    {
+        return $this->hasOne(Score::className(), ['id' => 'score_id']);
     }
 
 }
