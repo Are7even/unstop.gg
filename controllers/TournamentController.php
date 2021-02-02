@@ -122,37 +122,40 @@ class TournamentController extends Controller
         return new Exception("You are not ".Yii::t('admin','Author'));
     }
 
-    public function actionFight($tournamentId)
-    {
-        if (!Yii::$app->user->isGuest) {
-            $fight = $this->findFight($tournamentId);
-            $fightingUser = Fight::getFightingUser();
-            $statusModel = new IntermediateScore();
-            $status = $statusModel->getByFight($fight->id) ?? $statusModel;
-            if ($fight->first_user_id == $fightingUser->id) {
-                $enemy = Fight::getEnemy($fight->second_user_id);
-                return $this->render('fight', [
-                    'status' => $status,
-                    'fightId' => $fight->id,
-                    'statuses' => IntermediateScore::$status,
-                    'statusParam' => 'firstStatus',
-                    'user' => $fightingUser,
-                    'enemy' => $enemy,
-                ]);
-            } elseif ($fight->second_user_id == $fightingUser->id) {
-                $enemy = Fight::getEnemy($fight->first_user_id);
-                return $this->render('fight', [
-                    'status' => $status,
-                    'fightId' => $fight->id,
-                    'statuses' => IntermediateScore::$status,
-                    'statusParam' => 'secondStatus',
-                    'user' => $fightingUser,
-                    'enemy' => $enemy,
-                ]);
-            }
-        }
-        return $this->goBack(['tournament/view', 'id' => $tournamentId]);
-    }
+     public function actionFight($tournamentId)
+     {
+         if (!Yii::$app->user->isGuest) {
+             $fight = $this->findFight($tournamentId);
+             if (isset($fight)) {
+                 $fightingUser = Fight::getFightingUser();
+                 $statusModel = new IntermediateScore();
+                 $status = $statusModel->getByFight($fight->id) ?? $statusModel;
+                 if ($fight->first_user_id == $fightingUser->id) {
+                     $enemy = Fight::getEnemy($fight->second_user_id);
+                     return $this->render('fight', [
+                         'status' => $status,
+                         'fightId' => $fight->id,
+                         'statuses' => IntermediateScore::$status,
+                         'statusParam' => 'firstStatus',
+                         'user' => $fightingUser,
+                         'enemy' => $enemy,
+                     ]);
+                 } elseif ($fight->second_user_id == $fightingUser->id) {
+                     $enemy = Fight::getEnemy($fight->first_user_id);
+                     return $this->render('fight', [
+                         'status' => $status,
+                         'fightId' => $fight->id,
+                         'statuses' => IntermediateScore::$status,
+                         'statusParam' => 'secondStatus',
+                         'user' => $fightingUser,
+                         'enemy' => $enemy,
+                     ]);
+                 }
+             }
+             return $this->goBack(['tournament/view', 'id' => $tournamentId]);
+         }
+         return $this->goBack(['tournament/view', 'id' => $tournamentId]);
+     }
 
     private function findFight($tournamentId)
     {
