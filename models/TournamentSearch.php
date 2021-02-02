@@ -11,6 +11,9 @@ use app\models\Tournament;
  */
 class TournamentSearch extends Tournament
 {
+
+    public $header;
+
     /**
      * {@inheritdoc}
      */
@@ -18,6 +21,7 @@ class TournamentSearch extends Tournament
     {
         return [
             [['id', 'created_at', 'author','hidden', 'handheld', 'rating_on', 'players_count', 'start', 'end', 'checkin', 'checkin_start', 'checkin_end', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place'], 'integer'],
+            [['header'], 'string'],
             [['icon', 'game', 'type'], 'safe'],
         ];
     }
@@ -42,11 +46,18 @@ class TournamentSearch extends Tournament
     {
         $query = Tournament::find();
 
+        $query->joinWith('translations');
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['header']=[
+            'asc' => ['header' => SORT_ASC],
+            'desc' => ['header' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -61,6 +72,7 @@ class TournamentSearch extends Tournament
             'id' => $this->id,
             'created_at' => $this->created_at,
             'hidden' => $this->hidden,
+            'tournament_translate.header' => $this->header,
             'handheld' => $this->handheld,
             'rating_on' => $this->rating_on,
             'players_count' => $this->players_count,
@@ -79,7 +91,8 @@ class TournamentSearch extends Tournament
         $query->andFilterWhere(['like', 'icon', $this->icon])
             ->andFilterWhere(['like', 'game', $this->game])
             ->andFilterWhere(['like', 'author', $this->game])
-            ->andFilterWhere(['like', 'type', $this->type]);
+            ->andFilterWhere(['like', 'type', $this->type])
+            ->andFilterWhere(['like', 'tournament_translate.header', $this->header]);
 
         return $dataProvider;
     }

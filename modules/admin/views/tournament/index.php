@@ -35,10 +35,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->user->username;
                 }
             ],
+            'header',
             'icon',
             'game',
             'created_at',
-            //'hidden',
             //'handheld',
             //'type',
             //'rating_on',
