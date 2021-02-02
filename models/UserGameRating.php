@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\components\EloTable;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "user_game_rating".
@@ -51,7 +52,7 @@ class UserGameRating extends \yii\db\ActiveRecord
         $rating = new UserGameRating();
         $rating->user_id = $userId;
         $rating->games_id = $gamesId;
-        $rating->rating = 0;
+        $rating->rating = 100;
         $rating->save(false);
     }
 
@@ -63,56 +64,55 @@ class UserGameRating extends \yii\db\ActiveRecord
 
         $Rst = $user->rating;
         if ($winner) {
-            $user->rating = $Rst + self::K($Rst) * (self::$N - $Nozh);
-            $user->save();
-            return true;
+            $user->rating = intval($Rst + self::K($Rst) * (self::$N - $Nozh));
+            return $user->save();
         }
-        $N = self::$N = -1 * abs(self::$N);
-        $user->rating = $Rst + self::K($Rst) * ($N - $Nozh);
-        $user->save();
 
-        return true;
+        $user->rating = intval($Rst - (self::K($Rst) * (self::$N - $Nozh)));
+        return $user->save();
     }
 
     static function Nozh($first_user_id, $second_user_id, $gamesId)
     {
-        $firstUserScore = self::find()
-            ->select('rating')
+        $more = true;
+        $firstUserRating = self::find()
             ->where(['user_id' => $first_user_id, 'games_id' => $gamesId])
             ->one();
 
-        $secondUserScore = self::find()
-            ->select('rating')
+        $secondUserRating = self::find()
             ->where(['user_id' => $second_user_id, 'games_id' => $gamesId])
             ->one();
 
-        $dR = abs($firstUserScore - $secondUserScore);
+        $firstUserRating = $firstUserRating['rating'];
+        $secondUserRating = $secondUserRating['rating'];
 
-        if ($firstUserScore > $secondUserScore) {
+        $dR = abs($firstUserRating - $secondUserRating);
+
+        if ($firstUserRating > $secondUserRating) {
             $more = true;
-        } elseif ($firstUserScore < $secondUserScore) {
+        } elseif ($firstUserRating < $secondUserRating) {
             $more = false;
         }
 
-        for ($i = 1; $i <= 50; $i++) {
-            if (EloTable::$dR[0] <= $dR && $dR <= EloTable::$dR[1]) {
+
+        for ($i = 0; $i < 50; $i++) {
+            if (EloTable::$dR[$i][0] <= $dR && $dR <= EloTable::$dR[$i][1]) {
                 if ($more) {
-                    $Nozh = EloTable::$RstH[$i];
+                    return EloTable::$RstH[$i];
                 }
-                $Nozh = EloTable::$RstL[$i];
+                return EloTable::$RstL[$i];
             }
         }
-        return $Nozh;
     }
 
     static function K($rating): int
     {
         if ($rating >= 2400) {
-            return $k = 10;
+            return 10;
         } elseif ($rating >= 1200) {
-            return $k = 15;
+            return 15;
         }
-        return $k = 25;
+        return 25;
     }
 
 

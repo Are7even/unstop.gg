@@ -25,7 +25,6 @@ class ChatController extends Controller
         $messagesUser = Message::find()
             ->where(['sender_id' => Yii::$app->user->id])
             ->orWhere(['receiver_id' => Yii::$app->user->id])
-            ->groupBy('receiver_id')
             ->all();
         $arrayUser = [];
         foreach ($messagesUser as $user) {

@@ -25,6 +25,7 @@ SiteAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <script src="//code.jivosite.com/widget/wT0oFcxvuM" async></script>
 </head>
 <body>
 <?php $this->beginBody() ?>
