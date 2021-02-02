@@ -247,3 +247,17 @@ a .lk-button {
     font-size: large;
     color: #FFFFFF;
 }
+
+.faiting-container.faiting-result.result-fight {
+    display: flex;
+    justify-content: center;
+}
+
+.match-tournament{
+    border-radius: 14px;
+    background: #FFFFFF;
+}
+
+.faiting {
+    min-height: 63vh;
+}

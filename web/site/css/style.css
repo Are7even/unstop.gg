@@ -2916,7 +2916,7 @@ a .lk-button:hover {
 }
 
 .lk-matches-content .match-tournament {
-  padding-left: 15px;
+  /*padding-left: 15px;*/
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

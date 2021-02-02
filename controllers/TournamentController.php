@@ -96,7 +96,7 @@ class TournamentController extends Controller
     {
         if (!Yii::$app->user->isGuest) {
             $tournament = Tournament::findOne($tournamentId);
-            if (Tournament::maxPlayersCheck($tournamentId,$tournament->players_count)){
+            if (Tournament::maxPlayersCheck($tournamentId, $tournament->players_count)) {
                 $registration = new TournamentToUser();
                 $registration->add(Yii::$app->user->id, $tournamentId);
                 if (!UserGameRating::find()->where(['user_id' => Yii::$app->user->id])->andWhere(['games_id' => $tournament->game])->one()) {
@@ -110,52 +110,53 @@ class TournamentController extends Controller
         return $this->goBack(['tournament/view', 'id' => $tournamentId]);
     }
 
-    public function actionDeletePlayer($userId,$tournamentId){
+    public function actionDeletePlayer($userId, $tournamentId)
+    {
         $model = new TournamentToUser();
         $tournament = Tournament::findOne($tournamentId);
-        if ($tournament->author==Yii::$app->user->id) {
+        if ($tournament->author == Yii::$app->user->id) {
             if ($model->deleteFromTournament($userId, $tournamentId)) {
                 return $this->goBack(['tournament/view', 'id' => $tournamentId]);
             }
             return new Exception("Something problem with DataBase");
         }
-        return new Exception("You are not ".Yii::t('admin','Author'));
+        return new Exception("You are not " . Yii::t('admin', 'Author'));
     }
 
-     public function actionFight($tournamentId)
-     {
-         if (!Yii::$app->user->isGuest) {
-             $fight = $this->findFight($tournamentId);
-             if (isset($fight)) {
-                 $fightingUser = Fight::getFightingUser();
-                 $statusModel = new IntermediateScore();
-                 $status = $statusModel->getByFight($fight->id) ?? $statusModel;
-                 if ($fight->first_user_id == $fightingUser->id) {
-                     $enemy = Fight::getEnemy($fight->second_user_id);
-                     return $this->render('fight', [
-                         'status' => $status,
-                         'fightId' => $fight->id,
-                         'statuses' => IntermediateScore::$status,
-                         'statusParam' => 'firstStatus',
-                         'user' => $fightingUser,
-                         'enemy' => $enemy,
-                     ]);
-                 } elseif ($fight->second_user_id == $fightingUser->id) {
-                     $enemy = Fight::getEnemy($fight->first_user_id);
-                     return $this->render('fight', [
-                         'status' => $status,
-                         'fightId' => $fight->id,
-                         'statuses' => IntermediateScore::$status,
-                         'statusParam' => 'secondStatus',
-                         'user' => $fightingUser,
-                         'enemy' => $enemy,
-                     ]);
-                 }
-             }
-             return $this->goBack(['tournament/view', 'id' => $tournamentId]);
-         }
-         return $this->goBack(['tournament/view', 'id' => $tournamentId]);
-     }
+    public function actionFight($tournamentId)
+    {
+        if (!Yii::$app->user->isGuest) {
+            $fight = $this->findFight($tournamentId);
+            if (isset($fight)) {
+                $fightingUser = Fight::getFightingUser();
+                $statusModel = new IntermediateScore();
+                $status = $statusModel->getByFight($fight->id) ?? $statusModel;
+                if ($fight->first_user_id == $fightingUser->id) {
+                    $enemy = Fight::getEnemy($fight->second_user_id);
+                    return $this->render('fight', [
+                        'status' => $status,
+                        'fightId' => $fight->id,
+                        'statuses' => IntermediateScore::$status,
+                        'statusParam' => 'firstStatus',
+                        'user' => $fightingUser,
+                        'enemy' => $enemy,
+                    ]);
+                } elseif ($fight->second_user_id == $fightingUser->id) {
+                    $enemy = Fight::getEnemy($fight->first_user_id);
+                    return $this->render('fight', [
+                        'status' => $status,
+                        'fightId' => $fight->id,
+                        'statuses' => IntermediateScore::$status,
+                        'statusParam' => 'secondStatus',
+                        'user' => $fightingUser,
+                        'enemy' => $enemy,
+                    ]);
+                }
+            }
+            return $this->goBack(['tournament/view', 'id' => $tournamentId]);
+        }
+        return $this->goBack(['tournament/view', 'id' => $tournamentId]);
+    }
 
     private function findFight($tournamentId)
     {
@@ -178,24 +179,8 @@ class TournamentController extends Controller
 
     public function actionResults($tournamentId)
     {
-        if (!Yii::$app->user->isGuest) {
-            $fight = $this->findFight($tournamentId);
-            $fightingUser = Fight::getFightingUser();
-            if ($fight->first_user_id == $fightingUser->id) {
-                $enemy = Fight::getEnemy($fight->second_user_id);
-                return $this->render('results', [
-                    'user' => $fightingUser,
-                    'enemy' => $enemy,
-                    'fight' => $fight,
-                ]);
-            } elseif ($fight->second_user_id == $fightingUser->id) {
-                $enemy = Fight::getEnemy($fight->first_user_id);
-                return $this->render('results', [
-                    'user' => $fightingUser,
-                    'enemy' => $enemy,
-                    'fight' => $fight,
-                ]);
-            }
+        if (!Yii::$app->user->isGuest)
+        {
             return $this->render('results');
         }
         return $this->goBack(['tournament/view', 'id' => $tournamentId]);
