@@ -186,7 +186,6 @@ $config = [
             //'debug/*',
             'cabinet/*',
             'tournament/*',
-            'simplechat/*',
             'chat/*',
         ]
     ],

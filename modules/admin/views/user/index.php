@@ -2,7 +2,9 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -28,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-           // 'auth_key',
+            // 'auth_key',
             'first_name',
             'last_name',
             'username',
@@ -40,7 +42,22 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_at',
             //'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {ban}',
+                'buttons' => [
+                    'ban' => function ($url, $model, $key) {
+                        if (!Yii::$app->authManager->getAssignment('ban',$model->id)) {
+                            $iconName = "lock";
+                            $icon = Html::tag('i', '', ['class' => "mdi mdi-$iconName"]);
+                            return Html::a($icon, Url::to(['user/ban', 'id' => $model->id]));
+                        }
+                        $iconName = "lock-open-variant";
+                        $icon = Html::tag('i', '', ['class' => "mdi mdi-$iconName"]);
+                        return Html::a($icon, Url::to(['user/unban', 'id' => $model->id]));
+                    }
+                ],
+            ],
         ],
     ]); ?>
 

@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'type')->dropDownList(\app\helpers\StageTypeHelper::StageList()); ?>
 
-    <?= $form->field($model, 'rule')->dropDownList(\app\helpers\StageRuleHelper::RuleList()) ?>
+    <?= $form->field($model, 'rule')->dropDownList(\app\helpers\FightTypeHelper::RuleList()) ?>
 
     <?= $form->field($model, 'start')->widget(DateTimePicker::classname(), [
         'pickerButton' => ['icon' => 'time'],

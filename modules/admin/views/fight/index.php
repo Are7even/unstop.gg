@@ -28,10 +28,31 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'tournament_id',
+            [
+                'attribute'=>'tournament_id',
+                'label' => Yii::t('admin', 'Tournament'),
+                'value' => function ($model) {
+                    return $model->tournament->header;
+                }
+
+            ],
             'type',
-            'first_user_id',
-            'second_user_id',
+            [
+                'attribute'=>'first_user_id',
+                'label' => Yii::t('admin', 'First player'),
+                'value' => function ($model) {
+                    return \app\models\User::getUsername($model->first_user_id);
+                }
+
+            ],
+            [
+                'attribute'=> 'second_user_id',
+                'label' => Yii::t('admin', 'Second player'),
+                'value' => function ($model) {
+                    return \app\models\User::getUsername($model->second_user_id) ?? '...on waiting...';
+                }
+
+            ],
             //'score_id',
             //'status',
             //'fight_order',

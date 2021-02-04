@@ -12,19 +12,19 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'tournament_id')->textInput() ?>
+    <?= $form->field($model, 'tournament_id')->hiddenInput()->label(false) ?>
 
-    <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'type')->dropDownList(\app\helpers\FightTypeHelper::TypeList()) ?>
 
-    <?= $form->field($model, 'first_user_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'first_user_id')->textInput(['maxlength' => true])->label('First player') ?>
 
-    <?= $form->field($model, 'second_user_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'second_user_id')->textInput(['maxlength' => true])->label('Second player') ?>
 
-    <?= $form->field($model, 'score_id')->textInput() ?>
+    <?= $form->field($model, 'score_id')->hiddenInput()->label(false) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->hiddenInput()->label(false) ?>
 
-    <?= $form->field($model, 'fight_order')->textInput() ?>
+    <?= $form->field($model, 'fight_order')->hiddenInput()->label(false) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('admin', 'Save'), ['class' => 'btn btn-success']) ?>

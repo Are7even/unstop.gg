@@ -95,16 +95,33 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing User model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+
+    public function actionBan($id)
+    {
+        if ($role = Yii::$app->authManager->getRole('ban')) {
+            Yii::$app->authManager->assign($role, $id);
+            return $this->redirect(['index']);
+        }
+
+        return $this->redirect(['index']);
+    }
+
+    public function actionUnban($id)
+    {
+        $role = Yii::$app->authManager->getRole("ban");
+        Yii::$app->authManager->revoke($role,$id);
+
+        if ($role = Yii::$app->authManager->getRole('user')) {
+            Yii::$app->authManager->assign($role, $id);
+            return $this->redirect(['index']);
+        }
+
+        return $this->redirect(['index']);
+    }
+
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        //  $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
