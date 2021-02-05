@@ -4,13 +4,17 @@
 namespace app\controllers;
 
 
+use app\models\Games;
+use app\models\UserGameRating;
 use yii\web\Controller;
 
 class TopController extends Controller
 {
 
     public function actionIndex(){
-        return $this->render('index');
+        $games = Games::find()->all();
+
+        return $this->render('index',compact('games'));
     }
 
 }

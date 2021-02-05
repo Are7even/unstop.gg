@@ -115,6 +115,10 @@ class UserGameRating extends \yii\db\ActiveRecord
         return 25;
     }
 
+    public static function getTopPlayersByGame($gameId,$limit = 100){
+        $list = self::find()->where(['games_id' => $gameId])->orderBy('rating DESC')->limit($limit)->all();
+        return $list;
+    }
 
     static function getUserRatingByGame($gameId, $userId)
     {

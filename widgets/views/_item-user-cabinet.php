@@ -37,9 +37,6 @@ use yii\helpers\Html;
 <a class="popup-link" href="#popup-content">
     <div class="lk-button">Написать сообщение</div>
 </a>
-<!--<a class="popup-link" href="--><?//= \yii\helpers\Url::to(['chat/chat','id'=>$model->id])?><!--">-->
-<!--    <div class="lk-button">Написать сообщение</div>-->
-<!--</a>-->
 <div class="wrapper">
     <div class="popup" id="popup-href">
         <div class="popup__body">

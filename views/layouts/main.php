@@ -113,7 +113,7 @@ SiteAsset::register($this);
             <li><a href="<?= Url::to(['tournament/index'])?>"><?=Yii::t('admin','Tournaments')?></a></li>
             <li><a href="leagues.html">Лиги</a></li>
             <li><a href="news.html">Новости</a></li>
-            <li><a class="gold_text" href="top100.html">Топ 100</a></li>
+            <li><a href="<?= Url::to(['top/index'])?>"><?=Yii::t('admin','Top 100')?></a></li>
             <li><a href="#">О нас</a></li>
         </ul>
     </div>
