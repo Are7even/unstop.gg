@@ -2,7 +2,9 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\FightSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -29,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             [
-                'attribute'=>'tournament_id',
+                'attribute' => 'tournament_id',
                 'label' => Yii::t('admin', 'Tournament'),
                 'value' => function ($model) {
                     return $model->tournament->header;
@@ -38,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'type',
             [
-                'attribute'=>'first_user_id',
+                'attribute' => 'first_user_id',
                 'label' => Yii::t('admin', 'First player'),
                 'value' => function ($model) {
                     return \app\models\User::getUsername($model->first_user_id);
@@ -46,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ],
             [
-                'attribute'=> 'second_user_id',
+                'attribute' => 'second_user_id',
                 'label' => Yii::t('admin', 'Second player'),
                 'value' => function ($model) {
                     return \app\models\User::getUsername($model->second_user_id) ?? '...on waiting...';
@@ -58,7 +60,18 @@ $this->params['breadcrumbs'][] = $this->title;
             //'fight_order',
             //'stage',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {delete} {fixScore}',
+                'buttons' => [
+                    'fixScore' => function ($url, $model, $key) {
+                        $iconName = "wrench";
+                        $icon = Html::tag('i', '', ['class' => "mdi mdi-$iconName"]);
+                        return Html::a($icon, Url::to(['score/update', 'id' => $model->score_id, 'tournamentId' => $model->tournament_id]), ['title' => Yii::t('admin', 'Change scores')]);
+                    }
+                ],
+
+            ],
         ],
     ]); ?>
 
