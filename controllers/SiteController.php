@@ -2,6 +2,9 @@
 
 namespace app\controllers;
 
+use app\helpers\StatusHelper;
+use app\models\Confidential;
+use app\models\Convention;
 use app\models\ForgotPasswordForm;
 use app\models\FurtherInformationForm;
 use app\models\Games;
@@ -129,4 +132,23 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionConvention()
+    {
+        $convention = Convention::find()
+            ->where(['status'=>StatusHelper::$active])
+            ->one();
+
+        return $this->render('convention',compact('convention'));
+    }
+
+    public function actionConfidential()
+    {
+        $confidential = Confidential::find()
+            ->where(['status'=>StatusHelper::$active])
+            ->one();
+
+        return $this->render('confidential',compact('confidential'));
+    }
+
 }

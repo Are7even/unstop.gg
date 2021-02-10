@@ -73,7 +73,7 @@ class AuthController extends Controller
 
     public function actionLoginVk($uid, $first_name, $last_name, $photo)
     {
-        if (User::findById($uid)){
+        if ($user = User::findById($uid)){
             if (Yii::$app->getUser()->login($user)) {
                 return $this->goHome();
             }

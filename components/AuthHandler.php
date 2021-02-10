@@ -24,8 +24,8 @@ class AuthHandler
         $idAttr = 'id';
         switch ($this->client->name) {
             case 'google':
-                $emailAttr = 'emails.0.value';
-                $nameAttr = 'displayName';
+                $emailAttr = 'email';
+                $nameAttr = 'name';
                 break;
             default:
                 $emailAttr = 'email';
@@ -49,8 +49,8 @@ class AuthHandler
         }
         if (Yii::$app->user->isGuest) {
             if ($auth) { // login
-                /* @var User $user */
-                Yii::$app->user->login($user, Yii::$app->params['user.rememberMeDuration']);
+                $user = User::findById($auth['user_id']);
+                Yii::$app->user->login($user);
             } else { // signup
                 if ($email !== null && User::find()->where(['email' => $email])->exists()) {
                     Yii::$app->getSession()->setFlash('error', [

@@ -36,10 +36,10 @@ SiteAsset::register($this);
             <span class="nav-toggle_item">Menu</span>
         </button>
         <div class="social">
-            <a href="#" target="_blank">
+            <a href="https://facebook.com/unstop.gg" target="_blank">
                 <i class="fab fa-facebook-square"></i>
             </a>
-            <a href="#" target="_blank">
+            <a href="https://vk.com/unstop_gg" target="_blank">
                 <i class="fab fa-vk"></i>
             </a>
         </div>
@@ -162,8 +162,8 @@ SiteAsset::register($this);
 <div class="footer">
     <div class="container">
         <div class="footer-href">
-            <a href="#">Политика конфиденциальности</a>
-            <a href="#">Пользовательское соглашение</a>
+            <a href="<?= Url::to(['site/confidential'])?>"><?= Yii::t('admin','Privacy Policy')?></a>
+            <a href="<?= Url::to(['site/convention'])?>"><?= Yii::t('admin','Terms of use')?></a>
         </div>
         <div class="info">Copyright © unstop.gg 2020 All Rights Reserved</div>
     </div>
