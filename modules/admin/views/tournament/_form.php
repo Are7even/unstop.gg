@@ -67,7 +67,6 @@ $languages = \app\models\Language::findActive();
         ]
     ]); ?>
 
-<!--    --><?//= $form->field($model, 'checkin')->dropDownList(StatusHelper::statusList()) ?>
 
     <?php echo $form->field($model, 'checkin')->radioList(StatusHelper::statusList()) ?>
 

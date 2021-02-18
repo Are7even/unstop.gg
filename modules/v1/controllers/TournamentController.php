@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\controllers;
 
+use tests\RedirectTest;
 use yii\rest\Controller;
 use yii\base\Event;
 use app\models\TournamentToUser;
@@ -26,8 +27,10 @@ class TournamentController extends Controller
     private $userModel;
     private $intermediateScoreModel;
     private $tournamentHelper;
+    public $active = false;
 
-    public function init() {
+    public function init()
+    {
         $this->tournamentHelper = new TournamentHelper();
         $this->scoreModel = new Score();
         $this->tournametModel = new Tournament();
@@ -36,14 +39,16 @@ class TournamentController extends Controller
         $this->intermediateScoreModel = new IntermediateScore();
     }
 
-    public function actionTournaments() {
+    public function actionTournaments()
+    {
         $tournaments = $this->tournametModel->getTournaments();
         return [
             'tournaments' => $tournaments
         ];
     }
 
-    public function actionTournament($tournamentId) {
+    public function actionTournament($tournamentId)
+    {
         $tournament = $this->tournametModel->getTournament($tournamentId);
         if (!$tournament) {
             throw new NotFoundHttpException('Tournament not found');
@@ -122,7 +127,8 @@ class TournamentController extends Controller
         return $this->tournamentHelper->buildBracket($teams, $scores);
     }
 
-    public function actionUpdateFightStatus($tournamentId, $fightId) {
+    public function actionUpdateFightStatus($tournamentId, $fightId)
+    {
         $request = Yii::$app->request;
         $fight = $this->fightModel->getFightById($fightId);
         if ($fight->status == Fight::$status['finished']) {
@@ -150,6 +156,17 @@ class TournamentController extends Controller
 
         $this->fightModel->updateFightStatus($fight->id);
 
+        $firstUserScore = $fight->score->first_user_score;
+        $secondUserScore = $fight->score->second_user_score;
+        $type = $fight->type;
+
+        if ($firstUserScore != Fight::maxGamesByBO($type) && $secondUserScore != Fight::maxGamesByBO($type)) {
+            $updateActive = $this->intermediateScoreModel->updateActive($fightId);
+            if (!$updateActive) {
+                throw new BadRequestHttpException('Bad request(bo)');
+            }
+        }
+
         return [
             'status' => $status,
             'result' => $result,
@@ -157,7 +174,8 @@ class TournamentController extends Controller
         ];
     }
 
-    public function actionUpdateScore($tournamentId, $fightId) {
+    public function actionUpdateScore($tournamentId, $fightId)
+    {
         $request = Yii::$app->request;
         $fight = $this->fightModel->getFightById($fightId);
         if ($fight->status == Fight::$status['finished']) {

@@ -5,6 +5,7 @@ namespace app\models;
 use app\models\Tournament;
 use app\models\Score;
 use Yii;
+use yii\web\BadRequestHttpException;
 
 /**
  * This is the model class for table "fight".
@@ -168,19 +169,21 @@ class Fight extends \yii\db\ActiveRecord
                 $fight->status = self::$status['finished'];
                 $isSaved = $fight->save();
 
-                $ratingModel::updateRating(
-                    self::player($fight->id,true),
-                    $gamesId,
-                    $ratingModel::Nozh(self::player($fight->id,true),self::player($fight->id,false),$gamesId),
-                    true
-                );
+                if (Tournament::getRatingStatus($fight->tournament_id) == 1) {
+                    $ratingModel::updateRating(
+                        self::player($fight->id, true),
+                        $gamesId,
+                        $ratingModel::Nozh(self::player($fight->id, true), self::player($fight->id, false), $gamesId),
+                        true
+                    );
 
-                $ratingModel::updateRating(
-                    self::player($fight->id,false),
-                    $gamesId,
-                    $ratingModel::Nozh(self::player($fight->id,false),self::player($fight->id,true),$gamesId),
-                    false
-                );
+                    $ratingModel::updateRating(
+                        self::player($fight->id, false),
+                        $gamesId,
+                        $ratingModel::Nozh(self::player($fight->id, false), self::player($fight->id, true), $gamesId),
+                        false
+                    );
+                }
 
                 if ($isSaved) {
                     return $this->createStageFight($fight, $score);
@@ -209,6 +212,20 @@ class Fight extends \yii\db\ActiveRecord
             }
             return $fight->first_user_id;
         }
+    }
+
+    static function maxGamesByBO($type)
+    {
+        if ($type == 'bo1') {
+            return 1;
+        } elseif ($type == 'bo3') {
+            return 2;
+        } elseif ($type == 'bo5') {
+            return 3;
+        } elseif ($type == 'bo7') {
+            return 4;
+        }
+        throw new BadRequestHttpException('Not correct Fight type');
     }
 
     static function getFightingUser()

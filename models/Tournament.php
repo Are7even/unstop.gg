@@ -158,6 +158,12 @@ class Tournament extends \yii\db\ActiveRecord
         return $links;
     }
 
+    public static function getRatingStatus($tournamentId)
+    {
+        $tournament = self::findOne($tournamentId);
+        return $tournament->rating_on;
+    }
+
     static function getCurrentStartTime($id)
     {
         return true;

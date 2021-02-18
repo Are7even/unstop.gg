@@ -59,7 +59,14 @@ class IntermediateScore extends \yii\db\ActiveRecord
         return $this->save();
     }
 
-    public function updateStatuses($fightId, $firstStatus = 0, $secondStatus = 0)
+    public function updateActive($fightId)
+    {
+        $status = $this->getByFight($fightId);
+        $status->active = true;
+        return $status->save();
+    }
+
+    public function updateStatuses($fightId, $firstStatus = 0, $secondStatus = 0, $active = false)
     {
         $status = $this->getByFight($fightId);
         if ($status && $status->active) {
@@ -75,7 +82,7 @@ class IntermediateScore extends \yii\db\ActiveRecord
                 $status->second_user_id_status != self::$status['unset'] &&
                 $status->first_user_id_status != $status->second_user_id_status
             ) {
-                $status->active = false;
+                $status->active = $active;
             }
 
             return $status->save();
