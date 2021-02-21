@@ -36,6 +36,14 @@ class TournamentHelper
                     $scores[$iters]['second_user_score']
                 ];
                 $iters++;
+
+            }
+            if ($size <= 1 && $iters < $scoresCount) {
+                $results[$i][] = [
+                    $scores[$iters]['first_user_score'],
+                    $scores[$iters]['second_user_score']
+                ];
+                break;
             }
         }
 
@@ -63,7 +71,7 @@ class TournamentHelper
         $size = count($teams);
         $teams = $this->normalizeTeams($teams);
         $results = $this->getFightsResults($scores, $size);
-        
+
         return [
             'teams' => $teams,
             'results' => $results

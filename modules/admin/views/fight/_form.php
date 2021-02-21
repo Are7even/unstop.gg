@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'tournament_id')->hiddenInput()->label(false) ?>
+    <?= $form->field($model, 'tournament_id')->textInput() ?>
 
     <?= $form->field($model, 'type')->dropDownList(\app\helpers\FightTypeHelper::TypeList()) ?>
 
@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'second_user_id')->textInput(['maxlength' => true])->label('Second player') ?>
 
-    <?= $form->field($model, 'score_id')->hiddenInput()->label(false) ?>
+    <?= $form->field($model, 'score_id')->hiddenInput()->label(false)?>
 
     <?= $form->field($model, 'status')->hiddenInput()->label(false) ?>
 
