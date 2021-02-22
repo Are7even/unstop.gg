@@ -93,16 +93,20 @@ function initFightStatuses() {
         );
     }
 
+    let isClicked = false;
+
     if (winBtn) {
         const fightId = winBtn.dataset.fightId;
         const statusParam = winBtn.dataset.param;
         const value = winBtn.dataset.value;
         const req = { ...config, body: JSON.stringify({ [statusParam]: value }) };
 
+
         winBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            if (isPending) return;
+            if (isPending || isClicked) return;
             isPending = true;
+            isClicked = true;
             fetch(`/api/v1/tournaments/${tournamentId}/fights/${fightId}/status`, req)
                 .then(function(response) {
                     if (response.status >= 400 && response.status < 600) {
@@ -118,15 +122,16 @@ function initFightStatuses() {
                         errorBlock.classList.add('hidden');
                     }
 
-                    alert('Успех');
+                    alert('Успех, ожидайте ответа противника!');
                 })
                 .catch((err) => {
-                    alert('Провал');
+                    alert('Извините, Противник еще не внес результат');
                     console.error(err);
                 })
                 .finally(() => (isPending = false));
         });
     }
+
 
     if (loseBtn) {
         const fightId = loseBtn.dataset.fightId;
@@ -136,7 +141,8 @@ function initFightStatuses() {
 
         loseBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            if (isPending) return;
+            if (isPending || isClicked) return;
+            isClicked = true;
             isPending = true;
             fetch(`/api/v1/tournaments/${tournamentId}/fights/${fightId}/status`, req)
                 .then(function(response) {
@@ -145,9 +151,9 @@ function initFightStatuses() {
                     }
                     return response.json();
                 })
-                .then(() => alert('Успех'))
+                .then(() => alert('Успех, ожидайте ответа противника!'))
                 .catch((err) => {
-                    alert('Провал');
+                    alert('Извините, Противник еще не внес результат');
                     console.error(err);
                 })
                 .finally(() => (isPending = false));
