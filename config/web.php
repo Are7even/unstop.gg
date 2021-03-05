@@ -8,7 +8,7 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log','simplechat'],
+    'bootstrap' => ['log', 'simplechat'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
@@ -31,6 +31,11 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'loginUrl' => ['/'],
+        ],
+        'bbuser' => [
+            'class' => 'PhpBBWebUser',
+            'loginUrl' => ['/'],
+            'allowAutoLogin' => true, 
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -110,7 +115,7 @@ $config = [
                     'prefix' => 'api',
                     'tokens' => [
                         '{tournamentId}' => '<tournamentId:\\w+>',
-                        '{fightId}'=>'<fightId:\\w+>'
+                        '{fightId}' => '<fightId:\\w+>'
                     ],
                     'extraPatterns' => [
                         'GET /' => 'tournaments',
@@ -142,9 +147,13 @@ $config = [
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
-            'defaultRoles' => function(){
+            'defaultRoles' => function () {
                 return \Yii::$app->user->isGuest ? ['guest'] : ['user'];
             },
+        ],
+        'phpBB' => [
+            'class' => 'ext.phpBB.phpBB',
+            'path' => 'webroot.forum',
         ],
     ],
     'modules' => [
@@ -182,12 +191,13 @@ $config = [
             'site/*',
             'auth/*',
             'mm/*',
-           // 'rbac/*',
+            // 'rbac/*',
             //'debug/*',
             'cabinet/*',
             'tournament/*',
             'chat/*',
             'top/*',
+            'forum/*',
         ]
     ],
     'params' => $params,
