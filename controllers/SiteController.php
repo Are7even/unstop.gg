@@ -8,6 +8,7 @@ use app\models\Convention;
 use app\models\ForgotPasswordForm;
 use app\models\FurtherInformationForm;
 use app\models\Games;
+use app\models\News;
 use app\models\RegistrationForm;
 use app\models\User;
 use app\models\UserGameRating;
@@ -67,6 +68,7 @@ class SiteController extends Controller
         $loginForm = new LoginForm();
         $registrationForm = new RegistrationForm();
         $forgotPasswordForm = new ForgotPasswordForm();
+        $news = News::find()->all();
         $games = Games::find()->all();
 
         if (Yii::$app->request->isPost) {
@@ -110,6 +112,7 @@ class SiteController extends Controller
             'registration' => $registrationForm,
             'forgotPasswordForm' => $forgotPasswordForm,
             'games' => $games,
+            'news' => $news,
         ]);
     }
 

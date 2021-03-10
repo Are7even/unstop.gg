@@ -81,6 +81,9 @@ AdminAsset::register($this);
                             <a href="<?php echo Url::to(['/admin/advertisement'])?>" class="waves-effect"><i class="mdi mdi-billboard"></i><span><?php echo Yii::t('admin','Advertisement')?></span></a>
                         </li>
                         <li>
+                            <a href="<?php echo Url::to(['/admin/news'])?>" class="waves-effect"><i class="mdi mdi-newspaper"></i><span><?php echo Yii::t('admin','News')?></span></a>
+                        </li>
+                        <li>
                             <a href="<?php echo Url::to(['/admin/confidential'])?>" class="waves-effect"><i class="mdi mdi-book-lock"></i><span><?php echo Yii::t('admin','Privacy Policy')?></span></a>
                         </li>
                         <li>

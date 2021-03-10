@@ -19,84 +19,40 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                     <!-- Additional required wrapper -->
                     <div class="swiper-wrapper ">
                         <!-- Slides -->
-                        <div class="swiper-slide popup-link">
-                            <a class="popup-link" href="#popup">
-                                <img src="/web/site/img/fifa.png" alt="">
+                        <?php foreach ($news as $key => $newsItem):?>
+                        <div class="swiper-slide <?=  ($key == 0) ? 'popup-link' : '';?>">
+                            <a class="popup-link" href="#popup<?=$key?>">
+                                <img src="/web/upload/<?= $newsItem->image?>" alt="">
                                 <div class="slide-text">
                                     <div class="title">
-                                        Cs Go Tournament
+                                        <?= $newsItem->title?>
                                     </div>
                                     <div class="subtitle">
-                                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                        tempor invidunt ut labore et dolore magna aliquyam
+                                        <?= substr($newsItem->text,0,150)?>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        <div class="swiper-slide">
-                            <a class="popup-link" href="#popup">
-                                <img src="/web/site/img/cs.jpg" alt="">
-                                <div class="slide-text">
-                                    <div class="title">
-                                        Cs Go Tournament
-                                    </div>
-                                    <div class="subtitle">
-                                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                        tempor invidunt ut labore et dolore magna aliquyam
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a class="popup-link" href="#popup">
-                                <img src="/web/site/img/cs.jpg" alt="">
-                                <div class="slide-text">
-                                    <div class="title">
-                                        Cs Go Tournament
-                                    </div>
-                                    <div class="subtitle">
-                                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                        tempor invidunt ut labore et dolore magna aliquyam
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                        <?php endforeach;?>
+
                     </div>
                     <!--                    <div class="swiper-button-prev"></div>-->
                     <!--                    <div class="swiper-button-next"></div>-->
                 </div>
                 <div class="swiper-container gallery-thumbs">
                     <div class="swiper-wrapper">
+                        <?php foreach ($news as $newsItem):?>
                         <div class="swiper-slide">
                             <a class="popup-link" href="#popup">
-                                <img src="/web/site/img/fifa.png" alt="">
+                                <img src="/web/upload/<?= $newsItem->image?>" alt="">
                                 <div class="slide-text">
                                     <div class="subtitle">
-                                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+                                        <?= $newsItem->title?>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        <div class="swiper-slide">
-                            <a class="popup-link" href="#popup">
-                                <img src="/web/site/img/cs.jpg" alt="">
-                                <div class="slide-text">
-                                    <div class="subtitle">
-                                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a class="popup-link" href="#popup">
-                                <img src="/web/site/img/cs.jpg" alt="">
-                                <div class="slide-text">
-                                    <div class="subtitle">
-                                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                        <?php endforeach;?>
                     </div>
                 </div>
 
@@ -261,17 +217,20 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
     </div>
 </div>
 
+
+
 <div class="wrapper">
-    <div class="popup" id="popup">
+    <?php foreach ($news as $key => $newsItem):?>
+    <div class="popup" id="popup<?= $key?>">
         <div class="popup__body">
             <div class="popup__content">
                 <a href="#" class="popup__close close-popup">
                     <i class="fas fa-times"></i>
                 </a>
                 <div class="info-block">
-                    <img src="/web/site/img/cs.jpg" alt="">
+                    <img src="/web/upload/<?= $newsItem->image?>" alt="">
                     <div class="info">
-                        <div class="button">на форум</div>
+                        <a href="/forum"><div class="button"><?= Yii::t('admin','Forum')?></div></a>
                         <div class="icons">
                             <div><i class="fas fa-heart"></i><br>22</div>
                             <div><i class="fas fa-share-alt"></i><br>22</div>
@@ -279,39 +238,15 @@ $this->registerJsFile('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery
                     </div>
                 </div>
                 <div class="text">
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-                    ut
-                    labore et
-                    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-                    rebum. Stet
-                    clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor
-                    sit
-                    amet,
-                    consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                    aliquyam erat,
-                    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-                    gubergren, no
-                    sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-                    sadipscing
-                    elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-                    voluptua. At
-                    vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-                    sanctus est
-                    Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                    nonumy
-                    eirmod
-                    tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                    accusam
-                    et justo
-                    duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
-                    dolor
-                    sit amet
+                    <?= $newsItem->text?>
                     <div class="autor">
-                        Author
+                        <?= \app\models\User::getUsername($newsItem->user_id)?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <?php endforeach;?>
 </div>
-</div>
+
+
