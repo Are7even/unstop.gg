@@ -45,13 +45,13 @@ $config = [
             'clients' => [
                 'google' => [
                     'class' => 'yii\authclient\clients\Google',
-                    'clientId' => '47812081007-ujho43p3p49imna2qaassekqcg6u84uj.apps.googleusercontent.com',
-                    'clientSecret' => 'ucjgMBYpc1LFu5aHD2QHYOr3',
+                    'clientId' => '',
+                    'clientSecret' => '',
                 ],
                 'facebook' => [
                     'class' => 'yii\authclient\clients\Facebook',
-                    'clientId' => '3803066436432297',
-                    'clientSecret' => '2a3ca785e525b039c6268d8deebce2cc',
+                    'clientId' => '',
+                    'clientSecret' => '',
                 ],
             ],
         ],
@@ -85,8 +85,8 @@ $config = [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.gmail.com',  // e.g. smtp.mandrillapp.com or smtp.gmail.com
-                'username' => 'jeka.klumenko@gmail.com',
-                'password' => '21214141Zz',
+                'username' => '*************@gmail.com',
+                'password' => '**********',
                 'port' => '465', // Port 25 is a very common port too
                 'encryption' => 'ssl', // It is often used, check your provider or mail server specs
             ],
