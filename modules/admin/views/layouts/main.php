@@ -43,7 +43,7 @@ AdminAsset::register($this);
             <!-- LOGO -->
             <div class="topbar-left">
                 <div class="text-center">
-                    <a href="<?php echo Url::to(['/admin/default'])?>" class="logo"><img src="/web/admin/images/logo.png" alt=""></a>
+                    <a href="<?php echo Url::to(['/admin/default'])?>" class="logo"><img src="/web/admin/assets/images/logo.png" alt=""></a>
                     <!-- <a href="index.html" class="logo"><img src="assets/images/logo.png" height="24" alt="logo"></a> -->
                 </div>
             </div>
@@ -53,31 +53,46 @@ AdminAsset::register($this);
                 <div id="sidebar-menu">
                     <ul>
                         <li>
-                            <a href="<?php echo Url::to(['/admin/user'])?>" class="waves-effect"><i class="mdi mdi-account"></i><span>User</span></a>
+                            <a href="<?php echo Url::to(['/admin/user'])?>" class="waves-effect"><i class="mdi mdi-account"></i><span><?php echo Yii::t('admin','User')?></span></a>
                         </li>
 
                         <li>
-                            <a href="<?php echo Url::to(['/admin/games'])?>" class="waves-effect"><i class="mdi mdi-gamepad-down"></i><span>Games</span></a>
+                            <a href="<?php echo Url::to(['/admin/games'])?>" class="waves-effect"><i class="mdi mdi-gamepad-down"></i><span><?php echo Yii::t('admin','Games')?></span></a>
                         </li>
                         <li>
-                            <a href="<?php echo Url::to(['/admin/genre'])?>" class="waves-effect"><i class="mdi mdi-gamepad-variant"></i><span>Genre</span></a>
+                            <a href="<?php echo Url::to(['/admin/genre'])?>" class="waves-effect"><i class="mdi mdi-gamepad-variant"></i><span><?php echo Yii::t('admin','Genre')?></span></a>
                         </li>
                         <li>
-                            <a href="<?php echo Url::to(['/admin/gifts'])?>" class="waves-effect"><i class="mdi mdi-trophy-award"></i><span>Gifts</span></a>
+                            <a href="<?php echo Url::to(['/admin/gifts'])?>" class="waves-effect"><i class="mdi mdi-trophy-award"></i><span><?php echo Yii::t('admin','Gifts')?></span></a>
                         </li>
                         <li>
-                            <a href="<?php echo Url::to(['/admin/stage'])?>" class="waves-effect"><i class="mdi mdi-truck-fast"></i><span>Stage</span></a>
+                            <a href="<?php echo Url::to(['/admin/tournament'])?>" class="waves-effect"><i class="mdi mdi-tournament"></i><span><?php echo Yii::t('admin','Tournament')?></span></a>
                         </li>
                         <li>
-                            <a href="<?php echo Url::to(['/admin/tournament'])?>" class="waves-effect"><i class="mdi mdi-tournament"></i><span>Tournament</span></a>
+                            <a href="<?php echo Url::to(['/admin/fight'])?>" class="waves-effect"><i class="mdi mdi-kabaddi"></i><span><?php echo Yii::t('admin','Fight')?></span></a>
                         </li>
                         <li>
-                            <a href="<?php echo Url::to(['/admin/language'])?>" class="waves-effect"><i class="mdi mdi-flag-variant"></i><span>Language</span></a>
+                            <a href="<?php echo Url::to(['/admin/language'])?>" class="waves-effect"><i class="mdi mdi-flag-variant"></i><span><?php echo Yii::t('admin','Language')?></span></a>
                         </li>
                         <li>
-                            <a href="<?= Url::to(['site/index'])?>" class="waves-effect">
+                            <a href="<?php echo Url::to(['/rbac'])?>" class="waves-effect"><i class="mdi mdi-account-question"></i><span><?php echo Yii::t('admin','Roles')?></span></a>
+                        </li>
+                        <li>
+                            <a href="<?php echo Url::to(['/admin/advertisement'])?>" class="waves-effect"><i class="mdi mdi-billboard"></i><span><?php echo Yii::t('admin','Advertisement')?></span></a>
+                        </li>
+                        <li>
+                            <a href="<?php echo Url::to(['/admin/news'])?>" class="waves-effect"><i class="mdi mdi-newspaper"></i><span><?php echo Yii::t('admin','News')?></span></a>
+                        </li>
+                        <li>
+                            <a href="<?php echo Url::to(['/admin/confidential'])?>" class="waves-effect"><i class="mdi mdi-book-lock"></i><span><?php echo Yii::t('admin','Privacy Policy')?></span></a>
+                        </li>
+                        <li>
+                            <a href="<?php echo Url::to(['/admin/convention'])?>" class="waves-effect"><i class="mdi mdi-handshake"></i><span><?php echo Yii::t('admin','Terms of use')?></span></a>
+                        </li>
+                        <li>
+                            <a href="<?= Url::home()?>" class="waves-effect">
                                 <i class="mdi mdi-power"></i>
-                                <span>logout</span>
+                                <span><?php echo Yii::t('admin','Exit')?></span>
                             </a>
 
 <!--                            <a href="logout.html" class="waves-effect"><i class="mdi mdi-power"></i><span> Logout </span></a>-->
@@ -105,7 +120,7 @@ AdminAsset::register($this);
                                 <a class="nav-link dropdown-toggle arrow-none waves-effect text-white" data-toggle="dropdown" href="#" role="button"
                                    aria-haspopup="false" aria-expanded="false">
 
-                                    <?php echo Yii::$app->language; ?>
+                                    <?php echo \app\widgets\CurrentLanguage::widget(['language_code'=>Yii::$app->language]); ?>
 
 <!--                                    --><?php //$languages = Language::find()->where(['status' => true])->all() ?>
 <!--                                    --><?php
@@ -113,15 +128,11 @@ AdminAsset::register($this);
 //                                        echo Yii::$app->language;
 //                                    endforeach;
 //                                    ?>
-                                    <img src="/web/admin/images/flags/us_flag.jpg" class="ml-2" height="16" alt=""/>
+                                    <img src="/web/upload/<?php echo \app\widgets\LanguageIconWidget::widget(['currentLanguage'=>Yii::$app->language])?>" class="ml-2" height="16" alt=""/>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right language-switch">
-                                    <?php echo LanguageSwitch::widget()?>
-                                    <a class="dropdown-item" href="#"><img src="/web/admin/images/flags/italy_flag.jpg" alt="" height="16"/><span> Italian </span></a>
-                                    <a class="dropdown-item" href="#"><img src="/web/admin/images/flags/french_flag.jpg" alt="" height="16"/><span> French </span></a>
-                                    <a class="dropdown-item" href="#"><img src="/web/admin/images/flags/spain_flag.jpg" alt="" height="16"/><span> Spanish </span></a>
-                                    <a class="dropdown-item" href="#"><img src="/web/admin/images/flags/russia_flag.jpg" alt="" height="16"/><span> Russian </span></a>
+                                    <?php echo LanguageSwitch::widget(['admin'=>\app\helpers\StatusHelper::$active])?>
                                 </div>
                             </li>
 <!--                            <li class="list-inline-item dropdown notification-list">-->
@@ -242,10 +253,6 @@ AdminAsset::register($this);
                 </div>
                 <!-- Top Bar End -->
 
-<!--                --><?//= Breadcrumbs::widget([
-//                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-//                ]) ?>
-<!--                --><?//= Alert::widget() ?>
 
 
                 <div class="page-content-wrapper ">

@@ -2,42 +2,77 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model app\models\LoginForm */
+
+/* @var $login app\models\LoginForm */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Login';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out the following fields to login:</p>
 
     <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
+        'id' => 'login',
         'layout' => 'horizontal',
-        'fieldConfig' => [
-            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            'labelOptions' => ['class' => 'col-lg-1 control-label'],
-        ],
+        'action' => \yii\helpers\Url::to(['site/index']),
+        'options'=>['class' => 'login-form validate-form'],
     ]); ?>
+    <span class="form-title"><?php echo Yii::t('admin', 'Login') ?></span>
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+    <?= $form->field($login, 'formId')->hiddenInput([
+        'value'=>'login-form',
+        'name'=>'formId'
+    ])->label(false)?>
 
-        <?= $form->field($model, 'password')->passwordInput() ?>
+    <?= $form->field($login, 'email')->textInput([
+        'class' => 'input100',
+        'placeholder' => 'email',
+        'type' => 'text',
+        'name' => 'email',
+    ])->label(false) ?>
 
-        <?= $form->field($model, 'rememberMe')->checkbox([
-            'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
+    <?= $form->field($login, 'password')->passwordInput([
+        'class' => 'input100',
+        'placeholder' => 'password',
+        'type' => 'password',
+        'name' => 'password',
+    ])->label(false) ?>
+
+    <?= $form->field($login, 'rememberMe')->checkbox([
+        'style' => 'display:none',
+    ])->label(false) ?>
+
+    <div class="form-group">
+        <div class="col-lg-offset-1 col-lg-11">
+            <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+        </div>
+    </div>
+
+
+
+        <?= yii\authclient\widgets\AuthChoice::widget([
+            'baseAuthUrl' => ['auth/auth'],
+            'popupMode' => false,
+            'options' => [
+                'class' => 'social',
+            ], // for div holder
         ]) ?>
 
-        <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-            </div>
-        </div>
+    <div class="col-mb-4">
+        <script type="text/javascript" src="https://vk.com/js/api/openapi.js?168"></script>
+        <script type="text/javascript">
+            VK.init({apiId: 7649532});
+        </script>
 
+        <!-- VK Widget -->
+        <div id="vk_auth"></div>
+        <script type="text/javascript">
+            VK.Widgets.Auth("vk_auth", {"authUrl": "/auth/login-vk"});
+        </script>
+    </div>
+
+    <div class="text-center">
+        <a href="#" class="txt1" id="recovery_login_href"><?php echo Yii::t('admin','Forgot your password?')?></a>
+        <a href="#" class="txt1" id="register_login_href"><?php echo Yii::t('admin',"Don't have an account? Register")?></a>
+    </div>
     <?php ActiveForm::end(); ?>
 
-</div>

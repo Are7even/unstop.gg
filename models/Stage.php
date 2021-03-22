@@ -52,4 +52,13 @@ class Stage extends \yii\db\ActiveRecord
             'players_count' => Yii::t('admin', 'Players Count'),
         ];
     }
+
+    public function getTournament () {
+        return $this -> hasOne(Tournament::className(), ['id'=>'tournament_id']);
+    }
+
+    public function getFight () {
+        return $this -> hasMany(Fight::className(), ['stage_id'=>'id']);
+    }
+
 }

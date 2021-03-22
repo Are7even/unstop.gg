@@ -54,7 +54,11 @@ class UserToGifts extends \yii\db\ActiveRecord
     }
 
     public function getGifts(){
-        return $this->hasMany(Gifts::className(),['id'=>'gifts_id']);
+        return $this->hasOne(Gifts::className(),['id'=>'gifts_id']);
+    }
+
+    public function getUser(){
+        return $this->hasOne(User::className(),['id'=>'user_id']);
     }
 
 }

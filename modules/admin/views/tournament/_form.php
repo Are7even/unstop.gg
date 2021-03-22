@@ -35,13 +35,17 @@ $languages = \app\models\Language::findActive();
 
     <?= $form->field($model, 'game')->dropDownList(ArrayHelper::map(Games::find()->all(),'id','name')) ?>
 
+    <?= $form->field($model, 'status')->hiddenInput()->label(false) ?>
+
+    <?= $form->field($model, 'author')->hiddenInput()->label(false)  ?>
+
     <?= $form->field($model, 'created_at')->hiddenInput()->label(false) ?>
 
     <?= $form->field($model, 'hidden')->dropDownList(StatusHelper::statusList()) ?>
 
     <?= $form->field($model, 'handheld')->dropDownList(StatusHelper::statusList()) ?>
 
-    <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'type')->dropDownList(\app\helpers\TournamentTypeHelper::typeList()) ?>
 
     <?= $form->field($model, 'rating_on')->dropDownList(StatusHelper::statusList()) ?>
 
@@ -51,7 +55,7 @@ $languages = \app\models\Language::findActive();
         'pickerButton' => ['icon' => 'time'],
         'pluginOptions' => [
             'autoclose' => true,
-            'format'=>'dd-mm-yyyy hh:ii',
+            'format'=>'yyyy-mm-dd hh:ii',
         ]
     ]); ?>
 
@@ -59,22 +63,18 @@ $languages = \app\models\Language::findActive();
         'pickerButton' => ['icon' => 'time'],
         'pluginOptions' => [
             'autoclose' => true,
-            'format'=>'dd-mm-yyyy hh:ii',
+            'format'=>'yyyy-mm-dd hh:ii',
         ]
     ]); ?>
 
-<!--    --><?//= $form->field($model, 'checkin')->dropDownList(StatusHelper::statusList()) ?>
-    <?php \yii\widgets\Pjax::begin([
-        'timeout' => '1000',
-        'enablePushState' => false,
-    ]); ?>
+
     <?php echo $form->field($model, 'checkin')->radioList(StatusHelper::statusList()) ?>
 
     <?php echo $form->field($model, 'checkin_start')->widget(DateTimePicker::classname(), [
         'pickerButton' => ['icon' => 'time'],
         'pluginOptions' => [
             'autoclose' => true,
-            'format'=>'dd-mm-yyyy hh:ii',
+            'format'=>'yyyy-mm-dd hh:ii',
         ]
     ]); ?>
 
@@ -82,10 +82,10 @@ $languages = \app\models\Language::findActive();
         'pickerButton' => ['icon' => 'time'],
         'pluginOptions' => [
             'autoclose' => true,
-            'format'=>'dd-mm-yyyy hh:ii',
+            'format'=>'yyyy-mm-dd hh:ii',
         ]
     ]); ?>
-    <?php \yii\widgets\Pjax::end()?>
+
     <?= $form->field($model, 'first_place')->hiddenInput()->label(false) ?>
 
     <?= $form->field($model, 'second_place')->hiddenInput()->label(false) ?>

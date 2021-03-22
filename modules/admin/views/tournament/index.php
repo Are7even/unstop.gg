@@ -28,16 +28,23 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
+            [
+                'attribute' => 'author',
+                'label' => Yii::t('admin', 'Author'),
+                'value' => function ($model) {
+                    return $model->user->username;
+                }
+            ],
+            'header',
             'icon',
             'game',
             'created_at',
-            'hidden',
             //'handheld',
             //'type',
             //'rating_on',
             //'players_count',
-            //'start',
-            //'end',
+            'start',
+            'end',
             //'checkin',
             //'checkin_start',
             //'checkin_end',

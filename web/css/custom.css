@@ -1,0 +1,263 @@
+.content .content-body .match .match-container{
+    width: 100%;
+}
+
+.header .container .control .control_logout, .header .container .control_login .control_logout, .header .container .control_logout .control_logout {
+    display: flex;
+    justify-content: flex-end;
+}
+
+a .lk-button {
+    margin-bottom: 25px;
+}
+
+#modalContent .header,
+#modalContent .nav,
+#modalContent .footer{
+    display: none;
+}
+
+.clearfix:before, .clearfix:after, .dl-horizontal dd:before, .dl-horizontal dd:after, .container:before, .container:after, .container-fluid:before, .container-fluid:after, .row:before, .row:after, .form-horizontal .form-group:before, .form-horizontal .form-group:after, .btn-toolbar:before, .btn-toolbar:after, .btn-group-vertical > .btn-group:before, .btn-group-vertical > .btn-group:after, .nav:before, .nav:after, .navbar:before, .navbar:after, .navbar-header:before, .navbar-header:after, .navbar-collapse:before, .navbar-collapse:after, .pager:before, .pager:after, .panel-body:before, .panel-body:after, .modal-header:before, .modal-header:after, .modal-footer:before, .modal-footer:after {
+    content: normal;
+}
+
+.tournament-container .reg-container .button-registration a{
+    color: #FFFFFF;
+}
+
+.games .game img {
+   /* height: 240px; */
+    object-fit: cover;
+}
+
+.match-container {
+    width: 100%;
+}
+
+.photo-button {
+    width: 100%;
+    outline: none;
+    background-color: #5600ff;
+    height: 50px;
+    outline: 0;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+}
+
+.control-label {
+    text-align: left;
+    width: 100%;
+}
+
+.content .aside .rating .rating-list .icon-background{
+    overflow: hidden;
+}
+
+.tournament-gamers .match-tournament {
+    justify-content: center;
+}
+
+#w2 {
+    padding-top: 30px !important;
+}
+
+.open {
+    z-index: 100;
+}
+
+.further-information {
+    text-align: center;
+    padding-top: 200px;
+    padding-bottom: 200px;
+}
+
+.further-information h1{
+    padding-bottom: 30px;
+}
+
+.further-information p{
+    padding-bottom: 15px;
+}
+
+.further-information input{
+    background: #fff;
+    border: 2px solid #ededed;
+    border-radius: 7px;
+    width: 100%;
+    max-width: 300px;
+    height: 50px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    outline: 0;
+}
+
+.ftr-info {
+    background-color: #5600ff;
+    height: 50px;
+    width: 300px;
+    outline: 0;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.mesgs {
+    padding: 15px 15px 0 15px;
+}
+
+/*.msg_history {*/
+/*    height: 560px !important;*/
+/*}*/
+
+#p0,
+.chat-iframe {
+    width: 100%;
+    height: 560px;
+    vertical-align: bottom;
+    overflow: hidden;
+}
+
+#list-scroll {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 60%;
+    padding-bottom: 50px;
+}
+
+.received_withd_msg {
+    width: 100%;
+}
+
+.input_msg_write input {
+    padding: 0 15px;
+}
+
+.msg_send_btn {
+    right: 10px;
+    top: 9px;
+}
+
+.empty {
+    padding: 20px;
+}
+
+.inbox_chat {
+    height: auto;
+    position: fixed;
+    width: 40%;
+}
+
+.inbox_people{
+    float: none;
+    height: 100%;
+}
+
+.help-block {
+    display: none;
+}
+
+.received_withd_msg h1 {
+    font-size: 15px;
+    color: #464646;
+    margin: 15px 0 10px 0;
+
+}
+
+
+.tournament-container .active .button .panel {
+    width: 100%;
+}
+
+
+.lk-content .lk-aside .lk-info .image-container .lk-image {
+    height: 360px;
+}
+
+.faiting .faiting-container .faiter .fainer-content img {
+    object-fit: cover;
+}
+
+.hidden {
+    display: none;
+}
+
+.tournament-gamers .match-tournament .table-button {
+    position: relative;
+}
+
+.tournament-gamers .match-tournament .table-button .close{
+    position: absolute;
+    top: 5px;
+    right: 12px;
+    color: #fff;
+    z-index: 2;
+}
+
+.pjax-form {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 60%;
+    float: right;
+    background: white
+}
+
+#osnova {
+    width: 100%;
+    display: flex;
+}
+
+#list-messages {
+    width: 100%;
+}
+
+.delete_chat {
+    bottom: 10px;
+    right: 20px;
+    position: absolute;
+    z-index: 2;
+}
+
+.people_list {
+    position: relative;
+}
+
+.chat_people {
+    position: relative;
+}
+
+.fight_number {
+    margin-bottom: 20px;
+    font-size: large;
+    color: #FFFFFF;
+}
+
+.faiting-container.faiting-result.result-fight {
+    display: flex;
+    justify-content: center;
+}
+
+.match-tournament{
+    border-radius: 14px;
+    background: #FFFFFF;
+}
+
+.faiting {
+    min-height: 63vh;
+}

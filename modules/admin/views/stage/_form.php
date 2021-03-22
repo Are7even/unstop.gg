@@ -1,5 +1,7 @@
 <?php
 
+use kartik\datetime\DateTimePicker;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -12,15 +14,27 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'tournament_id')->textInput() ?>
+    <?= $form->field($model, 'tournament_id')->dropDownList(ArrayHelper::map(\app\models\Tournament::find()->all(),'id','header')) ?>
 
-    <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'type')->dropDownList(\app\helpers\StageTypeHelper::StageList()); ?>
 
-    <?= $form->field($model, 'rule')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'rule')->dropDownList(\app\helpers\FightTypeHelper::RuleList()) ?>
 
-    <?= $form->field($model, 'start')->textInput() ?>
+    <?= $form->field($model, 'start')->widget(DateTimePicker::classname(), [
+        'pickerButton' => ['icon' => 'time'],
+        'pluginOptions' => [
+            'autoclose' => true,
+            'format'=>'yyyy-mm-dd hh:ii',
+        ]
+    ]); ?>
 
-    <?= $form->field($model, 'end')->textInput() ?>
+    <?= $form->field($model, 'end')->widget(DateTimePicker::classname(), [
+        'pickerButton' => ['icon' => 'time'],
+        'pluginOptions' => [
+            'autoclose' => true,
+            'format'=>'yyyy-mm-dd hh:ii',
+        ]
+    ]); ?>
 
     <?= $form->field($model, 'players_count')->textInput() ?>
 

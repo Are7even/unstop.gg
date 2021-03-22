@@ -1,0 +1,55 @@
+/*.swiper-container {*/
+/*	height: 100%;*/
+/*	max-height: 700px;*/
+/*}*/
+
+/*.swiper-button-prev,*/
+/*.swiper-button-next {*/
+/*	background-color: #fff;*/
+/*	width: 40px;*/
+/*	height: 40px;*/
+/*	border-radius: 100%;*/
+/*	background-position: center;*/
+/*	background-repeat: no-repeat;*/
+/*	background-size: 20px 20px;*/
+/*}*/
+
+/*.swiper-button-prev::after,*/
+/*.swiper-button-next::after {*/
+/*	display: none;*/
+/*}*/
+
+/*.slider-top {*/
+/*	display: flex;*/
+/*	justify-content: space-between;*/
+/*	align-items: center;*/
+/*	width: 100%;*/
+/*	margin-bottom: 30px;*/
+/*}*/
+
+/*.slider-buttons {*/
+/*	display: flex;*/
+/*	align-items: center;*/
+/*}*/
+
+/*.swiper-pagination {*/
+/*	padding-bottom: 60px;*/
+/*	display: flex;*/
+/*	justify-content: center;*/
+/*	align-items: center;*/
+/*}*/
+
+/*.swiper-pagination-bullet {*/
+/*	width: 10px;*/
+/*	height: 10px;*/
+/*	margin: 0 10px !important;*/
+/*	background-color: #aaa9a9;*/
+/*	opacity: 1;*/
+/*}*/
+
+/*.swiper-pagination-bullet-active {*/
+/*	background-color: transparent;*/
+/*	border: 5px solid #fefdff;*/
+/*	width: 20px;*/
+/*	height: 20px;*/
+/*}*/

@@ -2,13 +2,17 @@
 
 namespace app\models;
 
+use app\helpers\StatusHelper;
+use app\helpers\TournamentStatusHelper;
 use creocoder\translateable\TranslateableBehavior;
 use Yii;
+use yii\web\NotAcceptableHttpException;
 
 /**
  * This is the model class for table "tournament".
  *
  * @property int $id
+ * @property int $status
  * @property string|null $icon
  * @property string|null $game
  * @property int|null $created_at
@@ -43,7 +47,7 @@ class Tournament extends \yii\db\ActiveRecord
         return [
             'translateable' => [
                 'class' => TranslateableBehavior::className(),
-                'translationAttributes' => ['header','short_text','text'],
+                'translationAttributes' => ['header', 'short_text', 'text'],
             ],
         ];
     }
@@ -61,21 +65,22 @@ class Tournament extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['hidden', 'handheld', 'rating_on', 'players_count', 'checkin', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place'], 'integer'],
-            [['icon', 'game', 'type'], 'string', 'max' => 255],
-            [['created_at', 'start', 'end','checkin_start', 'checkin_end'], 'safe'],
+            [['hidden', 'status', 'handheld', 'rating_on', 'players_count', 'checkin', 'first_place', 'second_place', 'third_place', 'fourth_place', 'fifth_place', 'game'], 'integer'],
+            [['icon', 'author', 'type'], 'string', 'max' => 255],
+            [['created_at', 'start', 'end', 'checkin_start', 'checkin_end'], 'safe'],
             [['created_at'], 'default', 'value' => date('Y-m-j')],
+            [['author'], 'default', 'value' => Yii::$app->user->id],
+            [['status'], 'default', 'value' => TournamentStatusHelper::$created],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
             'id' => Yii::t('admin', 'ID'),
+            'status' => Yii::t('admin', 'Status'),
             'icon' => Yii::t('admin', 'Icon'),
+            'author' => Yii::t('admin', 'Author'),
             'game' => Yii::t('admin', 'Game'),
             'created_at' => Yii::t('admin', 'Created At'),
             'hidden' => Yii::t('admin', 'Hidden'),
@@ -96,24 +101,113 @@ class Tournament extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getTranslations () {
-        return $this -> hasMany(TournamentTranslate::className(), ['tournament_id'=>'id']);
+    public function getTournaments()
+    {
+        return $this->find()->all();
     }
 
-    static function getCurrentStartTime($id){
+    public function getTournament($id)
+    {
+        return $this->findOne($id);
+    }
+
+    public function getTranslations()
+    {
+        return $this->hasMany(TournamentTranslate::className(), ['tournament_id' => 'id']);
+    }
+
+    public function getStage()
+    {
+        return $this->hasMany(Stage::className(), ['tournament_id' => 'id']);
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'author']);
+    }
+
+    public function getIcon()
+    {
+        return ($this->icon) ? '/upload/' . $this->icon : '/web/upload/user/no-image.png';
+    }
+
+    public function allow()
+    {
+        $this->status = TournamentStatusHelper::$waiting;
+        return $this->save();
+    }
+
+    public function disallow()
+    {
+        $this->status = TournamentStatusHelper::$created;
+        return $this->save(false);
+    }
+
+    public function start()
+    {
+        $this->status = TournamentStatusHelper::$fighting;
+        if ($this->save()){
+            return true;
+        }
+        throw new NotAcceptableHttpException('Tournament not started');
+    }
+
+    public function checkRegistration($userId, $tournamentId)
+    {
+        $links = TournamentToUser::find()->where(['user_id' => $userId])->andWhere(['tournament_id' => $tournamentId])->all();
+        return $links;
+    }
+
+    public static function getRatingStatus($tournamentId)
+    {
+        $tournament = self::findOne($tournamentId);
+        return $tournament->rating_on;
+    }
+
+    static function getCurrentStartTime($id)
+    {
         return true;
     }
 
-    static function getCurrentEndTime($id){
+    static function getCurrentEndTime($id)
+    {
         return true;
     }
 
-    static function getCurrentCheckinStartTime($id){
+    static function getCurrentCheckinStartTime($id)
+    {
         return true;
     }
 
-    static function getCurrentCheckinEndTime($id){
+    static function getCurrentCheckinEndTime($id)
+    {
         return true;
+    }
+
+    public function getCutDate($modelDate)
+    {
+        $date = date('d.m.Y', strtotime($modelDate));
+        return $date;
+    }
+
+    public static function maxPlayersCheck($tournamentId, $maxPlayers)
+    {
+        $playersCount = TournamentToUser::find()->where(['tournament_id' => $tournamentId])->all();
+        $playersCount = count($playersCount);
+        if ($playersCount <= $maxPlayers) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isAuthor($tournamentId)
+    {
+        if ($author = self::find()
+            ->where(['id' => $tournamentId, 'author' => Yii::$app->user->id])
+            ->one()) {
+            return true;
+        }
+        return false;
     }
 
 }

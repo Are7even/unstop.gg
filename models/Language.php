@@ -54,7 +54,11 @@ class Language extends \yii\db\ActiveRecord
         ];
     }
 
-    static function findActive(){
+    static public function findActive(){
         return self::find()->where(['status'=>StatusHelper::$active])->all();
+    }
+
+    public function getIcon(){
+        return ($this->icon) ? '/upload/' . $this->icon : '/no-image.png';
     }
 }

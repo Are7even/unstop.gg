@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 
+use app\models\FurtherInformationForm;
 use app\models\LoginForm;
 use app\models\RegistrationForm;
 use app\models\User;
@@ -11,9 +12,26 @@ use Yii;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;
+use app\components\AuthHandler;
 
 class AuthController extends Controller
 {
+
+    public function actions()
+    {
+        return [
+            'auth' => [
+                'class' => 'yii\authclient\AuthAction',
+                'successCallback' => [$this, 'onAuthSuccess'],
+            ],
+        ];
+    }
+
+    public function onAuthSuccess($client)
+    {
+        (new AuthHandler($client))->handle();
+    }
+
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
@@ -27,7 +45,7 @@ class AuthController extends Controller
 
         $model->password = '';
         return $this->render('login', [
-            'model' => $model,
+            'login' => $model,
         ]);
     }
 
@@ -35,24 +53,55 @@ class AuthController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 
 
-    public function actionRegistration()
+//    public function actionRegistration()
+//    {
+//        $model = new RegistrationForm();
+//
+//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//            Yii::$app->session->setFlash('success', Yii::t('admin', 'User registered!'));
+//            return $this->redirect(Url::to(['auth/login']));
+//        }
+//        return $this->render('registration', [
+//            'registration' => $model,
+//        ]);
+//
+//    }
+
+    public function actionLoginVk($uid, $first_name, $last_name, $photo)
     {
-
-        $model = new RegistrationForm();
-
-        if ($model->load(Yii::$app->request->post())&&$model->save()) {
-            Yii::$app->session->setFlash('success', Yii::t('admin', 'User registered!'));
-            return $this->redirect(Url::to(['auth/login']));
+        if ($user = User::findById($uid)){
+            if (Yii::$app->getUser()->login($user)) {
+                return $this->goHome();
+            }
         }
-        return $this->render('registration', [
-            'model' => $model,
-        ]);
+        $user = new User();
+        if ($user->saveFromVk($uid, $first_name, $last_name, $photo)) {
+            if (empty(User::getUsername(Yii::$app->user->id))) {
+                return $this->redirect(['auth/further-information']);
+            }
+        }
+        return $this->redirect(Url::to(['auth/login']));
+    }
 
+    public function actionFurtherInformation()
+    {
+        $model = new FurtherInformationForm();
+        $user = new User();
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        if ($model->load(Yii::$app->request->post())) {
+            $user->updateFurtherInformation(Yii::$app->user->id, $model->username, $model->email);
+            Yii::$app->session->setFlash('success', Yii::t('admin', 'User registered!'));
+            return $this->redirect(Url::to(['site/index']));
+        }
+        return $this->render('further-information', [
+            'furtherInformation' => $model,
+        ]);
     }
 
 }
